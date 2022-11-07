@@ -32,6 +32,6 @@
 
 3、缺少的依赖请使用`poetry run pip install xxx`进行安装。
 
-4、脑积水包含两个自学习插件, 其中，`./LittlePaimon/plugins/Paimon_Chat` 环境配置~~较麻烦~~**相当麻烦**，可以直接删除。
+4、脑积水包含两个自学习插件, 其中，`./LittlePaimon/plugins/Paimon_Chat` 环境配置~~较麻烦~~ **相当麻烦**，可以直接删除。
 
 ### 如有问题：请通过[博客首页](https://zhulinyv.github.io/)联系方式联系我。

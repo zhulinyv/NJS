@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="./app.css" />
+    {{result_js}}
+    <script src="./app.js"></script>
+    {% if has_chart %}
+    <script src="./chart.js"></script>
+    {% endif %}
+  </head>
+  <body>
+    <div id="main-container">
+      {{title}}
+      {{result}}
+    </div>
+  </body>
+</html>

@@ -18,7 +18,7 @@
 
 2、克隆后 进入 **NJS** 目录`cd NJS`, 运行 `poetry run pip install -r package.txt` 进行安装。
 
-3、配置请参照注释。
+3、`env.prod` 配置请参照注释。
 
 4、安装 **go-cqhttp** 插件 `poetry run nb plugin install nonebot-plugin-gocqhttp` , 安装好后, 启动脑积水（在**NJS**目录执行`poetry run nb run`）, 浏览器访问链接[http://127.0.0.1:13579/go-cqhttp](http://127.0.0.1:13579/go-cqhttp)。添加账号配置后重启即可。
 

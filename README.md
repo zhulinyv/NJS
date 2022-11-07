@@ -16,7 +16,7 @@
 ### 安装脑积水：
 1、克隆或直接下载本仓库。`git clone https://github.com/zhulinyv/NJS.git`
 
-2、克隆后 进入 **NJS** 目录`cd NJS`, 运行 `poetry install` , 如果安装失败运行 `poetry run pip install -r requirements.txt` 进行安装。
+2、克隆后 进入 **NJS** 目录`cd NJS`, 运行 `poetry run pip install -r package.txt` 进行安装。
 
 3、配置请参照注释。
 

@@ -8,6 +8,7 @@ from LittlePaimon.utils.path import GENSHIN_DB_PATH, SUB_DB_PATH, GENSHIN_VOICE_
     LEARNING_CHAT_DB_PATH, YSC_TEMP_IMG_PATH
 from .models import *
 
+# 下面的部分是添加AI画图的数据库
 from nonebot import get_driver
 from pydantic import BaseModel, Extra, Field, validator
 class Config(BaseModel, extra=Extra.ignore):

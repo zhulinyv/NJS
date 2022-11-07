@@ -34,4 +34,4 @@
 
 4、脑积水包含两个自学习插件, 其中，`./LittlePaimon/plugins/Paimon_Chat` 环境配置较麻烦，可以直接删除。
 
-### 如有问题，请通过[博客首页](https://zhulinyv.github.io/)联系方式联系我。
+### 如有问题：请通过[博客首页](https://zhulinyv.github.io/)联系方式联系我。

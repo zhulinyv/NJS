@@ -124,7 +124,7 @@ async def _poke_event(bot: Bot,event: PokeNotifyEvent)-> bool:
         if random.random() < 0.2:
             # pic = await get_setu()
             # message="别戳了别戳了,这张setu给你了,让我安静一会儿,30秒后我要撤回\n"+Message(pic[1])+Message(pic[0])
-            message="别戳了别戳了,这张图给你了,让我安静一会儿,30秒后我要撤回\n" + MessageSegment.image(file='https://dev.iw233.cn/api.php?sort=random')
+            message="别戳了别戳了,这张图给你了,让我安静一会儿,30秒后我要撤回\n" + MessageSegment.image(file='https://iw233.cn/api.php?sort=iw233')
             setu_msg_id = await poke_.send(message)
             setu_msg_id = setu_msg_id['message_id']
             await asyncio.sleep(30)

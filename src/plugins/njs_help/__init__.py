@@ -301,3 +301,8 @@ h54 = on_command('njs54', priority=10, block=True)
 @h54.handle()
 async def test_handle(event:Event):
     await h54.finish(Message(f"[CQ:at,qq={event.get_user_id()}]") + h54_r)
+
+h55 = on_command('njs55', priority=10, block=True)
+@h55.handle()
+async def test_handle(event:Event):
+    await h55.finish(Message(f"[CQ:at,qq={event.get_user_id()}]") + h55_r)

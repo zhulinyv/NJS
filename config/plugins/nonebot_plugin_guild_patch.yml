@@ -1,7 +1,0 @@
-name: nonebot_plugin_guild_patch
-module_name: nonebot_plugin_guild_patch
-description:
-usage:
-show: true
-priority: 99
-matchers: []

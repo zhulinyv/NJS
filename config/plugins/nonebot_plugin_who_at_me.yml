@@ -1,7 +1,0 @@
-name: who_at_me
-module_name: nonebot_plugin_who_at_me
-description: 看看是谁又艾特了我
-usage: 直接发送 谁@我了？
-show: true
-priority: 99
-matchers: []

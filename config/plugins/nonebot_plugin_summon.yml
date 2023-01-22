@@ -1,7 +1,0 @@
-name: nonebot_plugin_summon
-module_name: nonebot_plugin_summon
-description:
-usage:
-show: true
-priority: 99
-matchers: []

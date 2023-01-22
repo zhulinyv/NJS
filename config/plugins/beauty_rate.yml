@@ -1,7 +1,0 @@
-name: beauty_rate
-module_name: beauty_rate
-description:
-usage:
-show: true
-priority: 99
-matchers: []

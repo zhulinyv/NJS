@@ -1,7 +1,0 @@
-name: 历史上的今天
-module_name: nonebot_plugin_today_in_history
-description: 发送每日历史上的今天
-usage: 指令：历史上的今天
-show: true
-priority: 99
-matchers: []

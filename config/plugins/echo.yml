@@ -1,7 +1,0 @@
-name: echo
-module_name: echo
-description:
-usage:
-show: true
-priority: 99
-matchers: []

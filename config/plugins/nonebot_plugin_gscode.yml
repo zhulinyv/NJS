@@ -1,7 +1,0 @@
-name: nonebot_plugin_gscode
-module_name: nonebot_plugin_gscode
-description:
-usage:
-show: true
-priority: 99
-matchers: []

@@ -1,0 +1,18 @@
+body {
+    background-color: #111B2B;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-weight: 400;
+}
+
+t1 {
+    font-size: 1.7em;
+    font-weight: 700;
+    padding-bottom: 40px;
+    
+    margin: 20px;
+    margin-top: 80px;
+    text-align: center;
+}
+
+

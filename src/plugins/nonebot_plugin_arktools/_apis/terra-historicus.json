@@ -1,0 +1,37 @@
+{
+  "comic": {
+    "url": "https://terra-historicus.hypergryph.com/api/comic",
+    "method": "GET",
+    "verify": false,
+    "params": {},
+    "comment": "获取漫画列表"
+  },
+  "recommend": {
+    "url": "https://terra-historicus.hypergryph.com/api/recommend",
+    "method": "GET",
+    "verify": false,
+    "params": {},
+    "comment": "获取推荐漫画列表"
+  },
+  "history": {
+    "url": "https://terra-historicus.hypergryph.com/api/history",
+    "method": "GET",
+    "verify": false,
+    "params": {},
+    "comment": "获取历史漫画列表"
+  },
+  "recentUpdate": {
+    "url": "https://terra-historicus.hypergryph.com/api/recentUpdate",
+    "method": "GET",
+    "verify": false,
+    "params": {},
+    "comment": "获取最近更新漫画列表"
+  },
+  "comic-data": {
+    "url": "https://terra-historicus.hypergryph.com/api/comic/{}",
+    "method": "GET",
+    "verify": false,
+    "params": {},
+    "comment": "获取漫画信息，参数为漫画cid"
+  }
+}

@@ -1,0 +1,22 @@
+<div class="flex items-center grid grid-cols-6 gap-2 rounded-lg" style="padding: 10px; background-color: rgba(255,255,255,0.05);">
+    <div class="col-span-2 row-span-2 flex flex-col justify-center items-center">
+      <img src="{v[image]}" class="object-scale-down" style="height:50px;width:150px;"/>
+      {v[vehicleName]}
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">使用时间</div>
+      <div class="text-2xl font-bold font-mono">{v[__timeInHour]:.1f}h</div>
+    </div>    
+    <div>
+      <div class="text-1xl text-yellow-400">击杀</div>
+      <div class="text-2xl font-bold font-mono">{v[kills]:,}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">KPM</div>
+      <div class="text-2xl font-bold font-mono">{v[killsPerMinute]}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">摧毁载具数</div>
+      <div class="text-2xl font-bold font-mono">{v[destroyed]:,}</div>
+    </div>    
+  </div>

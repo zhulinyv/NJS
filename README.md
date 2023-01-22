@@ -1,0 +1,182 @@
+<p align="center" >
+  <a href="https://smms.app/image/plcUTsyMaz4QPgo"><img src="https://s2.loli.net/2023/01/21/plcUTsyMaz4QPgo.png" width="256" height="256" alt="NJS"></a>
+</p>
+<h1 align="center">脑积水|NJS</h1>
+<h4 align="center">✨基于<a href="https://github.com/nonebot/nonebot2" target="_blank">NoneBot2</a>和<a href="https://github.com/Mrs4s/go-cqhttp" target="_blank">go-cqhttp</a>的多功能QQ机器人✨</h4>
+
+<p align="center">
+    <a href="https://raw.githubusercontent.com/zhulinyv/NJS/NJS/LICENSE"><img src="https://img.shields.io/github/license/CMHopeSunshine/LittlePaimon" alt="license"></a>
+    <img src="https://img.shields.io/badge/Python-3.8+-yellow" alt="python">
+    <a href="https://pd.qq.com/s/8bkfowg3c"><img src="https://img.shields.io/badge/QQ频道交流-我的中心花园-blue?style=flat-square" alt="QQ guild"></a>
+</p>
+
+
+### 📣 前言
+脑积水**缝合**了很多功能，因此**不亚于**[真寻](https://github.com/HibiKier/zhenxun_bot)、[早苗](https://space.bilibili.com/3191529)、[椛椛](https://github.com/FloatTech/ZeroBot-Plugin)等机器人，但**不同的**是：其它机器人项目大都有自己写的依赖，由于个人能力有限，因此脑积水并没有属于自己的依赖，但这样也带来了一些好处，基本上每个插件各自独立，不需要考虑依赖打架的问题，方便修改。
+
+可能有人会问，自己利用 NoneBot 或者 ZeroBot 等框架搭建一个不是更好嘛？我会实话告诉你，你是正确的。**但是**如果插件用多用久了，你就会发现，各种指令冲突、优先级冲突，数据库打架，依赖打架，脑积水解决的正是这一问题。
+
+当然，其它整合项目也不会存在冲突和打架的问题。脑积水内置了部分我自己写的东西，做了更多个性化处理来提升用户体验。
+
+## ⭐ 开始部署
+
+⚠️ 你可能需要一点 Python 和有关计算机的知识。
+
+⚠️ 需要两个 QQ 号，一个自己的，一个机器人的。
+
+⚠️ 系统要求：Windows8 及以上，Linux(推荐:Ubuntu)，Mac。
+
+|⚠️ 推荐配置要求：|CPU|RAM||⚠️ 最低配置要求：|CPU|RAM|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|推荐配置|2线程+|2GB+||该配置下部分功能可能无法正常使用|1线程|1GB|
+
+### 1️⃣ 安装 Python
+
+1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.8 及以上的版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上。
+
+![image](https://user-images.githubusercontent.com/66541860/213637200-dca63b69-fd52-42d1-a3cd-f8b24f492186.png)
+
+2、安装时，注意勾选 `Add python.exe to PATH` 。
+
+![image](https://user-images.githubusercontent.com/66541860/213638736-729c083f-b2ca-41db-affd-31896db5d4cf.png)
+
+3、出现此页面时，就表示你已经安装成功了，此时点击 Close 关闭窗口即可。
+
+![image](https://user-images.githubusercontent.com/66541860/213639081-6ae459c9-6ef6-4dc1-9cb3-8755934dca2b.png)
+
+4、验证你的下载，`Windows + R` 调出运行框，输入 `powershell` 按下回车。
+
+![image](https://user-images.githubusercontent.com/66541860/213639939-d6489fde-998a-4a82-baed-140cc9123220.png)
+
+5、输入 `python --version`，可以看到你的 Python 版本，这里显示的版本应该和刚刚你安装的版本一致，如果不一致，则说明你有多个 Python 或者下载时选错了版本。
+
+![image](https://user-images.githubusercontent.com/66541860/213640522-b6e2756c-32b3-423e-8a7d-c800f5e1b5ef.png)
+
+
+### 2️⃣ 安装 Git
+
+1、来到 [Git](https://git-scm.com/download/win) 官网的下载页面，下载并安装 [Git](https://git-scm.com/download/win)(如果你是 32 位操作系统，就下载 32 位版本)。
+
+![image](https://user-images.githubusercontent.com/66541860/213641134-811ad3b9-bb91-4aa0-921e-b54f11214168.png)
+
+2、下载完安装程序后运行，之后出现的选项均选择 Next 即可，最后安装完成选择 Finish。
+
+![image](https://user-images.githubusercontent.com/66541860/213641800-4eac08d6-32e0-46de-8d9d-95516f17e83f.png)
+
+### 3️⃣ 安装 浏览器 和 解压软件
+
+此过程比较简单，不再附图。
+
+**不要**使用 Internet Explorer！如果你的电脑配置比较低，可以选择[百分浏览器](https://www.centbrowser.cn/)等占用小的浏览器，解压软件可以选择[7-Zip](https://www.7-zip.org/)等解压软件。**如果你的电脑上已经有其它同类软件，则跳过此步骤！**
+
+### 4️⃣ 安装 Poetry
+
+1、打开 **powershell** ，输入 `pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple` 回车，来进行换源操作，出现以下字样则表示成功。
+
+![image](https://user-images.githubusercontent.com/66541860/213643855-d3069451-5052-4b10-b4d9-9f28ff8851a2.png)
+
+2、输入 `pip install poetry` 回车，来安装 Poetry。
+
+3、安装完成后，输入 `poetry -V` 来验证安装是否成功，如果成功则应该看到 poetry 的版本号。
+
+![image](https://user-images.githubusercontent.com/66541860/213645181-064ff084-27fe-485e-ba37-7ccde3ef000e.png)
+
+### 5️⃣ 安装 ffmpeg
+1、来到 [ffmpeg](https://www.gyan.dev/ffmpeg/builds/#release-builds) 下载页面，下载最新版本即可。
+
+![image](https://user-images.githubusercontent.com/66541860/213646782-8ed8dfe1-7784-4bae-b5c7-52566396ad6a.png)
+
+2、解压，进入 .\bin 目录，并复制路径
+
+![image](https://user-images.githubusercontent.com/66541860/213647847-b8a27508-f547-4d93-bdad-d347479035e0.png)
+
+3、`Windows + R` 调出运行框，输入 `control` 按下回车打开控制面板，依次选择：**系统和安全-系统-高级系统设置-环境变量**
+
+4、点击用户变量下方的**编辑**，然后在新弹出的窗口中点击**新建**，粘贴刚刚复制的路径，选择**确定**。
+
+![image](https://user-images.githubusercontent.com/66541860/213648705-2df64a69-635b-4842-85bc-b012074a02d3.png)
+
+5、**重启**计算机。至此，环境配置全部结束。🎉
+
+### 6️⃣ 安装 脑积水
+
+1、打开 powershell，输入 `git clone https://ghproxy.com/https://github.com/zhulinyv/NJS` 来克隆本仓库。
+
+2、克隆过程较慢，耐心等待，大概会有 3.5GB 大小。
+
+![image](https://user-images.githubusercontent.com/66541860/213651257-3f3bcb25-329f-4d8b-982a-591494e4513b.png)
+
+### 7️⃣ 安装 依赖
+
+1、输入 `cd NJS` 回车，来进入脑积水机器人目录。
+
+2、输入 `.\requirements.bat` 回车，来安装依赖。依赖较多，耐心等待。
+
+备注：如果出现报错，不予理睬，这些是由于各个作者上传 PyPI 时填写的相同依赖不同版本导致的，但实际可以正常运行。
+
+![image](https://user-images.githubusercontent.com/66541860/213731127-e48e3962-f7be-4f24-85cd-de14cd861508.png)
+
+### 8️⃣ 配置 脑积水
+
+1、用记事本等文本编辑器打开 NJS 目录下的 **env.prod** 文件，里面已经填了一些我使用的配置，如果另有需要，可以对照 **env.else** 添加。
+
+![image](https://user-images.githubusercontent.com/66541860/213742811-823a5010-be38-4386-9293-8f52920e5084.png)
+
+2、在 `SUPERUSER=[""]` **引号**中填写你自己的 QQ 号作为超级管理员，如果你想拥有多个管理员，则需要用**英文**逗号隔开。
+
+例如：`SUPERUSER=["1234567890", "0987654321"]`，其它配置项类似。
+
+⚠️ 下一步骤非常重要
+
+3、其它配置文件请参照 **env.else** 文件中的注释，或根据[《脑积水使用手册》](https://zhulinyv.github.io/NJS/)中具体插件仓库详细配置项说明在 **env.prod** 文件中配置。
+
+注意：配置项较多，只有少部分是必须的，可以按需配置。
+
+### 9️⃣ 登录 脑积水
+
+1、在 NJS 目录中，输入 `poetry run nb run` 来运行脑积水。首次启动较慢，耐心等待。
+
+如果出现类似下图所示报错，是因为 hikari_bot 插件的 API_TOKEN 未配置造成的，可以直接**忽略**或根据步骤 8 的第 3 步中的说明获取。但这并**不影响**其它插件的使用，如果不需要这个插件，可以去 `NJS\src\plugins\hikari_bot` 目录中将 **_\_init__.py** 文件重命名为 **init__.py**。
+
+![image](https://user-images.githubusercontent.com/66541860/213744555-c22c8289-3789-4281-9781-5e372c5c3017.png)
+
+2、启动后，浏览器访问链接 [http://127.0.0.1:13579/go-cqhttp](http://127.0.0.1:13579/go-cqhttp)，添加账号，手动输入账号，密码**不需要**输入，设备选择 iPad 或 Mac，如果你选择 Android，那么你的安卓手机上将无法登录，同理其它也是。
+
+![image](https://user-images.githubusercontent.com/66541860/213741470-5392694c-1141-447c-89f9-4c77b60c6e88.png)
+
+3、点击启动，然后等待二维码绘制完成后点击显示二维码，用机器人 QQ 号扫描二维码登录。
+
+![image](https://user-images.githubusercontent.com/66541860/213741988-2faa1052-f52e-4d93-a94a-02af39569d8b.png)
+
+<details>
+<summary>4、如果服务器与手机不在同一网络下，<b>可能</b>会出现<b>无法登录</b>的情况，<b>如果</b>遇到，展开本条步骤查看解决办法。</summary>
+  <pre><p>
+  5、进入 `.\NJS\accounts\binary` 目录，复制 binary 目录下的 go-cqhttp.exe 文件到自己的电脑。
+  6、双击运行，在之后弹出的对话框中均点击确定。
+  <a><img src="https://user-images.githubusercontent.com/66541860/213905405-c1c39bf5-9e52-46ad-96d6-62a56d097bca.png"></a>
+  7、双击 go-cqhttp.bat 文件运行，输入 3 选择<b>反向 Websocket 通信</b>。
+  8、打开 config.yml 文件，将 uin 改为<b>机器人</b>的账号，最下方的 servers 部分改为如图所示内容保存。
+  <a><img src="https://user-images.githubusercontent.com/66541860/213905588-344e85e4-0db6-4b44-b57c-a1f7ddb4824d.png"></a>
+  <a><img src="https://user-images.githubusercontent.com/66541860/213905671-d6e63b62-39d7-4862-8923-ff4fdfa2db93.png"></a>
+  9、此时再次运行 go-cqhttp.bat 文件，使用手机扫码登录。
+  10、登录好后将 device.json 和 session.token 文件复制到 .\NJS\accounts\uin(机器人的QQ号) 目录即可。
+</details>
+
+
+### 🔟 使用 脑积水
+
+1、**在群聊或私聊中发送 `njs帮助` 简便获取帮助。**
+
+详细帮助查看：
+
+2、《脑积水食用手册》：[https://zhulinyv.github.io/NJS/](https://zhulinyv.github.io/NJS/)
+
+3、备用地址：[https://www.cnblogs.com/xytpz/p/NJS.html](https://www.cnblogs.com/xytpz/p/NJS.html)
+
+4、更新：艾特脑积水说更新即可在线更新，更新成功后，艾特脑积水说重启来应用新的内容。
+
+5、如有配置、部署或使用中的问题或建议，请通过本仓库 [Issues](https://github.com/zhulinyv/NJS/issues) 或 [博客首页](https://zhulinyv.github.io/) 联系方式联系我。
+
+
+## 🎉鸣谢：
+感谢 [Nonebot 商店](https://v2.nonebot.dev/store)中的许多贡献者。

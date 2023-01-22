@@ -1,0 +1,27 @@
+name: 米游社签到及获取
+module_name: Paimon_Autobbs
+description: 米游社
+usage: mys签到
+show: true
+priority: 11
+matchers:
+- pm_name: 米游币获取全部重做
+  pm_description: 重做全部米游币获取任务，需超级用户权限
+  pm_usage: '@Bot myb全部重做'
+  pm_priority: 4
+  pm_show: true
+- pm_name: 米游社全部重签
+  pm_description: 重签全部米游社签到任务，需超级用户权限
+  pm_usage: '@Bot 全部重签'
+  pm_priority: 3
+  pm_show: true
+- pm_name: 米游社签到
+  pm_description: '*执行米游社签到操作，或开启每日自动签到'
+  pm_usage: 米游社签到(uid)[on|off]
+  pm_priority: 1
+  pm_show: true
+- pm_name: 米游币获取
+  pm_description: '*执行米游币任务操作，或开启每日自动获取米游币'
+  pm_usage: 米游币获取(uid)[on|off]
+  pm_priority: 2
+  pm_show: true

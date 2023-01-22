@@ -1,0 +1,47 @@
+name: nonebot_plugin_chatgpt
+module_name: nonebot_plugin_chatgpt
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 回滚对话
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 查看对话
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 导入对话
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 保存对话
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 导出对话
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 刷新对话
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 切换对话
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: chat
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

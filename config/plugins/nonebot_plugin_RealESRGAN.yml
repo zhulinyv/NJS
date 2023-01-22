@@ -1,0 +1,7 @@
+name: nonebot_plugin_RealESRGAN
+module_name: nonebot_plugin_RealESRGAN
+description:
+usage:
+show: true
+priority: 99
+matchers: []

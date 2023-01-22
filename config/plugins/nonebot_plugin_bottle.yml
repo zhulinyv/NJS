@@ -1,0 +1,42 @@
+name: nonebot_plugin_bottle
+module_name: nonebot_plugin_bottle
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: '扔漂流瓶 '
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: '评论漂流瓶 '
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 清空漂流瓶
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: '删除漂流瓶 '
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: '查看漂流瓶 '
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: '举报漂流瓶 '
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 捡漂流瓶
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

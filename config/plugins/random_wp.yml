@@ -1,0 +1,17 @@
+name: random_wp
+module_name: random_wp
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 来点
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: PUID
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

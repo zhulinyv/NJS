@@ -1,0 +1,38 @@
+name: 今日运势
+module_name: nonebot_plugin_fortune
+description: 抽签！占卜你的今日运势🙏
+usage: "[今日运势/抽签/运势] 一般抽签\n[xx抽签]     指定主题抽签\n[指定xx签] 指定特殊角色签底，需要自己尝试哦~\n[设置xx签] 设置群抽签主题\n\
+  [重置主题] 重置群抽签主题\n[主题列表] 查看可选的抽签主题\n[查看主题] 查看群抽签主题"
+show: true
+priority: 99
+matchers:
+- pm_name: ^查看(抽签)?主题$
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ^[^/]\S+抽签$
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ^设置(.*?)签$
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ^重置(抽签)?主题$
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ^指定(.*?)签$
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 今日运势
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

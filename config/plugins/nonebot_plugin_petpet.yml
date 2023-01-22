@@ -1,0 +1,32 @@
+name: 头像表情包
+module_name: nonebot_plugin_petpet
+description: 摸头等头像相关表情制作
+usage: "触发方式：指令 + @user/qq/自己/图片\n发送“头像表情包”查看支持的指令"
+show: true
+priority: 99
+matchers:
+- pm_name: 全局启用表情
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 头像表情包
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 禁用表情
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 全局禁用表情
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 启用表情
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

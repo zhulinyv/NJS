@@ -1,0 +1,67 @@
+name: nonebot_plugin_antirecall
+module_name: nonebot_plugin_antirecall
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 重置开启名单
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 防撤回管理
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 开启防撤回私聊
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 关闭防撤回
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 关闭当前防撤回
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 查看防撤回群聊
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 开启绕过管理层
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 关闭绕过管理层
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 开启防撤回
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 关闭防撤回私聊
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 开启当前防撤回
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 查看防撤回私聊
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

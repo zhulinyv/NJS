@@ -1,0 +1,12 @@
+name: nonebot_plugin_code
+module_name: nonebot_plugin_code
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: code
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

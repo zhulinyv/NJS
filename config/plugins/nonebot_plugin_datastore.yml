@@ -1,0 +1,7 @@
+name: nonebot_plugin_datastore
+module_name: nonebot_plugin_datastore
+description:
+usage:
+show: true
+priority: 99
+matchers: []

@@ -1,0 +1,8 @@
+name: 命令别名
+module_name: nonebot_plugin_alias
+description: 为机器人指令创建别名
+usage: "添加别名：alias {name}={command}\n查看别名：alias {name}\n别名列表：alias -p\n删除别名：unalias\
+  \ {name}\n清空别名：unalias -a"
+show: true
+priority: 99
+matchers: []

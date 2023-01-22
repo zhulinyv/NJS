@@ -1,0 +1,28 @@
+name: 随机唐可可
+module_name: nonebot_plugin_randomtkk
+description: 找到唐可可！
+usage: "随机唐可可 v0.1.5\n[随机唐可可]+[简单/普通/困难/地狱/自定义数量] 开启寻找唐可可挑战\n不指定难度则默认普通\n答案格式：[答案是][行][空格][列]，例如：答案是114\
+  \ 514\n[找不到唐可可] 发起者可提前结束游戏\n将[唐可可]替换成其他角色可以寻找她们！"
+show: true
+priority: 99
+matchers:
+- pm_name: ^找不到\S{1,8}$
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ^随机\S{1,8}\s{1}(帮助|简单|普通|困难|地狱|\d{1,2})$
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ^随机\S{1,8}$
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 答案是
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

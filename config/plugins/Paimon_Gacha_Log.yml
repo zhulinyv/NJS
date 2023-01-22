@@ -1,0 +1,27 @@
+name: 原神抽卡记录分析
+module_name: Paimon_Gacha_Log
+description: 小派蒙的原神抽卡记录模块
+usage: ''
+show: true
+priority: 10
+matchers:
+- pm_name: 导入抽卡记录
+  pm_description: 导入符合UIGF标准的抽卡记录json文件，发送命令后，于5分钟内上传json文件即可
+  pm_usage: 导入抽卡记录
+  pm_priority: 3
+  pm_show: true
+- pm_name: 导出抽卡记录
+  pm_description: 导出符合UIGF标准的抽卡记录json文件
+  pm_usage: 导出抽卡记录
+  pm_priority: 4
+  pm_show: true
+- pm_name: 查看抽卡记录
+  pm_description: '*查看你的抽卡记录分析'
+  pm_usage: 查看抽卡记录(uid)
+  pm_priority: 2
+  pm_show: true
+- pm_name: 更新抽卡记录
+  pm_description: '*通过stoken更新原神抽卡记录'
+  pm_usage: 更新抽卡记录(uid)
+  pm_priority: 1
+  pm_show: true

@@ -1,0 +1,17 @@
+name: morning_and_night
+module_name: morning_and_night
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 晚安
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 早安
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

@@ -1,0 +1,7 @@
+name: Candy_reply
+module_name: Candy_reply
+description:
+usage:
+show: true
+priority: 99
+matchers: []

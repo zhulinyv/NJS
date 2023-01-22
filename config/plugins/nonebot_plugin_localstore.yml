@@ -1,0 +1,7 @@
+name: nonebot_plugin_localstore
+module_name: nonebot_plugin_localstore
+description:
+usage:
+show: true
+priority: 99
+matchers: []

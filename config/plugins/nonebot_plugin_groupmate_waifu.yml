@@ -1,0 +1,7 @@
+name: nonebot_plugin_groupmate_waifu
+module_name: nonebot_plugin_groupmate_waifu
+description:
+usage:
+show: true
+priority: 99
+matchers: []

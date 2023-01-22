@@ -1,0 +1,7 @@
+name: Daily_epilepsy
+module_name: Daily_epilepsy
+description:
+usage:
+show: true
+priority: 99
+matchers: []

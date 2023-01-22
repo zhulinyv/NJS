@@ -1,0 +1,42 @@
+name: 原神绑定
+module_name: Paimon_Bind
+description: 原神绑定信息
+usage: ysb
+show: true
+priority: 2
+matchers:
+- pm_name: 原神扫码绑定
+  pm_description: 通过米游社扫码的方式绑定原神Cookie
+  pm_usage: 原神扫码绑定
+  pm_priority: 1
+  pm_show: true
+- pm_name: 删除ck
+  pm_description: 删除你qq下绑定的cookie和订阅信息
+  pm_usage: 删除ck[uid|全部]
+  pm_priority: 3
+  pm_show: true
+- pm_name: ysbc
+  pm_description: 查询已绑定的原神cookie情况
+  pm_usage: ysbc
+  pm_priority: 2
+  pm_show: true
+- pm_name: 清除无效用户
+  pm_description: 清除所有已退群或已删好友的用户的cookie、订阅等信息，仅超级管理员可用
+  pm_usage: 清除无效用户
+  pm_priority: 6
+  pm_show: true
+- pm_name: 校验所有ck
+  pm_description: 校验所有cookie情况，仅超级管理员可用
+  pm_usage: 校验所有ck
+  pm_priority: 4
+  pm_show: true
+- pm_name: ysb
+  pm_description: 绑定原神uid或者cookie
+  pm_usage: ysb[uid|cookie]
+  pm_priority: 1
+  pm_show: true
+- pm_name: 添加公共ck
+  pm_description: 添加公共cookie，仅超级管理员可用
+  pm_usage: 添加公共ck[cookie]
+  pm_priority: 5
+  pm_show: true

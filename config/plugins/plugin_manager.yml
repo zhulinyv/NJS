@@ -1,0 +1,22 @@
+name: 插件管理
+module_name: plugin_manager
+description: 对派蒙插件进行管理
+usage: '...'
+show: true
+priority: 99
+matchers:
+- pm_name: pm-ban|unban
+  pm_description: 禁用|取消禁用插件的群|用户使用权限
+  pm_usage: pm ban|unban <插件名>
+  pm_priority: 1
+  pm_show: true
+- pm_name: pm-set
+  pm_description: 设置bot的配置项
+  pm_usage: pm set<配置名> <值>
+  pm_priority: 2
+  pm_show: true
+- pm_name: pm-help
+  pm_description: 查看本帮助
+  pm_usage: help
+  pm_priority: 3
+  pm_show: true

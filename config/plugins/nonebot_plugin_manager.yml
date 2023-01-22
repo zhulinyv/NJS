@@ -1,0 +1,7 @@
+name: nonebot_plugin_manager
+module_name: nonebot_plugin_manager
+description:
+usage:
+show: true
+priority: 99
+matchers: []

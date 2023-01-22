@@ -1,0 +1,42 @@
+name: 点歌
+module_name: nonebot_plugin_simplemusic
+description: 点歌，支持qq、网易、酷我、酷狗、咪咕、b站音频区
+usage: 点歌/qq点歌/网易点歌/酷我点歌/酷狗点歌/咪咕点歌/b站点歌 + 关键词
+show: true
+priority: 99
+matchers:
+- pm_name: bili点歌
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: kugou点歌
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 点歌
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: migu点歌
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: kuwo点歌
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 163点歌
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: qq点歌
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

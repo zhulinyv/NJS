@@ -1,0 +1,32 @@
+name: 文字表情包
+module_name: nonebot_plugin_memes
+description: 生成文字类表情包
+usage: "触发方式：指令 + 文字 (部分表情包需要多段文字)\n发送“文字表情包”查看表情包列表"
+show: true
+priority: 99
+matchers:
+- pm_name: 全局启用文字表情
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 文字表情包
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 禁用文字表情
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 全局禁用文字表情
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 启用文字表情
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

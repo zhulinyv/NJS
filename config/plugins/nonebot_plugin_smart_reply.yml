@@ -1,0 +1,7 @@
+name: nonebot_plugin_smart_reply
+module_name: nonebot_plugin_smart_reply
+description:
+usage:
+show: true
+priority: 99
+matchers: []

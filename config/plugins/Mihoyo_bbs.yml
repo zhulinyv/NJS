@@ -1,0 +1,12 @@
+name: 米游社
+module_name: Mihoyo_bbs
+description: 米游社
+usage: ''
+show: true
+priority: 20
+matchers:
+- pm_name: 米游社帖子截图
+  pm_description: (被动技能)自动对消息中的米游社帖子链接内容进行截图发送
+  pm_usage: 米游社帖子截图
+  pm_priority: 1
+  pm_show: true

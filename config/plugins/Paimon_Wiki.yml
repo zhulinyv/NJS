@@ -1,0 +1,32 @@
+name: 原神Wiki
+module_name: Paimon_Wiki
+description: 原神WIKI百科
+usage: ''
+show: true
+priority: 3
+matchers:
+- pm_name: 生成地图
+  pm_description: 生成材料图鉴等所需要的地图资源，仅超级用户可用。
+  pm_usage: 生成地图
+  pm_priority: 4
+  pm_show: true
+- pm_name: 材料地图
+  pm_description: "查看多个材料大地图采集点。\n示例：材料地图 鸣草 鬼兜虫 提瓦特"
+  pm_usage: 材料地图<材料名列表>[地图]
+  pm_priority: 3
+  pm_show: true
+- pm_name: 原神WIKI
+  pm_description: "支持查询：角色的图鉴、攻略、材料、参考面板、收益曲线，武器、圣遗物、原魔、七圣召唤图鉴，今日|周几材料\n示例：钟离攻略、护摩图鉴、今日材料"
+  pm_usage: <对象名><图鉴|攻略|材料>
+  pm_priority: 1
+  pm_show: true
+- pm_name: 尘歌壶摹本材料
+  pm_description: 查看尘歌壶摹本所需要的材料总览
+  pm_usage: 尘歌壶材料<摹数>
+  pm_priority: 5
+  pm_show: true
+- pm_name: 七圣召唤图鉴列表
+  pm_description: 查看已支持查询的七圣召唤卡牌图鉴列表
+  pm_usage: 原牌列表
+  pm_priority: 6
+  pm_show: true

@@ -1,0 +1,7 @@
+name: nonebot_plugin_ping
+module_name: nonebot_plugin_ping
+description:
+usage:
+show: true
+priority: 99
+matchers: []

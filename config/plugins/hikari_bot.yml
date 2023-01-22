@@ -1,0 +1,22 @@
+name: hikari_bot
+module_name: hikari_bot
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: wws
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: wws 更新Hikari
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: wws 检查更新
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

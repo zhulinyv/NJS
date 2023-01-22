@@ -1,0 +1,7 @@
+name: notice
+module_name: notice
+description:
+usage:
+show: true
+priority: 99
+matchers: []

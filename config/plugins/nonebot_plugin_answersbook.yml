@@ -1,0 +1,12 @@
+name: nonebot_plugin_answersbook
+module_name: nonebot_plugin_answersbook
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 翻看答案
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

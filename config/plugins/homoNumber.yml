@@ -1,0 +1,12 @@
+name: homoNumber
+module_name: homoNumber
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: homonumber
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

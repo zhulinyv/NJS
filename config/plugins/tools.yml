@@ -1,0 +1,12 @@
+name: 实用工具
+module_name: tools
+description: 一些实用的工具插件
+usage: ''
+show: true
+priority: 99
+matchers:
+- pm_name: 网页截图
+  pm_description: 对指定链接页面进行截图，例：【网页截图www.baidu.com】
+  pm_usage: 网页截图<链接>
+  pm_priority: 1
+  pm_show: true

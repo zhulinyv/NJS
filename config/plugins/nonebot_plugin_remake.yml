@@ -1,0 +1,12 @@
+name: 人生重开
+module_name: nonebot_plugin_remake
+description: 人生重开模拟器
+usage: '@我 remake/liferestart/人生重开'
+show: true
+priority: 99
+matchers:
+- pm_name: remake
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

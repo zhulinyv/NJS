@@ -1,0 +1,27 @@
+name: nonebot_plugin_giyf
+module_name: nonebot_plugin_giyf
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: search.list
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: search.delete
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: search.add
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: '?'
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

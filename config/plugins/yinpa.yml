@@ -1,0 +1,7 @@
+name: yinpa
+module_name: yinpa
+description:
+usage:
+show: true
+priority: 99
+matchers: []

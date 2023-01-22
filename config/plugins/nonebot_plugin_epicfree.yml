@@ -1,0 +1,17 @@
+name: nonebot_plugin_epicfree
+module_name: nonebot_plugin_epicfree
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 喜(加一|\+1)(私聊)?订阅
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ((E|e)(P|p)(I|i)(C|c))?喜(加一|\+1)
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

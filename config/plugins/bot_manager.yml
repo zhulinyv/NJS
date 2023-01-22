@@ -1,0 +1,32 @@
+name: 小派蒙管理
+module_name: bot_manager
+description: 小派蒙管理
+usage: '...'
+show: true
+priority: 99
+matchers:
+- pm_name: bot_restart
+  pm_description: 执行重启操作，需超级用户权限
+  pm_usage: '@bot 重启'
+  pm_priority: 3
+  pm_show: true
+- pm_name: bot_cmd
+  pm_description: 运行终端命令，需超级用户权限
+  pm_usage: '@bot cmd<命令>'
+  pm_priority: 4
+  pm_show: true
+- pm_name: bot_check_update
+  pm_description: 从Git检查bot更新情况，需超级用户权限
+  pm_usage: '@bot 检查更新'
+  pm_priority: 1
+  pm_show: true
+- pm_name: broadcast
+  pm_description: 向指定或所有群发送消息，需超级用户权限
+  pm_usage: '@bot 广播<内容>'
+  pm_priority: 5
+  pm_show: true
+- pm_name: bot_update
+  pm_description: 从Git中更新bot，需超级用户权限
+  pm_usage: '@bot 更新'
+  pm_priority: 2
+  pm_show: true

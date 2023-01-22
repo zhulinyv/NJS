@@ -1,0 +1,17 @@
+name: nonebot_plugin_antiflash
+module_name: nonebot_plugin_antiflash
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 开启反闪照
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 禁用反闪照
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

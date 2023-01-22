@@ -1,0 +1,7 @@
+name: nonebot_plugin_repeater
+module_name: nonebot_plugin_repeater
+description:
+usage:
+show: true
+priority: 99
+matchers: []

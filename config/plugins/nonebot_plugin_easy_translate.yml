@@ -1,0 +1,12 @@
+name: 简单翻译插件
+module_name: nonebot_plugin_easy_translate
+description: 免key翻译，使用谷歌翻译
+usage: "插件命令如下：\n翻译/x译x  # 试试就知道怎么用了\n"
+show: true
+priority: 99
+matchers:
+- pm_name: ^(翻译|(.)译(.))\s*([\s\S]*)?
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

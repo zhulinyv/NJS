@@ -1,0 +1,57 @@
+name: nonebot_plugin_arktools
+module_name: nonebot_plugin_arktools
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 塞壬歌单
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: '[查看询]*方舟[最]*新+[活动闻]*'
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 方舟理智恢复
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 方舟今[日|天]*[资源]*[材料]*
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 塞壬点歌
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 公招
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 更新方舟今[日|天]*[资源]*[材料]*
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 我的理智
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 干员
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 更新方舟游戏数据
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

@@ -1,0 +1,17 @@
+name: 心灵鸡汤
+module_name: nonebot_plugin_soup
+description: 来一碗心灵鸡汤吧
+usage: 鸡汤,毒鸡汤
+show: true
+priority: 99
+matchers:
+- pm_name: 毒鸡汤
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 鸡汤
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

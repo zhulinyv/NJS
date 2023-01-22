@@ -1,0 +1,12 @@
+name: nonebot_plugin_animeres
+module_name: nonebot_plugin_animeres
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 资源
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

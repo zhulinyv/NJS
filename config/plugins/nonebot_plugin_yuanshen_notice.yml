@@ -1,0 +1,17 @@
+name: nonebot_plugin_yuanshen_notice
+module_name: nonebot_plugin_yuanshen_notice
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 查看公告
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ^原神公告$
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

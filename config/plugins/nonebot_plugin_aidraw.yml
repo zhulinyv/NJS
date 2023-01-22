@@ -1,0 +1,17 @@
+name: nonebot_plugin_aidraw
+module_name: nonebot_plugin_aidraw
+description:
+usage:
+show: true
+priority: 99
+matchers:
+- pm_name: 个人标签排行
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: 本群标签排行
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

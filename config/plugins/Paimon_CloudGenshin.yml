@@ -1,0 +1,22 @@
+name: 云原神
+module_name: Paimon_CloudGenshin
+description: 云原神
+usage: '...'
+show: true
+priority: 16
+matchers:
+- pm_name: 云原神信息
+  pm_description: 查看云原神账户信息
+  pm_usage: 云原神信息(米游社id)
+  pm_priority: 2
+  pm_show: true
+- pm_name: 云原神解绑
+  pm_description: 解绑云原神账户并取消自动签到
+  pm_usage: 云原神解绑(米游社id)
+  pm_priority: 3
+  pm_show: true
+- pm_name: 云原神绑定
+  pm_description: 绑定云原神账户token，开启自动签到
+  pm_usage: 云原神绑定<token>
+  pm_priority: 1
+  pm_show: true

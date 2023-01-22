@@ -1,0 +1,38 @@
+name: 搜图
+module_name: nonebot_plugin_hikarisearch
+description: HikariSearch 动漫图片聚合搜索
+usage: "搜图 [图片]\n或回复图片，回复“搜图”\n默认为saucenao搜图，可使用 saucenao搜图 / ascii2d搜图 / iqdb搜图 /\
+  \ ehentai搜图 / tracemoe搜图 命令使用其他引擎搜索"
+show: true
+priority: 99
+matchers:
+- pm_name: 搜图
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ehentai搜图
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: tracemoe搜图
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: ascii2d搜图
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: iqdb搜图
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true
+- pm_name: saucenao搜图
+  pm_description:
+  pm_usage:
+  pm_priority: 99
+  pm_show: true

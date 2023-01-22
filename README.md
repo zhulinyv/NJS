@@ -169,7 +169,7 @@
 
 详细帮助查看：
 
-2、《脑积水食用手册》：[https://zhulinyv.github.io/NJS/](https://zhulinyv.github.io/NJS/)
+2、《脑积水食用手册》：[https://zhulinyv.github.io/NJS](https://zhulinyv.github.io/NJS)
 
 3、备用地址：[https://www.cnblogs.com/xytpz/p/NJS.html](https://www.cnblogs.com/xytpz/p/NJS.html)
 
@@ -179,4 +179,4 @@
 
 
 ## 🎉鸣谢：
-感谢 [Nonebot 商店](https://v2.nonebot.dev/store)中的许多贡献者。
+感谢 [Nonebot 商店](https://v2.nonebot.dev/store)中的诸多贡献者。

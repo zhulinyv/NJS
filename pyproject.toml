@@ -2,7 +2,7 @@
 name = "NJS"
 version = "3.0.5"
 description = "基于 NoneBot 的 QQ 机器人——脑积水！"
-authors = ["(๑•小丫头片子•๑) <zhulinyv2005@outlook.com>"]
+authors = ["zhulinyv <zhulinyv2005@outlook.com>"]
 license = "AGPL"
 
 [[tool.poetry.source]]

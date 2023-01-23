@@ -23,7 +23,7 @@ def trigger_rule():
 
 
 stat_matcher = on_command(
-    "运行状态", aliases={"状态", "zt", "yxzt", "status"}, priority=10, rule=trigger_rule()
+    "运行状态", aliases={"状态", "zt", "yxzt", "status"}, priority=10, rule=trigger_rule(), block=True
 )
 
 

@@ -5,7 +5,7 @@
 <h4 align="center">✨基于<a href="https://github.com/nonebot/nonebot2" target="_blank">NoneBot2</a>和<a href="https://github.com/Mrs4s/go-cqhttp" target="_blank">go-cqhttp</a>的多功能QQ机器人✨</h4>
 
 <p align="center">
-    <a href="https://raw.githubusercontent.com/zhulinyv/NJS/NJS/LICENSE"><img src="https://img.shields.io/github/license/CMHopeSunshine/LittlePaimon" alt="license"></a>
+    <a href="https://github.com/zhulinyv/NJS/raw/Bot/LICENSE"><img src="https://img.shields.io/github/license/CMHopeSunshine/LittlePaimon" alt="license"></a>
     <img src="https://img.shields.io/badge/Python-3.8+-yellow" alt="python">
     <a href="https://pd.qq.com/s/8bkfowg3c"><img src="https://img.shields.io/badge/QQ频道交流-我的中心花园-blue?style=flat-square" alt="QQ guild"></a>
 </p>

@@ -8,7 +8,7 @@ from .calc import calc_molar_mass, CalcException
 __all__ = []
 
 
-molar_mass = on_command('摩尔质量', aliases={'相对分子质量', 'mol'})
+molar_mass = on_command('摩尔质量', aliases={'相对分子质量', 'mol'}, priority=60, block=True)
 
 
 @molar_mass.handle()

@@ -10,7 +10,7 @@ from .getWords import getWords
 
 wantwords_config = Config.parse_obj(get_driver().config)
 
-wantwords = on_command('找词', aliases={'反向词典','wantwords'},priority=5)
+wantwords = on_command('找词', aliases={'反向词典','wantwords'},priority=5, block=True)
 
 @wantwords.handle()
 async def wantwords_body(args: Message = CommandArg()):

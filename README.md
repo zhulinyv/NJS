@@ -65,7 +65,11 @@
 
 ![image](https://user-images.githubusercontent.com/66541860/213641800-4eac08d6-32e0-46de-8d9d-95516f17e83f.png)
 
-### 3️⃣ 安装 浏览器 和 解压软件
+### 3️⃣ 安装 rust、浏览器 和 解压软件
+
+rust 仅 **Windows** 系统需要安装，其它系统**无需**安装。
+
+下载 [rust](https://file.chrisyy.top/rustup-setup.exe)，双击运行，运行后**回车**即可开始安装，过程较慢，耐心等待。
 
 此过程比较简单，不再附图。
 

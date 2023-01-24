@@ -87,7 +87,10 @@ help_reply_body = """1.头像表情包制作
 82.心灵鸡汤
 83.原神公告
 84.B站分享卡片
-85.反闪照"""
+85.反闪照
+86.leetcode每日一题
+87.摩尔质量计算
+88.反向词典"""
 help_reply_foot = """更详细内容：《脑积水使用手册》
 优先：zhulinyv.github.io/NJS
 备用：cnblogs.com/xytpz/p/NJS.html"""
@@ -628,3 +631,20 @@ h84_r = "被动技能，为B站链接或ID生成海报"
 
 h85_r = """(被动技能)
 超管指令：开启/启用/禁用反闪照"""
+
+h86_r = """对指令/每日一题，/lc，/leetcode回复，发送今天的每日一题。
+可搜索leetcode题目，指令/lc搜索 XXXXX，/lc查找 XXXXX，/leetcode搜索 XXXXX，将以关键词“XXXXX”进行leetcode搜索，发送搜索到的第一道题。
+随机一题，指令/lc随机，/lc随机一题，/leetcode随机将请求leetcode随机一题，发送请求到的任意题目。
+查询用户信息/lc查询 XXXXX，/lc查询用户 XXXXX，/leetcode查询 XXXXX，可查询用户基本信息，XXXXX为用户ID（不能用用户名）。
+加入计划任务 每日在指定时间向指定群和好友发送当天的每日一题"""
+
+h87_r = "发送 /摩尔质量 化学式 或 /相对分子质量 化学式 或 /mol 化学式"
+
+h88_r = """找词/反向词典/wantwords <模式> <描述>
+模式可选：
+zhzh：中—>中
+zhen：中—>英
+enzh：英—>中
+enen：英—>英
+<描述>即对希望找到的词的描述
+"""

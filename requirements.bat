@@ -129,6 +129,7 @@ poetry run pip install qrcode==7.3.1
 poetry run pip install regex==2022.3.2
 poetry run pip install requests==2.28.1
 poetry run pip install rfc3986==1.5.0
+poetry run pip install rply==0.78
 poetry run pip install rsa==4.9
 poetry run pip install rtoml==0.9.0
 poetry run pip install ruamel.yaml==0.17.21

@@ -83,13 +83,13 @@ def level_up(money):
 
 
 
-qd = on_regex(pattern = r'^我的好感$')
+hg = on_regex(pattern = r'^我的好感$')
 
-@qd.handle()
+@hg.handle()
 async def lj(event: MessageEvent):
     qq_id = str(event.user_id)
     lovelive_send = await search_qq(qq_id)
-    await qd.send(Message(str(lovelive_send)), at_sender=True)
+    await hg.send(Message(str(lovelive_send)), at_sender=True)
 
 send = 0
 async def search_qq(qq):

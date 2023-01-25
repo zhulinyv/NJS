@@ -1,3 +1,4 @@
+pip install poetry
 poetry run pip install aiocache==0.11.1
 poetry run pip install aiofiles==0.8.0
 poetry run pip install aiohttp==3.8.3

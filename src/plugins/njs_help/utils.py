@@ -108,7 +108,9 @@ r18: 不填则不会出现r18图片, 填了会根据r18模式管理中的数据�
 r18模式管理: setu_r18 on / off
 cd时间更新: setu_cd xxx
 撤回时间更新: setu_wd xxx
-最大张数更新: setu_mn xxx"""
+最大张数更新: setu_mn xxx
+更换setu代理服务器: setu_proxy xxx
+更新涩图数据库: setu_db"""
 
 h3_r = """无赌注轮盘/自由轮盘: 开启群内随机ban人游戏
 拨动滚轮 重新装弹: 重置子弹的位置。

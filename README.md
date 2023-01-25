@@ -12,7 +12,8 @@
 
 
 ### 📣 前言
-脑积水**缝合**了很多功能，因此**不亚于**[真寻](https://github.com/HibiKier/zhenxun_bot)、[早苗](https://space.bilibili.com/3191529)、[椛椛](https://github.com/FloatTech/ZeroBot-Plugin)等机器人，但**不同的**是：其它机器人项目大都有自己写的依赖，由于个人能力有限，因此脑积水并没有我自己写的依赖，但这样也带来了一些好处，基本上每个插件各自独立，不需要考虑依赖打架的问题，方便修改。
+
+脑积水**缝合**了很多功能，因此**不亚于**[真寻](https://github.com/HibiKier/zhenxun_bot)、[早苗](https://space.bilibili.com/3191529)、[椛椛](https://github.com/FloatTech/ZeroBot-Plugin)等机器人，但**不同的**是：其它机器人项目大都有自己写的依赖和生态，由于个人能力有限，因此脑积水并没有我自己写的依赖和生态，但这样也带来了一些好处，基本上每个插件各自独立，不需要考虑依赖打架的问题，方便修改。
 
 可能有人会问，自己利用 NoneBot 或者 ZeroBot 等框架搭建一个不是更好嘛？我会实话告诉你，你是正确的。**但是**如果插件用多用久了，你就会发现，各种指令冲突、优先级冲突，数据库打架，依赖打架，脑积水解决的正是这一问题。
 
@@ -26,13 +27,19 @@
 
 ⚠️ 需要两个 QQ 号，一个自己的，一个机器人的。
 
-⚠️ 系统要求：Windows8 及以上，Linux(推荐:Ubuntu)，Mac。
+⚠️ 系统要求：Windows8 及以上，Linux(推荐:Ubuntu)~~，Mac(不会真的有人用 Mac 跑 Bot 叭)~~。
 
 |⚠️ 推荐配置要求：|CPU|RAM||⚠️ 最低配置要求：|CPU|RAM|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |推荐配置|2线程+|2GB+||该配置下部分功能可能无法正常使用|1线程|1GB|
 
-### 1️⃣ 安装 Python
+### 1️⃣ 安装 浏览器、解压软件、文本编辑器
+
+此过程比较简单，不在附图。
+
+警告：**不要**使用 Internet Explorer！如果你的电脑配置比较低，可以选择[百分浏览器](https://www.centbrowser.cn/)等占用小的浏览器，解压软件可以选择[7-Zip](https://www.7-zip.org/)等解压软件，文本编辑器任意，系统自带的记事本都可以。**如果你的电脑上已经有其它同类软件，则跳过此步骤！**
+
+### 2️⃣ 安装 Python
 
 1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.8 及以上的版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上。
 
@@ -55,27 +62,66 @@
 ![image](https://user-images.githubusercontent.com/66541860/213640522-b6e2756c-32b3-423e-8a7d-c800f5e1b5ef.png)
 
 
-### 2️⃣ 安装 Git
+### 3️⃣ 安装 Git
 
-1、来到 [Git](https://git-scm.com/download/win) 官网的下载页面，下载并安装 [Git](https://git-scm.com/download/win)(如果你是 32 位操作系统，就下载 32 位版本)。
+#### Windows 下的安装
+
+1、来到 [Git](https://git-scm.com/download/win) 官网的下载页面，下载并安装 [Git](https://git-scm.com/download/win) (如果你是 32 位操作系统，就下载 32 位版本)。
 
 ![image](https://user-images.githubusercontent.com/66541860/213641134-811ad3b9-bb91-4aa0-921e-b54f11214168.png)
 
-2、下载完安装程序后运行，之后出现的选项均选择 Next 即可，最后安装完成选择 Finish。
+2、下载完安装程序后运行，之后出现的选项均选择 Next 即可，最后安装完成选择 **Finish**。
 
 ![image](https://user-images.githubusercontent.com/66541860/213641800-4eac08d6-32e0-46de-8d9d-95516f17e83f.png)
 
-### 3️⃣ 安装 rust、浏览器 和 解压软件
+#### Linux 下的安装
+
+Linux发行版可以用其对应的包管理器安装，比如 Ubuntu 用 `apt install git`，CentOS 用 `yum install git`。
+
+使用 `git --version` 来检查是否安装成功。
+
+#### 备注：小派蒙等插件需要使用，如果不需要，可以将 NJS 目录下的 bot.py 文件中的第 32 行最前面写一个 # 注释掉这个插件。
+
+### 4️⃣ 安装 rust
+
+备注：仅插件ChatGPT(API模式)需要。
 
 rust 仅 **Windows** 系统需要安装，其它系统**无需**安装。
 
-下载 [rust](https://file.chrisyy.top/rustup-setup.exe)，双击运行，运行后**回车**即可开始安装，过程较慢，耐心等待。
+如果不需要这个插件，可以去 NJS\src\plugins\nonebot_plugin_gpt3 目录将 _\_init_\_.py 文件重命名为 init__.py，此时就不需要安装 rust 了。
 
-此过程比较简单，不再附图。
+1、打开 powershell 分别输入以下两行命令并回车来进行换源操作。
 
-**不要**使用 Internet Explorer！如果你的电脑配置比较低，可以选择[百分浏览器](https://www.centbrowser.cn/)等占用小的浏览器，解压软件可以选择[7-Zip](https://www.7-zip.org/)等解压软件。**如果你的电脑上已经有其它同类软件，则跳过此步骤！**
+```
+$ENV:RUSTUP_DIST_SERVER='https://mirrors.ustc.edu.cn/rust-static'
 
-### 4️⃣ 安装 ffmpeg
+$ENV:RUSTUP_UPDATE_ROOT='https://mirrors.ustc.edu.cn/rust-static/rustup'
+```
+
+2、下载 [rust](https://file.chrisyy.top/rustup-setup.exe)，双击运行，运行后**输入 1 并回车**即可开始安装。
+
+![image](https://user-images.githubusercontent.com/66541860/214579123-ae92f347-dfb6-4eef-afd6-fb718c7ddd37.png)
+
+3、中途会可能会出现 VSinstaller，点击 continue 继续安装，过程较慢，耐心等待。
+
+![image](https://user-images.githubusercontent.com/66541860/214579360-c09be6e1-e968-44da-9a17-5734865197d9.png)
+
+4、点击 Install 确认安装。
+
+![image](https://user-images.githubusercontent.com/66541860/214580166-e3eb2e8b-73a6-44ef-b769-70ba0c908c77.png)
+
+5、安装完成后，点击 close 关闭，等待 rust 继续安装。
+
+![image](https://user-images.githubusercontent.com/66541860/214587212-a58b71aa-accc-498e-97d2-4e81bb9c2647.png)
+
+6、输入 **1** 并回车继续安装。
+
+![image](https://user-images.githubusercontent.com/66541860/214587555-e7af481e-27b2-429d-b57f-e24afb46bb3d.png)
+
+### 5️⃣ 安装 ffmpeg
+
+#### Windows下的安装
+
 1、来到 [ffmpeg](https://www.gyan.dev/ffmpeg/builds/#release-builds) 下载页面，下载最新版本即可。
 
 ![image](https://user-images.githubusercontent.com/66541860/213646782-8ed8dfe1-7784-4bae-b5c7-52566396ad6a.png)
@@ -92,7 +138,17 @@ rust 仅 **Windows** 系统需要安装，其它系统**无需**安装。
 
 5、**重启**计算机。至此，环境配置全部结束。🎉
 
-### 5️⃣ 安装 脑积水
+#### Linux 下的安装
+
+Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
+
+其他发行版请自行搜索安装教程，记得添加到环境变量中。
+
+使用 `ffmpeg -version` 来检查是否安装成功。
+
+#### 如果不安装，脑积水则无法发送**语音**和**视频**等信息。
+
+### 6️⃣ 安装 脑积水
 
 1、打开 powershell，输入 `git clone https://ghproxy.com/https://github.com/zhulinyv/NJS` 来克隆本仓库。
 
@@ -100,7 +156,7 @@ rust 仅 **Windows** 系统需要安装，其它系统**无需**安装。
 
 ![image](https://user-images.githubusercontent.com/66541860/213651257-3f3bcb25-329f-4d8b-982a-591494e4513b.png)
 
-### 6️⃣ 安装 Poetry 和依赖
+### 7️⃣ 安装 Poetry 和依赖
 
 1、输入 `cd NJS` 回车，来进入脑积水机器人目录。
 
@@ -110,7 +166,7 @@ rust 仅 **Windows** 系统需要安装，其它系统**无需**安装。
 
 ![image](https://user-images.githubusercontent.com/66541860/213731127-e48e3962-f7be-4f24-85cd-de14cd861508.png)
 
-### 7️⃣ 配置 脑积水
+### 8️⃣ 配置 脑积水
 
 1、用记事本等文本编辑器打开 NJS 目录下的 **env.prod** 文件，里面已经填了一些我使用的配置，如果另有需要，可以对照 **env.else** 添加。
 
@@ -126,7 +182,7 @@ rust 仅 **Windows** 系统需要安装，其它系统**无需**安装。
 
 注意：配置项较多，只有少部分是必须的，可以按需配置。
 
-### 8️⃣ 登录 脑积水
+### 9️⃣ 登录 脑积水
 
 1、在 NJS 目录中，输入 `poetry run nb run` 来运行脑积水。首次启动较慢，耐心等待。
 
@@ -157,7 +213,7 @@ rust 仅 **Windows** 系统需要安装，其它系统**无需**安装。
 </details>
 
 
-### 9️⃣ 使用 脑积水
+### 🔟 使用 脑积水
 
 1、**在群聊或私聊中发送 `njs帮助` 简便获取帮助。**
 
@@ -171,6 +227,24 @@ rust 仅 **Windows** 系统需要安装，其它系统**无需**安装。
 
 5、如有配置、部署或使用中的问题或建议，请通过本仓库 [Issues](https://github.com/zhulinyv/NJS/issues) 或 [博客首页](https://zhulinyv.github.io/) 联系方式联系我。
 
+####  进阶使用
+
+1、其它插件的安装：
+
+  方法一：
+  
+  ```
+  ① 在 NJS 目录执行 poetry run pip install xxx
+  
+  ② 在 pyproject.toml 文件第 44 行添加刚才安装的插件
+  ```
+  
+![image](https://user-images.githubusercontent.com/66541860/214586235-f78e30fd-2f5d-4342-8c3c-3ba72eb95180.png)
+
+  方法二：直接 clone 或下载某个插件仓库，把带有 _\_init__.py 的目录放到 NJS\src\plugins 目录下。
+
+2、如果你已经安装并配置好脑积水且对 [Nonebot](https://v2.nonebot.dev) 有一定了解并懂得 Python 基础知识，那么就可以自己编写插件啦！！
 
 ## 🎉鸣谢：
+
 感谢 [Nonebot 商店](https://v2.nonebot.dev/store)中的诸多贡献者。

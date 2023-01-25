@@ -27,7 +27,8 @@ except:
     'ban':[
         'user_1919',         # 禁用的群组或用户，跨会话生效，会覆盖白名单设置
         'group_810'
-    ]
+    ],
+    'proxy':'i.pixiv.re'  # 代理地址
 }'''
 
 
@@ -82,7 +83,7 @@ class PermissionManager:
         except Exception as e:
             # 读取失败
             logger.warning(f'setu_perm_cfg.json 读取失败, 尝试重建\n{e}')
-            self.cfg = {}
+            self.cfg = {"proxy":"i.pixiv.re"}
             self.WriteCfg()
             return {}
 
@@ -323,4 +324,16 @@ class PermissionManager:
                 return f'成功移除{sessionId}出黑名单'
             except ValueError:
                 return f'{sessionId}不在黑名单'
+            
+    def UpdateProxy(self, proxy: str) -> None:
+        # 更新代理
+        self.cfg['proxy'] = proxy
+        self.WriteCfg()
+    
+    def ReadProxy(self) -> str:
+        # 读取代理
+        try:
+            return self.cfg['proxy']
+        except KeyError:
+            return 'i.pixiv.re'
     # --------------- 增删系统 结束 ---------------

@@ -9,7 +9,7 @@ from pathlib import Path
 from httpx import AsyncClient
 from nonebot.log import logger
 from .fetch_resources import DownloadPic
-
+from .permission_manager import PermissionManager
 
 error: str = "Error:"
 # save_path,可在env设置, 默认False, 类型bool或str
@@ -19,10 +19,9 @@ try:
 except:
     save_path: bool = False
     all_file_name: list = []
-try:
-    setu_proxy: str = nonebot.get_driver().config.setu_proxy
-except:
-    setu_proxy: str = 'sex.nyan.xyz'
+
+# proxy, 用dict貌似能直接从__init__.py中updata这里面的内容, string却不可以
+proxy_dict = {"proxy": PermissionManager().ReadProxy()}
 
 
 # 返回列表,内容为setu消息(列表套娃)
@@ -51,16 +50,17 @@ async def get_setu(keywords: list = [], r18: bool = False, num: int = 1, quality
     if db_data == []:
         data.append([error, f"图库中没有搜到关于{keywords}的图。", False])
         return data
+    # 并发下载图片
     async with AsyncClient() as client:
         tasks = []
         for setu in db_data:
-            tasks.append(pic(setu, quality, client))
+            tasks.append(pic(setu, quality, client, proxy_dict["proxy"]))
         data = await asyncio.gather(*tasks)
     return data
 
 
 # 返回setu消息列表,内容 [图片, 信息, True/False, url]
-async def pic(setu: list, quality: int, client: AsyncClient) -> list:
+async def pic(setu: list, quality: int, client: AsyncClient, setu_proxy: str) -> list:
     setu_pid = setu[0]                   # pid
     setu_title = setu[1]                 # 标题
     setu_author = setu[2]                # 作者
@@ -93,7 +93,7 @@ async def pic(setu: list, quality: int, client: AsyncClient) -> list:
         if type(content) == int:
             logger.error(f"图片下载失败, 状态码: {content}")
             return [error, f"图片下载失败, 状态码: {content}", False, setu_url]
-        # 错误处理, 如果content是空bytes, 那么Image.open会报错, 跳到except, 直到change_pixel成功了, 图片应该不成问题,
+        # 错误处理, 如果content是空bytes, 那么Image.open会报错, 跳到except, 如果能打开图片, 图片应该不成问题,
         try:
             image = Image.open(BytesIO(content))
         except Exception as e:

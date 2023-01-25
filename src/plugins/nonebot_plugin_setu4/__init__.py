@@ -1,20 +1,23 @@
+import os
 import time
-import asyncio
 import random
+import asyncio
 import nonebot
+import platform
 from re import I, sub
 from nonebot.log import logger
 from nonebot.typing import T_State
-from nonebot.params import CommandArg
+from nonebot.matcher import Matcher
 from nonebot.permission import SUPERUSER
 from nonebot import on_command, on_regex
 from nonebot.exception import ActionFailed
+from nonebot.params import CommandArg, ArgPlainText
 from nonebot.adapters.onebot.v11 import (GROUP, PRIVATE_FRIEND, Bot,
                                          GroupMessageEvent, Message,
                                          MessageEvent, MessageSegment,
                                          PrivateMessageEvent)
 
-from .get_data import get_setu
+from .get_data import get_setu, proxy_dict
 from .fetch_resources import DownloadDatabase
 from .permission_manager import PermissionManager
 from .resource.setu_message import setu_sendmessage
@@ -39,17 +42,12 @@ from .resource.setu_message import setu_sendmessage
 # --------------- 初始化变量 ---------------
 # 实例化权限管理
 pm = PermissionManager()
+# 命令正则表达式
+setu_regex: str = r"^(setu|色图|涩图|想色色|来份色色|来份色图|想涩涩|多来点|来点色图|来张setu|来张色图|来点色色|色色|涩涩)\s?([x|✖️|×|X|*]?\d+[张|个|份]?)?\s?(r18)?\s?(.*)?"
 
-# 读取setu的正则表达式
-try:
-    setu_regex: str = repr(nonebot.get_driver().config.setu_regex)
-except:
-    setu_regex: str = r"^(setu|色图|涩图|想色色|来份色色|来份色图|想涩涩|多来点|来点色图|来张setu|来张色图|来点色色|色色|涩涩)\s?([x|✖️|×|X|*]?\d+[张|个|份]?)?\s?(r18)?\s?(.*)?"
 
 # --------------- 一些需要复用的功能 ---------------
 # 根据会话类型生成sessionId
-
-
 def sessionId(event: MessageEvent) -> str:
     if isinstance(event, PrivateMessageEvent):
         sessionId = 'user_' + str(event.user_id)
@@ -70,7 +68,7 @@ def verifySid(sid: str) -> bool:
 
 
 # --------------- 发送setu的部分 ---------------
-# 正则部分
+# 响应器部分
 setu = on_regex(
     setu_regex,
     flags=I,
@@ -79,9 +77,8 @@ setu = on_regex(
     block=True
 )
 
+
 # 响应器处理操作
-
-
 @setu.handle()
 async def _(bot: Bot, event: MessageEvent, state: T_State):
     # 获取用户输入的参数
@@ -121,6 +118,7 @@ async def _(bot: Bot, event: MessageEvent, state: T_State):
     key = key.split(" ")
     key = [word.strip() for word in key if word.strip()]
 
+    # 控制台输出
     flagLog = f"\nR18 == {str(r18)}\nkeyword == {key}\nnum == {num}\n"
     logger.info(f"key = {key}\tr18 = {r18}\tnum = {num}")
     # 记录时间, 计算CD用
@@ -168,6 +166,7 @@ async def _(bot: Bot, event: MessageEvent, state: T_State):
                         'content': msg
                     }
                 })
+            # 发送转发消息, 并且记录消息id, 撤回用
             setu_msg_id.append((await bot.call_api('send_group_forward_msg', group_id=event.group_id, messages=msgs))['message_id'])
     # 发送失败
     except ActionFailed as e:
@@ -394,7 +393,10 @@ async def _():
     setu_mn xxx  单次发送的最大图片数, xxx为int类型的参数
     
     查询黑白名单:
-    setu_roster"""
+    setu_roster
+    
+    更换代理:
+    setu_proxy xxx  xxx为代理url, 例如i.pixiv.re"""
     await setuhelp.finish(help_msg)
 
 
@@ -405,7 +407,7 @@ setuupdate = on_command('setu_db', permission=SUPERUSER,
 
 @setuupdate.handle()
 async def _():
-    await setuupdate.finish('目前此功能仍在实验性阶段，可能造成数据丢失或无法写入等错误\n如果执意需要使用，请手动删除代码中的对应部分以启用')
+    # await setuupdate.finish('目前此功能仍在实验性阶段，可能造成数据丢失或无法写入等错误\n如果执意需要使用，请手动删除代码中的对应部分以启用')
     try:
         remsg = await DownloadDatabase()
     except Exception as e:
@@ -425,3 +427,36 @@ async def _():
     key_list.remove('last')
     # 黑名单内容则在res['ban']
     await queryBlackAndWhiteList.send(f"白名单: {key_list}\n\n黑名单: {res['ban']}")
+
+
+# --------------- 更换代理 ---------------
+replaceProxy = on_command(
+    "更换代理", aliases={"替换代理", "setu_proxy"}, permission=SUPERUSER, block=True, priority=10)
+
+
+@replaceProxy.handle()
+async def _(matcher: Matcher, arg: Message = CommandArg()):
+    msg = arg.extract_plain_text().strip()
+    if msg:
+        matcher.set_arg("proxy", arg)
+
+
+@replaceProxy.got("proxy", prompt=f"请输入你要替换的proxy, 当前proxy为:{pm.ReadProxy()}\ntips: 一些也许可用的proxy\ni.pixiv.re\nsex.nyan.xyz\npx2.rainchan.win\npximg.moonchan.xyz\npiv.deception.world\npx3.rainchan.win\npx.s.rainchan.win\npixiv.yuki.sh\npixiv.kagarise.workers.dev\npixiv.a-f.workers.dev\n......")
+async def _(proxy: str = ArgPlainText("proxy")):
+    setu_proxy = proxy.strip()
+    pm.UpdateProxy(setu_proxy)
+    proxy_dict.update({'proxy': setu_proxy})
+    await replaceProxy.send(f"已经替换为{proxy}, 可以使用 ping 操作验证连通性")
+    # 警告: 这部分带了一个ping代理服务器的操作, 这个响应器是superuser only, 用了os.popen().read()操作, 请不要尝试给自己电脑注入指令
+    # 不会真的有弱智会这么做吧
+    # plat = platform.system().lower()
+    # if plat == 'windows':
+    #     result = os.popen(f"ping {setu_proxy}").read()
+    # elif plat == 'linux':
+    #     result = os.popen(f"ping -c 4 {setu_proxy}").read()
+    # await replaceProxy.send(f"{result}\n如果丢失的数据比较多, 请考虑重新更换代理")
+
+
+# bot主人自己搞自己命令行注入管我卵事, 摆!
+"""def url_is_vaild(url: str):
+    ..."""

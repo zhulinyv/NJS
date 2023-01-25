@@ -1,3 +1,4 @@
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 pip install poetry
 poetry run pip install aiocache==0.11.1
 poetry run pip install aiofiles==0.8.0

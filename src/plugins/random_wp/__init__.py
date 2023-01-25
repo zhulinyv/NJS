@@ -18,7 +18,6 @@ from .api import *
 
 
 picture = on_command("来点", aliases={"来份"}, priority=50, block=True)
-
 @picture.handle()
 async def _(msg: Message = CommandArg()):
     types = msg.extract_plain_text().strip()
@@ -138,3 +137,76 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
                 }
             })
         await bot.call_api('send_group_forward_msg', group_id=event.group_id, messages=msgs)
+
+
+
+search = on_command("关键词搜图", aliases={"文字搜图"}, priority=50, block=True)
+@search.handle()
+async def _(event:Event, bot:Bot, msg: Message = CommandArg()):
+    key_word = msg.extract_plain_text().strip()
+    url = f'http://ovooa.com/API/duitangtu/api.php?msg={key_word}'
+    res = requests.get(url).json()
+    code = str(res["code"])
+    if code == '1':
+        pic0 = MessageSegment.image(str(res["data"][0]["Url"]))
+        pic1 = MessageSegment.image(str(res["data"][1]["Url"]))
+        pic2 = MessageSegment.image(str(res["data"][2]["Url"]))
+        pic3 = MessageSegment.image(str(res["data"][3]["Url"]))
+        pic4 = MessageSegment.image(str(res["data"][4]["Url"]))
+        pic5 = MessageSegment.image(str(res["data"][5]["Url"]))
+        pic6 = MessageSegment.image(str(res["data"][6]["Url"]))
+        pic7 = MessageSegment.image(str(res["data"][7]["Url"]))
+        pic8 = MessageSegment.image(str(res["data"][8]["Url"]))
+        pic9 = MessageSegment.image(str(res["data"][9]["Url"]))
+        # 私聊直接发送
+        if isinstance(event, PrivateMessageEvent):
+            await search.send("找到以下图片捏~")
+            time.sleep(0.25)
+            await search.send(pic0)
+            time.sleep(0.25)
+            await search.send(pic1)
+            time.sleep(0.25)
+            await search.send(pic2)
+        # 群聊转发
+        elif isinstance(event, GroupMessageEvent):
+            msgs = []
+            message_list = []
+            message_list.append("找到以下图片捏~")
+            message_list.append(pic0)
+            message_list.append(pic1)
+            message_list.append(pic2)
+            message_list.append(pic3)
+            message_list.append(pic4)
+            message_list.append(pic5)
+            message_list.append(pic6)
+            message_list.append(pic7)
+            message_list.append(pic8)
+            message_list.append(pic9)
+            for msg in message_list:
+                msgs.append({
+                    'type': 'node',
+                    'data': {
+                        'name': "脑积水",
+                        'uin': bot.self_id,
+                        'content': msg
+                    }
+                })
+            await bot.call_api('send_group_forward_msg', group_id=event.group_id, messages=msgs)
+    elif code == '-1':
+        await search.finish('没找到该画师的插图哦~', at_sender=True)
+    elif code == '-2':
+        await search.finish('没找到该画师的插图哦~', at_sender=True)
+    elif code == '-3':
+        await search.finish('搜索出错啦！', at_sender=True)
+    elif code == '-4':
+        await search.finish('图图被外星人抢走啦~', at_sender=True)
+    elif code == '-5':
+        await search.finish('获取失败，请稍后重试', at_sender=True)
+    elif code == '-6':
+        await search.finish('找不到更多啦', at_sender=True)
+    else:
+        await search.finish("寄", at_sender=True)
+
+
+    
+

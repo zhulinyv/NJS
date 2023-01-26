@@ -41,6 +41,8 @@
 
 ### 2️⃣ 安装 Python
 
+#### Windows下的安装
+
 1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.8 及以上的版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上。
 
 ![image](https://user-images.githubusercontent.com/66541860/213637200-dca63b69-fd52-42d1-a3cd-f8b24f492186.png)
@@ -61,6 +63,21 @@
 
 ![image](https://user-images.githubusercontent.com/66541860/213640522-b6e2756c-32b3-423e-8a7d-c800f5e1b5ef.png)
 
+#### Ubuntu 和 Debian 下的安装
+
+如果是20+的版本，系统会自带python3.8或3.10版本，可以直接使用。
+
+如果是更低的版本，请自行安装 python3.8-3.10 版本。
+
+Ubuntu可能没有自带pip命令，需要运行apt install python3-pip进行安装
+
+Debian系统和Ubuntu系统同理。
+
+#### CentOS 及其它发行版下的安装
+
+建议更换Ubuntu，否则请自行编译安装Python3.8-3.10版本，~~耗子尾汁~~。
+
+CentOS在后续也可能有更多的问题，因此强烈不建议您使用CentOS 如果你执意使用，后续出现的额外问题，例如 playwright 缺依赖，请自行搜索解决。
 
 ### 3️⃣ 安装 Git
 
@@ -88,7 +105,7 @@ Linux发行版可以用其对应的包管理器安装，比如 Ubuntu 用 `apt i
 
 rust 仅 **Windows** 系统需要安装，其它系统**无需**安装。
 
-如果不需要这个插件，可以去 NJS\src\plugins\nonebot_plugin_gpt3 目录将 _\_init_\_.py 文件重命名为 init__.py，此时就不需要安装 rust 了。
+如果不需要这个插件，可以去 NJS\src\plugins\nonebot_plugin_gpt3 目录将 **_\_init__.py** 文件重命名为 **init__.py**，此时就不需要安装 rust 了。
 
 1、打开 powershell 分别输入以下两行命令并回车来进行换源操作。
 
@@ -114,7 +131,7 @@ $ENV:RUSTUP_UPDATE_ROOT='https://mirrors.ustc.edu.cn/rust-static/rustup'
 
 ![image](https://user-images.githubusercontent.com/66541860/214587212-a58b71aa-accc-498e-97d2-4e81bb9c2647.png)
 
-6、输入 **1** 并回车继续安装。
+6、输入 **1** 并回车继续安装，等待安装完成后关闭即可。
 
 ![image](https://user-images.githubusercontent.com/66541860/214587555-e7af481e-27b2-429d-b57f-e24afb46bb3d.png)
 

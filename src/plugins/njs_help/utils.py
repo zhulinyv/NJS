@@ -90,7 +90,9 @@ help_reply_body = """1.头像表情包制作
 85.反闪照
 86.leetcode每日一题
 87.摩尔质量计算
-88.反向词典"""
+88.反向词典
+89.简易群管
+90.对话超管"""
 help_reply_foot = """更详细内容：《脑积水使用手册》
 优先：zhulinyv.github.io/NJS
 备用：cnblogs.com/xytpz/p/NJS.html"""
@@ -650,3 +652,13 @@ enzh：英—>中
 enen：英—>英
 <描述>即对希望找到的词的描述
 """
+
+h89_r = """需要超级用户或群主或管理员权限
+设置管理员 + @somebody
+取消管理员 + @somebody
+禁言/口球 + @somebody + 阿拉伯数字
+解禁 + @somebody
+移出 + @somebody
+移出并拉黑 + @somebody"""
+
+h90_r = "反馈开发者 + 内容"

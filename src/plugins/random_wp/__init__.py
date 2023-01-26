@@ -14,6 +14,7 @@ import random
 import requests
 
 from .api import *
+from .utils import *
 
 
 
@@ -158,6 +159,7 @@ async def _(event:Event, bot:Bot, msg: Message = CommandArg()):
         pic7 = MessageSegment.image(str(res["data"][7]["Url"]))
         pic8 = MessageSegment.image(str(res["data"][8]["Url"]))
         pic9 = MessageSegment.image(str(res["data"][9]["Url"]))
+        logger.info("成功获取 10 张图片")
         # 私聊直接发送
         if isinstance(event, PrivateMessageEvent):
             await search.send("找到以下图片捏~")
@@ -182,6 +184,7 @@ async def _(event:Event, bot:Bot, msg: Message = CommandArg()):
             message_list.append(pic7)
             message_list.append(pic8)
             message_list.append(pic9)
+            message_list.append('o(〃＾▽＾〃)o')
             for msg in message_list:
                 msgs.append({
                     'type': 'node',
@@ -193,20 +196,17 @@ async def _(event:Event, bot:Bot, msg: Message = CommandArg()):
                 })
             await bot.call_api('send_group_forward_msg', group_id=event.group_id, messages=msgs)
     elif code == '-1':
-        await search.finish('没找到该画师的插图哦~', at_sender=True)
+        await search.finish(f'没找到关于{key_word}的图片哦~', at_sender=True)
     elif code == '-2':
-        await search.finish('没找到该画师的插图哦~', at_sender=True)
+        await search.finish(f'没找到关于{key_word}的图片哦~', at_sender=True)
     elif code == '-3':
         await search.finish('搜索出错啦！', at_sender=True)
     elif code == '-4':
         await search.finish('图图被外星人抢走啦~', at_sender=True)
     elif code == '-5':
-        await search.finish('获取失败，请稍后重试', at_sender=True)
+        await search.finish('获取失败，换个关键词试试叭~', at_sender=True)
     elif code == '-6':
-        await search.finish('找不到更多啦', at_sender=True)
+        await search.finish('找不到更多啦！', at_sender=True)
     else:
+        logger.info("接口炸啦，寄")
         await search.finish("寄", at_sender=True)
-
-
-    
-

@@ -77,7 +77,7 @@ help_reply_body = """1.头像表情包制作
 72.防撤回
 73.原神前瞻直播兑换码
 74.签到
-75.PING|HTTP
+75.PING|QRCODE|HTTP|WHOIS
 76.文字表情包制作
 77.兽语译者
 78.AI绘图(使用本地SDWebUI)
@@ -580,6 +580,8 @@ h74_r = """签到
 我的好感"""
 
 h75_r = """ping  + 网址
+qrcode + 网址
+whois + 网址
 httpcat + HTTP状态码"""
 
 h77_r = """[兽音加密]/[convert]

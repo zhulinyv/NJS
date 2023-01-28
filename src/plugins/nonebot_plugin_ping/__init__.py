@@ -74,8 +74,6 @@ async def cmd_ping(url):
 
 
 
-
-
 """二维码生成"""
 qrcode = on_command('qrcode', aliases={'二维码', '二维码生成'}, priority=60, block=True)
 @qrcode.handle()
@@ -83,6 +81,34 @@ async def _(msg: Message = CommandArg()):
     url = msg.extract_plain_text().strip()
     api = f'https://api.gmit.vip/Api/QrCode?text={url}'
     await qrcode.finish(MessageSegment.image(file=api))
+
+
+
+"""WHOIS查询"""
+whois = on_command('whois', aliases={'whois', 'whois查询'}, priority=60, block=True)
+@whois.handle()
+async def _(msg: Message = CommandArg()):
+    url = msg.extract_plain_text().strip()
+    api = f'http://whois.4.cn/api/main?domain={url}'
+    message = await whois_search(api)
+    await whois.finish(message)
+    
+async def whois_search(api):
+    async with AsyncClient() as client:
+        res = (await client.get(api)).json()
+        if res["data"]["status"] == "":
+            return "寄"
+        else:
+            url = (res["data"]["domain_name"])
+            reg = (res["data"]["registrars"])
+            email = (res["data"]["owner_email"])
+            regtime = (res["data"]["create_date"])
+            exptime = (res["data"]["expire_date"])
+            dnsserver = (res["data"]["nameserver"])
+            status = (res["data"]["status"])
+            updatetime = (res["data"]["update_date"])
+            res = f"请求域名: {url}\n注册商: {reg}\n邮箱: {email}\n注册时间: {regtime}\n过期时间: {exptime}\nDNS服务器: {dnsserver}\n域名状态: {status}\n更新时间: {updatetime}"
+            return res
 
 
 

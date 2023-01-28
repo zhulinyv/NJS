@@ -53,6 +53,7 @@ def get_img_url():
             matcher.block = False
             await matcher.finish()
         state["img_url"] = img_url
+        await matcher.send("脑积水已获取图片, 正在努力ing~", at_sender=True)
 
     return Depends(dependency)
 
@@ -68,19 +69,19 @@ def create_matchers():
                 img = await download_image(img_url)
             except:
                 logger.warning(traceback.format_exc())
-                await matcher.finish("图片下载出错，请稍后再试")
+                await matcher.finish("图片下载出错，请稍后再试", at_sender=True)
 
             try:
                 res = await source.func(img)
             except:
                 logger.warning(traceback.format_exc())
-                await matcher.finish("出错了，请稍后再试")
+                await matcher.finish("出错了，请稍后再试", at_sender=True)
 
             help_msg = f"当前搜索引擎：{source.name}\n可使用 {options} 命令使用其他引擎搜索"
             if res:
                 await send_msg(bot, event, res, help_msg)
             else:
-                await matcher.finish(f"{source.name} 中未找到匹配的图片")
+                await matcher.finish(f"{source.name} 中未找到匹配的图片", at_sender=True)
 
         return handler
 
@@ -103,7 +104,7 @@ async def handler(bot: Bot, matcher: Matcher, event: MessageEvent, state: T_Stat
         img = await download_image(img_url)
     except:
         logger.warning(traceback.format_exc())
-        await matcher.finish("图片下载出错，请稍后再试")
+        await matcher.finish("图片下载出错，请稍后再试", at_sender=True)
 
     res: List[Message] = []
     help_msg = ""
@@ -119,7 +120,7 @@ async def handler(bot: Bot, matcher: Matcher, event: MessageEvent, state: T_Stat
             logger.warning(f"{source.name} 搜索出错")
 
     if not res:
-        await matcher.finish("出错了，请稍后再试")
+        await matcher.finish("出错了，请稍后再试", at_sender=True)
 
     await send_msg(bot, event, res, help_msg)
 

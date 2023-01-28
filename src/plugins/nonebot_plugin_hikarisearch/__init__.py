@@ -53,7 +53,7 @@ def get_img_url():
             matcher.block = False
             await matcher.finish()
         state["img_url"] = img_url
-        await matcher.send("脑积水已获取图片, 正在努力ing~", at_sender=True)
+        await matcher.send("脑积水已获取图片, 正在努力搜图ing~", at_sender=True)
 
     return Depends(dependency)
 

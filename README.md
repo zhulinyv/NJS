@@ -37,7 +37,7 @@
 
 此过程比较简单，不在附图。
 
-警告：**不要**使用 Internet Explorer！如果你的电脑配置比较低，可以选择[百分浏览器](https://www.centbrowser.cn/)等占用小的浏览器，解压软件可以选择[7-Zip](https://www.7-zip.org/)等解压软件，文本编辑器任意，系统自带的记事本都可以，也可以使用比较高级一点的，比如 [VScode](https://code.visualstudio.com/)、[Notepad++](https://notepad-plus-plus.org/)，[Sublime](https://www.sublimetext.com/)等。**如果你的电脑上已经有其它同类软件，则跳过此步骤！**
+警告：**不要**使用 Internet Explorer！如果你的电脑配置比较低，可以选择[百分浏览器](https://www.centbrowser.cn/)等占用小的浏览器，解压软件可以选择[7-Zip](https://www.7-zip.org/)等解压软件，文本编辑器任意，系统自带的记事本都可以，也可以使用比较高级一点的，比如 [VScode](https://code.visualstudio.com/) 等。**如果你的电脑上已经有其它同类软件，则跳过此步骤！**
 
 ### 2️⃣ 安装 Python
 

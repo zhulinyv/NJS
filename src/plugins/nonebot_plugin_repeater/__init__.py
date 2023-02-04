@@ -6,7 +6,7 @@ import re
 repeater_group = config.repeater_group
 shortest = config.shortest_length
 
-m = on_message(priority=99, block=False)
+m = on_message(priority=100, block=False)
 
 last_message = {}
 message_times = {}

@@ -42,7 +42,7 @@ logger.info(logo) # 在日志中输出打印logo
 
 
 """------------------------------响应部分------------------------------"""
-ai = on_message(rule=to_me(), priority=99, block=False)
+ai = on_message(rule=to_me(), priority=99, block=True)
 attack = on_keyword(curse, rule=to_me(), block=True, priority=1) # ban 人的响应器, curse 是关键词列表
 remove_CD = on_command("remove_qq", aliases={"rm_qq"}, permission=SUPERUSER, priority=5, block=True, rule=to_me())
 # -------------------------------api部分---------------------切换均需要艾特

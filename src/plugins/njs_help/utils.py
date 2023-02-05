@@ -83,9 +83,9 @@ help_reply_body = """[size=20][color=#008000]*绿色表示正常可用
 74.签到
 75.PING|QRCODE|HTTP|WHOIS
 76.文字表情包制作
-77.兽语译者
-78.AI绘图(使用本地SDWebUI)
-79.对对联
+77.兽语译者[/color]
+[color=#0000FF]78.AI绘图(使用本地SDWebUI)[/color]
+[color=#008000]79.对对联
 80.整点报时
 81.星座查询
 82.心灵鸡汤

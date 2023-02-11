@@ -3,9 +3,9 @@
 发送 "njs+对应序号" 查看指令捏~
 发送 "njs+对应序号" 查看指令捏~
 (重要的事情说三遍！！！)"""
-help_reply_body = """[size=20][color=#008000]*绿色表示正常可用
-[color=#0000FF]*蓝色表示部分维护
-[color=#FF0000]*红色表示暂时维护[/size]
+help_reply_body = """[align=right][size=20][color=#008000]*绿色表示正常可用[/color]
+[color=#0000FF]*蓝色表示部分维护[/color]
+[color=#FF0000]*红色表示暂时维护[/color][/size][/align]
 
 [color=#008000]1.头像表情包制作
 2.涩图(bushi)
@@ -64,7 +64,7 @@ help_reply_body = """[size=20][color=#008000]*绿色表示正常可用
 55.疯狂星期四文案
 56.番剧资源搜索
 57.战地1、5战绩查询
-58.战舰世界水表BOT
+[color=#FF0000]58.战舰世界水表BOT[/color]
 59.词云
 60.二次元化图像
 61.群事件变化通知
@@ -96,7 +96,9 @@ help_reply_body = """[size=20][color=#008000]*绿色表示正常可用
 87.摩尔质量计算
 88.反向词典
 89.简易群管
-90.对话超管[/color]"""
+90.对话超管[/color]
+
+[align=center][color=#000000]Powered by (๑•小丫头片子•๑)[/color][/align]"""
 help_reply_foot = """更详细内容：《脑积水使用手册》
 优先：zhulinyv.github.io/NJS
 备用：cnblogs.com/xytpz/p/NJS.html"""
@@ -533,6 +535,7 @@ unalias -g [别名] 删除全局别名"""
 
 h68_r = """设置召唤术+昵称+QQ号
 召唤+昵称
+戳+昵称+数字
 
 删除召唤术+昵称
 召唤列表

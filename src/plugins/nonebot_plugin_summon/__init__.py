@@ -37,7 +37,7 @@ async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
     await set_summoning.finish("设置成功~")
 
 
-del_summoning = on_command("删除召唤", aliases={"删除召唤术"}, priority=60, block=True)
+del_summoning = on_command("删除召唤", aliases={"删除召唤术"}, rule=to_me(), priority=60, block=True)
 @del_summoning.handle()
 async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
     name = msg.extract_plain_text().strip()
@@ -65,7 +65,7 @@ async def _(switch_msg: Message = CommandArg()):
     await model_switch.finish(msg)
 
 
-list_summoning = on_command("召唤列表", aliases={"查看召唤", "查看召唤术"}, rule=to_me(), priority=50, block=True)
+list_summoning = on_command("召唤列表", aliases={"查看召唤", "查看召唤术"}, priority=50, block=True)
 @list_summoning.handle()
 async def _(event: GroupMessageEvent):
     gid = str(event.group_id)
@@ -95,6 +95,27 @@ async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
             await summon.send(Message(f"[CQ:at,qq={qid}]"))
     except KeyError:
         await summon.finish(f"{NICKNAME}的记忆里没有这号人捏......".replace('{\'', '').replace('\'}', ''))
+
+
+poke = on_command("戳", priority=80, block=True)
+@poke.handle()
+async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
+    gid = str(event.group_id)
+    global data_path_gid
+    data_path_gid = data_path + gid + "/"
+    message = msg.extract_plain_text().strip().replace(" ", '')
+    name = re.sub(r'[0-9]+', '', message)
+    times = int(message.replace(name, ''))
+    data = read_json()
+    try:
+        if times <= 10:
+            qid = data[name]
+            for t in range(times):
+                await poke.send(Message(f"[CQ:poke,qq={qid}]"))
+        else:
+            await poke.finish(f"你想让{NICKNAME}风控嘛......".replace('{\'', '').replace('\'}', ''), at_sende=True)
+    except KeyError:
+        await poke.finish(f"{NICKNAME}的记忆里没有这号人捏......".replace('{\'', '').replace('\'}', ''), at_sender=True)
 
 
 

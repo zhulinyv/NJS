@@ -7,18 +7,16 @@ from nonebot import on_command
 from httpx import AsyncClient
 import nonebot
 import re
+try:
+    import ujson as json
+except:
+    import json
 
 """导入变量"""
-try:
-    # 当 admin_model 为 1 时，调用 API，BOT 不需要为群主。
-    # 当 admin_model 为 2 时，使用 Nonebot 内置函数，BOT 必须为群主。
-    admin_model: int = nonebot.get_driver().config.admin_model
-    skey: str = nonebot.get_driver().config.skey
-    pskey: str = nonebot.get_driver().config.pskey
-except:
-    admin_model: int = 1
-    skey: str = ''
-    pskey: str = ''
+config = nonebot.get_driver().config
+admin_model: int =  getattr(config, "admin_model", 1)
+skey: str =  getattr(config, "skey", "")
+pskey: str =  getattr(config, "pskey", "")
 
 
 """响应部分"""
@@ -35,7 +33,7 @@ kick_ban = on_command('移出并拉黑', permission=SUPERUSER|GROUP_ADMIN|GROUP_
 @set_admin.handle()
 async def _(bot: Bot, event: GroupMessageEvent):
     # 获取被操作群员的ID、所在群号、所在群群主ID
-    qid = await get_at(event)
+    qid_list = await get_at(event.json())
     gid = event.group_id
     member_list = await bot.get_group_member_list(group_id=gid)
     for owner in member_list:
@@ -44,22 +42,25 @@ async def _(bot: Bot, event: GroupMessageEvent):
             break
     # 模式判断
     if admin_model == 1:
-        api = f'https://ovooa.com/API/quns/api.php?qq={owner_id}&skey={skey}&pskey={pskey}&group={gid}&uin={qid}&kt=1'
-        msg = await admin_api(api)
-        await set_admin.send(f"{msg}", at_sender=True)
+        for qid in qid_list:
+            api = f'https://ovooa.com/API/quns/api.php?qq={owner_id}&skey={skey}&pskey={pskey}&group={gid}&uin={qid}&kt=1'
+            print(api)
+            msg = await admin_api(api)
+            await set_admin.send(f"{msg}", at_sender=True)
     elif admin_model == 2:
-        try:
-            await bot.set_group_admin(group_id=gid, user_id=qid, enable=True)
-            await set_admin.send('设置管理员成功~', at_sender=True)
-        except ActionFailed:
-            await set_admin.send('权限不足捏', at_sender=True)
+        for qid in qid_list:
+            try:
+                await bot.set_group_admin(group_id=gid, user_id=qid, enable=True)
+                await set_admin.send('设置管理员成功~', at_sender=True)
+            except ActionFailed:
+                await set_admin.send('权限不足捏', at_sender=True)
     else:
         await set_admin.send('env 配置项有误，联系 SUPPERUSER 检查！', at_sender=True)
 
 @unset_admin.handle()
 async def _(bot: Bot, event: GroupMessageEvent):
     # 获取被操作群员的ID、所在群号、所在群群主ID
-    qid = await get_at(event)
+    qid_list = await get_at(event.json())
     gid = event.group_id
     member_list = await bot.get_group_member_list(group_id=gid)
     for owner in member_list:
@@ -68,9 +69,10 @@ async def _(bot: Bot, event: GroupMessageEvent):
             break
     # 模式判断
     if admin_model == 1:
-        api = f'https://ovooa.com/API/quns/api.php?qq={owner_id}&skey={skey}&pskey={pskey}&group={gid}&uin={qid}&kt=2'
+        for qid in qid_list:
+            api = f'https://ovooa.com/API/quns/api.php?qq={owner_id}&skey={skey}&pskey={pskey}&group={gid}&uin={qid}&kt=2'
         msg = await admin_api(api)
-        await unset_admin.send(f"{msg}")
+        await unset_admin.send(f"{msg}", at_sender=True)
     elif admin_model == 2:
         try:
             await bot.set_group_admin(group_id=gid, user_id=qid, enable=False)
@@ -82,46 +84,61 @@ async def _(bot: Bot, event: GroupMessageEvent):
 
 @ban.handle()
 async def _(bot: Bot, event: GroupMessageEvent, msg: Message = CommandArg()):
-    qid = await get_at(event)
+    qid_list = await get_at(event.json())
     msg = msg.extract_plain_text().strip()
     # 这里去除 CQ 码提取数字并扩大 60 倍变单位为分钟
     time = int(re.sub(r"\[.*?\]", "", msg))*60
-    await bot.set_group_ban(group_id = event.group_id, user_id = qid, duration = time)
+    for qid in qid_list:
+        try:
+            print(qid)
+            await bot.set_group_ban(group_id = event.group_id, user_id = qid, duration = time)
+        except ActionFailed:
+            await unset_admin.send('权限不足捏', at_sender=True)
 
 @unban.handle()
 async def _(bot: Bot, event: GroupMessageEvent):
-    qid = await get_at(event)
+    qid_list = await get_at(event.json())
     # duration = 0 即为解除禁言
-    await bot.set_group_ban(group_id = event.group_id, user_id = qid, duration = 0)
+    for qid in qid_list:
+        await bot.set_group_ban(group_id = event.group_id, user_id = qid, duration = 0)
 
 @kick.handle()
 async def _(bot: Bot, event: GroupMessageEvent):
-    qid = await get_at(event)
+    qid_list = await get_at(event.json())
     gid = event.group_id
-    try:
-        await bot.set_group_kick(group_id=gid, user_id=qid, reject_add_request=False)
-    except ActionFailed:
-        await kick.send('权限不足捏', at_sender=True)
+    for qid in qid_list:
+        try:
+            await bot.set_group_kick(group_id=gid, user_id=qid, reject_add_request=False)
+            await kick.send(f'已移出群员{qid}')
+        except ActionFailed:
+            await kick.send('权限不足捏', at_sender=True)
 
 @kick_ban.handle()
 async def _(bot: Bot, event: GroupMessageEvent):
-    qid = await get_at(event)
+    qid_list = await get_at(event.json())
     gid = event.group_id
-    try:
-        # reject_add_request=True 阻止再次申请
-        await bot.set_group_kick(group_id=gid, user_id=qid, reject_add_request=True)
-    except ActionFailed:
-        await kick_ban.send('权限不足捏', at_sender=True)
+    for qid in qid_list:
+        try:
+            # reject_add_request=True 阻止再次申请
+            await bot.set_group_kick(group_id=gid, user_id=qid, reject_add_request=True)
+            await kick.send(f'已移出并拉黑群员{qid}')
+        except ActionFailed:
+            await kick_ban.send('权限不足捏', at_sender=True)
 
 
 
 """一些工具"""
-# 获取倍艾特用户 ID
-async def get_at(event: GroupMessageEvent) -> int:
-    msg=event.get_message()
-    for msg_seg in msg:
-        if msg_seg.type == "at":
-            return int(msg_seg.data["qq"])
+# 获取被艾特用户 ID列表
+async def get_at(data:str) -> list[int]:
+    qq_list = []
+    data = json.loads(data)
+    try:
+        for msg in data['message']:
+            if msg['type'] == 'at':
+                qq_list.append(int(msg['data']['qq']))
+        return qq_list
+    except Exception:
+        return []
 
 # 调用 API 设置群员身份
 async def admin_api(api):

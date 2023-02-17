@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from nonebot import on_regex, get_driver
+from nonebot import get_driver, on_startswith, on_endswith
 from nonebot.log import logger
 from nonebot.params import RegexGroup
 from nonebot.matcher import Matcher
@@ -25,29 +25,30 @@ if plugin_config.debug:
 else:
     DEBUG = False
 
-weather = on_regex(r".*?(.*)天气(.*).*?", priority=1)
+weather_startswith = on_startswith("天气", priority=10, block=True)
+weather_endswith = on_endswith("天气", priority=10, block=True)
 
-
-@weather.handle()
+@weather_startswith.handle()
+@weather_endswith.handle()
 async def _(matcher: Matcher, args: Tuple[str, ...] = RegexGroup()):
     city = args[0].strip() or args[1].strip()
-    await weather.send("少女观星中...", at_sender=True)
+    await matcher.send("少女观星中...", at_sender=True)
     if not city:
-        await weather.finish("地点是...空气吗?? >_<")
+        await matcher.finish("地点是...空气吗?? >_<")
 
     w_data = Weather(city_name=city, api_key=api_key, api_type=api_type)
     try:
         await w_data.load_data()
     except CityNotFoundError:
         matcher.block = False
-        await weather.finish(f"未查询到{city}的天气哦~")
+        await matcher.finish(f"未查询到{city}的天气哦~")
 
     img = await render(w_data)
 
     if DEBUG:
         debug_save_img(img)
 
-    await weather.finish(MessageSegment.image(img))
+    await matcher.finish(MessageSegment.image(img))
 
 
 def debug_save_img(img: bytes) -> None:

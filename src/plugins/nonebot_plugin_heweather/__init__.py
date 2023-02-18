@@ -31,10 +31,11 @@ weather = on_regex(r".*?(.*)天气(.*).*?", priority=1)
 @weather.handle()
 async def _(matcher: Matcher, args: Tuple[str, ...] = RegexGroup()):
     city = args[0].strip() or args[1].strip()
-    await weather.send("少女观星中...", at_sender=True)
     if not city:
         await weather.finish("地点是...空气吗?? >_<")
-
+    if ((args[0].strip() == '') == (args[1].strip() == '')):
+        await weather.finish()
+    await weather.send("少女观星中...", at_sender=True)
     w_data = Weather(city_name=city, api_key=api_key, api_type=api_type)
     try:
         await w_data.load_data()

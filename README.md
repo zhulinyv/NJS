@@ -43,7 +43,7 @@
 
 #### Windows下的安装
 
-1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.10 及以上的版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上。
+1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.10 版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上。
 
 ![image](https://user-images.githubusercontent.com/66541860/213637200-dca63b69-fd52-42d1-a3cd-f8b24f492186.png)
 
@@ -65,9 +65,9 @@
 
 #### Ubuntu 和 Debian 下的安装
 
-如果是 20+ 的版本，系统会自带 Python3.8 或 3.10 版本，可以直接使用。
+如果是 20+ 的版本，系统会自带 Python3.8 或 3.10 版本，如果是 3.10 版本可以直接使用。
 
-如果是更低的版本，请自行安装 Python3.8-3.10 版本。
+如果是更低的版本，请自行安装 3.10 版本。
 
 Ubuntu 可能没有自带pip命令，需要运行 `apt install python3-pip` 进行安装
 

@@ -674,7 +674,7 @@ h89_r = """需要超级用户或群主或管理员权限
 
 h90_r = "反馈开发者 + 内容"
 
-h91_r = """chat    与Bing进行对话
+h91_r = """chat3    与Bing进行对话
 chat-new    新建一个对话
 chat-history    返回历史对话"""
 

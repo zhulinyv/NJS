@@ -97,7 +97,8 @@ help_reply_body = """[align=right][size=20][color=#008000]*绿色表示正常可
 88.反向词典
 89.简易群管
 90.对话超管
-91.BingGPT(Bing)对话(使用cookies)[/color][/color]
+91.BingGPT(Bing)对话(使用cookies)
+92.P站图片查询[/color][/color]
 
 [align=center][color=#000000]Powered by (๑•小丫头片子•๑)[/color][/align]"""
 help_reply_foot = """更详细内容：《脑积水使用手册》
@@ -676,3 +677,7 @@ h90_r = "反馈开发者 + 内容"
 h91_r = """chat    与Bing进行对话
 chat-new    新建一个对话
 chat-history    返回历史对话"""
+
+h92_r = """pixiv pid
+pixivRank 1/7/30
+"""

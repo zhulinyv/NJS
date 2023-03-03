@@ -54,6 +54,8 @@ wordcloud_cmd = on_command(
         "我的年度词云",
         "我的历史词云",
     },
+    priority=60,
+    block=True
 )
 
 

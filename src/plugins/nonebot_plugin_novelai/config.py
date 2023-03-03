@@ -8,7 +8,7 @@ from pydantic import BaseSettings, validator
 from pydantic.fields import ModelField
 
 jsonpath = Path("data/novelai/config.json").resolve()
-nickname = list(get_driver().config.nickname)[0] if len(
+nickname = get_driver().config.nickname if len(
     get_driver().config.nickname) else "nonebot-plugin-novelai"
 
 

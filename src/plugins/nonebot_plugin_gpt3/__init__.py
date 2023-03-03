@@ -284,7 +284,7 @@ async def _(event: MessageEvent, arg: Message = CommandArg()):
 
 
 # 基本聊天
-gpt3 = on_command(priority=100, block=True, **matcher_params)
+gpt3 = on_command(priority=10, block=True, **matcher_params)
 
 
 @gpt3.handle()

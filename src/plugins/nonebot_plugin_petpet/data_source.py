@@ -111,13 +111,16 @@ memes = [
     Meme("sit_still", sit_still, ("坐得住", "坐的住")),
     Meme("learn", learn, ("偷学",)),
     Meme("trance", trance, ("恍惚",)),
-    Meme("dinosuar", dinosaur, ("恐龙", "小恐龙")),
+    Meme("dinosaur", dinosaur, ("恐龙", "小恐龙")),
     Meme("scratch_head", scratch_head, ("挠头",)),
     Meme("applaud", applaud, ("鼓掌",)),
     Meme("chase_train", chase_train, ("追列车", "追火车")),
     Meme("kaleidoscope", kaleidoscope, ("万花筒", "万花镜")),
     Meme("overtime", overtime, ("加班",)),
     Meme("avatar_formula", avatar_formula, ("头像公式", "等价无穷小")),
+    Meme("potato", potato, ("土豆",)),
+    Meme("printing", printing, ("打印",)),
+    Meme("name_generator", name_generator, ("亚文化取名机", "亚名")),
 ]
 
 memes = [meme for meme in memes if meme.name not in petpet_config.petpet_disabled_list]

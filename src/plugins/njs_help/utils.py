@@ -64,7 +64,7 @@ help_reply_body = """[align=right][size=20][color=#008000]*绿色表示正常可
 55.疯狂星期四文案
 56.番剧资源搜索
 57.战地1、5战绩查询
-[color=#FF0000]58.战舰世界水表BOT[/color]
+58.战舰世界水表BOT
 59.词云
 60.二次元化图像
 61.群事件变化通知
@@ -72,7 +72,7 @@ help_reply_body = """[align=right][size=20][color=#008000]*绿色表示正常可
 63.今天吃(喝)什么
 64.翻译
 65.记事本[/color]
-[color=#FF0000]66.ChatGPT(OpenAI)对话(使用token)[/color]
+[color=#0000FF]66.ChatGPT(OpenAI)对话(使用token)[/color]
 [color=#008000]67.命令别名
 68.群友召唤术
 69.戒色打卡日记
@@ -96,7 +96,8 @@ help_reply_body = """[align=right][size=20][color=#008000]*绿色表示正常可
 87.摩尔质量计算
 88.反向词典
 89.简易群管
-90.对话超管[/color]
+90.对话超管
+91.BingGPT(Bing)对话(使用cookies)[/color][/color]
 
 [align=center][color=#000000]Powered by (๑•小丫头片子•๑)[/color][/align]"""
 help_reply_foot = """更详细内容：《脑积水使用手册》
@@ -671,3 +672,7 @@ h89_r = """需要超级用户或群主或管理员权限
 移出并拉黑 + @somebody"""
 
 h90_r = "反馈开发者 + 内容"
+
+h91_r = """chat    与Bing进行对话
+chat-new    新建一个对话
+chat-history    返回历史对话"""

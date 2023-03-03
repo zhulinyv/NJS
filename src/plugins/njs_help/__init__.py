@@ -778,3 +778,11 @@ async def test_handle(event:Event):
         await h90.finish('\n' + h90_r, at_sender=True)
     else:
         await h90.finish(h90_r)
+
+h91 = on_command('njs91', priority=2, block=True)
+@h91.handle()
+async def test_handle(event:Event):
+    if isinstance(event, GroupMessageEvent):
+        await h91.finish('\n' + h91_r, at_sender=True)
+    else:
+        await h91.finish(h91_r)

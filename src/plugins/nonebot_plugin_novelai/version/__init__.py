@@ -7,17 +7,17 @@ from .version import Version
 from nonebot import on_command, get_driver
 from nonebot.permission import SUPERUSER
 from nonebot.log import logger
-from ..utils import cs, aliases, sendtosuperuser
+from ..utils import sendtosuperuser # cs, aliases, 
 ver = Version()
 driver = get_driver()
 nickname = driver.config.nickname.pop() if driver.config.nickname else ver.package
 
-check = on_command(cs("version"), aliases=aliases("版本"), priority=5)
+check = on_command("version", aliases={"版本"}, priority=5, block=True)
 update = on_command(
-    cs("update"), aliases=aliases("更新"), permission=SUPERUSER, priority=5
+    "update", aliases={"更新"}, permission=SUPERUSER, priority=5, block=True
 )
 reboot = on_command(
-    cs("reboot"), aliases=aliases("重启"), permission=SUPERUSER, priority=5
+    "reboot", aliases={"重启"}, permission=SUPERUSER, priority=5
 )
 
 

@@ -38,6 +38,7 @@ poetry run pip install cycler==0.11.0
 poetry run pip install dateparser==1.1.1
 poetry run pip install dnspython==2.2.1
 poetry run pip install ecdsa==0.18.0
+poetry run pip install EdgeGPT==0.0.51
 poetry run pip install emoji==2.1.0
 poetry run pip install et-xmlfile==1.1.0
 poetry run pip install expandvars==0.9.0
@@ -49,6 +50,7 @@ poetry run pip install filelock==3.8.2
 poetry run pip install fonttools==4.38.0
 poetry run pip install frozenlist==1.3.1
 poetry run pip install gitdb==4.0.9
+poetry run pip install githubkit==0.9.6
 poetry run pip install GitPython==3.1.29
 poetry run pip install greenlet==1.1.3
 poetry run pip install h11==0.12.0
@@ -65,7 +67,6 @@ poetry run pip install imageio==2.22.2
 poetry run pip install importlib-metadata==4.12.0
 poetry run pip install iso8601==1.1.0
 poetry run pip install jieba==0.42.1
-poetry run pip install jieba-fast==0.53
 poetry run pip install Jinja2==3.1.2
 poetry run pip install jinja2-time==0.2.0
 poetry run pip install joblib==1.2.0

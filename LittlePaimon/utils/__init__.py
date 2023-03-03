@@ -18,6 +18,6 @@ if not SUPERUSERS or SUPERUSERS == ['123456']:
 try:
     NICKNAME: str = list(DRIVER.config.nickname)[0]
 except Exception:
-    NICKNAME = '派蒙'
+    NICKNAME = '脑积水'
 
 __all__ = ['logger', 'scheduler', 'DRIVER', 'SUPERUSERS', 'NICKNAME', '__version__']

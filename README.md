@@ -43,7 +43,7 @@
 
 #### Windows下的安装
 
-1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.10 及以上的版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上。
+1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.10 版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上。
 
 ![image](https://user-images.githubusercontent.com/66541860/213637200-dca63b69-fd52-42d1-a3cd-f8b24f492186.png)
 

@@ -15,7 +15,10 @@ from nonebot.adapters.onebot.v11 import (
 
 from .utils import *
 
-NICKNAME: str = list(nonebot.get_driver().config.nickname)[0]
+try:
+    NICKNAME: str = list(nonebot.get_driver().config.nickname)[0]
+except Exception:
+    NICKNAME: str = "脑积水"
 
 
 

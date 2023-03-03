@@ -84,7 +84,7 @@ poetry run pip install nonebot-adapter-onebot==2.2.0
 poetry run pip install nonebot-adapter-qqguild==0.1.4
 poetry run pip install nonebot-bison==0.5.5
 poetry run pip install nonebot-plugin-apscheduler==0.2.0
-poetry run pip install nonebot-plugin-chatrecorder==0.1.9
+poetry run pip install nonebot-plugin-chatrecorder==0.2.1
 poetry run pip install nonebot-plugin-datastore==0.4.0
 poetry run pip install nonebot-plugin-easy-translate==0.1.3
 poetry run pip install nonebot-plugin-gocqhttp==0.6.4

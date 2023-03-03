@@ -1,10 +1,10 @@
-echo æ­£åœ¨è¿›è¡Œæ¢æºæ“ä½œâ€¦â€¦
+echo ÕıÔÚ½øĞĞ»»Ô´²Ù×÷¡­¡­
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-echo æ­£åœ¨å®‰è£…Poetryâ€¦â€¦
+echo ÕıÔÚ°²×°Poetry¡­¡­
 pip install poetry
 
-echo æ­£åœ¨å®‰è£…ä¾èµ–ï¼Œè€—æ—¶è¾ƒé•¿ï¼Œè€å¿ƒç­‰å¾…â€¦â€¦
+echo ÕıÔÚ°²×°ÒÀÀµ£¬ºÄÊ±½Ï³¤£¬ÄÍĞÄµÈ´ı¡­¡­
 poetry run pip install aiocache==0.11.1
 poetry run pip install aiofiles==0.8.0
 poetry run pip install aiohttp==3.8.3
@@ -187,5 +187,5 @@ poetry run pip install yarl==1.8.1
 poetry run pip install zhconv==1.4.3
 poetry run pip install zipp==3.8.1
 
-echo å®‰è£…å®Œæˆï¼ŒæŒ‰ä»»æ„é”®é€€å‡º
+echo °²×°Íê³É£¬°´ÈÎÒâ¼üÍË³ö
 pause

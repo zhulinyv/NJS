@@ -23,7 +23,7 @@ picture = on_command("来点", aliases={"来份"}, priority=50, block=True)
 async def _(msg: Message = CommandArg()):
     types = msg.extract_plain_text().strip()
 
-    if types == "二次元":
+    if types in ["二次元", "二刺螈"]:
         pic = get_pic(random.choice(random_acg))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
 
@@ -31,11 +31,11 @@ async def _(msg: Message = CommandArg()):
         pic = get_pic(random.choice(wp_top))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
 
-    elif types == "白毛":
+    elif types in ["白毛", "银发"]:
         pic = get_pic(random.choice(white))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
     
-    elif types == "兽耳":
+    elif types in ["兽耳", "猫耳"]:
         pic = get_pic(random.choice(cat))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
 
@@ -43,15 +43,15 @@ async def _(msg: Message = CommandArg()):
         pic = get_pic(random.choice(star))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
 
-    elif types == "竖屏壁纸":
+    elif types in ["竖屏壁纸", "竖屏", "手机壁纸"]:
         pic = get_pic(random.choice(phone))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
 
-    elif types == "横屏壁纸":
+    elif types in ["横屏壁纸", "横屏", "电脑壁纸", "pc壁纸", "PC壁纸"]:
         pic = get_pic(random.choice(pc))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
 
-    elif types == "萝莉":
+    elif types in ["萝莉", "Loli", "loli"]:
         pic = get_pic(random.choice(loli))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
 
@@ -86,6 +86,8 @@ async def _(msg: Message = CommandArg()):
         msg = Message(msg_img)
         await picture.send(msg)
         logger.info("消息发送成功!")
+    else:
+        await picture.finish()
         
 
 

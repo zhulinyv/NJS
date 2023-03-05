@@ -91,4 +91,5 @@ async def reboot_handle():
 
 @driver.on_bot_connect
 async def on_start():
-    await sendtosuperuser(f"{nickname}启动完成")
+    # await sendtosuperuser(f"{nickname}启动完成")
+    logger.success(f"{nickname}启动完成")

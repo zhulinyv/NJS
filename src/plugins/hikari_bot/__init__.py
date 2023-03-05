@@ -315,10 +315,11 @@ async def startup():
 async def remind(bot: Bot):
     superid = driver.config.superusers
     bot_info = await bot.get_login_info()
-    for each in superid:
+    """for each in superid:
         await bot.send_private_msg(
             user_id=int(each), message=f"Hikari已上线，当前版本{__version__}"
-        )
+        )"""
+    logger.success("脑积水启动完成")
     # global is_first_run
     # if is_first_run:
     #    mqtt_run(bot_info['user_id'])

@@ -482,7 +482,8 @@ async def _(event:Event,args:Message=CommandArg()):
 async def _restart():
     try:
         for superuser in superusers:
-            await nonebot.get_bot().send_private_msg(user_id=superuser,message=Message('记事项目重启中……'))
+            # await nonebot.get_bot().send_private_msg(user_id=superuser,message=Message('记事项目重启中……'))
+            logger.success(f"{nickname}启动完成")
     except:
         return
     timing.remove_job(job_id='restart')
@@ -534,7 +535,8 @@ async def _restart():
                         await nonebot.get_bot().send_private_msg(user_id=superuser,message=Message("重启成功，将在{}年{}月{}日{}时{}分{}秒提醒{}({})：{}".format(parameter[2],parameter[3],parameter[4],parameter[5],parameter[6],parameter[7],name,user_id,parameter[8])))
         f.close()
     for superuser in superusers:
-        await nonebot.get_bot().send_private_msg(user_id=superuser,message=Message("已成功重启所有的记事项目"))
+        # await nonebot.get_bot().send_private_msg(user_id=superuser,message=Message("已成功重启所有的记事项目"))
+        logger.success("脑积水启动完成")
 
 
 #删除note

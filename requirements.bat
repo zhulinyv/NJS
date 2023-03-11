@@ -1,10 +1,7 @@
-echo 正在进行换源操作……
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-echo 正在安装Poetry……
 pip install poetry
 
-echo 正在安装依赖，耗时较长，耐心等待……
 poetry run pip install aiocache==0.11.1
 poetry run pip install aiofiles==0.8.0
 poetry run pip install aiohttp==3.8.3
@@ -87,7 +84,7 @@ poetry run pip install nonebot-plugin-apscheduler==0.2.0
 poetry run pip install nonebot-plugin-chatrecorder==0.2.1
 poetry run pip install nonebot-plugin-datastore==0.4.0
 poetry run pip install nonebot-plugin-easy-translate==0.1.3
-poetry run pip install nonebot-plugin-gocqhttp==0.6.7
+poetry run pip install nonebot-plugin-gocqhttp==0.6.8
 poetry run pip install nonebot-plugin-guild-patch==0.2.2
 poetry run pip install nonebot-plugin-htmlrender==0.2.0.1
 poetry run pip install nonebot-plugin-imageutils==0.1.13.4
@@ -188,5 +185,4 @@ poetry run pip install yarl==1.8.1
 poetry run pip install zhconv==1.4.3
 poetry run pip install zipp==3.8.1
 
-echo 安装完成，按任意键退出
 pause

@@ -42,13 +42,10 @@ async def lj(event: MessageEvent):
         get_txt = ""
     # 整合信息
     msg = f"\n{lovelive_send}\n{level_msg}\n\n{get_txt}"
-    try:
-        # 图片
-        res = requests.get('https://img.moehu.org/pic.php?return=json&id=img1&num=1').json()
-        pic_url = res["pic"][0]
-        await qd.finish(msg + MessageSegment.image(file=pic_url), at_sender=True)
-    except Exception:
-        await qd.finish(msg, at_sender=True)
+    # 图片
+    res = requests.get('https://img.moehu.org/pic.php?return=json&id=img1&num=1').json()
+    pic_url = res["pic"][0]
+    await qd.finish(msg + MessageSegment.image(file=pic_url), at_sender=True)
 
 def level_up(money):
     level1 = 10

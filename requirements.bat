@@ -7,6 +7,7 @@ poetry run pip install aiofiles==0.8.0
 poetry run pip install aiohttp==3.8.3
 poetry run pip install aiosignal==1.2.0
 poetry run pip install aiosqlite==0.17.0
+poetry run pip install alembic==1.9.4
 poetry run pip install amis-python==1.0.6
 poetry run pip install anyio==3.6.2
 poetry run pip install appdirs==1.4.4
@@ -14,6 +15,7 @@ poetry run pip install APScheduler==3.9.1.post1
 poetry run pip install arrow==1.2.3
 poetry run pip install asgiref==3.5.2
 poetry run pip install async-timeout==4.0.2
+poetry run pip install asyncio==3.4.3
 poetry run pip install attrs==22.1.0
 poetry run pip install bbcode==1.1.0
 poetry run pip install beautifulsoup4==4.11.1
@@ -50,12 +52,12 @@ poetry run pip install gitdb==4.0.9
 poetry run pip install githubkit==0.9.6
 poetry run pip install GitPython==3.1.29
 poetry run pip install greenlet==1.1.3
-poetry run pip install h11==0.12.0
+poetry run pip install h11==0.14.0
 poetry run pip install h2==4.1.0
 poetry run pip install hpack==4.0.0
-poetry run pip install httpcore==0.14.7
+poetry run pip install httpcore==0.16.3
 poetry run pip install httptools==0.5.0
-poetry run pip install httpx==0.22.0
+poetry run pip install httpx==0.23.3
 poetry run pip install huggingface-hub==0.11.1
 poetry run pip install humanize==4.4.0
 poetry run pip install hyperframe==6.0.1
@@ -71,6 +73,7 @@ poetry run pip install kiwisolver==1.4.4
 poetry run pip install littlepaimon-utils==1.0.2
 poetry run pip install loguru==0.6.0
 poetry run pip install lxml==4.9.1
+poetry run pip install Mako==1.2.4
 poetry run pip install Markdown==3.4.1
 poetry run pip install MarkupSafe==2.1.1
 poetry run pip install matplotlib==3.6.2
@@ -82,7 +85,7 @@ poetry run pip install nonebot-adapter-qqguild==0.1.4
 poetry run pip install nonebot-bison==0.5.5
 poetry run pip install nonebot-plugin-apscheduler==0.2.0
 poetry run pip install nonebot-plugin-chatrecorder==0.2.1
-poetry run pip install nonebot-plugin-datastore==0.5.1
+poetry run pip install nonebot-plugin-datastore==0.5.10
 poetry run pip install nonebot-plugin-easy-translate==0.1.3
 poetry run pip install nonebot-plugin-gocqhttp==0.6.8
 poetry run pip install nonebot-plugin-guild-patch==0.2.2
@@ -92,7 +95,6 @@ poetry run pip install nonebot-plugin-localstore==0.2.0
 poetry run pip install nonebot2==2.0.0rc2
 poetry run pip install numpy==1.23.4
 poetry run pip install openai==0.27.0
-poetry run pip install OpenAIAuth==0.0.3.1
 poetry run pip install opencv-python-headless==4.6.0.66
 poetry run pip install openpyxl==3.0.10
 poetry run pip install packaging==21.3

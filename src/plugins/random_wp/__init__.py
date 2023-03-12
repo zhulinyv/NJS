@@ -15,14 +15,15 @@ import requests
 
 from .api import *
 from .utils import *
+from .nonebot_plugin_setu_collection import *
 
 
 
-picture = on_command("来点", aliases={"来份"}, priority=50, block=True)
+picture = on_command("来点", aliases={"来份"}, priority=59, block=False)
 @picture.handle()
 async def _(msg: Message = CommandArg()):
     types = msg.extract_plain_text().strip()
-
+    """
     if types in ["二次元", "二刺螈"]:
         pic = get_pic(random.choice(random_acg))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
@@ -50,8 +51,8 @@ async def _(msg: Message = CommandArg()):
     elif types in ["横屏壁纸", "横屏", "电脑壁纸", "pc壁纸", "PC壁纸"]:
         pic = get_pic(random.choice(pc))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
-
-    elif types in ["萝莉", "Loli", "loli"]:
+    """
+    if types in ["萝莉", "Loli", "loli"]:
         pic = get_pic(random.choice(loli))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
 

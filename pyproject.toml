@@ -43,6 +43,7 @@ nb-cli = "^0.6.7"
 [tool.nonebot]
 plugins = ["nonebot_plugin_gocqhttp", "nonebot_plugin_guild_patch", "nonebot_bison", "nonebot_plugin_easy_translate"]
 plugin_dirs = ["src/plugins"]
+adapters = [{name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11", project_link = "nonebot-adapter-onebot", desc = "OneBot V11 协议"}]
 
 [build-system]
 requires = ["poetry_core>=1.0.0"]

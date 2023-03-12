@@ -40,7 +40,7 @@ async def lj(event: MessageEvent):
     # 整合信息
     msg = f"\n{lovelive_send}\n{level_msg}\n\n{get_txt}"
     # 发送
-    res = requests.get('https://iw233.cn/api.php?sort=pc&type=json').json()
+    res = requests.get('https://img.moehu.org/pic.php?return=json&id=img1&num=1').json()
     pic_url = res["pic"][0]
     await qd.finish(msg + MessageSegment.image(file=pic_url), at_sender=True)
 

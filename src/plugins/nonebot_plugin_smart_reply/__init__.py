@@ -246,7 +246,7 @@ async def _poke(bot: Bot,event: PokeNotifyEvent)-> bool:
         # 20% 概率发送图片
         if probability < 0.20:
             if setu_flag:
-                res = requests.get('https://iw233.cn/api.php?sort=random&type=json').json()
+                res = requests.get('https://img.moehu.org/pic.php?return=json&id=img1&num=1').json()
                 pic_url = res["pic"][0]
                 message="别戳了别戳了,这张图给你了,让我安静一会儿,60秒后我要撤回\n" + MessageSegment.image(file=pic_url)
             else:

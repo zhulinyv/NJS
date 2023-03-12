@@ -6,7 +6,7 @@
 
 <p align="center">
     <a href="https://github.com/zhulinyv/NJS/raw/Bot/LICENSE"><img src="https://img.shields.io/github/license/CMHopeSunshine/LittlePaimon" alt="license"></a>
-    <img src="https://img.shields.io/badge/Python-3.8+-yellow" alt="python">
+    <img src="https://img.shields.io/badge/Python-3.10+-yellow" alt="python">
     <a href="https://pd.qq.com/s/8bkfowg3c"><img src="https://img.shields.io/badge/QQ频道交流-我的中心花园-blue?style=flat-square" alt="QQ guild"></a>
 </p>
 
@@ -38,6 +38,10 @@
 此过程比较简单，不在附图。
 
 警告：**不要**使用 Internet Explorer！如果你的电脑配置比较低，可以选择 [百分浏览器](https://www.centbrowser.cn/) 等占用小的浏览器，解压软件可以选择 [7-Zip](https://www.7-zip.org/)、[WinRAR](https://www.ghxi.com/winrarlh.html) 等解压软件，文本编辑器任意，系统自带的记事本都可以，也可以使用比较高级一点的，比如 [VScode](https://code.visualstudio.com/)、[Sublime](https://www.sublimetext.com/) 等。**如果你的电脑上已经有其它同类软件，则跳过此步骤！**
+
+备注：Linux 服务器可能会出现中文乱码，还需要安装字体。感谢 [@DuuuLu](https://github.com/DuuuLu) 反馈。
+
+`sudo apt-get install -y ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-umingsudo fc-cache -f -v`
 
 ### 2️⃣ 安装 Python
 

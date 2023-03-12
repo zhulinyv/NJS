@@ -164,7 +164,7 @@ async def _(event: MessageEvent, cmd: str = ArgPlainText('cmd')):
     )
     stdout, stderr = await p.communicate()
     try:
-        result = (stdout or stderr).decode('utf-8')
+        result = (stdout or stderr).decode('gb2312')
     except Exception:
         result = str(stdout or stderr)
     await run_cmd.finish(f'{cmd}\n运行结果：\n{result}')

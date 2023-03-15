@@ -208,9 +208,11 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 3、备用地址：[https://www.cnblogs.com/xytpz/p/NJS.html](https://www.cnblogs.com/xytpz/p/NJS.html)
 
-4、更新：艾特脑积水说更新即可在线更新，更新成功后，艾特脑积水说重启来应用新的内容。
+4、仓库文档：[https://github.com/zhulinyv/NJS/blob/Bot/NJS.md](https://github.com/zhulinyv/NJS/blob/Bot/NJS.md)
 
-5、如有配置、部署或使用中的问题或建议，请通过本仓库 [Issues](https://github.com/zhulinyv/NJS/issues) 或 [博客首页](https://zhulinyv.github.io/) 联系方式联系我。
+5、更新：艾特脑积水说更新即可在线更新，更新成功后，艾特脑积水说重启来应用新的内容。
+
+6、如有配置、部署或使用中的问题或建议，请通过本仓库 [Issues](https://github.com/zhulinyv/NJS/issues) 或 [博客首页](https://zhulinyv.github.io/) 联系方式联系我。
 
 ### 🔟 进阶使用
 

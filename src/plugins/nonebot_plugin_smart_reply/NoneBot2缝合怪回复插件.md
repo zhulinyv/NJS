@@ -70,4 +70,4 @@
 | :---: | :---: |
 | @bot + rm_qq + QQ号 | 提前解除被屏蔽用户 |
 | @bot + 切换图片api | 切换图片api |
-| @bot + 切换小爱同学/青云客/ChatGPTapi模式1/ChatGPTapi模式2 | 切换聊天api |
+| @bot + 切换小爱同学模式1/模式2/青云客/ChatGPTapi模式1/ChatGPTapi模式2 | 切换聊天api |

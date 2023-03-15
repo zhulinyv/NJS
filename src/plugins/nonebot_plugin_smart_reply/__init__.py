@@ -122,8 +122,8 @@ async def _(switch_msg: Message = CommandArg()):
         api_num = 4
     else:
         await api_switch.finish("没有这个api哦~")
-    finish_msg = f"切换成功, 当前智能回复api为{api_num}".replace('1', "小爱同学").replace(
-        '2', "青云客").replace('3', "ChatGPT(使用Token)").replace('4', "ChatGPT(使用API)")
+    finish_msg = f"切换成功, 当前智能回复api为{api_num}".replace('0', "小爱同学模式2").replace('1', "小爱同学模式1"
+    ).replace('2', "青云客").replace('3', "ChatGPT(使用Token)").replace('4', "ChatGPT(使用API)")
     await api_switch.finish(finish_msg)
 
 @setu_switch.handle()
@@ -135,8 +135,8 @@ async def _():
 
 @api_check.handle()
 async def check():
-    check_msg = f"当前图片 api 为 {setu_flag};\n当前聊天 api 为 {api_num}".replace('1', "小爱同学").replace('2', "青云客"
-    ).replace('3', "ChatGPT(使用Token)").replace('4', "ChatGPT(使用API)").replace('True', "MirlKoi").replace('False', "Pixiv")
+    check_msg = f"当前图片 api 为 {setu_flag};\n当前聊天 api 为 {api_num}".replace('0', "小爱同学模式2").replace('1', "小爱同学模式1"
+    ).replace('2', "青云客").replace('3', "ChatGPT(使用Token)").replace('4', "ChatGPT(使用API)").replace('True', "MirlKoi").replace('False', "Pixiv")
     await api_check.send(check_msg)
 
 

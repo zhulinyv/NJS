@@ -333,11 +333,11 @@ async def startup_download(url, name):
             file.write(resp.content)
 
 
-scheduler.add_job(
-    check_version,
-    "cron",
-    hour=12,
-)
+# scheduler.add_job(
+#     check_version,
+#     "cron",
+#     hour=12,
+# )
 scheduler.add_job(startup, "cron", hour=4)
 scheduler.add_job(downlod_OcrResult, "interval", minutes=10)
 

@@ -1,4 +1,5 @@
 ﻿"""------------------------------导入依赖------------------------------"""
+import httpx
 import asyncio
 import requests
 from collections import defaultdict
@@ -246,8 +247,26 @@ async def _poke(bot: Bot,event: PokeNotifyEvent)-> bool:
         # 20% 概率发送图片
         if probability < 0.20:
             if setu_flag:
-                res = requests.get('https://img.moehu.org/pic.php?return=json&id=img1&num=1').json()
-                pic_url = res["pic"][0]
+                async def func(client,url):
+                    resp = await client.get(url,headers={'Referer':'http://www.weibo.com/',})
+                    if resp.status_code == 200:
+                        return resp.content
+                    else:
+                        return None
+                res = httpx.get(url='https://dev.iw233.cn/api.php?sort=pc&type=json', headers={'Referer':'http://www.weibo.com/'})
+                res = res.text
+                res = ''.join(x for x in res if x.isprintable())
+                res = json.loads(res)["pic"]
+                async with httpx.AsyncClient() as client:
+                    task_list = []
+                    for url in res:
+                        task = asyncio.create_task(func(client,url))
+                        task_list.append(task)
+                    image_list = await asyncio.gather(*task_list)
+                image_list = [image for image in image_list if image]
+                pic_url = image_list[0]
+                # res = requests.get('https://img.moehu.org/pic.php?return=json&id=img1&num=1').json()
+                # pic_url = res["pic"][0]
                 message="别戳了别戳了,这张图给你了,让我安静一会儿,60秒后我要撤回\n" + MessageSegment.image(file=pic_url)
             else:
                 pic = await get_setu()

@@ -4,7 +4,9 @@ from .read import notice2, read_data
 from .login import notice
 import time
 import json
+import httpx
 import random
+import asyncio
 import requests
 
 
@@ -43,8 +45,18 @@ async def lj(event: MessageEvent):
     # 整合信息
     msg = f"\n{lovelive_send}\n{level_msg}\n\n{get_txt}"
     # 图片
-    res = requests.get('https://img.moehu.org/pic.php?return=json&id=img1&num=1').json()
-    pic_url = res["pic"][0]
+    res = httpx.get(url='https://dev.iw233.cn/api.php?sort=pc&type=json', headers={'Referer':'http://www.weibo.com/'})
+    res = res.text
+    res = ''.join(x for x in res if x.isprintable())
+    res = json.loads(res)["pic"]
+    async with httpx.AsyncClient() as client:
+        task_list = []
+        for url in res:
+            task = asyncio.create_task(func(client,url))
+            task_list.append(task)
+        image_list = await asyncio.gather(*task_list)
+    image_list = [image for image in image_list if image]
+    pic_url = image_list[0]
     await qd.finish(msg + MessageSegment.image(file=pic_url), at_sender=True)
 
 def level_up(money):
@@ -115,6 +127,16 @@ async def search_qq(qq):
         return send
 
 
+
+
+
+async def func(client,url):
+    resp = await client.get(url,headers={'Referer':'http://www.weibo.com/',})
+    if resp.status_code == 200:
+        return resp.content
+    else:
+        return None
+    
 
 
 like_message = [

@@ -23,39 +23,38 @@ picture = on_command("来点", aliases={"来份"}, priority=59, block=False)
 @picture.handle()
 async def _(msg: Message = CommandArg()):
     types = msg.extract_plain_text().strip()
-    """
     if types in ["二次元", "二刺螈"]:
         pic = get_pic(random.choice(random_acg))
         await picture.finish(MessageSegment.image(file=pic), at_sender=True)
-
-    elif types == "壁纸推荐":
-        pic = get_pic(random.choice(wp_top))
-        await picture.finish(MessageSegment.image(file=pic), at_sender=True)
-
-    elif types in ["白毛", "银发"]:
-        pic = get_pic(random.choice(white))
-        await picture.finish(MessageSegment.image(file=pic), at_sender=True)
     
-    elif types in ["兽耳", "猫耳"]:
-        pic = get_pic(random.choice(cat))
-        await picture.finish(MessageSegment.image(file=pic), at_sender=True)
-
-    elif types == "星空":
-        pic = get_pic(random.choice(star))
-        await picture.finish(MessageSegment.image(file=pic), at_sender=True)
-
-    elif types in ["竖屏壁纸", "竖屏", "手机壁纸"]:
-        pic = get_pic(random.choice(phone))
-        await picture.finish(MessageSegment.image(file=pic), at_sender=True)
-
-    elif types in ["横屏壁纸", "横屏", "电脑壁纸", "pc壁纸", "PC壁纸"]:
-        pic = get_pic(random.choice(pc))
-        await picture.finish(MessageSegment.image(file=pic), at_sender=True)
-    """
-    if types in ["萝莉", "Loli", "loli"]:
-        pic = get_pic(random.choice(loli))
-        await picture.finish(MessageSegment.image(file=pic), at_sender=True)
-
+    # elif types == "壁纸推荐":
+    #     pic = get_pic(random.choice(wp_top))
+    #     await picture.finish(MessageSegment.image(file=pic), at_sender=True)
+    # 
+    # elif types in ["白毛", "银发"]:
+    #     pic = get_pic(random.choice(white))
+    #     await picture.finish(MessageSegment.image(file=pic), at_sender=True)
+    # 
+    # elif types in ["兽耳", "猫耳"]:
+    #     pic = get_pic(random.choice(cat))
+    #     await picture.finish(MessageSegment.image(file=pic), at_sender=True)
+    # 
+    # elif types == "星空":
+    #     pic = get_pic(random.choice(star))
+    #     await picture.finish(MessageSegment.image(file=pic), at_sender=True)
+    # 
+    # elif types in ["竖屏壁纸", "竖屏", "手机壁纸"]:
+    #     pic = get_pic(random.choice(phone))
+    #     await picture.finish(MessageSegment.image(file=pic), at_sender=True)
+    # 
+    # elif types in ["横屏壁纸", "横屏", "电脑壁纸", "pc壁纸", "PC壁纸"]:
+    #     pic = get_pic(random.choice(pc))
+    #     await picture.finish(MessageSegment.image(file=pic), at_sender=True)
+    # 
+    # if types in ["萝莉", "Loli", "loli"]:
+    #     pic = get_pic(random.choice(loli))
+    #     await picture.finish(MessageSegment.image(file=pic), at_sender=True)
+    
     elif types == "必应壁纸":
         # await picture.finish(MessageSegment.image(file=f'{random.choice(bing)}'), at_sender=True)
         d_url = str(getBingImageURL())
@@ -148,7 +147,7 @@ search = on_command("关键词搜图", aliases={"文字搜图"}, priority=50, bl
 @search.handle()
 async def _(event:Event, bot:Bot, msg: Message = CommandArg()):
     key_word = msg.extract_plain_text().strip()
-    url = f'http://ovooa.com/API/duitangtu/api.php?msg={key_word}'
+    url = f'http://ovooa.muban.plus/API/duitangtu/api.php?msg={key_word}'
     res = requests.get(url).json()
     code = str(res["code"])
     if code == '1':

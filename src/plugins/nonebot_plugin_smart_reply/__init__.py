@@ -110,7 +110,9 @@ async def _(msg: Message = CommandArg()):
 async def _(switch_msg: Message = CommandArg()):
     switch_msg = switch_msg.extract_plain_text().strip()
     global api_num
-    if switch_msg == "小爱同学api":
+    if switch_msg == "小爱同学api模式2":
+        api_num = 0
+    elif switch_msg == "小爱同学api模式1":
         api_num = 1
     elif switch_msg == "青云客api":
         api_num = 2
@@ -168,13 +170,21 @@ async def _(event: MessageEvent, state: T_State):
     result = await get_chat_result(msg, nickname)
     # 如果词库没有结果，则调用api获取智能回复
     if result == None:
-        if api_num == 1:
+        if api_num in [0, 1]:
             msg = msg.replace(" ","") # 去除消息中的空格, 不知道为什么, 如果消息中存在空格, 这个 api 大概率会返回空字符
             logger.debug("传入的信息为{}".format(msg))
             xiaoai_url = f"https://xiaoapi.cn/API/lt_xiaoai.php?type=json&msg={msg}"
-            message = await xiaoice_reply(xiaoai_url)
-            logger.info("来自小爱同学的智能回复: " + message)
-            await ai.finish(message=message)
+            message, voice = await xiaoice_reply(xiaoai_url)
+            if api_num == 1:
+                logger.info("来自小爱同学的智能回复: " + message)
+                await ai.finish(message=message)
+            elif api_num == 0:
+                logger.info("尝试发送语音...")
+                response = requests.get(voice)
+                with open('./src/plugins/nonebot_plugin_smart_reply/voice.mp3', 'wb') as f:
+                    f.write(response.content)
+                await ai.finish(message=MessageSegment.record(file="./src/plugins/nonebot_plugin_smart_reply/voice.mp3").record(file=voice))
+            
         elif api_num == 2:
             qinyun_url = f"http://api.qingyunke.com/api.php?key=free&appid=0&msg={msg}"
             message = await qinyun_reply(qinyun_url)

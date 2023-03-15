@@ -163,8 +163,8 @@ class Handle:
 
     @classmethod
     def install(cls, args: Namespace) -> str:
-        pass
+        return ""
 
     @classmethod
     def uninstall(cls, args: Namespace) -> str:
-        pass
+        return ""

@@ -19,7 +19,6 @@ try:
     api_num: int = nonebot.get_driver().config.api_num               # 这个值为1时, 使用的是小爱同学
     api_cd_time: int = nonebot.get_driver().config.api_cd_time       # api 冷却时间
     ban_cd_time: int = nonebot.get_driver().config.ban_cd_time       # ban 冷却时间
-    apiKey: str = nonebot.get_driver().config.xiaoai_apikey          # 小爱同学 api key
     api_key: str = nonebot.get_driver().config.openai_api_key        # Openai api key
     max_tokens: int = nonebot.get_driver().config.openai_max_tokens  # 返回的最大文本
     Bot_NICKNAME: str = nonebot.get_driver().config.bot_nickname     # bot的nickname,可以换成你自己的
@@ -30,7 +29,6 @@ except:
     api_num: int = 1
     api_cd_time: int = 120
     ban_cd_time: int = 21600
-    apiKey: str = "寄"
     api_key: str = "寄"
     max_tokens: int = 2000
     Bot_NICKNAME: str = "脑积水"
@@ -120,7 +118,7 @@ async def xiaoice_reply(url):
     async with AsyncClient() as client:
         res = (await client.get(url)).json()
         if res["code"] == 200:
-            return (res["text"]).replace("小爱", Bot_NICKNAME)
+            return (res["data"]["txt"]).replace("小爱", Bot_NICKNAME), res["data"]["tts"]
         else:
             return "寄"
 

@@ -171,12 +171,8 @@ async def _(event: MessageEvent, state: T_State):
         if api_num == 1:
             msg = msg.replace(" ","") # 去除消息中的空格, 不知道为什么, 如果消息中存在空格, 这个 api 大概率会返回空字符
             logger.debug("传入的信息为{}".format(msg))
-            xiaoai_url = f"https://apibug.cn/api/xiaoai/?msg={msg}&apiKey={apiKey}"
-            if apiKey == "寄":
-                await ai.finish("小爱同学apiKey未设置, 请联系SUPERUSERS在.env中设置")
+            xiaoai_url = f"https://xiaoapi.cn/API/lt_xiaoai.php?type=json&msg={msg}"
             message = await xiaoice_reply(xiaoai_url)
-            if message == "寄":
-                await ai.finish("返回信息为空 或 小爱同学 apiKey 错误, 请发送纯文本信息重试")
             logger.info("来自小爱同学的智能回复: " + message)
             await ai.finish(message=message)
         elif api_num == 2:

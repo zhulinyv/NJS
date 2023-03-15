@@ -118,7 +118,7 @@ async def xiaoice_reply(url):
     async with AsyncClient() as client:
         res = (await client.get(url)).json()
         if res["code"] == 200:
-            return (res["data"]["txt"]).replace("小爱", Bot_NICKNAME), res["data"]["tts"]
+            return (res["data"]["txt"]).replace("小爱", Bot_NICKNAME)
         else:
             return "寄"
 

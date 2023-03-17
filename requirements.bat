@@ -92,6 +92,7 @@ poetry run pip install nonebot-plugin-guild-patch==0.2.2
 poetry run pip install nonebot-plugin-htmlrender==0.2.0.1
 poetry run pip install nonebot-plugin-imageutils==0.1.13.4
 poetry run pip install nonebot-plugin-localstore==0.2.0
+poetry run pip install nonebot-plugin-PicMenu==0.2
 poetry run pip install nonebot2==2.0.0rc2
 poetry run pip install numpy==1.23.4
 poetry run pip install openai==0.27.0

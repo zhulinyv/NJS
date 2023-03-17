@@ -98,7 +98,11 @@ help_reply_body = """[align=right][size=20][color=#008000]*绿色表示正常可
 89.简易群管
 90.对话超管
 91.BingGPT(Bing)对话(使用cookies)
-92.P站图片查询[/color][/color]
+92.P站图片查询
+93.舔狗日记
+94.B站热搜
+95.网易云热评
+96.课表查询[/color][/color]
 
 [align=center][color=#000000]Powered by (๑•小丫头片子•๑)[/color][/align]"""
 help_reply_foot = """更详细内容：《脑积水使用手册》
@@ -679,5 +683,12 @@ chat-new    新建一个对话
 chat-history    返回历史对话"""
 
 h92_r = """pixiv pid
-pixivRank 1/7/30
-"""
+pixivRank 1/7/30"""
+
+h93_r = "舔狗日记\n讲个笑话\n文案\n\n超管指令:\n开启文案/关闭文案"
+
+h94_r = "b站热搜"
+
+h95_r = "网抑云|网易云热评"
+
+h96_r = "完整课表\n本周课表\n下周课表\n上课\n设置周数\n查看课表\m明日早八"

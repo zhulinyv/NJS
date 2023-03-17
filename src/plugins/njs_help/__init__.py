@@ -797,3 +797,36 @@ async def test_handle(event:Event):
         await h92.finish('\n' + h92_r, at_sender=True)
     else:
         await h92.finish(h92_r)
+
+h93 = on_command('njs93', priority=2, block=True)
+@h93.handle()
+async def test_handle(event:Event):
+    if isinstance(event, GroupMessageEvent):
+        await h93.finish('\n' + h93_r, at_sender=True)
+    else:
+        await h93.finish(h93_r)
+
+h94 = on_command('njs94', priority=2, block=True)
+@h94.handle()
+async def test_handle(event:Event):
+    if isinstance(event, GroupMessageEvent):
+        await h94.finish('\n' + h94_r, at_sender=True)
+    else:
+        await h94.finish(h94_r)
+
+h95 = on_command('njs95', priority=2, block=True)
+@h95.handle()
+async def test_handle(event:Event):
+    if isinstance(event, GroupMessageEvent):
+        await h95.finish('\n' + h95_r, at_sender=True)
+    else:
+        await h95.finish(h95_r)
+
+h96 = on_command('njs96', priority=2, block=True)
+@h96.handle()
+async def test_handle(event:Event):
+    if isinstance(event, GroupMessageEvent):
+        await h96.finish('\n' + h96_r, at_sender=True)
+    else:
+        await h96.finish(h96_r)
+

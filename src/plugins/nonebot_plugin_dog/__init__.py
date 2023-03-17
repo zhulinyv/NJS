@@ -1,5 +1,6 @@
-import httpx
+# import httpx
 import nonebot
+import requests
 import re
 from re import I
 from nonebot.typing import T_State
@@ -46,10 +47,8 @@ async def dog(event: GroupMessageEvent, matcher: Matcher):     # 定义异步函
     ):                                                                     # 记录cd
         dog_CD_dir.update({uid: event.time})
         try:
-            # 使用 httpx.AsyncClient 获取 API，存储为 response 变量
-            async with httpx.AsyncClient() as client:
-                response = await client.get("https://api.juncikeji.xyz/api/tgrj.php", verify=False)
-                response_text = response.text
+            response = requests.get("https://api.juncikeji.xyz/api/tgrj.php", verify=False)
+            response_text = response.text
         except Exception as error:
             await dog_matcher.finish(MessageSegment.text(str(error)))
         await matcher.finish(MessageSegment.text(response_text.strip()), block=True)
@@ -74,10 +73,8 @@ async def laugh(event: GroupMessageEvent, matcher: Matcher):     # 定义异步�
     ):                                                                       # 记录cd
         laugh_CD_dir.update({uid: event.time})
         try:
-            # 使用 httpx.AsyncClient 获取 API，存储为 response 变量
-            async with httpx.AsyncClient() as client:
-                response = await client.get("https://api.juncikeji.xyz/api/qwxh.php", verify=False)
-                response_text = response.text
+            response = requests.get("https://api.juncikeji.xyz/api/qwxh.php", verify=False)
+            response_text = response.text
         except Exception as error:
             await laugh_matcher.finish(MessageSegment.text(str(error)))
         response_text = re.sub(r'。。\\n', '\n', response_text)
@@ -140,10 +137,8 @@ async def wenan(event: GroupMessageEvent, matcher: Matcher):  # 定义异步函�
     ):                                                                        # 记录cd
         wenan_CD_dir.update({uid: event.time})
         try:
-            # 使用 httpx.AsyncClient 获取 API，存储为 response 变量
-            async with httpx.AsyncClient() as client:
-                response = await client.get("https://api.juncikeji.xyz/api/sgyl.php", verify=False)
-                response_text = response.text
+            response = requests.get("https://api.juncikeji.xyz/api/sgyl.php", verify=False)
+            response_text = response.text
         except Exception as error:
             await laugh_matcher.finish(MessageSegment.text(str(error)))
         await matcher.finish(MessageSegment.text(response_text.strip()), block=True)

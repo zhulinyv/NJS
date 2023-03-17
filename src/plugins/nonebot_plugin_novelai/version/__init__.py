@@ -12,12 +12,12 @@ ver = Version()
 driver = get_driver()
 nickname = driver.config.nickname.pop() if driver.config.nickname else ver.package
 
-check = on_command("version", aliases={"版本"}, priority=5, block=True)
+check = on_command("AI画图version", aliases={"AI画图版本"}, priority=5, block=True)
 update = on_command(
-    "update", aliases={"更新"}, permission=SUPERUSER, priority=5, block=True
+    "AI画图update", aliases={"AI画图更新"}, permission=SUPERUSER, priority=5, block=True
 )
 reboot = on_command(
-    "reboot", aliases={"重启"}, permission=SUPERUSER, priority=5
+    "AI画图reboot", aliases={"AI画图重启"}, permission=SUPERUSER, priority=5
 )
 
 

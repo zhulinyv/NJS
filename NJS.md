@@ -1,5 +1,14 @@
+---
+title: '脑积水食用手册（用爱发电）'
+date: 2023-01-24 15:12:06
+tags: [脑积水]
+published: true
+hideInList: false
+feature: /post-images/NJS.png
+isTop: false
+---
 # o(〃＾▽＾〃)o 目前使用的插件：……
-天下没有不散的宴席，感谢大家陪[**脑积水**](https://github.com/zhulinyv/NJS)走过的 200 多个日日夜夜，大家都是用爱发电，且用且珍惜……
+天下没有不散的宴席，感谢大家陪[**脑积水**](https://github.com/zhulinyv/NJS)走过的 300 多个日日夜夜，大家都是用爱发电，且用且珍惜……
 [**脑积水**](https://github.com/zhulinyv/NJS)基于 NoneBot 开源项目，如有需要，可以自行查找相关资料了解。
 **插件名称旁边即为插件仓库地址，可以自行查看配置项。**
 
@@ -496,7 +505,7 @@ code [语言] [-i] [inputText]
 <pre><p>
 超管指令：以下指令均需要艾特
 rm_qq + QQ号
-切换小爱同学|青云客|ChatGPTapi模式1/模式2
+切换小爱同学模式1/模式2|青云客|ChatGPTapi模式1/模式2
 切换图片api
 查看当前api
 </p></pre>
@@ -1553,5 +1562,48 @@ chat-history    返回历史对话
 <pre><p>
 pixiv pid
 pixivRank 1/7/30
+</p></pre>
+</details>
+
+## 93.舔狗日记
+<details>
+<summary><b>指令：</summary></b>
+<pre><p>
+舔狗日记
+讲个笑话
+文案
+
+超管指令:
+开启文案/关闭文案
+</p></pre>
+</details>
+
+## 94.B站热搜
+<details>
+<summary><b>指令：</summary></b>
+<pre><p>
+b站热搜
+</p></pre>
+</details>
+
+## 95.网易云热评
+<details>
+<summary><b>指令：</summary></b>
+<pre><p>
+网易云/网易云热评
+</p></pre>
+</details>
+
+## 96.课表查询
+<details>
+<summary><b>指令：</summary></b>
+<pre><p>
+完整课表
+本周课表
+下周课表
+上课
+设置周数
+查看课表
+明日早八
 </p></pre>
 </details>

@@ -42,10 +42,10 @@ async def _():
         except Exception as e:
             logger.error(f"方舟游戏数据更新出错: {e}")
         else:
-            logger.info("方舟游戏数据更新完毕！")
+            logger.debug("方舟游戏数据更新完毕！")
             await write_in_version(version)
     else:
-        logger.info("方舟游戏数据当前为最新！")
+        logger.debug("方舟游戏数据当前为最新！")
 
 
 @update.handle()
@@ -80,15 +80,15 @@ async def check_update():
         except Exception as e:
             logger.error(f"方舟游戏数据更新出错: {e}")
         else:
-            logger.info("方舟游戏数据更新完毕！")
+            logger.debug("方舟游戏数据更新完毕！")
             await write_in_version(version)
     else:
-        logger.info("方舟游戏数据当前为最新！")
+        logger.debug("方舟游戏数据当前为最新！")
 
 
 async def is_game_data_update():
     """T 更新, F 不更新"""
-    logger.info("开始检查方舟游戏数据更新...")
+    logger.debug("开始检查方舟游戏数据更新...")
     version = (await async_get(url="https://ghproxy.com/https://raw.githubusercontent.com/yuanyan3060/Arknights-Bot-Resource/main/version")).text
 
     local_version = Path(__file__).parent.parent / "_data" / "version.txt"
@@ -118,7 +118,7 @@ async def init_dir():
 # @retry(attempts=5, delay=3)
 async def download_game_data():
     await init_dir()
-    logger.info("开始更新方舟游戏数据，视网络情况可能需要20~30分钟，如果中途出错可以重新输入指令从断点处继续下载")
+    logger.debug("开始更新方舟游戏数据，视网络情况可能需要20~30分钟，如果中途出错可以重新输入指令从断点处继续下载")
 
     async with open(file=Path(__file__).parent.parent / "_data" / "operator_info" / "json" / "recruitment_tags.json", mode="wb") as fp:
         await fp.write(recruitment_tags.encode("utf-8"))
@@ -131,47 +131,47 @@ async def download_game_data():
                 font_cont = (await client.get(url=f"https://ghproxy.com/https://raw.githubusercontent.com/NumberSir/nonebot_plugin_arktools/main/nonebot_plugin_arktools/_data/operator_info/font/{font}")).content
                 async with open(Path(__file__).parent.parent / "_data" / "operator_info" / "font" / font, "wb") as fp:
                     await fp.write(font_cont)
-                    logger.info(f"字体下载完成 {font}")
+                    logger.debug(f"字体下载完成 {font}")
 
             for lvl in {"skill_lvl1", "skill_lvl2", "skill_lvl3"}:
                 lvl_cont = (await client.get(url=f"https://ghproxy.com/https://raw.githubusercontent.com/NumberSir/nonebot_plugin_arktools/main/nonebot_plugin_arktools/_data/operator_info/image/skill/{lvl}.png")).content
                 async with open(Path(__file__).parent.parent / "_data" / "operator_info" / "image" / "skill" / f"{lvl}.png", "wb") as fp:
                     await fp.write(lvl_cont)
-                    logger.info(f"技能专精图标下载完成 {lvl}")
+                    logger.debug(f"技能专精图标下载完成 {lvl}")
 
             for lvl in {"elite1", "elite2"}:
                 lvl_cont = (await client.get(url=f"https://ghproxy.com/https://raw.githubusercontent.com/NumberSir/nonebot_plugin_arktools/main/nonebot_plugin_arktools/_data/operator_info/image/elite/{lvl}.png")).content
                 async with open(Path(__file__).parent.parent / "_data" / "operator_info" / "image" / "elite" / f"{lvl}.png", "wb") as fp:
                     await fp.write(lvl_cont)
-                    logger.info(f"精英化图标下载完成 {lvl}")
+                    logger.debug(f"精英化图标下载完成 {lvl}")
 
             for lvl in {"equip_lvl1", "equip_lvl2", "equip_lvl3"}:
                 lvl_cont = (await client.get(url=f"https://ghproxy.com/https://raw.githubusercontent.com/NumberSir/nonebot_plugin_arktools/main/nonebot_plugin_arktools/_data/operator_info/image/equip/{lvl}.png")).content
                 async with open(Path(__file__).parent.parent / "_data" / "operator_info" / "image" / "equip" / f"{lvl}.png", "wb") as fp:
                     await fp.write(lvl_cont)
-                    logger.info(f"模组图标下载完成 {lvl}")
+                    logger.debug(f"模组图标下载完成 {lvl}")
 
             for file in all_files:
                 if file.split("/")[0] in IMAGE_DIRS:
                     if (Path(__file__).parent.parent / "_data" / "operator_info" / "image" / file).exists():
-                        logger.info(f"跳过图片 {file}")
+                        logger.debug(f"跳过图片 {file}")
                         continue
                     content = (await client.get(url=f"https://raw.githubusercontent.com/yuanyan3060/Arknights-Bot-Resource/main/{quote(file)}")).content
                     async with open(Path(__file__).parent.parent / "_data" / "operator_info" / "image" / file, "wb") as fp:
                         await fp.write(content)
-                        logger.info(f"图片下载完成 {file}")
+                        logger.debug(f"图片下载完成 {file}")
 
                 elif file.split("/")[-1] in JSON_FILES:
                     name = file.split("/")[-1]
                     content = (await client.get(url=f"https://ghproxy.com/https://raw.githubusercontent.com/yuanyan3060/Arknights-Bot-Resource/main/{quote(file)}")).content
                     async with open(Path(__file__).parent.parent / "_data" / "operator_info" / "json" / name, "wb") as fp:
                         await fp.write(content)
-                        logger.info(f"json下载完成 {file}")
+                        logger.debug(f"json下载完成 {file}")
                 continue
     except Exception as e:
         logger.warning(f"更新方舟游戏数据出错: {e}")
         raise e
-    logger.info("方舟游戏数据更新完毕")
+    logger.debug("方舟游戏数据更新完毕")
 
 recruitment_tags = """{
     "职业": ["近卫干员", "狙击干员", "重装干员", "医疗干员", "辅助干员", "术师干员", "特种干员", "先锋干员"],

@@ -21,11 +21,11 @@ async def get_comic_news():
         raise APICodeException(status=response['code'])
 
     data = response.json()['data']
-    logger.info(f"comic_data: {data}")
+    logger.debug(f"comic_data: {data}")
     result = []
     for _ in data[:3]:
         result.append(await process_comic_news(_))
-    logger.info(f"comic_result: {result}")
+    logger.debug(f"comic_result: {result}")
     return result
 
 

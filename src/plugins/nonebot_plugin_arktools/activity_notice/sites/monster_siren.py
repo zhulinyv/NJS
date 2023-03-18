@@ -28,11 +28,11 @@ async def get_album_news() -> list:
         raise APICodeException(status=response['code'])
 
     data = response.json()['data']
-    logger.info(f"album_data: {data}")
+    logger.debug(f"album_data: {data}")
     result = []
     for _ in data['list'][:3]:
         result.append(await process_album_news(_))
-    logger.info(f"album_result: {result}")
+    logger.debug(f"album_result: {result}")
     return result
 
 

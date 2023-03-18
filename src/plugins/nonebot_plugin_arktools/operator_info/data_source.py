@@ -152,19 +152,19 @@ class OperatorInfo:
 
     @property
     def all_skills(self) -> dict:
-        return self.info["all_skills_materials"]
+        return self.debug["all_skills_materials"]
 
     @property
     def evolve(self) -> dict:
-        return self.info["evolve_materials"]
+        return self.debug["evolve_materials"]
 
     @property
     def skills(self) -> dict:
-        return self.info["skills_materials"]
+        return self.debug["skills_materials"]
 
     @property
     def equips(self) -> dict:
-        return self.info["equip_materials"]
+        return self.debug["equip_materials"]
 
 
 class BuildOperatorImage:

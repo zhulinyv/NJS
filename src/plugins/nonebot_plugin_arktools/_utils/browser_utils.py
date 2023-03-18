@@ -37,7 +37,7 @@ async def get_browser(**kwargs) -> Browser:
 # @driver.on_startup
 def install():
     """自动安装、更新 Chromium"""
-    logger.info("正在检查 Chromium 更新")
+    logger.debug("正在检查 Chromium 更新")
     import sys
     from playwright.__main__ import main
 

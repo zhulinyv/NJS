@@ -16,7 +16,7 @@ async def _(state: T_State, matcher: Matcher, event: GroupMessageEvent):
         event.message = event.reply.message
 
     if event.message.get("image", None):  # 自带图片
-        logger.info("发送公招截图")
+        logger.debug("发送公招截图")
         for img in event.message["image"]:
             img_url = img.data.get("url", "")
             state["recruit"] = "image"
@@ -24,7 +24,7 @@ async def _(state: T_State, matcher: Matcher, event: GroupMessageEvent):
 
     elif event.message.extract_plain_text().strip().replace("公招", ""):  # 文字tag
         tags = event.message.extract_plain_text().strip()
-        logger.info("直接输入文字标签")
+        logger.debug("直接输入文字标签")
         state["recruit"] = "str"
         matcher.set_arg("rec", tags)
 
@@ -44,7 +44,7 @@ async def _(state: T_State, rec: Union[Message, str] = Arg()):
 
     if not tags:
         await recruit.finish("没有检测到符合要求的公招标签！", at_sender=True)
-    logger.info(f"tags: {tags}")
+    logger.debug(f"tags: {tags}")
     await recruit.send(f"检测到的公招标签：{', '.join(list(tags))}")
     recruit_list = get_rare_operators(tags)
     if not recruit_list:

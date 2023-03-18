@@ -1,12 +1,3 @@
----
-title: '脑积水食用手册（用爱发电）'
-date: 2023-01-24 15:12:06
-tags: [脑积水]
-published: true
-hideInList: false
-feature: /post-images/NJS.png
-isTop: false
----
 # o(〃＾▽＾〃)o 目前使用的插件：……
 天下没有不散的宴席，感谢大家陪[**脑积水**](https://github.com/zhulinyv/NJS)走过的 300 多个日日夜夜，大家都是用爱发电，且用且珍惜……
 [**脑积水**](https://github.com/zhulinyv/NJS)基于 NoneBot 开源项目，如有需要，可以自行查找相关资料了解。

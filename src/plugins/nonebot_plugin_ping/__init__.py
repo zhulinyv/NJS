@@ -34,21 +34,21 @@ async def _(msg: Message = CommandArg()):
 
 async def api_ping(api):
     async with AsyncClient() as client:
-            res = (await client.get(api)).json()
-            if res["code"] == 200:
-                url = (res["data"]["host"])
-                ip = (res["data"]["ip"])
-                max = (res["data"]["ping_max"])
-                min = (res["data"]["ping_min"])
-                avg = (res["data"]["ping_avg"])
-                place = (res["data"]["location"])
-                res = f"域名: {url}\nIP: {ip}\n最大延迟: {max}\n最小延迟: {min}\n平均延迟: {avg}\n服务器归属地: {place}"
-                return res
-            elif res["code"] == 201:
-                res = (res["data"])
-                return res
-            else:
-                return "寄"
+        res = (await client.get(api)).json()
+        if res["code"] == 200:
+            url = (res["data"]["host"])
+            ip = (res["data"]["ip"])
+            max = (res["data"]["ping_max"])
+            min = (res["data"]["ping_min"])
+            avg = (res["data"]["ping_avg"])
+            place = (res["data"]["location"])
+            res = f"域名: {url}\nIP: {ip}\n最大延迟: {max}\n最小延迟: {min}\n平均延迟: {avg}\n服务器归属地: {place}"
+            return res
+        elif res["code"] == 201:
+            res = (res["data"])
+            return res
+        else:
+            return "寄"
 
 async def cmd_ping(url):
     # 获取系统信息, Windows 请求默认 4 次, Linux 请求默认不会停止.

@@ -189,7 +189,7 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 ![image](https://user-images.githubusercontent.com/66541860/213744555-c22c8289-3789-4281-9781-5e372c5c3017.png)
 
-2、启动后，浏览器访问链接 [http://127.0.0.1:13579/go-cqhttp](http://127.0.0.1:13579/go-cqhttp)，添加账号，手动输入账号，密码**不需要**输入，设备选择 iPad 或 Mac，如果你选择 Android，那么你的安卓手机上将无法登录，同理其它也是。
+2、启动后，浏览器访问链接 [http://127.0.0.1:13579/go-cqhttp](http://127.0.0.1:13579/go-cqhttp)，添加账号，手动输入账号，密码**不需要**输入，设备选择 aPad 或 iPad，如果你选择 Android，那么你的安卓手机上将无法登录，同理其它也是。
 
 ![image](https://user-images.githubusercontent.com/66541860/213741470-5392694c-1141-447c-89f9-4c77b60c6e88.png)
 
@@ -198,19 +198,29 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 ![image](https://user-images.githubusercontent.com/66541860/213741988-2faa1052-f52e-4d93-a94a-02af39569d8b.png)
 
 <details>
-<summary>4、如果服务器与手机不在同一网络下，<b>可能</b>会出现<b>无法登录</b>的情况，<b>如果</b>遇到，展开本条步骤查看解决办法。</summary>
+<summary>4、如果服务器与手机不在同一网络下，<b>可能</b>会提示<b>复杂的网络环境</b>，<b>如果</b>遇到，展开本条步骤查看解决办法。</summary>
   <pre><p>
-  5、进入 `.\NJS\accounts\binary` 目录，复制 binary 目录下的 go-cqhttp.exe 文件到自己的电脑。
-  6、双击运行，在之后弹出的对话框中均点击确定。
+  1、进入 `.\NJS\accounts\binary` 目录，复制 binary 目录下的 go-cqhttp.exe(Linux 版没有扩展名) 文件到自己的电脑。
+  2、双击运行，在之后弹出的对话框中均点击确定(Linux 版无需此步骤)。
   <a><img src="https://user-images.githubusercontent.com/66541860/213905405-c1c39bf5-9e52-46ad-96d6-62a56d097bca.png"></a>
-  7、双击 go-cqhttp.bat 文件运行，输入 3 选择<b>反向 Websocket 通信</b>。
-  8、打开 config.yml 文件，将 uin 改为<b>机器人</b>的账号，最下方的 servers 部分改为如图所示内容保存。
+  3、双击 go-cqhttp.bat 文件运行，输入 3 选择<b>反向 Websocket 通信</b>。
+  4、打开 config.yml 文件，将 uin 改为<b>机器人</b>的账号，最下方的 universal 部分改为 <code>"ws://127.0.0.1:13579/onebot/v11/ws"</code>，保存。
   <a><img src="https://user-images.githubusercontent.com/66541860/213905588-344e85e4-0db6-4b44-b57c-a1f7ddb4824d.png"></a>
   <a><img src="https://user-images.githubusercontent.com/66541860/213905671-d6e63b62-39d7-4862-8923-ff4fdfa2db93.png"></a>
-  9、此时再次运行 go-cqhttp.bat 文件，使用手机扫码登录。
-  10、登录好后将 device.json 和 session.token 文件复制到 .\NJS\accounts\uin(机器人的QQ号) 目录即可。
+  5、此时再次运行 go-cqhttp.bat 文件(Linux 运行 go-cqhttp)，使用手机扫码登录。
+  6、登录好后将 device.json 和 session.token 文件复制到 .\NJS\accounts\uin(机器人的QQ号) 目录即可。
 </details>
 
+<details>
+<summary>5、<b>如果</b>服务器与手机在同一网络下，登录提示账号被冻结，展开本条步骤查看解决办法。</summary>
+  <pre><p>
+  1、更换登录协议重试(优先 aPad 或 iPad，其它协议可能导致部分信息无法处理)。
+  2、如果更换登录协议无法解决，进入 `.\NJS\accounts\binary` 目录，运行 binary 目录下的 go-cqhttp.exe(Linux 版没有扩展名)。
+  3、运行 go-cqhttp.bat 文件运行，输入 3 选择<b>反向 Websocket 通信</b>。
+  4、打开 config.yml 文件，将 uin 改为<b>机器人</b>的账号，password 填写机器人账号密码，最下方的 universal 部分改为 <code>"ws://127.0.0.1:13579/onebot/v11/ws"</code>，保存。
+  5、此时再次运行 go-cqhttp.bat 文件(Linux 运行 go-cqhttp)，按照提示输入 1 自动获取 ticket，如开启了设备锁，输入 1 选择<b>短信验证</b>。
+  6、登录好后将 device.json 和 session.token 文件复制到 .\NJS\accounts\uin(机器人的QQ号) 目录即可。
+</details>
 
 ### 9️⃣ 使用 脑积水
 

@@ -206,7 +206,7 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 ![image](https://user-images.githubusercontent.com/66541860/213741988-2faa1052-f52e-4d93-a94a-02af39569d8b.png)
 
 <details>
-<summary>4、如果服务器与手机不在同一网络下，<b>可能</b>会提示<b>复杂的网络环境</b>，<b>如果</b>遇到，展开本条步骤查看解决办法。</summary>
+<summary>4、<b>如果</b>服务器与手机不在同一网络下，登录提示<b>复杂的网络环境</b>，展开本条步骤查看解决办法。</summary>
   <pre><p>
   1、进入 `.\NJS\accounts\binary` 目录，复制 binary 目录下的 go-cqhttp.exe(Linux 版没有扩展名) 文件到自己的电脑。
   2、双击运行，在之后弹出的对话框中均点击确定(Linux 版无需此步骤)。
@@ -221,7 +221,7 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 </details>
 
 <details>
-<summary>5、<b>如果</b>服务器与手机在同一网络下，登录提示账号被冻结，展开本条步骤查看解决办法。</summary>
+<summary>5、<b>如果</b>服务器与手机在同一网络下，登录提示<b>账号被冻结</b>，展开本条步骤查看解决办法。</summary>
   <pre><p>
   1、更换登录协议重试(优先 aPad 或 iPad，其它协议可能导致部分信息无法处理)。
   2、如果更换登录协议无法解决，进入 `.\NJS\accounts\binary` 目录，运行 binary 目录下的 go-cqhttp.exe(Linux 版没有扩展名)。

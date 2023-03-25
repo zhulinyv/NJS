@@ -1,0 +1,66 @@
+{
+    "char": {
+        "title": "「雳裁冥昭」",
+        "pool_img": "https:\/\/patchwiki.biligame.com\/images\/ys\/thumb\/f\/f6\/ecvwy294e0nb86qg1aqaz9sowuxmjly.png\/1200px-%E7%A5%88%E6%84%BF044-2%E6%9C%9F.png.jpeg",
+        "start_time": "2023-03-01T17:59:00",
+        "end_time": "2023-03-21T17:59:00",
+        "up_char": [
+            {
+                "name": "赛诺",
+                "star": 5,
+                "limited": false,
+                "zoom": 50.0
+            },
+            {
+                "name": "班尼特",
+                "star": 4,
+                "limited": false,
+                "zoom": 50.0
+            },
+            {
+                "name": "芭芭拉",
+                "star": 4,
+                "limited": false,
+                "zoom": 50.0
+            },
+            {
+                "name": "柯莱",
+                "star": 4,
+                "limited": false,
+                "zoom": 50.0
+            }
+        ]
+    },
+    "arms": {
+        "title": "「烈阳烁金」",
+        "pool_img": "https:\/\/patchwiki.biligame.com\/images\/ys\/thumb\/0\/08\/63uaxmujxc9tx2ya8dl72vsuiz75o6r.png\/1200px-%E7%A5%88%E6%84%BF044%E6%9C%9F.png.jpeg",
+        "start_time": "2023-03-01T17:59:00",
+        "end_time": "2023-03-21T17:59:00",
+        "up_char": [
+            {
+                "name": "迪希雅",
+                "star": 5,
+                "limited": false,
+                "zoom": 50.0
+            },
+            {
+                "name": "班尼特",
+                "star": 4,
+                "limited": false,
+                "zoom": 50.0
+            },
+            {
+                "name": "芭芭拉",
+                "star": 4,
+                "limited": false,
+                "zoom": 50.0
+            },
+            {
+                "name": "柯莱",
+                "star": 4,
+                "limited": false,
+                "zoom": 50.0
+            }
+        ]
+    }
+}

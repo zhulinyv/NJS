@@ -1,0 +1,1263 @@
+{
+    "无锋剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/0d\/i5smc85ma234uzd3jzx3u9onhy28i94.png",
+        "名称": "无锋剑",
+        "星级": 1,
+        "获取途径": [
+            "初始武器赠送",
+            "商店购买（锻造商店学徒处）",
+            "宝箱"
+        ]
+    },
+    "银剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/ad\/npev8zqms0tp09szd3ngkp2la2es15e.png",
+        "名称": "银剑",
+        "星级": 2,
+        "获取途径": [
+            "商店购买",
+            "宝箱"
+        ]
+    },
+    "飞天御剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/a4\/ivbrml7lrzifbyiaj5h4rf7ra7mkio7.png",
+        "名称": "飞天御剑",
+        "星级": 3,
+        "获取途径": [
+            "与绝云间到到庆云顶之间的亭子下的判官儿对话",
+            "对话",
+            "祈愿"
+        ]
+    },
+    "吃虎鱼刀": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/91\/0nj68wmrj4lq5qo83ijiknlxrgjb2s3.png",
+        "名称": "吃虎鱼刀",
+        "星级": 3,
+        "获取途径": [
+            "与稻妻铁匠铺处的天目十五对话获得",
+            "宝箱"
+        ]
+    },
+    "黎明神剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/94\/p0mzw27obtfktcgzhwu3y4vnq8nn4vn.png",
+        "名称": "黎明神剑",
+        "星级": 3,
+        "获取途径": [
+            "任务（凯亚传说任务）",
+            "祈愿"
+        ]
+    },
+    "旅行剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/44\/ajkicxj5plmwi07n53ijymzl9zn70c9.png",
+        "名称": "旅行剑",
+        "星级": 3,
+        "获取途径": [
+            "宝箱"
+        ]
+    },
+    "暗铁剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/cf\/3v77tnyk0f0gspfmk8ddlrj62um1i9z.png",
+        "名称": "暗铁剑",
+        "星级": 3,
+        "获取途径": [
+            "与璃月港快刀陈对话（全图仅一把，建议收藏）",
+            "对话"
+        ]
+    },
+    "冷刃": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/f\/f3\/c9f7m9klv0tqgad0t35l0v659dckl11.png",
+        "名称": "冷刃",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "原木刀": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/49\/r9ibrj3g5yzqec8f3ymxiw6sg9mrntd.png",
+        "名称": "原木刀",
+        "星级": 4,
+        "获取途径": [
+            "第二章「梦中的苗圃」完成「兰那罗的世界」后获得兑换物「"
+        ]
+    },
+    "笼钓瓶一心": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/6\/60\/dgcvrkjcfs3iaob8kw61eg3bvshfp4z.png",
+        "名称": "笼钓瓶一心",
+        "星级": 4,
+        "获取途径": [
+            "任务",
+            "枫红之章·第一幕「陌野不识故人」"
+        ]
+    },
+    "降临之剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/7\/74\/3g8bzrgm3e8pl9sla0jmjtyg9jonk19.png",
+        "名称": "降临之剑",
+        "星级": 4,
+        "获取途径": [
+            "“PlayStation Network”的玩家特典奖励"
+        ]
+    },
+    "西风剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/6\/6d\/id86h90vm78lyntq48f46j4l47zdmxk.png",
+        "名称": "西风剑",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "西福斯的月光": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/d\/d1\/tgc0wwtcukbxy8q3sowun37n4et9fho.png",
+        "名称": "西福斯的月光",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "黑岩长剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/3\/3b\/sb1fghkah0hn4is9a3jmfhqkmslz44q.png",
+        "名称": "黑岩长剑",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "黑剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/4a\/3ve4num887ksh8gqh12a5z2k0mmbegm.png",
+        "名称": "黑剑",
+        "星级": 4,
+        "获取途径": [
+            "纪行"
+        ]
+    },
+    "试作斩岩": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/af\/fq5reyiyfz37umtz3ngdue1pbtnbma6.png",
+        "名称": "试作斩岩",
+        "星级": 4,
+        "获取途径": [
+            "冒险等阶10级奖励获取",
+            "完成"
+        ]
+    },
+    "腐殖之剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c2\/qf4xr9irx3sj3mh2ohzihtwwhixo8h5.png",
+        "名称": "腐殖之剑",
+        "星级": 4,
+        "获取途径": [
+            "1.2版本活动"
+        ]
+    },
+    "暗巷闪光": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/89\/m0uex1u5qswbnpqebv75ppgf19dowrc.png",
+        "名称": "暗巷闪光",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "宗室长剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/53\/ei69kfgd5hcuplrcdlrkqp7corrp80j.png",
+        "名称": "宗室长剑",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "铁蜂刺": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/3\/3b\/ryh96u1cs5jcf2w02vbhtzw75lylc9m.png",
+        "名称": "铁蜂刺",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "笛剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/f\/fd\/5hbxsdik3322ar5z2d4s4qkj3gf8gnh.png",
+        "名称": "笛剑",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "辰砂之纺锤": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/ba\/rilaqrv0x0t8dt3ehgqimtp8ncgp941.png",
+        "名称": "辰砂之纺锤",
+        "星级": 4,
+        "获取途径": [
+            "2.3版本活动"
+        ]
+    },
+    "东花坊时雨": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/e\/ed\/4e0h36rcyvqlf36b7r5zxm6u4m0s38q.png",
+        "名称": "东花坊时雨",
+        "星级": 4,
+        "获取途径": [
+            "3.3版本活动"
+        ]
+    },
+    "天目影打刀": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/4b\/ao0uepct6aszst6l97nbxmib6s5cx14.png",
+        "名称": "天目影打刀",
+        "星级": 4,
+        "获取途径": [
+            "完成"
+        ]
+    },
+    "祭礼剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/a0\/94o647bri6ccuviq733khmrzfekwixv.png",
+        "名称": "祭礼剑",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "匣里龙吟": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b6\/fnmxiyrh35272i8h9jydyqadyqkfw0e.png",
+        "名称": "匣里龙吟",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "苍古自由之誓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/9c\/s33ad0g15uajwrwuocu2ydbduo5top7.png",
+        "名称": "苍古自由之誓",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "天空之刃": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/e\/e3\/pdych2p08vbppwo0q777tpt8ij5xu0i.png",
+        "名称": "天空之刃",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "裁叶萃光": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/bc\/duzuhy4bbh8ej5m3nwhfqf3fyfr1fyv.png",
+        "名称": "裁叶萃光",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "磐岩结绿": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/0c\/a3c2nk6mszyh54oa3h85ey3a2llox9h.png",
+        "名称": "磐岩结绿",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "圣显之钥": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c8\/20gddrmu0jjg0dtotbrj6l24ctb64gd.png",
+        "名称": "圣显之钥",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "波乱月白经津": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/9a\/0luibsomngme29h3q62sbueig7zafna.png",
+        "名称": "波乱月白经津",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "风鹰剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/5d\/0nq1evrhhxelybr3mogpxoouc4s6b98.png",
+        "名称": "风鹰剑",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "雾切之回光": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/06\/tftyt95dhatbvfeqcbwgkaid6kohsub.png",
+        "名称": "雾切之回光",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "斫峰之刃": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/52\/apwds1zuq7bymq572qthh1aw3j8mjx6.png",
+        "名称": "斫峰之刃",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "训练大剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/d\/d5\/nd5eugeofambx7ssbxk4ggnpv4af0vg.png",
+        "名称": "训练大剑",
+        "星级": 1,
+        "获取途径": [
+            "初始武器赠送",
+            "商店购买",
+            "宝箱"
+        ]
+    },
+    "佣兵重剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/07\/h54n8whizi54yvb3eqe8qewvcvwanty.png",
+        "名称": "佣兵重剑",
+        "星级": 2,
+        "获取途径": [
+            "商店购买",
+            "宝箱"
+        ]
+    },
+    "沐浴龙血的剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/57\/lpb3rsmenks3ej8qccdsmizgsf05amz.png",
+        "名称": "沐浴龙血的剑",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "白铁大剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/9f\/9xw0ywermt7zniyxkkqgaflg4bspalf.png",
+        "名称": "白铁大剑",
+        "星级": 3,
+        "获取途径": [
+            "宝箱",
+            "宝箱（蒙德）"
+        ]
+    },
+    "铁影阔剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/e\/e4\/5yi9lz2gqnfen8axz1s70zaebwu2yar.png",
+        "名称": "铁影阔剑",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "飞天大御剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/f\/f8\/77lbd8p046kafk44vvhvfbc9s14qweq.png",
+        "名称": "飞天大御剑",
+        "星级": 3,
+        "获取途径": [
+            "孤云阁附近拔出",
+            "宝箱（璃月）"
+        ]
+    },
+    "以理服人": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/3\/3d\/2c93huro1qmcsasdxh7fdpm9zhv1obt.png",
+        "名称": "以理服人",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "恶王丸": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/2\/2a\/gftfk28thmd4w9nsyle85ondi9rtq6n.png",
+        "名称": "恶王丸",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "衔珠海皇": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/f\/fb\/930ty97yrmcqrz5oh5cykv8ms6a6hv9.png",
+        "名称": "衔珠海皇",
+        "星级": 4,
+        "获取途径": [
+            "2.1版本活动"
+        ]
+    },
+    "雨裁": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c9\/a2hgbmdegka66sycqn26nof7f5eggaa.png",
+        "名称": "雨裁",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "白影剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/2\/28\/jr9n32gce7t4mp4wngtilxpxesmhyvd.png",
+        "名称": "白影剑",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "宗室大剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/1\/1f\/c6ruhw5q4szn19bem7bs12qvpvwu09e.png",
+        "名称": "宗室大剑",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "祭礼大剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/d\/d3\/ph4fb03f9uc9jqek1u2li6si3bp9ep6.png",
+        "名称": "祭礼大剑",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "黑岩斩刀": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/44\/buzpaggrxsisk8l4kiaz5zba19ug2e3.png",
+        "名称": "黑岩斩刀",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "螭骨剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/4c\/a03ookbm5axi3xyxxdkr8g4ky0gw3fv.png",
+        "名称": "螭骨剑",
+        "星级": 4,
+        "获取途径": [
+            "纪行"
+        ]
+    },
+    "雪葬的星银": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/d\/d9\/okmj08vuwblqbc5hm8rc51hs14hkv0c.png",
+        "名称": "雪葬的星银",
+        "星级": 4,
+        "获取途径": [
+            "任务后龙脊雪山密室内拔出",
+            "锻造"
+        ]
+    },
+    "饰铁之花": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/f\/fc\/fk6kgg3m2h8kooteago3bxkj3qyphtp.png",
+        "名称": "饰铁之花",
+        "星级": 4,
+        "获取途径": [
+            "3.5版本活动"
+        ]
+    },
+    "试作古华": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/1\/1c\/gfejb3e6w0vqa659eckz1f7y9t3slyr.png",
+        "名称": "试作古华",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "西风大剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/85\/ehb1s9y8ae4voq08ndoyauyn1tp9zqu.png",
+        "名称": "西风大剑",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "桂木斩长正": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b5\/j3umncqaavs05j2kge17blv1cyjnr1a.png",
+        "名称": "桂木斩长正",
+        "星级": 4,
+        "获取途径": [
+            "踏鞴沙防护罩解除（踏鞴物语任务相关）后搜集三把钥匙",
+            "锻造"
+        ]
+    },
+    "玛海菈的水色": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/0f\/anoh0a2ndrq4iuxhtmcjrri33165n4v.png",
+        "名称": "玛海菈的水色",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "钟剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/3\/38\/lz61cywx7g0x0gr5g9hmghz050h1h9o.png",
+        "名称": "钟剑",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "森林王器": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b0\/1capo52qkoo0yeu1djmpj0g31ag7k4z.png",
+        "名称": "森林王器",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "千岩古剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c0\/67h6ygjm57faxd8odp71kmi5kaqneuk.png",
+        "名称": "千岩古剑",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "无工之剑": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/3\/3f\/a7z9mi5plfp88ecpeoat389kqivysft.png",
+        "名称": "无工之剑",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "狼的末路": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/9a\/s5wst50l76mnmcds5qq7a3w5ij1jt3x.png",
+        "名称": "狼的末路",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "苇海信标": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/d\/d7\/9m9hbg17umdxrxbwhpz273bq1db3qc0.png",
+        "名称": "苇海信标",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "赤角石溃杵": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/58\/egjrzrzlfm9p7ds13g9n5yn0e1v3pev.png",
+        "名称": "赤角石溃杵",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "松籁响起之时": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/f\/fe\/br8j2j9bqs2r1e1bt6mkmw3qwywn8cg.png",
+        "名称": "松籁响起之时",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "天空之傲": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/a8\/1ymiut626atl2wctx4ukolw60w9mvwd.png",
+        "名称": "天空之傲",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "猎弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/bf\/6kl41yfn2o813n65owm00vjagyrskuq.png",
+        "名称": "猎弓",
+        "星级": 1,
+        "获取途径": [
+            "初始武器赠送",
+            "商店购买",
+            "宝箱"
+        ]
+    },
+    "历练的猎弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/90\/orfj6o4jpkggxpu4j2994a3hc899pva.png",
+        "名称": "历练的猎弓",
+        "星级": 2,
+        "获取途径": [
+            "商店购买",
+            "宝箱"
+        ]
+    },
+    "鸦羽弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/05\/53ipmiydm1223mgs1553tfvlusefx3g.png",
+        "名称": "鸦羽弓",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "信使": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b0\/eiuwkzr42sxnwsdhx58m9nxg0lmjlpi.png",
+        "名称": "信使",
+        "星级": 3,
+        "获取途径": [
+            "宝箱",
+            "（璃月区域宝箱）"
+        ]
+    },
+    "弹弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/2\/2a\/hz45wjba3c0oe62vs7gq1derhrfut39.png",
+        "名称": "弹弓",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "反曲弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/1\/1c\/037366z9oujt6dbi037os1ivao2lrsg.png",
+        "名称": "反曲弓",
+        "星级": 3,
+        "获取途径": [
+            "与稻妻离岛港口中野对话",
+            "与须弥化城郭池边的希琳对话",
+            "宝箱",
+            "对话"
+        ]
+    },
+    "神射手之誓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/3\/3c\/5nqr8ib8lef2mjjoccgsuej6y5ggd8y.png",
+        "名称": "神射手之誓",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "绝弦": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/6\/66\/1wlrzu80qe5jwzv9zxa9apuzkkt5m06.png",
+        "名称": "绝弦",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "风花之颂": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/4c\/1anq6ld3vkvak7egwrw9cnmor6ed0t7.png",
+        "名称": "风花之颂",
+        "星级": 4,
+        "获取途径": [
+            "1.4版本活动"
+        ]
+    },
+    "幽夜华尔兹": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/0e\/b5mx66j5mn9zt1rvw2le4getvtz8aw5.png",
+        "名称": "幽夜华尔兹",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "钢轮弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/7\/7a\/0z9oqbgp7xmufb10i51oopdi285ewfi.png",
+        "名称": "钢轮弓",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "西风猎弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/55\/ptq434ipzu2tdibixc9u0of6h0sj5sm.png",
+        "名称": "西风猎弓",
+        "星级": 4,
+        "获取途径": [
+            "任务"
+        ]
+    },
+    "弓藏": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/88\/jqv0wgqqrk8uzrl0bkjlm2z271r3wx6.png",
+        "名称": "弓藏",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "竭泽": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/6\/67\/h5i21t2g2n62m6zax4vkv4nu8yfk24k.png",
+        "名称": "竭泽",
+        "星级": 4,
+        "获取途径": [
+            "NPC商店",
+            "须弥钓鱼协会兑换"
+        ]
+    },
+    "黑岩战弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/9e\/2477l07lereuehc60ssgv4amlcjeayh.png",
+        "名称": "黑岩战弓",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "试作澹月": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/ae\/f7vngju0e5np72x0u4e49k847kme9u8.png",
+        "名称": "试作澹月",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "宗室长弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c6\/ejsd6fjfdctyhkp0mc4jel6xr7037sv.png",
+        "名称": "宗室长弓",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "曚云之月": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/8a\/5uwhczptaxydt6t86gog4sgcwjw5jwf.png",
+        "名称": "曚云之月",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "王下近侍": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/8f\/qok3iyhogwja8km8f6mxvt1wrsvneal.png",
+        "名称": "王下近侍",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "破魔之弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/95\/fg7r5aov1jfstcpsokahqhzb1mxzsmv.png",
+        "名称": "破魔之弓",
+        "星级": 4,
+        "获取途径": [
+            "奇怪的海螺兑换阿敬的宝箱大奖可获得锻造图纸<神无冢·踏鞴砂>上面海螺屋。",
+            "锻造"
+        ]
+    },
+    "暗巷猎手": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/40\/5ymxa0sdy5ymls5y9fj3zkej2d5mx6c.png",
+        "名称": "暗巷猎手",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "祭礼弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b2\/2rec7q8fz258yn1ugmm13cojcx2cjdq.png",
+        "名称": "祭礼弓",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "掠食者": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/86\/dpteyjptbn4lgnsr48jneoeneh096kb.png",
+        "名称": "掠食者",
+        "星级": 4,
+        "获取途径": [
+            "2.1版本更新完后，旅行者通过PlayStation平台登录游戏，可在冒险等阶达到20级后，通过游戏内邮件免费获得该武器"
+        ]
+    },
+    "落霞": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/81\/gediyggl2thgj9wm8nf9oymdflomtc7.png",
+        "名称": "落霞",
+        "星级": 4,
+        "获取途径": [
+            "2.7版本活动"
+        ]
+    },
+    "苍翠猎弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/7\/77\/7c6x3yu5fb0uj76cyuzf9vc0bdgk4h7.png",
+        "名称": "苍翠猎弓",
+        "星级": 4,
+        "获取途径": [
+            "纪行"
+        ]
+    },
+    "天空之翼": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/a2\/tj1tuu3q9s6cdvgp52jdeydqla8x4v0.png",
+        "名称": "天空之翼",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "猎人之径": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b4\/oeap8gkvc29t665uy64nnod68cny0v2.png",
+        "名称": "猎人之径",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "阿莫斯之弓": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c6\/o1bcb4o9oo765hbycm6949f9f0njcdd.png",
+        "名称": "阿莫斯之弓",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "终末嗟叹之诗": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/a1\/2s11z5u7vd4hte4qb3lmfz9qww4gzl9.png",
+        "名称": "终末嗟叹之诗",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "飞雷之弦振": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/3\/3c\/ejbu26uc82uaugh8uc5urr1tc303uws.png",
+        "名称": "飞雷之弦振",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "若水": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/af\/o2trbbsyf2kvcxuegwi8xvb0xfl2kmk.png",
+        "名称": "若水",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "冬极白星": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/4a\/lbn9hfwq08te0cghdu44x24bir7o93e.png",
+        "名称": "冬极白星",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "学徒笔记": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c5\/igw6rxjhh72k7cha3wq5lrdr7mw636g.png",
+        "名称": "学徒笔记",
+        "星级": 1,
+        "获取途径": [
+            "初始武器赠送",
+            "商店购买",
+            "宝箱"
+        ]
+    },
+    "口袋魔导书": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/54\/3cez0e67cnkft1idnofhpm59wbsk5md.png",
+        "名称": "口袋魔导书",
+        "星级": 2,
+        "获取途径": [
+            "商店购买",
+            "宝箱"
+        ]
+    },
+    "讨龙英杰谭": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/e\/e0\/r009hx3olkmrtk1ykdlr5lvhc76j4iu.png",
+        "名称": "讨龙英杰谭",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "异世界行记": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c3\/9j2dbvbocavnm3ztyfmmw1y1cjxwz85.png",
+        "名称": "异世界行记",
+        "星级": 3,
+        "获取途径": [
+            "宝箱",
+            "（蒙德区域宝箱）"
+        ]
+    },
+    "翡玉法球": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/46\/1klq7fy01lhzlepa64rfu33hs4wwl0f.png",
+        "名称": "翡玉法球",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "甲级宝珏": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/d\/d8\/brcmqo7o8pw6xr5pq9ujz5kjug3xslp.png",
+        "名称": "甲级宝珏",
+        "星级": 3,
+        "获取途径": [
+            "宝箱",
+            "（璃月区域宝箱）"
+        ]
+    },
+    "魔导绪论": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/ae\/7l0lp1uvwkjmj8g04eg59xy7nqhrgyd.png",
+        "名称": "魔导绪论",
+        "星级": 3,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "试作金珀": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/ac\/p578m7ua6jzji5qhigdqmf3komz09zx.png",
+        "名称": "试作金珀",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "祭礼残章": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/bf\/eey13bo96c5di0j2wfhd6pq1dhsgk5r.png",
+        "名称": "祭礼残章",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "黑岩绯玉": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/0e\/mp51gft6okg6t4lcm3ro4um607612zn.png",
+        "名称": "黑岩绯玉",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "万国诸海图谱": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b4\/snhy06y9px3auxic0wbs7f1pxsme5w7.png",
+        "名称": "万国诸海图谱",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "白辰之环": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/a4\/48ctquzv8v71zn053n89l43eahuoica.png",
+        "名称": "白辰之环",
+        "星级": 4,
+        "获取途径": [
+            "完成「"
+        ]
+    },
+    "证誓之明瞳": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/04\/gfrop4sutfitpg1ie8pz1eo7ooemrcn.png",
+        "名称": "证誓之明瞳",
+        "星级": 4,
+        "获取途径": [
+            "2.5版本活动"
+        ]
+    },
+    "昭心": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/e\/e9\/bsmftbddqryi4mp9nwql8tvi5gh964k.png",
+        "名称": "昭心",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "嘟嘟可故事集": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/a9\/to27idcbyyvjyozelpt281o2wqpkppu.png",
+        "名称": "嘟嘟可故事集",
+        "星级": 4,
+        "获取途径": [
+            "1.6版本活动"
+        ]
+    },
+    "暗巷的酒与诗": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/1\/1b\/8p7ebo8ma61z683tkjnrvw2llmqnx6f.png",
+        "名称": "暗巷的酒与诗",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "盈满之实": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/cd\/0sw6m7f5rc45ryknd89k5yw9wxvjg9v.png",
+        "名称": "盈满之实",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "流浪的晚星": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/84\/enl7iak6z4p4lett8xwf7zhkxwyzxby.png",
+        "名称": "流浪的晚星",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "宗室秘法录": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/4d\/0wxzvohfvm6tkkrh2mcr20ltefdtfvy.png",
+        "名称": "宗室秘法录",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "流浪乐章": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/8b\/1gfpyhq0horhcbho0eqs1c62nklx118.png",
+        "名称": "流浪乐章",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "匣里日月": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/ca\/m9wcqu2irdto40c5byid1no15zouv2f.png",
+        "名称": "匣里日月",
+        "星级": 4,
+        "获取途径": [
+            "纪行"
+        ]
+    },
+    "西风秘典": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/55\/myxc1shaba3gaof6hxltjp9iqre47da.png",
+        "名称": "西风秘典",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "忍冬之果": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/1\/1e\/0mqvavh1ryy2zpz6wt3apvph7ral6v7.png",
+        "名称": "忍冬之果",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "图莱杜拉的回忆": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/cb\/q6ppzrt0mfpfuy4ra65s0ed4jqr3aes.png",
+        "名称": "图莱杜拉的回忆",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "神乐之真意": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/01\/jrwr230b17m9j6fuo25b04eb1ziwrov.png",
+        "名称": "神乐之真意",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "不灭月华": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/84\/7l5swg86g75qp6fpskigns1vebs75r1.png",
+        "名称": "不灭月华",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "四风原典": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/85\/h2any7ypjy8nejtlu4dshfb5ds73n7r.png",
+        "名称": "四风原典",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "天空之卷": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/5e\/ljga8vdrkv9u3erfguhsuv9i568l8yo.png",
+        "名称": "天空之卷",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "尘世之锁": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c1\/iv8sa85v2wh81npdj1drdyb01i9b5uq.png",
+        "名称": "尘世之锁",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "千夜浮梦": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/0\/07\/s74zq4c9sas58jwxkt3adstibl7qcib.png",
+        "名称": "千夜浮梦",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "新手长枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/be\/9zeqw9h2k2n3f32bllbknm5qo806bcl.png",
+        "名称": "新手长枪",
+        "星级": 1,
+        "获取途径": [
+            "初始武器赠送",
+            "商店购买",
+            "宝箱"
+        ]
+    },
+    "铁尖枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/53\/8rxq05fk93j4o755v88489147205wuk.png",
+        "名称": "铁尖枪",
+        "星级": 2,
+        "获取途径": [
+            "商店购买",
+            "宝箱"
+        ]
+    },
+    "黑缨枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/95\/kjxqr03u3o59vqhd06q1dkr9udn4bzk.png",
+        "名称": "黑缨枪",
+        "星级": 3,
+        "获取途径": [
+            "祈愿，与NPC乌尔班(位于雪山营地)对话获得"
+        ]
+    },
+    "钺矛": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c7\/bnxkv79cim47byqz0znf6wpvrxjiawz.png",
+        "名称": "钺矛",
+        "星级": 3,
+        "获取途径": [
+            "宝箱"
+        ]
+    },
+    "白缨枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/3\/3a\/mgdxazk35nyu792h4s1w8qikz11djjt.png",
+        "名称": "白缨枪",
+        "星级": 3,
+        "获取途径": [
+            "宝箱",
+            "（璃月区域宝箱）"
+        ]
+    },
+    "龙脊长枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/f\/f6\/g0wtjxe5sk8el47lmax1ixuv862629y.png",
+        "名称": "龙脊长枪",
+        "星级": 4,
+        "获取途径": [
+            "任务",
+            "锻造"
+        ]
+    },
+    "喜多院十文字": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/7\/7a\/ndxblaqimgtu2arafzv2zrjxmzptmcz.png",
+        "名称": "喜多院十文字",
+        "星级": 4,
+        "获取途径": [
+            "完成"
+        ]
+    },
+    "决斗之枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/49\/6kwk4rcg7hrag06ru43n001345slipa.png",
+        "名称": "决斗之枪",
+        "星级": 4,
+        "获取途径": [
+            "纪行"
+        ]
+    },
+    "断浪长鳍": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/1\/13\/iu6ewa4gmjv0krtkkuh07i3eowazy9i.png",
+        "名称": "断浪长鳍",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "宗室猎枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/2\/2b\/aqnkuo83r4dwbohss1f0ekumcyrwcm9.png",
+        "名称": "宗室猎枪",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "流月针": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/9\/92\/99k8uxhkckglspqsgvjhyppoc2vmbkv.png",
+        "名称": "流月针",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "匣里灭辰": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/4\/4a\/oglqma2aqftd6cxts3i4mgnaddfxmob.png",
+        "名称": "匣里灭辰",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "「渔获」": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/2\/2b\/rbmrxt4t11u67sr50far44n8su5a0h7.png",
+        "名称": "「渔获」",
+        "星级": 4,
+        "获取途径": [
+            "NPC商店",
+            "稻妻钓鱼协会兑换"
+        ]
+    },
+    "贯月矢": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b9\/s7qocxbf763pg6au1x6epx4pm22vr9r.png",
+        "名称": "贯月矢",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "千岩长枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b9\/t90pbsrnnvhmrakx518y6v48buiwvf9.png",
+        "名称": "千岩长枪",
+        "星级": 4,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "试作星镰": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/7\/7d\/c08xuqa5babolxeza3469h0h6qakjsd.png",
+        "名称": "试作星镰",
+        "星级": 4,
+        "获取途径": [
+            "锻造"
+        ]
+    },
+    "黑岩刺枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/e\/eb\/essnw00jgeqt0be88db7hd1ttplrsse.png",
+        "名称": "黑岩刺枪",
+        "星级": 4,
+        "获取途径": [
+            "商城兑换"
+        ]
+    },
+    "西风长枪": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/b\/b9\/iks26f9sp5okxrfkqwcad77wujwt9rm.png",
+        "名称": "西风长枪",
+        "星级": 4,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "风信之锋": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/c\/c9\/eyn2f5y5jkxwjw6eb87rmpv1ea9pose.png",
+        "名称": "风信之锋",
+        "星级": 4,
+        "获取途径": [
+            "3.1版本活动"
+        ]
+    },
+    "薙草之稻光": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/5\/50\/e6m859od1g4ucogx58ytwcvr9vom8em.png",
+        "名称": "薙草之稻光",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "护摩之杖": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/8\/8e\/bgt87ddwa4zm52fsann2dz73tfd29qg.png",
+        "名称": "护摩之杖",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "赤沙之杖": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/3\/37\/i2gicv7klq5ne29jf3lz2dktl5c5j7a.png",
+        "名称": "赤沙之杖",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "和璞鸢": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/1\/17\/qrsylrcoha9i3rmfaah1ojzymvsuhf9.png",
+        "名称": "和璞鸢",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "天空之脊": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/7\/78\/2xhhbluf7qsanm6pae1lnyoowy9nepd.png",
+        "名称": "天空之脊",
+        "星级": 5,
+        "获取途径": [
+            "祈愿"
+        ]
+    },
+    "贯虹之槊": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/e\/ed\/m1d4pox9fuaklkbgp7czt1rc32c4vg0.png",
+        "名称": "贯虹之槊",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    },
+    "息灾": {
+        "头像": "https:\/\/patchwiki.biligame.com\/images\/ys\/a\/ab\/1davjsfx18xw3v9xz5pdxjlzwe730vn.png",
+        "名称": "息灾",
+        "星级": 5,
+        "获取途径": [
+            "限定祈愿"
+        ]
+    }
+}

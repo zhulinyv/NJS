@@ -1,0 +1,64 @@
+{
+    "char": {
+        "title": "前路回响",
+        "pool_img": "https:\/\/ak.hycdn.cn\/announce\/images\/20230316\/14fb28a96e67dd0f84f15be0adcf678b.jpg",
+        "start_time": "2023-03-23T04:00:00",
+        "end_time": "2023-04-06T03:59:00",
+        "up_char": [
+            {
+                "name": "琴柳",
+                "star": 6,
+                "limited": false,
+                "zoom": 1.0
+            },
+            {
+                "name": "号角",
+                "star": 6,
+                "limited": false,
+                "zoom": 1.0
+            },
+            {
+                "name": "白铁",
+                "star": 6,
+                "limited": false,
+                "zoom": 1.0
+            },
+            {
+                "name": "桑葚",
+                "star": 5,
+                "limited": false,
+                "zoom": 0.6
+            },
+            {
+                "name": "洛洛",
+                "star": 5,
+                "limited": false,
+                "zoom": 0.6
+            },
+            {
+                "name": "明椒（占5★出率的60%）",
+                "star": 5,
+                "limited": false,
+                "zoom": 0.6
+            },
+            {
+                "name": "罗比菈塔",
+                "star": 4,
+                "limited": false,
+                "zoom": 0.45
+            },
+            {
+                "name": "褐果",
+                "star": 4,
+                "limited": false,
+                "zoom": 0.45
+            },
+            {
+                "name": "铅踝 （占4★出率的45%）",
+                "star": 4,
+                "limited": false,
+                "zoom": 0.45
+            }
+        ]
+    }
+}

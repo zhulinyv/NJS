@@ -12,7 +12,7 @@ from nonebot.adapters.onebot.v11 import (
 from PIL import Image
 
 from .utils import course_manager, get_weekday
-from nonebot_plugin_PicMenu.img_tool import img2b64
+from .nonebot_plugin_PicMenu.img_tool import img2b64
 from nonebot.plugin import PluginMetadata
 
 __plugin_meta__ = PluginMetadata(

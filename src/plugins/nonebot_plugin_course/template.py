@@ -4,7 +4,7 @@ from pathlib import Path
 from PIL import Image
 from pydantic import error_wrappers
 
-from nonebot_plugin_PicMenu.img_tool import simple_text, multi_text, ImageFactory, auto_resize_text
+from .nonebot_plugin_PicMenu.img_tool import simple_text, multi_text, ImageFactory, auto_resize_text
 from nonebot import logger, get_driver
 
 

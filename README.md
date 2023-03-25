@@ -43,7 +43,7 @@
 
 Windows 将 ./NJS/data/fonts 目录下的字体文件复制到 /Windows/Fonts 即可；
 
-Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/truetype/ 即可。
+Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/truetype 然后用 `sudo fc-cache -fv` 更新字体缓存。
 
 <details>
 

@@ -1598,3 +1598,27 @@ b站热搜
 明日早八
 </p></pre>
 </details>
+
+## 97.随机狗妈
+<details>
+<summary><b>指令：</summary></b>
+<pre><p>
+狗妈/随机狗妈
+</p></pre>
+</details>
+
+## 98.热搜
+<details>
+<summary><b>指令：</summary></b>
+<pre><p>
+微博热搜
+百度热搜
+贴吧热搜
+知乎热搜
+B站热搜
+</p></pre>
+</details>
+
+# 联系我：
+QQ频道：[我的中心花园](https://pd.qq.com/s/8bkfowg3c)
+仓库Issues：[Issues](https://github.com/zhulinyv/NJS/issues)

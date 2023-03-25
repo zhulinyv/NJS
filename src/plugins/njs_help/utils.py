@@ -102,7 +102,9 @@ help_reply_body = """[align=right][size=20][color=#008000]*绿色表示正常可
 93.舔狗日记
 94.B站热搜
 95.网易云热评
-96.课表查询[/color][/color]
+96.课表查询
+97.随机狗妈
+98.热搜[/color][/color]
 
 [align=center][color=#000000]Powered by (๑•小丫头片子•๑)[/color][/align]"""
 help_reply_foot = """更详细内容：《脑积水使用手册》

@@ -21,8 +21,8 @@ async def _():
         menu_manager.load_plugin_info()
 
 menu_manager = MenuManager()
-menu = on_startswith('Pic菜单', priority=5)
-switch = on_fullmatch('Pic开关菜单', permission=SUPERUSER | GROUP_ADMIN, priority=5)
+menu = on_startswith('PicMenu菜单', priority=5)
+switch = on_fullmatch('PicMenu开关菜单', permission=SUPERUSER | GROUP_ADMIN, priority=5)
 
 
 menu_switch = True

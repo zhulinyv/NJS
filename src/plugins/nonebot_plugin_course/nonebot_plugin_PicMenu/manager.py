@@ -63,7 +63,7 @@ class DataManager(object):
             if json_path.exists():
                 try:
                     load_from_json(json_path)
-                    logger.opt(colors=True).success(f'<y>{plugin.name}</y> 菜单数据已加载 <c>(from json)</c>')
+                    logger.opt(colors=True).debug(f'<y>{plugin.name}</y> 菜单数据已加载 <c>(from json)</c>')
                 except json.JSONDecodeError as e:
                     logger.opt(colors=True).error(f'<y>{plugin.name}</y> 菜单数据加载失败 <c>(from json)</c>\n'
                                                   f'<y>json解析失败</y>: {e}')
@@ -78,7 +78,7 @@ class DataManager(object):
                 else:
                     try:
                         load_from_dict(meta_data)
-                        logger.opt(colors=True).success(f'<y>{plugin.name}</y> 菜单数据已加载 <c>(from code)</c>')
+                        logger.opt(colors=True).debug(f'<y>{plugin.name}</y> 菜单数据已加载 <c>(from code)</c>')
                     except error_wrappers.ValidationError as e:
                         logger.opt(colors=True).error(f'<y>{plugin.name}</y> 菜单数据加载失败 <c>(from code)</c>\n'
                                                       f'<y>__plugin_meta__.extra["menu_data"] 缺少必要键值对</y>: \n'

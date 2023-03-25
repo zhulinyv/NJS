@@ -33,15 +33,26 @@
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |推荐配置|2线程+|2GB+||该配置下部分功能可能无法正常使用|1线程|1GB|
 
-### 1️⃣ 安装 浏览器、解压软件、文本编辑器
+### 1️⃣ 安装 字体、浏览器、解压软件、文本编辑器
 
 此过程比较简单，不在附图。
 
-警告：**不要**使用 Internet Explorer！如果你的电脑配置比较低，可以选择 [百分浏览器](https://www.centbrowser.cn/) 等占用小的浏览器，解压软件可以选择 [7-Zip](https://www.7-zip.org/)、[WinRAR](https://www.ghxi.com/winrarlh.html) 等解压软件，文本编辑器任意，系统自带的记事本都可以，也可以使用比较高级一点的，比如 [VScode](https://code.visualstudio.com/)、[Sublime](https://www.sublimetext.com/) 等。**如果你的电脑上已经有其它同类软件，则跳过此步骤！**
+1、警告：**不要**使用 Internet Explorer！如果你的电脑配置比较低，可以选择 [百分浏览器](https://www.centbrowser.cn/) 等占用小的浏览器，解压软件可以选择 [7-Zip](https://www.7-zip.org/)、[WinRAR](https://www.ghxi.com/winrarlh.html) 等解压软件，文本编辑器任意，系统自带的记事本都可以，也可以使用比较高级一点的，比如 [VScode](https://code.visualstudio.com/)、[Sublime](https://www.sublimetext.com/) 等。**如果你的电脑上已经有其它同类软件，则跳过此步骤！**
 
-备注：Linux 服务器可能会出现中文乱码，还需要安装字体。感谢 [@DuuuLu](https://github.com/DuuuLu) 反馈。
+2、可选：安装字体：部分插件需要用到特定字体，不安装不影响使用。
+
+Windows 将 ./NJS/data/fonts 目录下的字体文件复制到 /Windows/Fonts 即可；
+Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/truetype/ 即可
+
+<details>
+
+<summary>备注：Linux 服务器可能会出现中文乱码，此时需要安装中文字体。</summary>
+
+感谢 [@DuuuLu](https://github.com/DuuuLu) 反馈。
 
 `sudo apt-get install -y ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-umingsudo fc-cache -f -v`
+
+</details>
 
 ### 2️⃣ 安装 Python
 

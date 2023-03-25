@@ -1,0 +1,78 @@
+{
+    "char": {
+        "title": "本次up从03月16日开始，至03月30日结束。",
+        "pool_img": "",
+        "start_time": "2023-03-16T00:00:00",
+        "end_time": "2023-03-30T00:00:00",
+        "up_char": [
+            {
+                "name": "克罗塞尔",
+                "star": 3,
+                "limited": false,
+                "zoom": 0.0
+            },
+            {
+                "name": "莉莉丝",
+                "star": 3,
+                "limited": false,
+                "zoom": 0.0
+            },
+            {
+                "name": "克劳德",
+                "star": 3,
+                "limited": false,
+                "zoom": 0.0
+            },
+            {
+                "name": "阿拉贝尔",
+                "star": 3,
+                "limited": false,
+                "zoom": 0.0
+            },
+            {
+                "name": "贝丝",
+                "star": 3,
+                "limited": false,
+                "zoom": 0.0
+            }
+        ]
+    },
+    "arms": {
+        "title": "本次up从03月16日开始，至03月30日结束。",
+        "pool_img": "",
+        "start_time": "2023-03-16T00:00:00",
+        "end_time": "2023-03-30T00:00:00",
+        "up_char": [
+            {
+                "name": "拒绝访问",
+                "star": 5,
+                "limited": false,
+                "zoom": 0.0
+            },
+            {
+                "name": "女王的优雅",
+                "star": 5,
+                "limited": false,
+                "zoom": 0.0
+            },
+            {
+                "name": "暮光",
+                "star": 5,
+                "limited": false,
+                "zoom": 0.0
+            },
+            {
+                "name": "无边绝望",
+                "star": 5,
+                "limited": false,
+                "zoom": 0.0
+            },
+            {
+                "name": "猎食者",
+                "star": 5,
+                "limited": false,
+                "zoom": 0.0
+            }
+        ]
+    }
+}

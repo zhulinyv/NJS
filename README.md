@@ -175,19 +175,27 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 例如：`SUPERUSER=["1234567890", "0987654321"]`，其它配置项类似。
 
+注意：脑积水使用了频道补丁，因此也可以处理频道信息，但频道的超管 ID 与 QQ 群的不同，需要额外配置。
+
 ⚠️ 下一步骤非常重要
 
 3、其它配置文件请参照 **env.else** 文件中的注释，或根据[《脑积水使用手册》](https://zhulinyv.github.io/NJS/)中具体插件仓库详细配置项说明在 **env.prod** 文件中配置。
 
 注意：配置项较多，只有少部分是必须的，可以按需配置。
 
+目前只有 ChatGPT, Apex, WoWs, 和风天气, Ai画图, 颜值评分, BingGPT 这几个必需 apikey。
+
+
 ### 8️⃣ 登录 脑积水
 
 1、在 NJS 目录中，输入 `poetry run nb run` 来运行脑积水。首次启动较慢，耐心等待。
 
-如果出现类似下图所示报错，是因为 hikari_bot 插件的 API_TOKEN 未配置造成的，可以直接**忽略**或根据步骤 8 的第 3 步中的说明获取。但这并**不影响**其它插件的使用，如果不需要这个插件，可以去 `NJS\src\plugins\hikari_bot` 目录中将 **_\_init__.py** 文件重命名为 **init__.py**。
+如果出现类似下图所示报错，是因为 hikari_bot 插件的 API_TOKEN 和 nonebot_plugin_bing_chat 的 cookies 未配置造成的，可以直接**忽略**或根据步骤 7 的第 3 步中的说明获取。但这并**不影响**其它插件的使用，如果不需要这个插件，可以去 `NJS\src\plugins\hikari_bot` 和 `NJS\src\plugins\nonebot_plugin_bing_chat` 目录中将 **_\_init__.py** 文件重命名为 **init__.py**。
 
 ![image](https://user-images.githubusercontent.com/66541860/213744555-c22c8289-3789-4281-9781-5e372c5c3017.png)
+![image](https://user-images.githubusercontent.com/66541860/227728475-d85df47f-5e48-4c90-97f9-282c0c57aaa4.png)
+![image](https://user-images.githubusercontent.com/66541860/227728502-4da142d3-e9db-4a90-b049-906fc6f2d434.png)
+
 
 2、启动后，浏览器访问链接 [http://127.0.0.1:13579/go-cqhttp](http://127.0.0.1:13579/go-cqhttp)，添加账号，手动输入账号，密码**不需要**输入，设备选择 aPad 或 iPad，如果你选择 Android，那么你的安卓手机上将无法登录，同理其它也是。
 

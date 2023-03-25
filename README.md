@@ -59,7 +59,7 @@ Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/tr
 
 #### Windows下的安装
 
-1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.10 版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上。
+1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.10 版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上；实际上 3.8 版本以上就可以，但部分插件需要，因此 3.10 最为合适。
 
 ![image](https://user-images.githubusercontent.com/66541860/213637200-dca63b69-fd52-42d1-a3cd-f8b24f492186.png)
 
@@ -203,7 +203,8 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
   1、进入 `.\NJS\accounts\binary` 目录，复制 binary 目录下的 go-cqhttp.exe(Linux 版没有扩展名) 文件到自己的电脑。
   2、双击运行，在之后弹出的对话框中均点击确定(Linux 版无需此步骤)。
   <a><img src="https://user-images.githubusercontent.com/66541860/213905405-c1c39bf5-9e52-46ad-96d6-62a56d097bca.png"></a>
-  3、双击 go-cqhttp.bat 文件运行，输入 3 选择<b>反向 Websocket 通信</b>。
+  3、运行 go-cqhttp.bat 文件(Linux 运行 go-cqhttp)，输入 3 选择<b>反向 Websocket 通信</b>。
+  <a><img src="https://user-images.githubusercontent.com/66541860/227727773-83cea251-478d-4022-b0a9-596084e044d3.png"></a>
   4、打开 config.yml 文件，将 uin 改为<b>机器人</b>的账号，最下方的 universal 部分改为 <code>"ws://127.0.0.1:13579/onebot/v11/ws"</code>，保存。
   <a><img src="https://user-images.githubusercontent.com/66541860/213905588-344e85e4-0db6-4b44-b57c-a1f7ddb4824d.png"></a>
   <a><img src="https://user-images.githubusercontent.com/66541860/213905671-d6e63b62-39d7-4862-8923-ff4fdfa2db93.png"></a>
@@ -216,9 +217,14 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
   <pre><p>
   1、更换登录协议重试(优先 aPad 或 iPad，其它协议可能导致部分信息无法处理)。
   2、如果更换登录协议无法解决，进入 `.\NJS\accounts\binary` 目录，运行 binary 目录下的 go-cqhttp.exe(Linux 版没有扩展名)。
-  3、运行 go-cqhttp.bat 文件运行，输入 3 选择<b>反向 Websocket 通信</b>。
+  3、在弹出的对话框中均点击确定(Linux 版无需此步骤)，之后运行 go-cqhttp.bat(Linux 运行 go-cqhttp)，输入 3 选择<b>反向 Websocket 通信</b>。
+  <a><img src="https://user-images.githubusercontent.com/66541860/213905405-c1c39bf5-9e52-46ad-96d6-62a56d097bca.png"></a>
+  <a><img src="https://user-images.githubusercontent.com/66541860/227727773-83cea251-478d-4022-b0a9-596084e044d3.png"></a>
   4、打开 config.yml 文件，将 uin 改为<b>机器人</b>的账号，password 填写机器人账号密码，最下方的 universal 部分改为 <code>"ws://127.0.0.1:13579/onebot/v11/ws"</code>，保存。
+  <a><img src="https://user-images.githubusercontent.com/66541860/227727909-476bbfbb-9801-4314-b05c-ea16c23356af.png"></a>
+  <a><img src="https://user-images.githubusercontent.com/66541860/213905671-d6e63b62-39d7-4862-8923-ff4fdfa2db93.png"></a>
   5、此时再次运行 go-cqhttp.bat 文件(Linux 运行 go-cqhttp)，按照提示输入 1 自动获取 ticket，如开启了设备锁，输入 1 选择<b>短信验证</b>。
+  <a><img src="https://user-images.githubusercontent.com/66541860/227727962-943f121d-4d8d-4708-a3ae-d981670997a8.png"></a>
   6、登录好后将 device.json 和 session.token 文件复制到 .\NJS\accounts\uin(机器人的QQ号) 目录即可。
 </details>
 

@@ -42,7 +42,8 @@
 2、**可选**：安装字体：部分插件需要用到特定字体，不安装不影响使用。
 
 Windows 将 ./NJS/data/fonts 目录下的字体文件复制到 /Windows/Fonts 即可；
-Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/truetype/ 即可
+
+Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/truetype/ 即可。
 
 <details>
 

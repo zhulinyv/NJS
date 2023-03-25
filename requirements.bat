@@ -48,6 +48,7 @@ poetry run pip install feedparser==6.0.10
 poetry run pip install filelock==3.8.2
 poetry run pip install fonttools==4.38.0
 poetry run pip install frozenlist==1.3.1
+poetry run pip install fuzzywuzzy==0.18.0
 poetry run pip install gitdb==4.0.9
 poetry run pip install githubkit==0.9.6
 poetry run pip install GitPython==3.1.29
@@ -92,7 +93,6 @@ poetry run pip install nonebot-plugin-guild-patch==0.2.2
 poetry run pip install nonebot-plugin-htmlrender==0.2.0.1
 poetry run pip install nonebot-plugin-imageutils==0.1.13.4
 poetry run pip install nonebot-plugin-localstore==0.2.0
-poetry run pip install nonebot-plugin-PicMenu==0.2
 poetry run pip install nonebot2==2.0.0rc2
 poetry run pip install numpy==1.23.4
 poetry run pip install openai==0.27.0

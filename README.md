@@ -66,7 +66,7 @@ Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/tr
 
 ![image](https://user-images.githubusercontent.com/66541860/213638736-729c083f-b2ca-41db-affd-31896db5d4cf.png)
 
-3、出现此页面时，就表示你已经安装成功了，此时点击 Close 关闭窗口即可。
+3、出现此页面时，就表示你已经安装成功了，此时点击 Close 关闭窗口即可(Disable path length limit 解除路径长度限制，可选)。
 
 ![image](https://user-images.githubusercontent.com/66541860/213639081-6ae459c9-6ef6-4dc1-9cb3-8755934dca2b.png)
 

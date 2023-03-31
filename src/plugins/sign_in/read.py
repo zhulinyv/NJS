@@ -4,7 +4,7 @@ from .login import search
 
 send = 1
 async def read_data(coint, qq, time):
-    file_name = 'coints.json'
+    file_name = './data/sign_in/coints.json'
     global send
     try:
         with open(file_name) as f:

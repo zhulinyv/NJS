@@ -2,7 +2,7 @@ import json
 
 async def write_file(coint,qq,first,file_read,time):
     if first == True:
-        file_name = 'coints.json'
+        file_name = './data/sign_in/coints.json'
         data = dict(file_read)
         data2 = {str(qq):coint,f'{qq}login':time}
         data.update(data2)
@@ -10,7 +10,7 @@ async def write_file(coint,qq,first,file_read,time):
         with open(file_name,'w') as f:
            json.dump(data,f)
     else:
-        file_name = 'coints.json'
+        file_name = './data/sign_in/coints.json'
         data = dict(file_read)
         qq_str = str(qq)
         # print(data)

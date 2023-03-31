@@ -19,7 +19,7 @@ async def lj(event: MessageEvent):
     qq_id = str(event.user_id)
     local_time = time.localtime(event.time)
     login_time = time.strftime('%d', local_time)
-    file_name = 'coints.json'
+    file_name = './data/sign_in/coints.json'
     # 签到
     with open(file_name) as f:
             data_user = json.load(f)
@@ -109,7 +109,7 @@ async def lj(event: MessageEvent):
 send = 0
 async def search_qq(qq):
     global send
-    file_name = 'coints.json'
+    file_name = './data/sign_in/coints.json'
     with open(file_name) as f:
         data_user = json.load(f)
     try:

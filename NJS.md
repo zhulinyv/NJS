@@ -1556,7 +1556,7 @@ pixivRank 1/7/30
 </p></pre>
 </details>
 
-## 93.舔狗日记
+## 93.舔狗日记 [nonebot_plugin_dog](https://github.com/Reversedeer/nonebot_plugin_dog)
 <details>
 <summary><b>指令：</summary></b>
 <pre><p>
@@ -1569,15 +1569,19 @@ pixivRank 1/7/30
 </p></pre>
 </details>
 
-## 94.B站热搜
+## 94.热搜 [nonebot_plugin_hotsearch](https://github.com/Astolfocat/nonebot_plugin_hotsearch)
 <details>
 <summary><b>指令：</summary></b>
 <pre><p>
-b站热搜
+微博热搜
+百度热搜
+贴吧热搜
+知乎热搜
+B站热搜
 </p></pre>
 </details>
 
-## 95.网易云热评
+## 95.网易云热评 [nonebot_plugin_ncm_saying](https://github.com/techotaku39/nonebot-plugin-ncm-saying)
 <details>
 <summary><b>指令：</summary></b>
 <pre><p>
@@ -1585,7 +1589,7 @@ b站热搜
 </p></pre>
 </details>
 
-## 96.课表查询
+## 96.课表查询 [nonebot_plugin_course](https://github.com/InariInDream/nonebot_plugin_course)
 <details>
 <summary><b>指令：</summary></b>
 <pre><p>
@@ -1598,3 +1602,16 @@ b站热搜
 明日早八
 </p></pre>
 </details>
+
+## 97.随机狗妈 [nonebot_plugin_randomnana](https://github.com/NanakoOfficial/nonebot_plugin_randomnana)
+<details>
+<summary><b>指令：</summary></b>
+<pre><p>
+狗妈/随机狗妈
+</p></pre>
+</details>
+
+
+# 联系我：
+QQ频道：[我的中心花园](https://pd.qq.com/s/8bkfowg3c)
+仓库Issues：[Issues](https://github.com/zhulinyv/NJS/issues)

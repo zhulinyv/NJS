@@ -42,7 +42,8 @@
 2、**可选**：安装字体：部分插件需要用到特定字体，不安装不影响使用。
 
 Windows 将 ./NJS/data/fonts 目录下的字体文件复制到 /Windows/Fonts 即可；
-Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/truetype/ 即可
+
+Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/truetype 然后用 `sudo fc-cache -fv` 更新字体缓存。
 
 <details>
 
@@ -58,7 +59,7 @@ Linux 将 ./NJS/data/fonts 目录下的字体文件复制到 /usr/share/fonts/tr
 
 #### Windows下的安装
 
-1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.10 版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上。
+1、来到 [Python](https://www.python.org/downloads/windows/) 官网的下载页面，下载并安装 [Python](https://www.python.org/downloads/windows/)，下载 `3.10 版本`即可(这里我下载的是 3.10.9(64-bit)，如果你是 32 位操作系统，就下载 32 位版本)，但**不要**使用 3.11 版本及以上；实际上 3.8 版本以上就可以，但部分插件需要，因此 3.10 最为合适。
 
 ![image](https://user-images.githubusercontent.com/66541860/213637200-dca63b69-fd52-42d1-a3cd-f8b24f492186.png)
 
@@ -174,21 +175,29 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 例如：`SUPERUSER=["1234567890", "0987654321"]`，其它配置项类似。
 
+注意：脑积水使用了频道补丁，因此也可以处理频道信息，但频道的超管 ID 与 QQ 群的不同，需要额外配置。
+
 ⚠️ 下一步骤非常重要
 
 3、其它配置文件请参照 **env.else** 文件中的注释，或根据[《脑积水使用手册》](https://zhulinyv.github.io/NJS/)中具体插件仓库详细配置项说明在 **env.prod** 文件中配置。
 
 注意：配置项较多，只有少部分是必须的，可以按需配置。
 
+目前只有 ChatGPT, Apex, WoWs, 和风天气, Ai画图, 颜值评分, BingGPT 这几个必需 apikey。
+
+
 ### 8️⃣ 登录 脑积水
 
 1、在 NJS 目录中，输入 `poetry run nb run` 来运行脑积水。首次启动较慢，耐心等待。
 
-如果出现类似下图所示报错，是因为 hikari_bot 插件的 API_TOKEN 未配置造成的，可以直接**忽略**或根据步骤 8 的第 3 步中的说明获取。但这并**不影响**其它插件的使用，如果不需要这个插件，可以去 `NJS\src\plugins\hikari_bot` 目录中将 **_\_init__.py** 文件重命名为 **init__.py**。
+如果出现类似下图所示报错，是因为 hikari_bot 插件的 API_TOKEN 和 nonebot_plugin_bing_chat 的 cookies 未配置造成的，可以直接**忽略**或根据步骤 7 的第 3 步中的说明获取。但这并**不影响**其它插件的使用，如果不需要这个插件，可以去 `NJS\src\plugins\hikari_bot` 和 `NJS\src\plugins\nonebot_plugin_bing_chat` 目录中将 **_\_init__.py** 文件重命名为 **init__.py**。
 
 ![image](https://user-images.githubusercontent.com/66541860/213744555-c22c8289-3789-4281-9781-5e372c5c3017.png)
+![image](https://user-images.githubusercontent.com/66541860/227728475-d85df47f-5e48-4c90-97f9-282c0c57aaa4.png)
+![image](https://user-images.githubusercontent.com/66541860/227728502-4da142d3-e9db-4a90-b049-906fc6f2d434.png)
 
-2、启动后，浏览器访问链接 [http://127.0.0.1:13579/go-cqhttp](http://127.0.0.1:13579/go-cqhttp)，添加账号，手动输入账号，密码**不需要**输入，设备选择 iPad 或 Mac，如果你选择 Android，那么你的安卓手机上将无法登录，同理其它也是。
+
+2、启动后，浏览器访问链接 [http://127.0.0.1:13579/go-cqhttp](http://127.0.0.1:13579/go-cqhttp)，添加账号，手动输入账号，密码**不需要**输入，设备选择 aPad 或 iPad，如果你选择 Android，那么你的安卓手机上将无法登录，同理其它也是。
 
 ![image](https://user-images.githubusercontent.com/66541860/213741470-5392694c-1141-447c-89f9-4c77b60c6e88.png)
 
@@ -197,19 +206,35 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 ![image](https://user-images.githubusercontent.com/66541860/213741988-2faa1052-f52e-4d93-a94a-02af39569d8b.png)
 
 <details>
-<summary>4、如果服务器与手机不在同一网络下，<b>可能</b>会出现<b>无法登录</b>的情况，<b>如果</b>遇到，展开本条步骤查看解决办法。</summary>
+<summary>4、<b>如果</b>服务器与手机不在同一网络下，登录提示<b>复杂的网络环境</b>，展开本条步骤查看解决办法。</summary>
   <pre><p>
-  5、进入 `.\NJS\accounts\binary` 目录，复制 binary 目录下的 go-cqhttp.exe 文件到自己的电脑。
-  6、双击运行，在之后弹出的对话框中均点击确定。
+  1、进入 `.\NJS\accounts\binary` 目录，复制 binary 目录下的 go-cqhttp.exe(Linux 版没有扩展名) 文件到自己的电脑。
+  2、双击运行，在之后弹出的对话框中均点击确定(Linux 版无需此步骤)。
   <a><img src="https://user-images.githubusercontent.com/66541860/213905405-c1c39bf5-9e52-46ad-96d6-62a56d097bca.png"></a>
-  7、双击 go-cqhttp.bat 文件运行，输入 3 选择<b>反向 Websocket 通信</b>。
-  8、打开 config.yml 文件，将 uin 改为<b>机器人</b>的账号，最下方的 servers 部分改为如图所示内容保存。
+  3、运行 go-cqhttp.bat 文件(Linux 运行 go-cqhttp)，输入 3 选择<b>反向 Websocket 通信</b>。
+  <a><img src="https://user-images.githubusercontent.com/66541860/227727773-83cea251-478d-4022-b0a9-596084e044d3.png"></a>
+  4、打开 config.yml 文件，将 uin 改为<b>机器人</b>的账号，最下方的 universal 部分改为 <code>"ws://127.0.0.1:13579/onebot/v11/ws"</code>，保存。
   <a><img src="https://user-images.githubusercontent.com/66541860/213905588-344e85e4-0db6-4b44-b57c-a1f7ddb4824d.png"></a>
   <a><img src="https://user-images.githubusercontent.com/66541860/213905671-d6e63b62-39d7-4862-8923-ff4fdfa2db93.png"></a>
-  9、此时再次运行 go-cqhttp.bat 文件，使用手机扫码登录。
-  10、登录好后将 device.json 和 session.token 文件复制到 .\NJS\accounts\uin(机器人的QQ号) 目录即可。
+  5、此时再次运行 go-cqhttp.bat 文件(Linux 运行 go-cqhttp)，使用手机扫码登录。
+  6、登录好后将 device.json 和 session.token 文件复制到 .\NJS\accounts\uin(机器人的QQ号) 目录即可。
 </details>
 
+<details>
+<summary>5、<b>如果</b>服务器与手机在同一网络下，登录提示<b>账号被冻结</b>，展开本条步骤查看解决办法。</summary>
+  <pre><p>
+  1、更换登录协议重试(优先 aPad 或 iPad，其它协议可能导致部分信息无法处理)。
+  2、如果更换登录协议无法解决，进入 `.\NJS\accounts\binary` 目录，运行 binary 目录下的 go-cqhttp.exe(Linux 版没有扩展名)。
+  3、在弹出的对话框中均点击确定(Linux 版无需此步骤)，之后运行 go-cqhttp.bat(Linux 运行 go-cqhttp)，输入 3 选择<b>反向 Websocket 通信</b>。
+  <a><img src="https://user-images.githubusercontent.com/66541860/213905405-c1c39bf5-9e52-46ad-96d6-62a56d097bca.png"></a>
+  <a><img src="https://user-images.githubusercontent.com/66541860/227727773-83cea251-478d-4022-b0a9-596084e044d3.png"></a>
+  4、打开 config.yml 文件，将 uin 改为<b>机器人</b>的账号，password 填写机器人账号密码，最下方的 universal 部分改为 <code>"ws://127.0.0.1:13579/onebot/v11/ws"</code>，保存。
+  <a><img src="https://user-images.githubusercontent.com/66541860/227727909-476bbfbb-9801-4314-b05c-ea16c23356af.png"></a>
+  <a><img src="https://user-images.githubusercontent.com/66541860/213905671-d6e63b62-39d7-4862-8923-ff4fdfa2db93.png"></a>
+  5、此时再次运行 go-cqhttp.bat 文件(Linux 运行 go-cqhttp)，按照提示输入 1 自动获取 ticket，如开启了设备锁，输入 1 选择<b>短信验证</b>。
+  <a><img src="https://user-images.githubusercontent.com/66541860/227727962-943f121d-4d8d-4708-a3ae-d981670997a8.png"></a>
+  6、登录好后将 device.json 和 session.token 文件复制到 .\NJS\accounts\uin(机器人的QQ号) 目录即可。
+</details>
 
 ### 9️⃣ 使用 脑积水
 

@@ -69,7 +69,7 @@ async def handle_fanyi(matchgroup=RegexGroup()):
         result = resp.json()
         result = result["data"][0]
 
-    await fanyi.finish(result)
+    await fanyi.finish(result, at_sender=True)
 
     # 有道 免key翻译
     # params = {"q": in_mess, "from": ff, "to": tt}

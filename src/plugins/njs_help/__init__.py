@@ -23,7 +23,7 @@ except Exception:
 
 
 
-njs_help = on_command("njs", aliases={"NJS", "脑积水"}, priority=2, block=True)
+njs_help = on_command("njs", aliases={"NJS"}, priority=2, block=True)
 @njs_help.handle()
 async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
     number = msg.extract_plain_text().strip()

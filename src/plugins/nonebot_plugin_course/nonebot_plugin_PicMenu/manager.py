@@ -59,7 +59,9 @@ class DataManager(object):
             )
 
         for plugin in nonebot.plugin.get_loaded_plugins():
-            json_path = Path(Path.cwd() / 'menu_config' / 'menus' / f'{plugin.name}.json')
+            json_path = Path(
+                Path.cwd() / "data" / "menu_config" / "menus" / f"{plugin.name}.json"
+            )
             if json_path.exists():
                 try:
                     load_from_json(json_path)
@@ -139,8 +141,8 @@ class DataManager(object):
 
 class TemplateManager(object):
     def __init__(self):
-        self.template_container = {'default': DefaultTemplate}  # 模板装载对象
-        self.templates_path = Path.cwd() / 'menu_config' / 'template'  # 模板路径
+        self.template_container = {"default": DefaultTemplate}  # 模板装载对象
+        self.templates_path = Path.cwd() / "data" / "menu_config" / "template"  # 模板路径
         self.load_templates()
 
     def load_templates(self):  # 从文件加载模板
@@ -171,19 +173,21 @@ class MenuManager(object):  # 菜单总管理
 
     # 初始化文件结构
     def config_folder_make(self):
-        if not (self.cwd / 'menu_config').exists():
-            (self.cwd / 'menu_config').mkdir()
-        if not (self.cwd / 'menu_config' / 'fonts').exists():
-            (self.cwd / 'menu_config' / 'fonts').mkdir()
-        if not (self.cwd / 'menu_config' / 'templates').exists():
-            (self.cwd / 'menu_config' / 'templates').mkdir()
-        if not (self.cwd / 'menu_config' / 'menus').exists():
-            (self.cwd / 'menu_config' / 'menus').mkdir()
-        if not (self.cwd / 'menu_config' / 'config.json').exists():
-            with (self.cwd / 'menu_config' / 'config.json').open('w', encoding='utf-8') as fp:
-                fp.write(json.dumps({'default': 'font_path'}))
+        if not (self.cwd / "data" / "menu_config").exists():
+            (self.cwd / "data" / "menu_config").mkdir()
+        if not (self.cwd / "data" / "menu_config" / "fonts").exists():
+            (self.cwd / "data" / "menu_config" / "fonts").mkdir()
+        if not (self.cwd / "data" / "menu_config" / "templates").exists():
+            (self.cwd / "data" / "menu_config" / "templates").mkdir()
+        if not (self.cwd / "data" / "menu_config" / "menus").exists():
+            (self.cwd / "data" / "menu_config" / "menus").mkdir()
+        if not (self.cwd / "data" / "menu_config" / "config.json").exists():
+            with (self.cwd / "data" / "menu_config" / "config.json").open(
+                "w", encoding="utf-8"
+            ) as fp:
+                fp.write(json.dumps({"default": "font_path"}))
 
-    def generate_main_menu_image(self) -> Image:  # 生成主菜单图片
+    def generate_main_menu_image(self) -> Image.Image:  # 生成主菜单图片
         data = self.data_manager.get_main_menu_data()
         template = self.template_manager.select_template('default')
         return template().generate_main_menu(data)

@@ -78,7 +78,7 @@ class DefaultTemplate(PicTemplate):
 
     def load_resource(self):
         cwd = Path.cwd()
-        with (cwd / "menu_config" / "config.json").open("r", encoding="utf-8") as fp:
+        with (cwd / "data" / "menu_config" / "config.json").open("r", encoding="utf-8") as fp:
             config = json.loads(fp.read())
         self.using_font = config["default"]
 

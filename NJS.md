@@ -1611,6 +1611,26 @@ B站热搜
 </p></pre>
 </details>
 
+## 98.通用指令阻断 [https://github.com/KarisAya/nonebot_plugin_matcher_block](https://github.com/KarisAya/nonebot_plugin_matcher_block)
+<details>
+<summary><b>指令：</summary></b>
+<pre><p>
+添加阻断 指令 群
+在本群屏蔽 指令
+
+添加阻断 指令 冷却 300
+在本群把 指令 设置成每个用户 300 秒冷却。
+
+解除阻断 指令 群
+在本群取消屏蔽该指令。
+
+解除阻断 指令 冷却
+在本群取消该指令的冷却。
+
+查看阻断
+查看本群被阻断的指令。
+</p></pre>
+</details>
 
 # 联系我：
 QQ频道：[我的中心花园](https://pd.qq.com/s/8bkfowg3c)

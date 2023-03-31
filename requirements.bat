@@ -83,11 +83,9 @@ poetry run pip install multidict==6.0.2
 poetry run pip install nb-cli==0.6.7
 poetry run pip install nonebot-adapter-onebot==2.2.0
 poetry run pip install nonebot-adapter-qqguild==0.1.4
-poetry run pip install nonebot-bison==0.5.5
 poetry run pip install nonebot-plugin-apscheduler==0.2.0
 poetry run pip install nonebot-plugin-chatrecorder==0.2.1
 poetry run pip install nonebot-plugin-datastore==0.5.10
-poetry run pip install nonebot-plugin-easy-translate==0.1.3
 poetry run pip install nonebot-plugin-gocqhttp==0.6.8
 poetry run pip install nonebot-plugin-guild-patch==0.2.2
 poetry run pip install nonebot-plugin-htmlrender==0.2.0.1

@@ -1,89 +1,76 @@
 import re
-from typing import Union
 
-from nonebot import get_driver, on_command, on_fullmatch
-from nonebot.adapters.onebot.v11 import Message
-from nonebot.adapters.onebot.v11.message import MessageSegment
-from nonebot.adapters.onebot.v11.permission import GROUP_ADMIN
+from nonebot import get_driver
 from nonebot.matcher import Matcher
-from nonebot.params import CommandArg
+from nonebot.params import Depends
+from nonebot.plugin.on import on_startswith, on_fullmatch
+from nonebot.adapters.onebot.v11 import Event
+from nonebot.adapters.onebot.v11.message import MessageSegment
 from nonebot.permission import SUPERUSER
+from nonebot.adapters.onebot.v11.permission import GROUP_ADMIN
 
-from .img_tool import img2bytes
 from .manager import MenuManager
-from .metadata import __plugin_meta__ as __plugin_meta__
+from .img_tool import img2b64
+from .metadata import __plugin_meta__
+
 
 driver = get_driver()
-
-
-@driver.on_startup
+@driver.on_bot_connect
 async def _():
     if not menu_manager.data_manager.plugin_menu_data_list:
         menu_manager.load_plugin_info()
 
-
 menu_manager = MenuManager()
+menu = on_startswith('PicMenu菜单', priority=5)
+switch = on_fullmatch('PicMenu开关菜单', permission=SUPERUSER | GROUP_ADMIN, priority=5)
+
+
 menu_switch = True
-
-
-switch = on_fullmatch("PicMenu开关菜单", permission=SUPERUSER | GROUP_ADMIN, priority=5)
-
-
 @switch.handle()
-async def _(matcher: Matcher):
+async def _():
     global menu_switch
     menu_switch = not menu_switch
-
     if menu_switch:
-        await matcher.finish("菜单已开启")
+        await switch.finish(MessageSegment.text('菜单已开启'))
+    else:
+        await switch.finish(MessageSegment.text('菜单已关闭'))
 
-    await matcher.finish("菜单已关闭")
-
-
-async def menu_rule():
-    return menu_switch
-
-
-menu = on_command("PicMenu菜单", aliases={"PicMenu功能", "PicMenu帮助"}, rule=menu_rule, priority=5)
-
+async def check_switch(matcher: Matcher):
+    if not menu_switch:
+        matcher.skip()
 
 @menu.handle()
-async def _(matcher: Matcher, arg: Message = CommandArg()):
-    msg = arg.extract_plain_text().strip()
-
-    if not msg:  # 参数为空，主菜单
-        img = menu_manager.generate_main_menu_image()
-        await matcher.finish(MessageSegment.image(img2bytes(img)))
-
-    match_result = re.match(r"^(?P<name>.*?)( (?P<cmd>.*?))?$", msg)
-    if not match_result:
-        return
-
-    plugin_name: str = match_result["name"]
-    cmd: Union[str, None] = match_result["cmd"]
-
-    if cmd:  # 三级菜单
+async def _(event: Event, check=Depends(check_switch)):
+    msg = str(event.get_message())
+    if match_result := re.match(r'^菜单 (.*?) (.*?)$|^/菜单 (.*?) (.*?)$', msg):
+        result = [x for x in match_result.groups() if x is not None]
+        plugin_name = result[0]
+        cmd = result[1]
         temp = menu_manager.generate_func_details_image(plugin_name, cmd)
-
-        if not isinstance(temp, str):
-            await matcher.finish(MessageSegment.image(img2bytes(temp)))
-
-        if temp == "PluginIndexOutRange":
-            await matcher.finish("插件序号不存在")
-        if temp == "CannotMatchPlugin":
-            await matcher.finish("插件名过于模糊或不存在")
-        if temp == "PluginNoFuncData":
-            await matcher.finish("该插件无功能数据")
-        if temp == "CommandIndexOutRange":
-            await matcher.finish("命令序号不存在")
-        await matcher.finish("命令过于模糊或不存在")
-
-    else:  # 二级菜单
+        if isinstance(temp, str):
+            if temp == 'PluginIndexOutRange':
+                await menu.finish(MessageSegment.text('插件序号不存在'))
+            elif temp == 'CannotMatchPlugin':
+                await menu.finish(MessageSegment.text('插件名过于模糊或不存在'))
+            elif temp == 'PluginNoFuncData':
+                await menu.finish(MessageSegment.text('该插件无功能数据'))
+            elif temp == 'CommandIndexOutRange':
+                await menu.finish(MessageSegment.text('命令序号不存在'))
+            else:
+                await menu.finish(MessageSegment.text('命令过于模糊或不存在'))
+        else:
+            await menu.finish(MessageSegment.image('base64://' + img2b64(temp)))
+    elif match_result := re.match(r'^菜单 (.*)$|^/菜单 (.*)$', msg):
+        result = [x for x in match_result.groups() if x is not None]
+        plugin_name = result[0]
         temp = menu_manager.generate_plugin_menu_image(plugin_name)
-
-        if not isinstance(temp, str):
-            await matcher.finish(MessageSegment.image(img2bytes(temp)))
-
-        if temp == "PluginIndexOutRange":
-            await matcher.finish("插件序号不存在")
-        await matcher.finish("插件名过于模糊或不存在")
+        if isinstance(temp, str):
+            if temp == 'PluginIndexOutRange':
+                await menu.finish(MessageSegment.text('插件序号不存在'))
+            else:
+                await menu.finish(MessageSegment.text('插件名过于模糊或不存在'))
+        else:
+            await menu.finish(MessageSegment.image('base64://' + img2b64(temp)))
+    else:
+        img = menu_manager.generate_main_menu_image()
+        await menu.finish(MessageSegment.image('base64://' + img2b64(img)))

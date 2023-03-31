@@ -53,12 +53,12 @@ poetry run pip install gitdb==4.0.9
 poetry run pip install githubkit==0.9.6
 poetry run pip install GitPython==3.1.29
 poetry run pip install greenlet==1.1.3
-poetry run pip install h11==0.14.0
+poetry run pip install h11==0.12.0
 poetry run pip install h2==4.1.0
 poetry run pip install hpack==4.0.0
-poetry run pip install httpcore==0.16.3
+poetry run pip install httpcore==0.14.7
 poetry run pip install httptools==0.5.0
-poetry run pip install httpx==0.23.3
+poetry run pip install httpx==0.22.0
 poetry run pip install huggingface-hub==0.11.1
 poetry run pip install humanize==4.4.0
 poetry run pip install hyperframe==6.0.1

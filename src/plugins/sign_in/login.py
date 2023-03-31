@@ -3,7 +3,7 @@ from .write import write_file
 
 send = 0
 async def search(coint, qq, time):
-    file_name = 'coints.json'
+    file_name = './data/sign_in/coints.json'
     with open(file_name) as f:
         data_user = json.load(f)
     last_time = data_user[f'{qq}login']

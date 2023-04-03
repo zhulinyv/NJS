@@ -1,5 +1,6 @@
 import re
 import base64
+import nonebot
 from io import BytesIO
 
 from httpx import AsyncClient
@@ -10,9 +11,13 @@ from nonebot.adapters.onebot.v11 import MessageSegment
 
 from .utils import FaceRecognition
 
+try:
+    API_KEY: str = nonebot.get_driver().config.face_api_key
+    SECRET_KEY: str = nonebot.get_driver().config.face_secret_key
+except:
+    API_KEY: str = ""
+    SECRET_KEY: str = ""
 
-API_KEY = ""
-SECRET_KEY = ""
 face_val = on_command("颜值评分", priority=50, aliases={"beauty"})
 
 

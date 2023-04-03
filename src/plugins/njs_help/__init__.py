@@ -1,4 +1,4 @@
-import io
+﻿import io
 import os
 import nonebot
 from pathlib import Path
@@ -31,7 +31,7 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
         img = text2image(help_reply_body)
         output = io.BytesIO()
         img.save(output, format="png")
-        image = MessageSegment.image(output)
+        image = MessageSegment.image(Path(os.path.join(os.path.dirname(__file__), "resource")) / "njs_help.png")
         # 群聊转发
         if isinstance(event, GroupMessageEvent):
             msgs = []

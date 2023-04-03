@@ -483,7 +483,7 @@ code [语言] [-i] [inputText]
 </p></pre>
 </details>
 
-## 42.智能聊天  [nonebot_plugin_smart_reply](https://github.com/zhulinyv/nonebot_plugin_smart_reply)
+## 42.智能聊天  [nonebot_plugin_smart_reply](https://github.com/zhulinyv/NJS/blob/Bot/src/plugins/nonebot_plugin_smart_reply/NoneBot2%E7%BC%9D%E5%90%88%E6%80%AA%E5%9B%9E%E5%A4%8D%E6%8F%92%E4%BB%B6.md)
 <details>
 <summary><b>指令：</summary></b>
 <pre><p>

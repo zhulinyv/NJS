@@ -15,23 +15,39 @@ from loguru import logger
 
 try:
     ban_data_path: str = nonebot.get_driver().config.ban_data_path   # 记录 ban 冷却时间的路径
-    setu_flag: bool = nonebot.get_driver().config.setu_api           # 这个值为True时, 使用的是 MirlKoi 图片
-    api_num: int = nonebot.get_driver().config.api_num               # 这个值为1时, 使用的是小爱同学模式1
-    api_cd_time: int = nonebot.get_driver().config.api_cd_time       # api 冷却时间
-    ban_cd_time: int = nonebot.get_driver().config.ban_cd_time       # ban 冷却时间
-    api_key: str = nonebot.get_driver().config.openai_api_key        # Openai api key
-    max_tokens: int = nonebot.get_driver().config.openai_max_tokens  # 返回的最大文本
-    Bot_NICKNAME: str = nonebot.get_driver().config.bot_nickname     # bot的nickname,可以换成你自己的
-    Bot_MASTER: str = nonebot.get_driver().config.bot_master         # bot的主人名称,也可以换成你自己的
 except:
     ban_data_path: str = "./data/ban_CD"
+try:
+    setu_flag: bool = nonebot.get_driver().config.setu_api           # 这个值为True时, 使用的是 MirlKoi 图片
+except:
     setu_flag: bool = True
+try:
+    api_num: int = nonebot.get_driver().config.api_num               # 这个值为1时, 使用的是小爱同学模式1
+except:
     api_num: int = 1
+try:
+    api_cd_time: int = nonebot.get_driver().config.api_cd_time       # api 冷却时间
+except:
     api_cd_time: int = 120
+try:
+    ban_cd_time: int = nonebot.get_driver().config.ban_cd_time       # ban 冷却时间
+except:
     ban_cd_time: int = 21600
+try:
+    api_key: str = nonebot.get_driver().config.openai_api_key        # Openai api key
+except:
     api_key: str = "寄"
+try:
+    max_tokens: int = nonebot.get_driver().config.openai_max_tokens  # 返回的最大文本
+except:
     max_tokens: int = 2000
+try:
+    Bot_NICKNAME: str = nonebot.get_driver().config.bot_nickname     # bot的nickname,可以换成你自己的
+except:
     Bot_NICKNAME: str = "脑积水"
+try:
+    Bot_MASTER: str = nonebot.get_driver().config.bot_master         # bot的主人名称,也可以换成你自己的
+except:
     Bot_MASTER: str = "(๑•小丫头片子•๑)"
 
 """ban 使用的 json 工具"""

@@ -163,6 +163,8 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 备注：如果出现报错，不予理睬，这些是由于各个作者上传 PyPI 时填写的相同依赖不同版本导致的，但实际可以正常运行。
 
+备注：不推荐使用 `poetry install` 来安装，解决冲突会导致安装过程极慢。
+
 ![image](https://user-images.githubusercontent.com/66541860/213731127-e48e3962-f7be-4f24-85cd-de14cd861508.png)
 
 ### 7️⃣ 配置 脑积水
@@ -188,7 +190,7 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 ### 8️⃣ 登录 脑积水
 
-1、在 NJS 目录中，输入 `poetry run nb run` 来运行脑积水。首次启动较慢，耐心等待。
+1、在 NJS 目录中，输入 `poetry run nb run` 或 `poetry run python bot.py` 来运行脑积水。首次启动较慢，耐心等待。
 
 如果出现类似下图所示报错，是因为 hikari_bot 插件的 API_TOKEN 和 nonebot_plugin_bing_chat 的 cookies 未配置造成的，可以直接**忽略**或根据步骤 7 的第 3 步中的说明获取。但这并**不影响**其它插件的使用，如果不需要这个插件，可以去 `NJS\src\plugins\hikari_bot` 和 `NJS\src\plugins\nonebot_plugin_bing_chat` 目录中将 **_\_init__.py** 文件重命名为 **init__.py**。
 

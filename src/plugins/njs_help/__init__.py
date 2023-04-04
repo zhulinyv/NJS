@@ -35,14 +35,13 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
                 "file://" + (str(Path(__file__).parent / "resource" /"njs_help.html")),
                 wait_until="networkidle",
             )
-            pic = await page.screenshot(full_page=True, path="./src/plugins/njs_help/njs_help.png")
-        image = MessageSegment.image(pic)
+            pic = MessageSegment.image(await page.screenshot(full_page=True, path="./src/plugins/njs_help/njs_help.png"))
         # 群聊转发
         if isinstance(event, GroupMessageEvent):
             msgs = []
             message_list = []
             message_list.append(help_reply_head)
-            message_list.append(image)
+            message_list.append(pic)
             message_list.append(help_reply_foot)
             for msg in message_list:
                 msgs.append({
@@ -57,16 +56,19 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
         # 其它直接发送
         else:
             await njs_help.send(help_reply_head)
-            await njs_help.send(image)
+            await njs_help.send(pic)
             await njs_help.send(help_reply_foot)
     elif number.isdigit():
         try:
             await njs_help.finish('指令如下: \n' + help_reply[f"h{number}_r"], at_sender=True)
         except KeyError:
-            if number in ["1", "14", "58", "76"]:
-                help_image = Path(os.path.join(os.path.dirname(__file__), "resource")) / f"h{number}.jpg"
+            if number <= 98:
+                if number in ["1", "14", "58", "76"]:
+                    help_image = Path(os.path.join(os.path.dirname(__file__), "resource")) / f"h{number}.jpg"
+                else:
+                    help_image = Path(os.path.join(os.path.dirname(__file__), "resource")) / f"h{number}.png"
+                await njs_help.finish('指令如下: \n' + MessageSegment.image(help_image), at_sender=True)
             else:
-                help_image = Path(os.path.join(os.path.dirname(__file__), "resource")) / f"h{number}.png"
-            await njs_help.finish('指令如下: \n' + MessageSegment.image(help_image), at_sender=True)
+                await njs_help.finish('功能扩建中...', at_sender=True)
     else:
         await njs_help.finish('功能扩建中...', at_sender=True)

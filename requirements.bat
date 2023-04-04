@@ -35,7 +35,7 @@ poetry run pip install cycler==0.11.0
 poetry run pip install dateparser==1.1.1
 poetry run pip install dnspython==2.2.1
 poetry run pip install ecdsa==0.18.0
-poetry run pip install EdgeGPT==0.0.56.2
+poetry run pip install EdgeGPT==0.1.22
 poetry run pip install emoji==2.1.0
 poetry run pip install et-xmlfile==1.1.0
 poetry run pip install expandvars==0.9.0

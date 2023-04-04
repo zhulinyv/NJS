@@ -931,14 +931,14 @@ reference = "tsinghua"
 
 [[package]]
 name = "edgegpt"
-version = "0.0.56.2"
+version = "0.1.22"
 description = "Reverse engineered Edge Chat API"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "EdgeGPT-0.0.56.2-py3-none-any.whl", hash = "sha256:b42533897d1fd1bcd4b53056e39fbe911810edde447e75316824c65d0c3ce599"},
-    {file = "EdgeGPT-0.0.56.2.tar.gz", hash = "sha256:58a4bc7367fef69519c0d1d0eb91428cf2bd51df78de1c7515f5edaba50be704"},
+    {file = "EdgeGPT-0.1.22-py3-none-any.whl", hash = "sha256:b42533897d1fd1bcd4b53056e39fbe911810edde447e75316824c65d0c3ce599"},
+    {file = "EdgeGPT-0.1.22.tar.gz", hash = "sha256:58a4bc7367fef69519c0d1d0eb91428cf2bd51df78de1c7515f5edaba50be704"},
 ]
 
 [package.dependencies]

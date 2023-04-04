@@ -1,7 +1,3 @@
-import random
-from nonebot import on_command
-from nonebot.adapters.onebot.v11 import MessageSegment, Message, Event
-
 morning_reply = [
     "早喵~",
     "早上好的说~~",

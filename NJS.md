@@ -1151,7 +1151,7 @@ x支持：中（简中）、繁（繁中）、英、日、韩、法、俄、德
 </ul>
 </details>
 
-## 66.ChatGPT(OpenAI)对话(使用token) [nonebot-plugin-chatgpt](https://github.com/A-kirami/nonebot-plugin-chatgpt)
+## 66.ChatGPT(OpenAI)对话(使用token) [nonebot-plugin-chatgpt-plus](https://github.com/AkashiCoin/nonebot-plugin-chatgpt-plus)
 <details>
 <summary><b>指令：</summary></b>
 <pre><p>

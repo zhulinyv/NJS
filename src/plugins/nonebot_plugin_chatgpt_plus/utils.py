@@ -1,4 +1,6 @@
 from collections import defaultdict, deque
+import json
+from pathlib import Path
 from typing import (
     Any,
     AsyncGenerator,
@@ -16,10 +18,23 @@ from nonebot.adapters.onebot.v11 import GROUP, GroupMessageEvent, MessageEvent
 from nonebot.matcher import Matcher
 from nonebot.params import Depends
 from nonebot.rule import to_me
+from pydantic import root_validator
 
-from .config import config
 from .data import setting
+from .config import config
 
+
+def convert_seconds(seconds):
+    hours = seconds // 3600
+    minutes = (seconds % 3600) // 60
+    seconds = seconds % 60
+    
+    if hours > 0:
+        return f"{hours}小时{minutes}分钟{seconds}秒"
+    elif minutes > 0:
+        return f"{minutes}分钟{seconds}秒"
+    else:
+        return f"{seconds}秒"
 
 def cooldow_checker(cd_time: int) -> Any:
     cooldown = defaultdict(int)
@@ -37,6 +52,19 @@ def cooldow_checker(cd_time: int) -> Any:
 
     return Depends(check_cooldown)
 
+lockers = defaultdict(bool)
+def single_run_locker() -> Any:
+    async def check_running(
+        matcher: Matcher, event: MessageEvent
+    ) -> AsyncGenerator[None, None]:
+        lockers[event.user_id] = lockers[event.user_id]
+        if lockers[event.user_id]:
+            await matcher.finish(
+                f"我知道你很急，但你先别急", reply_message=True
+            )
+        yield
+
+    return Depends(check_running)
 
 def create_matcher(
     command: Union[str, List[str]],
@@ -67,9 +95,17 @@ def create_matcher(
 
 
 class Session(dict):
+    __file_path: Path = config.chatgpt_data / "sessions.json"
+
+    @property
+    def file_path(self) -> Path:
+        return self.__class__.__file_path
+
     def __init__(self, scope: Literal["private", "public"]) -> None:
         super().__init__()
         self.is_private = scope == "private"
+        if self.__file_path.is_file():
+            self.update(json.loads(self.__file_path.read_text("utf-8")))
 
     def __getitem__(self, event: MessageEvent) -> Dict[str, Any]:
         return super().__getitem__(self.id(event))
@@ -84,25 +120,28 @@ class Session(dict):
         else:
             conversation_id = value["conversation_id"]
             parent_id = value["parent_id"]
-        if self[event]:
+        if self.__getitem__(event):
             if isinstance(value, tuple):
-                self[event]["conversation_id"].append(conversation_id)
-                self[event]["parent_id"].append(parent_id)
+                self.__getitem__(event)["conversation_id"].append(conversation_id)
+                self.__getitem__(event)["parent_id"].append(parent_id)
+                if self.count(event) > config.chatgpt_max_rollback:
+                    self[event]["conversation_id"] = self[event]["conversation_id"][-config.chatgpt_max_rollback:]
+                    self[event]["parent_id"] = self[event]["parent_id"][-config.chatgpt_max_rollback:]
         else:
             super().__setitem__(
                 self.id(event),
                 {
-                    "conversation_id": deque(
-                        [conversation_id], maxlen=config.chatgpt_max_rollback
-                    ),
-                    "parent_id": deque([parent_id], maxlen=config.chatgpt_max_rollback),
+                    # "conversation_id": deque(
+                    #     [conversation_id], maxlen=config.chatgpt_max_rollback
+                    # ),
+                    # "parent_id": deque([parent_id], maxlen=config.chatgpt_max_rollback),
+                    "conversation_id": [conversation_id],
+                    "parent_id": [parent_id],
                 },
             )
 
     def __delitem__(self, event: MessageEvent) -> None:
-        sid = self.id(event)
-        if sid in self:
-            super().__delitem__(sid)
+        return super().__delitem__(self.id(event))
 
     def __missing__(self, _) -> Dict[str, Any]:
         return {}
@@ -123,15 +162,19 @@ class Session(dict):
             "parent_id": self[event]["parent_id"][-1],
         }
         setting.save()
+        self.save_sessions()
+
+    def save_sessions(self) -> None:
+        self.file_path.write_text(json.dumps(self), encoding="utf-8")
 
     def find(self, event: MessageEvent) -> Dict[str, Any]:
         sid = self.id(event)
         return setting.session[sid]
 
-    def count(self, event: MessageEvent) -> int:
+    def count(self, event: MessageEvent):
         return len(self[event]["conversation_id"])
 
-    def pop(self, event: MessageEvent) -> Tuple[str, str]:
+    def pop(self, event: MessageEvent):
         conversation_id = self[event]["conversation_id"].pop()
         parent_id = self[event]["parent_id"].pop()
         return conversation_id, parent_id

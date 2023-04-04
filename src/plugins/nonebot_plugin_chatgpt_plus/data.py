@@ -14,6 +14,7 @@ except ModuleNotFoundError:
 class Setting(BaseModel):
     session: Dict[str, Dict[str, Any]] = Field(default_factory=dict)
     token: str = ""
+    puid: str = ""
 
     __file_path: Path = config.chatgpt_data / "setting.json"
 

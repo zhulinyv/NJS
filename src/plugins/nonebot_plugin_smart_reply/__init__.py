@@ -200,23 +200,24 @@ async def _(event: MessageEvent, state: T_State):
             if (cd>api_cd_time or event.get_user_id() in nonebot.get_driver().config.superusers):  # 超过cd时间或者是超级用户
                 openai_cd_dir.update({qid: event.time}) # 记录cd
                 if api_num == 3:
-                    #----------------------------从 ChatGPT 获取信息-------------------------#
-                    if not chat_bot.content:                                                #
-                        await chat_bot.playwright_start()                                   #
-                    if start := _command_start(state):                                      #
-                        text = text[len(start) :]                                           #
-                    try:                                                                    #
-                        session_id = event.get_session_id()                                 #
-                        msg = await chat_bot(**session[session_id]).get_chat_response(msg)  #
-                        session[session_id]["conversation_id"] = chat_bot.conversation_id   #
-                        session[session_id]["parent_id"] = chat_bot.parent_id               #
-                    except Exception as e:                                                  #
-                        error = f"{type(e).__name__}: {e}"                                  #
-                        logger.opt(exception=e).error(f"ChatGPT request failed: {error}")   #
-                        await ai.finish(                                                    #
-                            f"请求 ChatGPT 服务器时出现问题: \n{error}",at_sender=True)       #
-                    await ai.finish(message = msg, at_sender=True)                          #
-                    #-----------------------------------------------------------------------#
+                    #----------------------------从 ChatGPT 获取信息---------------------------#
+                    # if not chat_bot.content:                                                #
+                    #     await chat_bot.playwright_start()                                   #
+                    # if start := _command_start(state):                                      #
+                    #     text = text[len(start) :]                                           #
+                    # try:                                                                    #
+                    #     session_id = event.get_session_id()                                 #
+                    #     msg = await chat_bot(**session[session_id]).get_chat_response(msg)  #
+                    #     session[session_id]["conversation_id"] = chat_bot.conversation_id   #
+                    #     session[session_id]["parent_id"] = chat_bot.parent_id               #
+                    # except Exception as e:                                                  #
+                    #     error = f"{type(e).__name__}: {e}"                                  #
+                    #     logger.opt(exception=e).error(f"ChatGPT request failed: {error}")   #
+                    #     await ai.finish(                                                    #
+                    #         f"请求 ChatGPT 服务器时出现问题: \n{error}",at_sender=True)       #
+                    # await ai.finish(message = msg, at_sender=True)                          #
+                    #-------------------------------------------------------------------------#
+                    await ai.finish("ChatGPT 模式 1 维护中...", at_sender=True)
                 elif api_num == 4:
                     if api_key == "寄":                             
                         await ai.finish("请先配置openai_api_key")

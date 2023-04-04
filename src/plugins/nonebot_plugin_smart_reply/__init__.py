@@ -23,21 +23,21 @@ from nonebot.adapters.onebot.v11 import (
 from loguru import logger
 # 从 utils 中导入一堆东西
 from .utils import *
-#-------------------ChatGPT-----------------------#
-from .chatgpt import Chatbot                      #
-from .config import config                        #
-chat_bot = Chatbot(                               #
-    token=config.chatgpt_session_token,           #
-    account=config.chatgpt_account,               #
-    password=config.chatgpt_password,             #
-    api=config.chatgpt_api,                       #
-    timeout=config.chatgpt_timeout,               #
-)                                                 #
-session = defaultdict(dict)                       #
-from nonebot import require                       #
-require("nonebot_plugin_apscheduler")             #
-from nonebot_plugin_apscheduler import scheduler  #
-#-------------------------------------------------#
+#-------------------ChatGPT-------------------------#
+# from .chatgpt import Chatbot                      #
+# from .config import config                        #
+# chat_bot = Chatbot(                               #
+#     token=config.chatgpt_session_token,           #
+#     account=config.chatgpt_account,               #
+#     password=config.chatgpt_password,             #
+#     api=config.chatgpt_api,                       #
+#     timeout=config.chatgpt_timeout,               #
+# )                                                 #
+# session = defaultdict(dict)                       #
+# from nonebot import require                       #
+# require("nonebot_plugin_apscheduler")             #
+# from nonebot_plugin_apscheduler import scheduler  #
+#---------------------------------------------------#
 logger.info(logo) # 在日志中输出打印logo
 
 

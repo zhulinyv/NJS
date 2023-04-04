@@ -151,9 +151,11 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 上方链接是镜像源地址，如有需要，可将 `https://ghproxy.com/` 删除来直接通过 GitHub 克隆本仓库。
 
-2、克隆过程较慢，耐心等待，大概会有 4GB 大小。
+2、仓库较大，克隆过程较慢，耐心等待，大概会有 4GB 大小。
 
 ![image](https://user-images.githubusercontent.com/66541860/213651257-3f3bcb25-329f-4d8b-982a-591494e4513b.png)
+
+备注：若出现克隆失败的情况，多半是由于仓库太大造成的，如果遇到可以尝试使用 GitHub 源克隆或直接下载 Zip 文件。
 
 ### 6️⃣ 安装 Poetry 和依赖
 

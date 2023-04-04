@@ -151,7 +151,7 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 上方链接是镜像源地址，如有需要，可将 `https://ghproxy.com/` 删除来直接通过 GitHub 克隆本仓库。
 
-2、克隆过程较慢，耐心等待，大概会有 2GB 大小。
+2、克隆过程较慢，耐心等待，大概会有 4GB 大小。
 
 ![image](https://user-images.githubusercontent.com/66541860/213651257-3f3bcb25-329f-4d8b-982a-591494e4513b.png)
 

@@ -234,6 +234,7 @@ async def _(event: MessageEvent, state: T_State):
 
 
 """------------------------------ChatGPT刷新会话------------------------------"""
+"""
 @refresh.handle()
 async def refresh_conversation(event: MessageEvent) -> None:
     session_id = event.get_session_id()
@@ -243,6 +244,7 @@ async def refresh_conversation(event: MessageEvent) -> None:
 @scheduler.scheduled_job("interval", minutes=config.chatgpt_refresh_interval)
 async def refresh_session() -> None:
     await chat_bot.refresh_session()
+"""
 
 
 

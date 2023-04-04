@@ -1,10 +1,9 @@
-﻿import io
-import os
+﻿import os
 import nonebot
 from pathlib import Path
+from nonebot import require
 from nonebot import on_command
 from nonebot.params import CommandArg
-# from nonebot_plugin_imageutils import text2image
 from nonebot.adapters.onebot.v11 import (
     Bot,
     Event,
@@ -12,6 +11,9 @@ from nonebot.adapters.onebot.v11 import (
     MessageSegment,
     GroupMessageEvent,
     )
+
+require("nonebot_plugin_htmlrender")
+from nonebot_plugin_htmlrender import get_new_page
 
 from .utils import *
 
@@ -27,13 +29,14 @@ njs_help = on_command("njs", aliases={"NJS"}, priority=2, block=True)
 async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
     number = msg.extract_plain_text().strip()
     if number in ["帮助", "菜单", "列表", "help", "Help" ,"HELP"]:
-        '''
-        # 转为图片发送
-        img = text2image(help_reply_body)
-        output = io.BytesIO()
-        img.save(output, format="png")
-        '''
-        image = MessageSegment.image(Path(os.path.join(os.path.dirname(__file__), "resource")) / "njs_help.png")
+        # 制作图片发送
+        async with get_new_page(viewport={"width": 300, "height": 300}) as page:
+            await page.goto(
+                "file://" + (str(Path(__file__).parent / "resource" /"njs_help.html")),
+                wait_until="networkidle",
+            )
+            pic = await page.screenshot(full_page=True, path="./src/plugins/njs_help/njs_help.png")
+        image = MessageSegment.image(pic)
         # 群聊转发
         if isinstance(event, GroupMessageEvent):
             msgs = []

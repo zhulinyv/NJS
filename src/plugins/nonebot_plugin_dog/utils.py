@@ -42,6 +42,11 @@ try:
     wenan_cd = nonebot.get_driver().config.wenan_cd       # 从配置文件中读取cd_time
 except:
     wenan_cd = 20      		# cd默认值
+
+try:
+    love_cd = nonebot.get_driver().config.love_cd
+except:
+    love_cd = 20
 '''
 try:
     music_cd = nonebot.get_driver().config.music_cd       # 从配置文件中读取cd_time
@@ -53,9 +58,11 @@ dog_CD_dir = {}  # 记录舔狗日记cd的字典
 laugh_CD_dir = {}  # 记录讲个笑话cd的字典
 hitokoto_CD_dir = {}  # 记录一言cd的字典
 wenan_CD_dir = {}  # 记录文案cd的字典
+love_CD_dir = {}  # 记录情话cd的字典
 #music_CD_dir = {}  # 记录点歌cd的字典
 notAllow = "群内还未开启文案功能, 请管理员或群主发送\"开启文案\", \"关闭文案\"以开启/关闭该功能"
 
+current_version = '0.2.7'
 
 __usage__ = """指令1：/舔狗日记
 指令2：/讲个笑话

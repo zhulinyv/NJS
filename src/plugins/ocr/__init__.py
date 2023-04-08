@@ -1,5 +1,6 @@
 import io
 import httpx
+import asyncio
 import urllib.request
 from nonebot import on_command
 from nonebot.adapters.onebot.v11 import MessageEvent
@@ -29,7 +30,8 @@ async def get_pic(event: MessageEvent):
         response = await client.get(pic_url, timeout=10)
         with open('./src/plugins/ocr/ocr.jpg', 'wb') as f:
             f.write(response.content)
-        result = ocr_local()
+        loop = asyncio.get_event_loop()
+        result = await loop.run_in_executor(None, ocr_local)
     await local_ocr.finish(f"识别结果: \n{result}", at_sender=True)
 
 
@@ -52,5 +54,6 @@ async def get_pic(event: MessageEvent):
             pic_url = seg.data["url"]
     response = urllib.request.urlopen(pic_url)
     img = io.BytesIO(response.read())
-    result = api_paddle_ocr(img=img)
+    loop = asyncio.get_event_loop()
+    result = await loop.run_in_executor(None, api_paddle_ocr, img)
     await api_ocr.finish(f"识别结果: \n{result}", at_sender=True)

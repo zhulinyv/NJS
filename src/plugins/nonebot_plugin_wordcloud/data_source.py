@@ -1,4 +1,8 @@
+import asyncio
+import concurrent.futures
 import re
+from functools import partial
+from io import BytesIO
 from typing import Dict, List, Optional
 
 import jieba
@@ -8,7 +12,7 @@ from emoji import replace_emoji
 from PIL import Image
 from wordcloud import WordCloud
 
-from .config import MASK_PATH, global_config, plugin_config
+from .config import global_config, plugin_config
 
 
 def pre_precess(msg: str) -> str:
@@ -48,13 +52,18 @@ def analyse_message(msg: str) -> Dict[str, float]:
     return {word: weight for word, weight in words}
 
 
-def get_mask():
+def get_mask(key: str):
     """获取 mask"""
-    if MASK_PATH.exists():
-        return np.array(Image.open(MASK_PATH))
+    mask_path = plugin_config.get_mask_path(key)
+    if mask_path.exists():
+        return np.array(Image.open(mask_path))
+    # 如果指定 mask 文件不存在，则尝试默认 mask
+    default_mask_path = plugin_config.get_mask_path()
+    if default_mask_path.exists():
+        return np.array(Image.open(default_mask_path))
 
 
-def get_wordcloud(messages: List[str]) -> Optional[Image.Image]:
+def _get_wordcloud(messages: List[str], mask_key: str) -> Optional[BytesIO]:
     # 过滤掉命令
     command_start = tuple([i for i in global_config.command_start if i])
     message = " ".join([m for m in messages if not m.startswith(command_start)])
@@ -62,16 +71,29 @@ def get_wordcloud(messages: List[str]) -> Optional[Image.Image]:
     message = pre_precess(message)
     # 分析消息。分词，并统计词频
     frequency = analyse_message(message)
+    # 词云参数
+    wordcloud_options = {}
+    wordcloud_options.update(plugin_config.wordcloud_options)
+    wordcloud_options.setdefault("font_path", str(plugin_config.wordcloud_font_path))
+    wordcloud_options.setdefault("width", plugin_config.wordcloud_width)
+    wordcloud_options.setdefault("height", plugin_config.wordcloud_height)
+    wordcloud_options.setdefault(
+        "background_color", plugin_config.wordcloud_background_color
+    )
+    wordcloud_options.setdefault("colormap", plugin_config.wordcloud_colormap)
+    wordcloud_options.setdefault("mask", get_mask(mask_key))
     try:
-        wordcloud = WordCloud(
-            font_path=str(plugin_config.wordcloud_font_path),
-            width=plugin_config.wordcloud_width,
-            height=plugin_config.wordcloud_height,
-            background_color=plugin_config.wordcloud_background_color,
-            colormap=plugin_config.wordcloud_colormap,
-            mask=get_mask(),
-        )
+        wordcloud = WordCloud(**wordcloud_options)
         image = wordcloud.generate_from_frequencies(frequency).to_image()
-        return image
+        image_bytes = BytesIO()
+        image.save(image_bytes, format="PNG")
+        return image_bytes
     except ValueError:
         pass
+
+
+async def get_wordcloud(messages: List[str], mask_key: str) -> Optional[BytesIO]:
+    loop = asyncio.get_running_loop()
+    pfunc = partial(_get_wordcloud, messages, mask_key)
+    with concurrent.futures.ThreadPoolExecutor() as pool:
+        return await loop.run_in_executor(pool, pfunc)

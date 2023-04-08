@@ -1,5 +1,6 @@
 from nonebot import on_command, require
 from nonebot.adapters.onebot.v11 import (
+    Bot,
     GroupMessageEvent,
     Message,
     MessageEvent,
@@ -42,7 +43,10 @@ __plugin_meta__ = PluginMetadata(
 查看会话/查看对话	查看已保存的所有会话
 切换会话/切换对话 + 会话名称	切换到指定的会话
 回滚会话/回滚对话	返回到之前的会话，输入数字可以返回多个会话，但不可以超过最大支持数量
+人格设定/设置人格 + 名称 使用人格预设
 清空会话/清空对话   清空所有会话（超级用户）
+查看人格/查询人格   查看已有的人格预设（超级用户）
+人格设定/设置人格 + 名称 + 人格信息 编辑人格信息（超级用户）
 刷新token   强制刷新token（超级用户）""",
         "author": "A-kirami",
         "version": "0.8.1",
@@ -68,7 +72,7 @@ chat_bot = Chatbot(
     password=config.chatgpt_password,
     api=config.chatgpt_api,
     proxies=config.chatgpt_proxies,
-    preset=config.chatgpt_preset,
+    presets=setting.presets,
     timeout=config.chatgpt_timeout,
 )
 
@@ -100,6 +104,8 @@ async def ai_chat(event: MessageEvent, state: T_State) -> None:
         text = text[len(start) :]
     has_title = True
     played_name = config.chatgpt_default_preset
+    if not chat_bot.presets.get(played_name):
+        played_name = ""
     cvst = session[event]
     if cvst:
         if not cvst['conversation_id'][-1]:
@@ -107,7 +113,7 @@ async def ai_chat(event: MessageEvent, state: T_State) -> None:
     else:
         has_title = False
     if not has_title:
-        for name in chat_bot.preset:
+        for name in chat_bot.presets.keys():
             if text.find(name) > -1:
                 played_name = name
     try:
@@ -235,6 +241,7 @@ async def switch_conversation(event: MessageEvent, arg: Message = CommandArg()) 
 
 refresh = on_command("刷新token", block=True, rule=to_me(), permission=SUPERUSER, priority=1)
 
+
 @refresh.handle()
 @scheduler.scheduled_job("interval", minutes=config.chatgpt_refresh_interval)
 async def refresh_session() -> None:
@@ -251,6 +258,7 @@ async def refresh_session() -> None:
     )
 
 clear = on_command("清空对话", aliases={"清空会话"}, block=True, rule=to_me(), permission=SUPERUSER, priority=1)
+
 
 @clear.handle()
 async def clear_session() -> None:
@@ -280,3 +288,47 @@ async def rollback_conversation(event: MessageEvent, arg: Message = CommandArg()
         await rollback.finish(
             f"请输入有效的数字，最大回滚数为{config.chatgpt_max_rollback}", reply_message=True
         )
+
+set_preset = on_command("人格设定", aliases={"设置人格"}, block=True, rule=to_me(), priority=1)
+
+
+@set_preset.handle()
+async def set_preset_(bot: Bot, event: MessageEvent, arg: Message = CommandArg()):
+    args = arg.extract_plain_text().strip().split()
+    if not args:
+        await set_preset.finish("至少需要提供人格名称", reply_message=True)
+    if len(args) >= 2:
+        if event.get_user_id() not in bot.config.superusers:
+            await set_preset.finish("权限不足", reply_message=True)
+        else:
+            setting.presets[args[0]] = '\n'.join(args[1:])
+            await set_preset.finish("人格设定修改成功: " + args[0], reply_message=True)
+    else:
+        if session[event]:
+            if session[event]['conversation_id'][-1]:
+                await set_preset.finish("已存在会话，请刷新会话后设定。", reply_message=True)
+        try:
+            msg = await chat_bot(**session[event], played_name=args[0]).get_chat_response(args[0])
+            session[event] = chat_bot.conversation_id, chat_bot.parent_id
+        except Exception as e:
+            error = f"{type(e).__name__}: {e}"
+            logger.opt(exception=e).error(f"ChatGPT request failed: {error}")
+            await set_preset.finish(
+                f"请求 ChatGPT 服务器时出现问题，请稍后再试\n错误信息: {error}", reply_message=True
+            )
+        await set_preset.finish(msg, reply_message=True)
+
+query = on_command("查看人格", aliases={"查询人格"}, block=True, rule=to_me(), permission=SUPERUSER, priority=1)
+
+
+@query.handle()
+async def query_preset(event: MessageEvent, arg: Message = CommandArg()):
+    preset = arg.extract_plain_text().strip()
+    if not preset:
+        msg = "人格如下：\n"
+        msg += "、".join(setting.presets.keys())
+        await query.finish(msg, reply_message=True)
+    if setting.presets.get(preset):
+        await query.finish(f"名称：{preset}\n人格设定：{setting.presets.get(preset)}", reply_message=True)
+    else:
+        await query.finish("人格设定不存在", reply_message=True)

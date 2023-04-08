@@ -4,7 +4,7 @@ from nonebot import get_driver
 from .logger import logger
 from .scheduler import scheduler
 
-__version__ = '1.6.2'
+__version__ = '1.7.2'
 
 DRIVER = get_driver()
 try:

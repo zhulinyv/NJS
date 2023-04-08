@@ -1632,6 +1632,15 @@ B站热搜
 </p></pre>
 </details>
 
+## 99.OCR文本识别
+<details>
+<summary><b>指令：</summary></b>
+<pre><p>
+ocr
+apiocr
+</p></pre>
+</details>
+
 # 联系我：
 QQ频道：[我的中心花园](https://pd.qq.com/s/8bkfowg3c)
 仓库Issues：[Issues](https://github.com/zhulinyv/NJS/issues)

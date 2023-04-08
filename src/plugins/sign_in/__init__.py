@@ -1,13 +1,12 @@
-from nonebot import on_regex
 from nonebot.adapters.onebot.v11 import MessageEvent, Message, MessageSegment
 from .read import notice2, read_data
+from nonebot import on_regex
 from .login import notice
 import time
 import json
 import httpx
 import random
 import asyncio
-import requests
 
 
 
@@ -36,14 +35,14 @@ async def lj(event: MessageEvent):
     money = data_user[f'{qq_id}']
     level_msg = level_up(money)
     try:
-        # 一言部分
-        url = 'https://api.juncikeji.xyz/api/mryy.php'
-        get_data = requests.get(url=url, timeout=20, verify=False)
-        get_txt = get_data.text
-    except Exception:
-        get_txt = ""
+        # 使用 httpx.AsyncClient 获取 API，存储为 response 变量
+        async with httpx.AsyncClient() as client:
+            response = await client.get("https://api.gmit.vip/Api/YiYan?format=text")
+            response_text = response.text
+    except Exception as error:
+        response_text = str(error)
     # 整合信息
-    msg = f"\n{lovelive_send}\n{level_msg}\n\n{get_txt}"
+    msg = f"\n{lovelive_send}\n{level_msg}\n\n{response_text}"
     # 图片
     res = httpx.get(url='https://dev.iw233.cn/api.php?sort=pc&type=json', headers={'Referer':'http://www.weibo.com/'})
     res = res.text

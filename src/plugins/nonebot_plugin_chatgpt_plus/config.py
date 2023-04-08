@@ -28,7 +28,5 @@ class Config(BaseModel, extra=Extra.ignore):
     chatgpt_data: Path = Path(__file__).parent
     chatgpt_max_rollback: int = 8
     chatgpt_default_preset: str = ""
-    chatgpt_preset: dict = {}
 
 config = Config.parse_obj(get_driver().config)
-config.chatgpt_default_preset = config.chatgpt_default_preset if config.chatgpt_default_preset in config.chatgpt_preset else None

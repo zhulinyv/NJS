@@ -3,9 +3,9 @@ import json
 from copy import deepcopy
 from typing import Dict, Iterator, List, TypeVar, Union
 
-from PIL import Image, ImageOps
 from aiohttp import ClientSession
 from nonebot.adapters.onebot.v11 import Message
+from PIL import Image, ImageOps
 
 from .config import config
 
@@ -60,7 +60,7 @@ async def async_req(
     is_json=True,
     raw=False,
     ignore_cache=False,
-    proxy=config.baproxy,
+    proxy=config.ba_proxy,
     method="GET",
     session: ClientSession = None,
     **kwargs,

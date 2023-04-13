@@ -10,10 +10,11 @@ from bs4 import BeautifulSoup, ResultSet, Tag
 from nonebot import logger
 from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot_plugin_htmlrender import get_new_page
-from nonebot_plugin_imageutils import BuildImage, text2image
-from playwright.async_api import Page
+from PIL import Image
+from pil_utils import BuildImage, text2image
 
-from .const import RES_CALENDER_BANNER
+from .config import config
+from .resource import RES_CALENDER_BANNER, RES_GRADIENT_BG
 from .util import async_req, parse_time_delta
 
 
@@ -27,7 +28,7 @@ async def game_kee_request(url, **kwargs) -> Union[List, Dict[str, Any]]:
 
 
 async def game_kee_get_calender():
-    ret: List = await game_kee_request("https://ba.gamekee.com/v1/wiki/index")
+    ret: List = await game_kee_request(f"{config.ba_gamekee_url}v1/wiki/index")
 
     for i in ret:
         if i["module"]["id"] == 12:
@@ -36,17 +37,17 @@ async def game_kee_get_calender():
             now = time.time()
             li = [x for x in li if (now < x["end_at"])]
 
-            li.sort(key=lambda x: x["end_at"])
+            li.sort(key=lambda x: x["begin_at"] if now < x["begin_at"] else x["end_at"])
+            li.sort(key=lambda x: now < x["begin_at"])
             li.sort(key=lambda x: x["importance"], reverse=True)
             return li
 
 
 async def game_kee_get_stu_li():
-    ret = await game_kee_request("https://ba.gamekee.com/v1/wiki/entry")
+    ret = await game_kee_request(f"{config.ba_gamekee_url}v1/wiki/entry")
 
     for i in ret["entry_list"]:
         if i["id"] == 23941:
-
             for ii in i["child"]:
                 if ii["id"] == 49443:
                     return {x["name"]: x for x in ii["child"]}
@@ -57,7 +58,7 @@ async def game_kee_get_stu_cid_li():
 
 
 def game_kee_page_url(sid):
-    return f"https://ba.gamekee.com/{sid}.html"
+    return f"{config.ba_gamekee_url}{sid}.html"
 
 
 async def game_kee_get_page(url):
@@ -78,6 +79,11 @@ async def game_kee_get_page(url):
             except:
                 pass
 
+        # 隐藏 header 和 footer
+        js_str = "(obj) => { obj.style.display = 'none' }"
+        await page.eval_on_selector(".wiki-header", js_str)
+        await page.eval_on_selector(".wiki-footer", js_str)
+
         return await (
             await page.query_selector('xpath=//div[@class="wiki-detail-body"]')
         ).screenshot()
@@ -92,12 +98,12 @@ async def game_kee_calender():
     return MessageSegment.image(pic)
 
 
-async def game_kee_get_calender_page(ret):
+async def game_kee_get_calender_page(ret, has_pic=True):
     now = datetime.now()
 
     async def draw(it: dict):
         _p = None
-        if _p := it.get("picture"):
+        if has_pic and (_p := it.get("picture")):
             try:
                 _p = (
                     BuildImage.open(BytesIO(await async_req(f"https:{_p}", raw=True)))
@@ -112,6 +118,8 @@ async def game_kee_get_calender_page(ret):
         started = begin <= now
         time_remain = (end if started else begin) - now
         dd, hh, mm, ss = parse_time_delta(time_remain)
+
+        # logger.debug(f'{it["title"]} | {started} | {time_remain}')
 
         title_p = text2image(
             f'[b]{it["title"]}[/b]', "#ffffff00", max_width=1290, fontsize=65
@@ -152,7 +160,7 @@ async def game_kee_get_calender_page(ret):
 
         if not started:
             img.draw_rectangle((1250, 0, 1400, 60), "gray")
-            img.draw_text((1250, 0, 1400, 60), "未开始", 50, fill="white")
+            img.draw_text((1250, 0, 1400, 60), "未开始", max_fontsize=50, fill="white")
 
         ii = 50
         img.paste(title_p, (60, ii), True)
@@ -173,30 +181,36 @@ async def game_kee_get_calender_page(ret):
     pics: List[BuildImage] = await asyncio.gather(  # type: ignore
         *[draw(x) for x in ret]
     )
+
+    bg_w = 1500
+    bg_h = 200 + sum([x.height + 50 for x in pics])
     bg = (
-        BuildImage.new("RGBA", (1500, 200 + sum([x.height + 50 for x in pics])))
-        .gradient_color((138, 213, 244), (251, 226, 229))
-        .paste(BuildImage.open(RES_CALENDER_BANNER).resize((1500, 150)))
+        BuildImage.new("RGBA", (bg_w, bg_h))
+        .paste(RES_CALENDER_BANNER.copy().resize((1500, 150)))
         .draw_text(
             (50, 0, 1480, 150),
             "GameKee丨活动日程",
-            100,
+            max_fontsize=100,
             weight="bold",
             fill="#ffffff",
             halign="left",
+        )
+        .paste(
+            RES_GRADIENT_BG.copy().resize((1500, bg_h - 150), resample=Image.NEAREST),
+            (0, 150),
         )
     )
 
     index = 200
     for p in pics:
-        bg.paste(p, (50, index), True)
+        bg.paste(p.circle_corner(10), (50, index), True)
         index += p.height + 50
 
     return bg.save_jpg()
 
 
 async def game_kee_grab_l2d(cid):
-    r: dict = await game_kee_request(f"https://ba.gamekee.com/v1/content/detail/{cid}")
+    r: dict = await game_kee_request(f"{config.ba_gamekee_url}v1/content/detail/{cid}")
     r: str = r["content"]
 
     i = r.find('<div class="input-wrapper">官方介绍</div>')
@@ -220,7 +234,7 @@ class GameKeeVoice:
 
 async def game_kee_get_voice(cid) -> List[GameKeeVoice]:
     wiki_html = (
-        await game_kee_request(f"https://ba.gamekee.com/v1/content/detail/{cid}")
+        await game_kee_request(f"{config.ba_gamekee_url}v1/content/detail/{cid}")
     )["content"]
     bs = BeautifulSoup(wiki_html, "lxml")
     audios = bs.select(".mould-table>tbody>tr>td>div>div>audio")

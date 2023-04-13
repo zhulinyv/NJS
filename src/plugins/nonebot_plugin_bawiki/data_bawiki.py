@@ -4,9 +4,9 @@ from io import BytesIO
 from typing import Any, Dict, List, TypedDict
 
 from nonebot.adapters.onebot.v11 import MessageSegment
-from nonebot_plugin_imageutils import BuildImage
+from pil_utils import BuildImage
 
-from .const import BAWIKI_DB_URL
+from .config import config
 from .util import async_req, recover_alia
 
 
@@ -14,11 +14,11 @@ class MangaDict(TypedDict):
     cid: int
     title: str
     detail: str
-    pics: list[str]
+    pics: List[str]
 
 
 async def db_get(suffix, raw=False):
-    return await async_req(f"{BAWIKI_DB_URL}{suffix}", raw=raw)
+    return await async_req(f"{config.ba_bawiki_db_url}{suffix}", raw=raw)
 
 
 async def db_get_wiki_data() -> Dict[str, Any]:

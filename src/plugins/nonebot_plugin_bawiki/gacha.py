@@ -6,28 +6,22 @@ from io import BytesIO
 from typing import Dict, Iterable, List, Optional, Tuple, TypedDict
 
 import aiofiles
-from aiohttp import ClientSession
 from nonebot import logger
 from nonebot.adapters.onebot.v11 import MessageSegment
-from nonebot_plugin_imageutils import BuildImage
+from pil_utils import BuildImage
 
-from .const import DATA_PATH, RES_PATH
-from .data_bawiki import db_get_gacha_data
-from .data_schaledb import (
-    find_current_event,
-    schale_get,
-    schale_get_common,
-    schale_get_stu_dict,
+from .data_schaledb import schale_get, schale_get_stu_dict
+from .resource import (
+    DATA_PATH,
+    RES_GACHA_BG,
+    RES_GACHA_CARD_BG,
+    RES_GACHA_CARD_MASK,
+    RES_GACHA_NEW,
+    RES_GACHA_PICKUP,
+    RES_GACHA_STAR,
+    RES_GACHA_STU_ERR,
 )
 from .util import split_list
-
-IMG_GACHA_BG = BuildImage.open(RES_PATH / "gacha_bg.png")
-IMG_GACHA_CARD_BG = BuildImage.open(RES_PATH / "gacha_card_bg.png")
-IMG_GACHA_CARD_MASK = BuildImage.open(RES_PATH / "gacha_card_mask.png").convert("RGBA")
-IMG_GACHA_NEW = BuildImage.open(RES_PATH / "gacha_new.png")
-IMG_GACHA_PICKUP = BuildImage.open(RES_PATH / "gacha_pickup.png")
-IMG_GACHA_STAR = BuildImage.open(RES_PATH / "gacha_star.png")
-IMG_GACHA_STU_ERR = BuildImage.open(RES_PATH / "gacha_stu_err.png")
 
 GACHA_DATA_PATH = DATA_PATH / "gacha.json"
 if not GACHA_DATA_PATH.exists():
@@ -76,7 +70,7 @@ async def gen_stu_img(students: Iterable[GachaStudent]) -> Tuple[BuildImage]:
     stu_li = await schale_get_stu_dict("Id")
 
     async def gen_single(stu: GachaStudent) -> BuildImage:
-        bg = IMG_GACHA_CARD_BG.copy()
+        bg = RES_GACHA_CARD_BG.copy()
 
         stu_star = 0
         try:
@@ -89,12 +83,12 @@ async def gen_stu_img(students: Iterable[GachaStudent]) -> Tuple[BuildImage]:
             stu_img = BuildImage.open(BytesIO(stu_img))
         except:
             logger.exception(f"学生数据获取失败 {stu.id}")
-            stu_img = IMG_GACHA_STU_ERR
+            stu_img = RES_GACHA_STU_ERR
 
-        card_img = BuildImage.new("RGBA", IMG_GACHA_CARD_MASK.size, (0, 0, 0, 0))
+        card_img = BuildImage.new("RGBA", RES_GACHA_CARD_MASK.size, (0, 0, 0, 0))
         card_img.image.paste(
-            stu_img.resize(IMG_GACHA_CARD_MASK.size, keep_ratio=True).image,
-            mask=IMG_GACHA_CARD_MASK.image,
+            stu_img.resize(RES_GACHA_CARD_MASK.size, keep_ratio=True).image,
+            mask=RES_GACHA_CARD_MASK.image,
         )
 
         bg = bg.paste(card_img, (26, 13), True)
@@ -102,20 +96,20 @@ async def gen_stu_img(students: Iterable[GachaStudent]) -> Tuple[BuildImage]:
         star_x_offset = int(26 + (159 - 30 * stu_star) / 2)
         star_y_offset = 198
         for i in range(stu_star):
-            bg = bg.paste(IMG_GACHA_STAR, (star_x_offset + i * 30, star_y_offset), True)
+            bg = bg.paste(RES_GACHA_STAR, (star_x_offset + i * 30, star_y_offset), True)
 
         font_x_offset = 45
         font_y_offset = 2
 
         if stu.new:
-            bg = bg.paste(IMG_GACHA_NEW, (font_x_offset, font_y_offset), True)
+            bg = bg.paste(RES_GACHA_NEW, (font_x_offset, font_y_offset), True)
             font_x_offset -= 2
             font_y_offset += 29
 
         if stu.pickup:
             font_x_offset -= 4
             font_y_offset -= 4
-            bg = bg.paste(IMG_GACHA_PICKUP, (font_x_offset, font_y_offset), True)
+            bg = bg.paste(RES_GACHA_PICKUP, (font_x_offset, font_y_offset), True)
 
         return bg
 
@@ -131,7 +125,7 @@ async def gen_gacha_img(
         return
     card_w, card_h = stu_cards[0][0].size
 
-    bg = IMG_GACHA_BG.copy()
+    bg = RES_GACHA_BG.copy()
 
     x_gap = 10
     y_gap = 80
@@ -144,9 +138,17 @@ async def gen_gacha_img(
         y_offset += card_h + y_gap
 
     bg = bg.draw_text(
-        (1678, 841, 1888, 885), "距上个3★UP", 30, weight="bold", fill=(36, 90, 126)
+        (1678, 841, 1888, 885),
+        "距上个3★UP",
+        max_fontsize=30,
+        weight="bold",
+        fill=(36, 90, 126),
     ).draw_text(
-        (1643, 885, 1890, 935), str(count), 30, weight="bold", fill=(255, 255, 255)
+        (1643, 885, 1890, 935),
+        str(count),
+        max_fontsize=30,
+        weight="bold",
+        fill=(255, 255, 255),
     )
 
     return bg.save("PNG")

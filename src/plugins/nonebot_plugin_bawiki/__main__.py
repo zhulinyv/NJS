@@ -7,8 +7,7 @@ from dataclasses import dataclass
 from io import BytesIO
 from typing import Dict, List, Optional
 
-from PIL import Image
-from nonebot import logger, on_command, on_shell_command
+from nonebot import on_command, on_shell_command
 from nonebot.adapters.onebot.v11 import (
     ActionFailed,
     Message,
@@ -17,13 +16,14 @@ from nonebot.adapters.onebot.v11 import (
 )
 from nonebot.exception import FinishedException, ParserExit
 from nonebot.internal.matcher import Matcher
+from nonebot.log import logger
 from nonebot.params import CommandArg, ShellCommandArgs
 from nonebot.permission import SUPERUSER
 from nonebot.rule import ArgumentParser
 from nonebot_plugin_apscheduler import scheduler
-from nonebot_plugin_imageutils import BuildImage
+from pil_utils import BuildImage
 
-from .const import BAWIKI_DB_URL, SCHALE_URL
+from .config import config
 from .data_bawiki import (
     MangaDict,
     db_get,
@@ -94,8 +94,8 @@ handler_calender = on_command("ba日程表")
 
 
 @handler_calender.handle()
-async def _(matcher: Matcher, arg: Message = CommandArg()):
-    arg: str = arg.extract_plain_text()
+async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
+    arg: str = cmd_arg.extract_plain_text()
 
     await matcher.send("正在绘制图片，请稍等")
     try:
@@ -119,7 +119,7 @@ async def _(matcher: Matcher, arg: Message = CommandArg()):
             await matcher.finish()
         else:
             await matcher.finish(await game_kee_calender())
-    except (FinishedException, ActionFailed):
+    except (FinishedException, ActionFailed):  # type: ignore
         raise
     except:
         logger.exception("绘制日程表图片出错")
@@ -143,8 +143,8 @@ stu_schale = on_command("ba学生图鉴")
 
 
 @stu_schale.handle()
-async def _(matcher: Matcher, arg: Message = CommandArg()):
-    arg = arg.extract_plain_text().strip()
+async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
+    arg = cmd_arg.extract_plain_text().strip()
     if not arg:
         return await matcher.finish("请提供学生名称")
 
@@ -161,7 +161,7 @@ async def _(matcher: Matcher, arg: Message = CommandArg()):
         return await matcher.finish("未找到该学生")
 
     stu_name = data["PathName"]
-    await matcher.send(f"请稍等，正在截取SchaleDB页面～\n" f"{SCHALE_URL}?chara={stu_name}")
+    await matcher.send(f"请稍等，正在截取SchaleDB页面～\n{config.ba_schale_url}?chara={stu_name}")
 
     try:
         img = MessageSegment.image(await schale_get_stu_info(stu_name))
@@ -176,8 +176,8 @@ stu_rank = on_command("ba学生评价", aliases={"ba角评"})
 
 
 @stu_rank.handle()
-async def _(matcher: Matcher, arg: Message = CommandArg()):
-    arg = arg.extract_plain_text().strip()
+async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
+    arg = cmd_arg.extract_plain_text().strip()
     if not arg:
         return await matcher.finish("请提供学生名称")
 
@@ -189,7 +189,7 @@ async def _(matcher: Matcher, arg: Message = CommandArg()):
     try:
         im = await db_wiki_stu(arg)
     except:
-        logger.exception(f"获取角评出错")
+        logger.exception("获取角评出错")
         return await matcher.finish("获取角评出错，请检查后台输出")
 
     await matcher.finish(im)
@@ -199,8 +199,8 @@ stu_wiki = on_command("ba学生wiki", aliases={"ba学生Wiki", "ba学生WIKI"})
 
 
 @stu_wiki.handle()
-async def _(matcher: Matcher, arg: Message = CommandArg()):
-    arg = arg.extract_plain_text().strip()
+async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
+    arg = cmd_arg.extract_plain_text().strip()
     if not arg:
         return await matcher.finish("请提供学生名称")
 
@@ -223,14 +223,14 @@ fav = on_command("ba好感度", aliases={"ba羁绊", "bal2d", "baL2D", "balive2d
 
 
 @fav.handle()
-async def _(matcher: Matcher, arg: Message = CommandArg()):
+async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
     async def get_l2d(stu_name):
         if r := (await db_get_extra_l2d_list()).get(stu_name):
-            return f"{BAWIKI_DB_URL}{r}"
+            return f"{config.ba_bawiki_db_url}{r}"
 
         return await game_kee_grab_l2d((await game_kee_get_stu_cid_li()).get(stu_name))
 
-    arg = arg.extract_plain_text().strip()
+    arg = cmd_arg.extract_plain_text().strip()
     if not arg:
         return await matcher.finish("请提供学生名称或所需的羁绊等级")
 
@@ -308,7 +308,7 @@ async def _(matcher: Matcher, foo: ParserExit = ShellCommandArgs()):
 @raid_wiki.handle()
 async def _(matcher: Matcher, args: Namespace = ShellCommandArgs()):
     if not args.server:
-        await matcher.finish(f"请指定server参数")
+        await matcher.finish("请指定server参数")
 
     server = set()
     for s in args.server:
@@ -330,11 +330,11 @@ async def _(matcher: Matcher, args: Namespace = ShellCommandArgs()):
                         db_wiki_raid(raid, [s], args.wiki, r[0].get("terrain"))
                     )
         except:
-            logger.exception(f"获取当前总力战失败")
-            return await matcher.finish(f"获取当前总力战失败")
+            logger.exception("获取当前总力战失败")
+            return await matcher.finish("获取当前总力战失败")
 
         if not tasks:
-            return await matcher.finish(f"目前服务器没有正在进行的总力战，请手动指定")
+            return await matcher.finish("目前服务器没有正在进行的总力战，请手动指定")
     else:
         tasks.append(
             db_wiki_raid(
@@ -353,7 +353,7 @@ async def _(matcher: Matcher, args: Namespace = ShellCommandArgs()):
         ret = await asyncio.gather(*tasks)
     except:
         logger.exception("获取总力战wiki失败")
-        return await matcher.finish(f"获取图片失败，请检查后台输出")
+        return await matcher.finish("获取图片失败，请检查后台输出")
 
     await matcher.finish(splice_msg(ret))
 
@@ -362,8 +362,8 @@ event_wiki = on_command("ba活动")
 
 
 @event_wiki.handle()
-async def _(matcher: Matcher, arg: Message = CommandArg()):
-    arg = arg.extract_plain_text().lower().strip()
+async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
+    arg = cmd_arg.extract_plain_text().lower().strip()
 
     server = []
     if arg.startswith("日") or arg.startswith("j") or (not arg):
@@ -380,8 +380,8 @@ async def _(matcher: Matcher, arg: Message = CommandArg()):
                 if e := find_current_event(ev):
                     events.append((e[0]["event"]) % 10000)
         except:
-            logger.exception(f"获取当前活动失败")
-            return await matcher.finish(f"获取当前活动失败")
+            logger.exception("获取当前活动失败")
+            return await matcher.finish("获取当前活动失败")
 
         if not events:
             await matcher.finish("当前服务器没有正在进行的活动")
@@ -402,8 +402,8 @@ time_atk_wiki = on_command("ba综合战术考试", aliases={"ba合同火力演�
 
 
 @time_atk_wiki.handle()
-async def _(matcher: Matcher, arg: Message = CommandArg()):
-    arg = arg.extract_plain_text().lower().strip()
+async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
+    arg = cmd_arg.extract_plain_text().lower().strip()
 
     server = []
     if arg.startswith("日") or arg.startswith("j") or (not arg):
@@ -420,8 +420,8 @@ async def _(matcher: Matcher, arg: Message = CommandArg()):
                 if (r := find_current_event(raid)) and (raid := r[0]["raid"]) >= 1000:
                     events.append(raid)
         except:
-            logger.exception(f"获取当前综合战术考试失败")
-            return await matcher.finish(f"获取当前综合战术考试失败")
+            logger.exception("获取当前综合战术考试失败")
+            return await matcher.finish("获取当前综合战术考试失败")
 
         if not events:
             await matcher.finish("当前服务器没有正在进行的综合战术考试")
@@ -519,8 +519,8 @@ voice = on_command("ba语音")
 
 
 @voice.handle()
-async def _(matcher: Matcher, arg: Message = CommandArg()):
-    arg = arg.extract_plain_text().strip()
+async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
+    arg = cmd_arg.extract_plain_text().strip()
     if not arg:
         return await matcher.finish("请提供学生名称")
 
@@ -580,8 +580,8 @@ change_pool = on_command("ba切换卡池")
 
 
 @change_pool.handle()
-async def _(matcher: Matcher, event: MessageEvent, arg: Message = CommandArg()):
-    arg = arg.extract_plain_text().strip().lower()
+async def _(matcher: Matcher, event: MessageEvent, cmd_arg: Message = CommandArg()):
+    arg = cmd_arg.extract_plain_text().strip().lower()
     qq = event.get_user_id()
 
     if arg:
@@ -641,8 +641,8 @@ gacha_once = on_command("ba抽卡")
 
 
 @gacha_once.handle()
-async def _(matcher: Matcher, event: MessageEvent, arg: Message = CommandArg()):
-    arg = arg.extract_plain_text().strip().lower()
+async def _(matcher: Matcher, event: MessageEvent, cmd_arg: Message = CommandArg()):
+    arg = cmd_arg.extract_plain_text().strip().lower()
 
     gacha_times = 10
     if arg:

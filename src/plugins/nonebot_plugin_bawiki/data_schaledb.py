@@ -5,19 +5,15 @@ from datetime import datetime
 from io import BytesIO
 from typing import Any, Dict, List
 
-from PIL import Image, ImageFilter
 from nonebot import logger
 from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot_plugin_htmlrender import get_new_page
-from nonebot_plugin_imageutils import BuildImage, text2image
-from playwright.async_api import Page, ViewportSize
+from PIL import Image, ImageFilter
+from pil_utils import BuildImage, text2image
+from playwright.async_api import ViewportSize
 
-from .const import (
-    MIRROR_SCHALE_URL,
-    RES_CALENDER_BANNER,
-    RES_SCHALE_BG,
-    SCHALE_URL,
-)
+from .config import config
+from .resource import RES_CALENDER_BANNER, RES_GRADIENT_BG
 from .util import async_req, img_invert_rgba, parse_time_delta
 
 PAGE_KWARGS = {
@@ -27,23 +23,23 @@ PAGE_KWARGS = {
 
 
 async def schale_get(suffix, raw=False, **kwargs):
-    return await async_req(f"{SCHALE_URL}{suffix}", raw=raw, **kwargs)
+    return await async_req(f"{config.ba_schale_url}{suffix}", raw=raw, **kwargs)
 
 
-async def schale_get_stu_data() -> List[Dict[str, Any]]:
-    return await schale_get("data/cn/students.min.json")
+async def schale_get_stu_data(loc: str = "cn") -> List[Dict[str, Any]]:
+    return await schale_get(f"data/{loc}/students.min.json")
 
 
 async def schale_get_common() -> Dict[str, Any]:
     return await schale_get("data/common.min.json")
 
 
-async def schale_get_localization() -> Dict[str, Any]:
-    return await schale_get("data/cn/localization.min.json")
+async def schale_get_localization(loc: str = "cn") -> Dict[str, Any]:
+    return await schale_get(f"data/{loc}/localization.min.json")
 
 
-async def schale_get_raids() -> Dict[str, Any]:
-    return await schale_get("data/raids.min.json")
+async def schale_get_raids(loc: str = "cn") -> Dict[str, Any]:
+    return await schale_get(f"data/{loc}/raids.min.json")
 
 
 async def schale_get_stu_dict(key="Name"):
@@ -53,7 +49,7 @@ async def schale_get_stu_dict(key="Name"):
 async def schale_get_stu_info(stu):
     async with get_new_page(**PAGE_KWARGS) as page:  # type:Page
         await page.goto(
-            f"{MIRROR_SCHALE_URL}?chara={stu}",
+            f"{config.ba_schale_mirror_url}?chara={stu}",
             timeout=60 * 1000,
             wait_until="networkidle",
         )
@@ -209,7 +205,9 @@ async def schale_get_calender(server, students, common, localization, raids):
                 .convert("RGB")
                 .circle_corner(25)
                 .draw_text(
-                    (0, ev_bg.height - 65, ev_bg.width, ev_bg.height), ev_name, 50
+                    (0, ev_bg.height - 65, ev_bg.width, ev_bg.height),
+                    ev_name,
+                    max_fontsize=50,
                 )
             )
             return pic.paste(ev_bg, (int((pic.width - ev_bg.width) / 2), 250), True)
@@ -341,9 +339,9 @@ async def schale_get_calender(server, students, common, localization, raids):
                     (
                         localization["TimeAttackStage"][c_ri["DungeonType"]]
                         if time_atk
-                        else (c_ri["NameCn"] or c_ri["NameJp"])
+                        else (c_ri["Name"])
                     ),
-                    50,
+                    max_fontsize=50,
                 )
             )
             return pic.paste(c_bg, (int((pic.width - c_bg.width) / 2), 250), True)
@@ -369,7 +367,7 @@ async def schale_get_calender(server, students, common, localization, raids):
             elif next_week_t <= birth <= next_next_week_t:
                 birth_next_week.append(s)
 
-        sort_key = lambda x: x["BirthDay"].split("/")
+        sort_key = lambda x: x["BirthDay"].split("/")  # noqa: E731
         p_h = 0
         if birth_this_week:
             birth_this_week.sort(key=sort_key)
@@ -399,7 +397,9 @@ async def schale_get_calender(server, students, common, localization, raids):
                     int((1400 - (len(birth_this_week) * (180 + 10) - 10)) / 2) + 75
                 )
                 pic = pic.draw_text(
-                    (x_index - 165, y_index, x_index, y_index + 180), "本周", 50
+                    (x_index - 165, y_index, x_index, y_index + 180),
+                    "本周",
+                    max_fontsize=50,
                 )
                 for s in birth_this_week:
                     pic.paste(stu_pics.pop(0), (x_index, y_index), True).draw_text(
@@ -415,7 +415,9 @@ async def schale_get_calender(server, students, common, localization, raids):
                     int((1400 - (len(birth_next_week) * (180 + 10) - 10)) / 2) + 75
                 )
                 pic = pic.draw_text(
-                    (x_index - 165, y_index, x_index, y_index + 180), "下周", 50
+                    (x_index - 165, y_index, x_index, y_index + 180),
+                    "下周",
+                    max_fontsize=50,
                 )
                 for s in birth_next_week:
                     pic.paste(stu_pics.pop(0), (x_index, y_index), True).draw_text(
@@ -426,29 +428,37 @@ async def schale_get_calender(server, students, common, localization, raids):
 
             return pic
 
-    img = await asyncio.gather(draw_gacha(), draw_event(), draw_raid(), draw_birth())
-    img = [x for x in img if x]
+    img = await asyncio.gather(  # type: ignore
+        draw_gacha(), draw_event(), draw_raid(), draw_birth()
+    )
+    img: List[BuildImage] = [x for x in img if x]
     if not img:
         img.append(
             pic_bg.copy().draw_text((0, 0, 1400, 640), "没有获取到任何数据", max_fontsize=60)
         )
+
+    bg_w = 1500
+    bg_h = 200 + sum([x.height + 50 for x in img])
     bg = (
-        BuildImage.new("RGBA", (1500, 200 + sum([x.height + 50 for x in img])))
-        .gradient_color((138, 213, 244), (251, 226, 229))
-        .paste(BuildImage.open(RES_CALENDER_BANNER).resize((1500, 150)))
+        BuildImage.new("RGBA", (bg_w, bg_h))
+        .paste(RES_CALENDER_BANNER.copy().resize((1500, 150)))
         .draw_text(
             (50, 0, 1480, 150),
             f"SchaleDB丨活动日程丨{localization['ServerName'][str(server)]}",
-            100,
+            max_fontsize=100,
             weight="bold",
             fill="#ffffff",
             halign="left",
+        )
+        .paste(
+            RES_GRADIENT_BG.copy().resize((1500, bg_h - 150), resample=Image.NEAREST),
+            (0, 150),
         )
     )
 
     h_index = 200
     for im in img:
-        bg.paste(im, (50, h_index), True)
+        bg.paste(im.circle_corner(10), (50, h_index), True)
         h_index += im.height + 50
     return bg.convert("RGB").save("png")
 
@@ -473,15 +483,15 @@ async def draw_fav_li(lvl):
     icon_h = pic_h + txt_h
     line_max_icon = 6
 
-    if (l := len(stu_li)) <= line_max_icon:
+    if (li_len := len(stu_li)) <= line_max_icon:
         line = 1
-        length = l
+        length = li_len
     else:
-        line = math.ceil(l / line_max_icon)
+        line = math.ceil(li_len / line_max_icon)
         length = line_max_icon
 
-    img = BuildImage.open(RES_SCHALE_BG).resize(
-        (icon_w * length, icon_h * line + 5), keep_ratio=True
+    img = RES_GRADIENT_BG.copy().resize(
+        (icon_w * length, icon_h * line + 5), resample=Image.NEAREST
     )
 
     async def draw_stu(name_, dev_name_, line_, index_):
@@ -501,13 +511,13 @@ async def draw_fav_li(lvl):
         )
 
     task_li = []
-    l = 0
+    line = 0
     i = 0
     for stu in stu_li:
         if i == line_max_icon:
             i = 0
-            l += 1
-        task_li.append(draw_stu(stu["Name"], stu["DevName"], l, i))
+            line += 1
+        task_li.append(draw_stu(stu["Name"], stu["DevName"], line, i))
         i += 1
     await asyncio.gather(*task_li)
 

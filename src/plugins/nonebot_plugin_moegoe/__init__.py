@@ -3,10 +3,11 @@ from string import Template
 from pathlib import Path
 import rtoml as tomllib
 import httpx
+import os
 from nonebot.log import logger
 from nonebot.matcher import Matcher
-from nonebot.params import RegexGroup
-from nonebot.plugin import PluginMetadata, on_regex
+from nonebot.params import RegexGroup, CommandArg
+from nonebot.plugin import PluginMetadata, on_regex, on_command
 from nonebot.adapters.onebot.v11 import MessageSegment, ActionFailed
 from nonebot import get_driver
 
@@ -14,6 +15,7 @@ driver = get_driver()
 
 dataPath = Path() / 'data' / 'moegoe'
 profilePath = dataPath / 'profile.toml'
+bakProfilePath = dataPath / 'profile.bak'
 
 profileDict = None
 if profilePath.exists():
@@ -53,10 +55,13 @@ async def update():
 
     newProfileDict = tomllib.loads(profileData.decode('utf-8'))
     if versionGreater(newProfileDict['version'], profileDict['version']):
+        os.rename(profilePath, bakProfilePath)
         write_file(profilePath, profileData)
         profileDict = newProfileDict
         profilePreprocess()
         logger.info(f"moegoe profile updated to version {profileDict['version']}.")
+    else:
+        logger.info("moegoe profile checked.")
 
 
 __version__ = profileDict['version']
@@ -74,6 +79,17 @@ __plugin_meta__ = PluginMetadata(
 
 profilePreprocess()
 
+# plugin commands
+plugin_cmd = on_command(profileDict['plugin']['cmd'], block=True, priority=profileDict['priority'])
+
+@plugin_cmd.handle()
+async def _(matcher: Matcher, args: Tuple[Any, ...] = CommandArg()):
+    args = args.extract_plain_text().split()
+    if 'load' in args:
+        await update()
+        await matcher.finish('moegoe reloaded.')
+    else:
+        await matcher.finish(f'moegoe命令：load->更新profile.')
 
 # api for other plugins
 async def get_record(url):
@@ -83,25 +99,46 @@ async def get_record(url):
     voice = resp.content
     return MessageSegment.record(voice)
 
+async def get_MessageSegment(url, name, msg, output_format):
+    if output_format == "link":
+        return MessageSegment.text(url)
+    elif output_format == "share":  # Windows TIM端的url会缺失&，原因不明
+        return MessageSegment.share(url=url, title=name+'说...', content=msg, image='')
+    else:
+        return await get_record(url)
 
-async def jp_func(msg, name=profileDict['jpapi']['order'][0]):
-    url = jpapi.substitute(text=msg, id=jp_dict[name])
-    return await get_record(url)
+def getApiConfigs(api_name):
+    config = dict()
+    for k,q,d in (('format', 'voice_format', 'mp3'), ('length','length', 1), ('noise','noise', 0.6), ('noisew','noisew', 0.8)):
+        config[k] = d
+        for name in (api_name, 'api'):
+            if q in profileDict[name].keys():
+                config[k] = profileDict[name][q]
+                break
+    return config
+
+async def jp_func(msg, name=profileDict['jpapi']['order'][0], output_format=profileDict['api']['return_format']):
+    id = jp_dict[name] if name in jp_dict.keys() else -1
+    url = jpapi.substitute(text=msg, name=name, speaker=name, id=id, **getApiConfigs('jpapi'))
+    return await get_MessageSegment(url, name, msg, output_format)
 
 
-async def jp2_func(msg, name=profileDict['jp2api']['order'][0]):
-    url = jp2api.substitute(text=msg, id=jp2_dict[name])
-    return await get_record(url)
+async def jp2_func(msg, name=profileDict['jp2api']['order'][0], output_format=profileDict['api']['return_format']):
+    id = jp2_dict[name] if name in jp2_dict.keys() else -1
+    url = jp2api.substitute(text=msg, name=name, speaker=name, id=id, **getApiConfigs('jp2api'))
+    return await get_MessageSegment(url, name, msg, output_format)
 
 
-async def kr_func(msg, name=profileDict['krapi']['order'][0]):
-    url = krapi.substitute(text=msg, id=kr_dict[name])
-    return await get_record(url)
+async def kr_func(msg, name=profileDict['krapi']['order'][0], output_format=profileDict['api']['return_format']):
+    id = kr_dict[name] if name in kr_dict.keys() else -1
+    url = krapi.substitute(text=msg, name=name, speaker=name, id=id, **getApiConfigs('krapi'))
+    return await get_MessageSegment(url, name, msg, output_format)
 
 
-async def cn_func(msg, name=profileDict['cnapi']['order'][0]):
-    url = cnapi.substitute(text=msg, id=cn_dict[name])
-    return await get_record(url)
+async def cn_func(msg, name=profileDict['cnapi']['order'][0], output_format=profileDict['api']['return_format']):
+    id = cn_dict[name] if name in cn_dict.keys() else -1
+    url = cnapi.substitute(text=msg, name=name, speaker=name, id=id, **getApiConfigs('cnapi'))
+    return await get_MessageSegment(url, name, msg, output_format)
 
 
 jp_cmd = on_regex(profileDict['jpapi']['regex'], block=True, priority=profileDict['priority'])

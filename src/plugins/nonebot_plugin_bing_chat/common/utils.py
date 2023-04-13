@@ -1,115 +1,117 @@
 import re
-import shutil
-from datetime import datetime, timedelta
+import asyncio
+from pathlib import Path
+from datetime import datetime
 
-from nonebot import get_driver, require
+from EdgeGPT import Chatbot
 from nonebot.log import logger
-from nonebot.rule import Rule, command, to_me
-from nonebot.plugin.on import on_message
 
-require("nonebot_plugin_apscheduler")
-from nonebot_plugin_apscheduler import scheduler
+from . import plugin_data, plugin_config
+from .data_model import UserData, BingChatResponse, DisplayContentType
+from .exceptions import BingChatAccountReachLimitException
 
-from .dataModel import Config
-
-
-plugin_config = Config.parse_obj(get_driver().config)
-
-plugin_directory = plugin_config.bingchat_plugin_directory
-
-command_chat = on_message(
-    rule=command(*plugin_config.bingchat_command_chat)
-    & (to_me() if plugin_config.bingchat_to_me else Rule()),
-    priority=plugin_config.bingchat_priority,
-    block=plugin_config.bingchat_block,
-)
-command_new_chat = on_message(
-    rule=command(*plugin_config.bingchat_command_new_chat)
-    & (to_me() if plugin_config.bingchat_to_me else Rule()),
-    priority=plugin_config.bingchat_priority,
-    block=plugin_config.bingchat_block,
-)
-command_history_chat = on_message(
-    rule=command(*plugin_config.bingchat_command_history_chat)
-    & (to_me() if plugin_config.bingchat_to_me else Rule()),
-    priority=plugin_config.bingchat_priority,
-    block=plugin_config.bingchat_block,
-)
-
-matcher_reply_to_me = on_message(
-    rule=to_me(),
-    priority=plugin_config.bingchat_priority,
-    block=plugin_config.bingchat_block,
-)
-
+if any(i == 'image' for i, _ in plugin_config.bingchat_display_content_types):
+    from nonebot_plugin_htmlrender import md_to_pic
 
 _matcher_in_regex = '|'.join(
     (
-        f"""(({'|'.join(plugin_config.bingchat_command_start)})({'|'.join(plugin_config.bingchat_command_chat)}).*)""",
-        f"""(({'|'.join(plugin_config.bingchat_command_start)})({'|'.join(plugin_config.bingchat_command_new_chat)}).*)""",
-        f"""(({'|'.join(plugin_config.bingchat_command_start)})({'|'.join(plugin_config.bingchat_command_history_chat)}).*)""",
+        f"""(({'|'.join(plugin_config.command_start)})({'|'.join(plugin_config.bingchat_command_chat)}).*)""",
+        f"""(({'|'.join(plugin_config.command_start)})({'|'.join(plugin_config.bingchat_command_new_chat)}).*)""",
+        f"""(({'|'.join(plugin_config.command_start)})({'|'.join(plugin_config.bingchat_command_history_chat)}).*)""",
     )
 )
 
 
-def isConfilctWithOtherMatcher(msg: str) -> bool:
-    return True if re.match(_matcher_in_regex, msg) else False
+def is_conflict_with_other_matcher(msg: str) -> bool:
+    return bool(re.match(_matcher_in_regex, msg))
 
 
-def helpMessage() -> str:
-    help_message = (
-        f"""开始对话：{'/'.join(i for i in plugin_config.bingchat_command_chat)} + {{你要询问的内容}}"""
-        f"""\n\n"""
-        f"""新建一个对话：{'/'.join(i for i in plugin_config.bingchat_command_new_chat)}"""
-        f"""\n\n"""
-        f"""查看历史记录：{'/'.join(i for i in plugin_config.bingchat_command_history_chat)}"""
-        f"""\n\n"""
-        f"""如果有任何疑问请查看https://github.com/Harry-Jing/nonebot-plugin-bing-chat"""
-    )
-
-    if '' not in plugin_config.bingchat_command_start:
-        help_message = (
-            f"""以下所有的命令都要在开头加上命令符号！！！"""
-            f"""\n\n"""
-            f"""命令符号：{','.join(f'"{i}"' for i in plugin_config.bingchat_command_start)}"""
-            f"""\n\n"""
-        ) + help_message
-
-    return help_message
-
-
-def initFile() -> None:
-    plugin_directory.mkdir(parents=True, exist_ok=True)
-
-    # 检查cookie文件是否存在且不为空
-    file_path = plugin_directory.joinpath('cookies.json')
-    file_path.touch(exist_ok=True)
-    if file_path.stat().st_size == 0:
-        raise FileNotFoundError(
-            'BingChat插件未配置cookie，请在./data/BingChat/cookies.json中填入你的cookie'
-        )
-
-    # 创建log文件夹
-    plugin_log_directory = plugin_directory / 'log'
-    plugin_log_directory.mkdir(parents=True, exist_ok=True)
-
-
-def createLog(data: str) -> None:
+def create_log(data: str) -> None:
     current_log_directory = (
-        plugin_directory / 'log' / datetime.now().strftime('%Y-%m-%d')
+        plugin_config.bingchat_plugin_directory
+        / 'log'
+        / datetime.now().strftime('%Y-%m-%d')
     )
     current_log_directory.mkdir(parents=True, exist_ok=True)
     current_log_file = (
         current_log_directory / f'{datetime.now().strftime("%H-%M-%S")}.log'
     )
-    current_log_file.write_text(data=str(data), encoding='utf-8')
+    current_log_file.write_text(data=data, encoding='utf-8')
 
 
-@scheduler.scheduled_job('cron', hour=2)
-async def _del_log_file() -> None:
-    print('del_log_file')
-    current_time = datetime.now()
-    plugin_log_directory = plugin_directory / 'log'
-    for child_dir in plugin_log_directory.iterdir():
-        if current_time - datetime.fromisoformat(child_dir.name) > timedelta(days=7):
-            shutil.rmtree(child_dir)
+async def check_cookies_usable(cookies: Path) -> bool:
+    chatbot = Chatbot(
+        cookiePath=str(cookies),
+        proxy=plugin_config.bingchat_proxy,
+    )
+    try:
+        BingChatResponse(raw=(await chatbot.ask('Hello')))
+    except BingChatAccountReachLimitException:
+        return False
+    except Exception as exc:
+        logger.error(f'在检查cookies：{cookies} 时出错')
+        logger.error(exc)
+        return False
+    else:
+        return True
+
+
+async def switch_to_usable_cookies() -> bool:
+    plugin_data.is_switching_cookies = True
+
+    try:
+        task_result = await asyncio.gather(
+            check_cookies_usable(cookies)
+            for cookies in plugin_data.cookies_file_path_list
+        )
+    except Exception:
+        plugin_data.is_switching_cookies = False
+        raise
+
+    for cookies, result in zip(plugin_data.cookies_file_path_list, task_result):
+        if result:
+            plugin_data.current_cookies_file_path = cookies
+            plugin_data.is_switching_cookies = False
+            return True
+
+    plugin_data.is_switching_cookies = False
+    return False
+
+
+async def get_display_data(
+    user_data: UserData, display_content_type: DisplayContentType
+) -> str | bytes:
+    plain_text_list = []
+    display_type, content_type_list = display_content_type
+    for content_type in content_type_list:
+        if not (content := user_data.latest_response.get_content(content_type)):
+            continue
+        match display_type:
+            case 'text':
+                match content_type:
+                    case 'reference':
+                        new_content = '参考链接：\n'
+                    case 'suggested-question':
+                        new_content = '猜你想问：\n'
+                    case 'num-max-conversation':
+                        new_content = '回复数：'
+                    case _:
+                        new_content = ''
+
+            case 'image':
+                match content_type:
+                    case 'reference':
+                        new_content = '参考链接：\n\n'
+                    case 'suggested-question':
+                        new_content = '猜你想问：\n\n'
+                    case 'num-max-conversation':
+                        new_content = '回复数：'
+                    case _:
+                        new_content = ''
+        plain_text_list.append(f'{new_content}{content}')
+
+    match display_type:
+        case 'text':
+            return '\n\n'.join(plain_text_list)
+        case 'image':
+            return await md_to_pic('\n\n---\n\n'.join(plain_text_list))

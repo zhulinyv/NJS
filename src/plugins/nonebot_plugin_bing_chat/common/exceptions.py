@@ -8,9 +8,10 @@ BaseBingChatException
         - BingchatIsWaitingForResponseException
     · BingchatNetworkException
         - BingChatResponseException
+            + BingChatInvalidSessionException
             + BingChatAccountReachLimitException
             + BingChatConversationReachLimitException
-      
+
 """
 
 
@@ -39,6 +40,10 @@ class BingchatNetworkException(BaseBingChatException):
 
 
 class BingChatResponseException(BingchatNetworkException):
+    pass
+
+
+class BingChatInvalidSessionException(BingChatResponseException):
     pass
 
 

@@ -29,7 +29,7 @@ file_path.parent.mkdir(parents = True, exist_ok = True)
 enablelist = (
     json.loads(file_path.read_text('utf-8'))
     if file_path.is_file()
-    else {'grouplist': [], 'userlist': []}
+    else {'grouplist': [], 'userlist': [], 'listenlist' : [], 'listener' : ''}
 )
 
 def save_enablelist() -> None:
@@ -161,7 +161,7 @@ async def disable_bypass_admin_(event: GroupMessageEvent):
     save_bypass_admin_list()
     await add_group.finish('本群管理层也会防撤回...挺公平的...')
 
-reset_enablelist = on_command('重置开启名单', aliases = {'清空开启名单'}, permission = SUPERUSER, priority = 1, block = True)
+reset_enablelist = on_command('重置开启名单', aliases = {'清空开启名单', 'clear list'}, permission = SUPERUSER, priority = 1, block = True)
 
 @reset_enablelist.got('flag', prompt='确定重置开启名单? (Y/n)')
 async def reset_list(flag: str = ArgStr('flag')):
@@ -174,7 +174,7 @@ async def reset_list(flag: str = ArgStr('flag')):
         await reset_enablelist.finish('操作已取消')
 
 # 主体
-recall = on_notice(priority = 60, block = False)
+recall = on_notice()
 
 @recall.handle()
 
@@ -183,19 +183,26 @@ async def recall_handle(bot:Bot, event: GroupRecallNoticeEvent):
         mid = event.message_id
         gid = event.group_id
         uid = event.user_id
+        oid = event.operator_id
         tid = datetime.datetime.fromtimestamp(event.time)
         time = tid.strftime('%Y-%m-%d %H:%M:%S')
         # await recall.send(str(enablelist['grouplist']))
         response = await bot.get_msg(message_id = mid)
+        info = await bot.get_group_member_info(group_id = gid, user_id = uid)
+        group_info = await bot.get_group_info(group_id = gid)
+        if str(gid) in enablelist['listenlist']:
+            try:
+                await bot.send_group_msg(group_id = int(enablelist['listener']), message = time + '\n' + group_info['group_name'] + '(' + str(gid) + ') 内 ' + info['nickname'] + '(' + str(uid) + ') 撤回消息如下:' )
+                await bot.send_group_msg(group_id = int(enablelist['listener']), message = response['message'], auto_escape = False)
+            except:
+                logger.debug('群组监听失败')
         if str(gid) in enablelist['grouplist']:
             # await bot.send_group_msg(group_id = gid, message = time + '\n触发反撤回功能')
             if testfor_bypass_admin_list(str(gid)) and bypass_admin_list[str(gid)]:
-                info = await bot.get_group_member_info(group_id = gid, user_id = uid)
-                if info['role'] == 'member':
+                if (info['role'] == 'member') and uid == oid:
                     await bot.send_group_msg(group_id = gid, message = response['message'], auto_escape = False)
                     if str(gid) in private_msg_list.keys():
                         for i in private_msg_list[str(gid)]:
-                            group_info = await bot.get_group_info(group_id = gid)
                             await bot.send_private_msg(user_id = int(i), message = time + '\n' + group_info['group_name'] + '(' + str(gid) + ') 内 ' + info['nickname'] + '(' + str(uid) + ') 撤回消息如下:' )
                             await bot.send_private_msg(user_id = int(i), message = response['message'], auto_escape = False)
                 else:
@@ -208,12 +215,12 @@ async def recall_handle(bot:Bot, event: GroupRecallNoticeEvent):
                         await bot.send_private_msg(user_id = int(i), message = time + '\n' + group_info['group_name'] + '(' + str(gid) + ') 内 ' + info['nickname'] + '(' + str(uid) + ') 撤回消息如下:' )
                         await bot.send_private_msg(user_id = int(i), message = response['message'], auto_escape = False)
 
-use_help = on_command('防撤回管理', aliases = {'防撤回菜单', 'anti recall menu'}, priority=50, block = True)
+use_help = on_command('防撤回管理', aliases = {'防撤回菜单', 'antirecall menu'}, priority=50, block = True)
 
 @use_help.handle()
 
 async def use_help_handle(bot: Bot, event: Event):
-    await use_help.send('开启/添加防撤回, enable\n关闭/删除防撤回, disable\n查看防撤回群聊\n开启/添加当前/本群防撤回, enable here\n关闭/删除当前/本群防撤回, disable here\n重置/清空开启名单\n开启/关闭绕过管理层, bypass/no bypass here\n开启/关闭防撤回私聊[gid] [qq] : 私聊使用,仅限一个群号和一个私聊的qq\n查看防撤回私聊, list private msg : 私聊使用,返回一个json数据\n不建议使用私聊,容易风控')
+    await use_help.send('开启/添加防撤回, 关闭/删除防撤回, enable, disable\n查看防撤回群聊\n开启/添加当前/本群防撤回, 关闭/删除当前/本群防撤回, enable/disable here\n重置/清空开启名单\n开启/关闭绕过管理层, bypass/no bypass here\n开启/关闭防撤回私聊[gid] [qq] : 私聊使用,仅限一个群号和一个私聊的qq\n查看防撤回私聊, list private msg : 私聊使用,返回一个json数据\n不建议使用私聊,容易风控\n开启/关闭防撤回监听 : 开启加监听到的群号(仅限一个重新设置会覆盖),关闭不用加参数\n添加/删除/查看防撤回监听, add/remove/view listener gid\n')
 
 enable_private_msg = on_command('开启防撤回私聊', aliases = {'enable private msg', '启用防撤回私聊'}, permission = SUPERUSER, priority = 1, block = True)
 
@@ -257,3 +264,55 @@ view_private_msg = on_command('查看防撤回私聊', aliases = {'list private 
 
 async def view_private_msg_handle(bot: Bot, event: PrivateMessageEvent):
     await view_private_msg.send(str(private_msg_list))
+
+enable_listener = on_command('开启防撤回监听', aliases = {'enable listener', '启用防撤回监听'}, permission = SUPERUSER, priority = 1, block = True)
+
+@enable_listener.handle()
+
+async def enable_listener_handle(bot: Bot, event: MessageEvent, arg: Message = CommandArg()):
+    gid = arg.extract_plain_text().strip()
+    enablelist['listener'] = gid
+    await enable_listener.send('操作成功!')
+    save_enablelist()
+
+disable_listener = on_command('关闭防撤回监听', aliases = {'disable listener', '停用防撤回监听'}, permission = SUPERUSER, priority = 1, block = True)
+
+@disable_listener.handle()
+
+async def disable_listener_handle(bot: Bot, event: MessageEvent, arg: Message = CommandArg()):
+    enablelist['listener'] = ''
+    await disable_listener.send('操作成功!')
+    save_enablelist()
+
+add_listen_group = on_command('添加防撤回监听', aliases = {'add listener', '设置防撤回监听'}, permission = SUPERUSER, priority = 1, block = True)
+
+@add_listen_group.handle()
+
+async def add_listen_group_handle(bot: Bot, event: MessageEvent, arg: Message = CommandArg()):
+    uid = arg.extract_plain_text().strip()
+    enablelist['listenlist'].append(uid)
+    await add_listen_group.send('操作成功!')
+    save_enablelist()
+
+del_listen_group = on_command('删除防撤回监听', aliases = {'remove listener', '移除防撤回监听'}, permission = SUPERUSER, priority = 1, block = True)
+
+@del_listen_group.handle()
+
+async def del_listen_group_handle(bot: Bot, event: MessageEvent, arg: Message = CommandArg()):
+    uid = arg.extract_plain_text().strip()
+    try:
+        enablelist['listenlist'].remove(uid)
+        await del_listen_group.send('操作成功!')
+        save_enablelist()
+    except:
+        await del_listen_group.send('操作失败,你是不是还没有加要听的qq?')
+
+view_listen_group = on_command('查看防撤回监听', aliases = {'view listener', '查询防撤回监听'}, permission = SUPERUSER, priority = 1, block = True)
+
+@view_listen_group.handle()
+
+async def view_listen_group_handle(bot: Bot, event: MessageEvent):
+    await view_listen_group.send(str(enablelist['listenlist']) + ' listner:' + enablelist['listener'])
+
+
+

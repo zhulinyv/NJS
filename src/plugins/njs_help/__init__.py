@@ -62,7 +62,7 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
         try:
             await njs_help.finish('指令如下: \n' + help_reply[f"h{number}_r"], at_sender=True)
         except KeyError:
-            if int(number) <= 98:
+            if int(number) <= 99:
                 if number in ["1", "14", "58", "76"]:
                     help_image = Path(os.path.join(os.path.dirname(__file__), "resource")) / f"h{number}.jpg"
                 else:

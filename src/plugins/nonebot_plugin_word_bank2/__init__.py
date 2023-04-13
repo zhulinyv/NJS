@@ -39,7 +39,7 @@ def wb_match_rule(event: MessageEvent, state: T_State) -> bool:
     return True
 
 
-wb_matcher = on_message(wb_match_rule, priority=50)
+wb_matcher = on_message(wb_match_rule, priority=99)
 
 
 @wb_matcher.handle()

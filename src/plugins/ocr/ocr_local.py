@@ -5,5 +5,5 @@ def ocr_local():
     word = reader.readtext("./src/plugins/ocr/ocr.jpg", detail=0)
     result = ""
     for i in word:
-        result = result + i + "\n"
+        result = result + i + " "
     return result

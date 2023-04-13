@@ -16,13 +16,13 @@ local_ocr = on_command("ocr", aliases={"OCR"}, priority=50, block=True)
 
 @local_ocr.handle()
 async def _():
-    await local_ocr.send("请发送要识别的图片(支持中英文和数字)", at_sender=True)
+    await local_ocr.send("请发送要识别的图片(支持中英文和数字)。\n\n⚠️本地识别将占用大量系统资源,\n发送任意非图片信息取消。", at_sender=True)
 
 @local_ocr.got("pic")
 async def get_pic(event: MessageEvent):
     # 判断收到的信息是否为图片，不是则结束
     if not (str(event.message).find("[CQ:image") + 1):
-        await local_ocr.finish("不是图片捏~", at_sender=True)
+        await local_ocr.finish("不是图片捏~ 本次识别取消! ", at_sender=True)
     for seg in event.message:
         if seg.type == "image":
             pic_url = seg.data["url"]

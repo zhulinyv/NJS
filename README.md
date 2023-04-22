@@ -6,7 +6,9 @@
 
 <p align="center">
     <a href="https://github.com/zhulinyv/NJS/raw/Bot/LICENSE"><img src="https://img.shields.io/github/license/CMHopeSunshine/LittlePaimon" alt="license"></a>
-    <img src="https://img.shields.io/badge/Python-3.10+-yellow" alt="python">
+    <img src="https://img.shields.io/badge/Python-3.10+-green" alt="python">
+    <img src="https://img.shields.io/badge/nonebot-2.0.0-yellow" alt="nonebot-2.0.0">
+    <img src="https://img.shields.io/badge/go--cqhttp-1.0.0-red" alt="go--cqhttp">
     <a href="https://pd.qq.com/s/8bkfowg3c"><img src="https://img.shields.io/badge/QQ频道交流-我的中心花园-blue?style=flat-square" alt="QQ guild"></a>
 </p>
 

@@ -45,7 +45,7 @@ o(〃＾▽＾〃)o
 
 ### 1️⃣ 安装 浏览器、解压软件、文本编辑器
 
-此过程比较简单，不在附图。
+此过程比较简单，不再附图。
 
 1、警告：**不要**使用 Internet Explorer！如果你的电脑配置比较低，可以选择 [百分浏览器](https://www.centbrowser.cn/) 等占用小的浏览器，解压软件可以选择 [7-Zip](https://www.7-zip.org/)、[WinRAR](https://www.ghxi.com/winrarlh.html) 等解压软件，文本编辑器任意，系统自带的记事本都可以，也可以使用比较高级一点的，比如 [VScode](https://code.visualstudio.com/)、[Sublime](https://www.sublimetext.com/) 等。**如果你的电脑上已经有其它同类软件，则跳过此步骤！**
 
@@ -147,7 +147,9 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 ![image](https://user-images.githubusercontent.com/66541860/213651257-3f3bcb25-329f-4d8b-982a-591494e4513b.png)
 
-备注：若出现克隆失败的情况，多半是由于仓库太大造成的，如果遇到可以尝试使用 GitHub 源克隆或直接下载 Zip 文件。
+备注：若出现克隆失败的情况，多半是由于仓库太大造成的，如果遇到可以尝试用如下命令调整 http 的请求最大容量或直接下载 Zip 文件。
+
+`git config --global http.postBuffer 1145141919810`。
 
 ### 6️⃣ 安装 字体
 

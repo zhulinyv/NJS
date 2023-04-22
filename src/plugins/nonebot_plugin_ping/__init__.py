@@ -22,7 +22,7 @@ async def _(msg: Message = CommandArg()):
     url = msg.extract_plain_text().strip()
 
     if model == 1:
-        api = f'https://v.api.aa1.cn/api/api-ping/ping.php?url={url}'
+        api = f'https://xiaoapi.cn/API/sping.php?url={url}'
         message = await api_ping(api)
     elif model == 2:
         message = await cmd_ping(url)
@@ -34,14 +34,19 @@ async def _(msg: Message = CommandArg()):
 
 async def api_ping(api):
     async with AsyncClient() as client:
-        res = (await client.get(api)).json()
+        # res = (await client.get(api)).json()
+        # try:
+        #     url = (res["host"])
+        #     ip = (res["ip"])
+        #     max = (res["ping_time_max"])
+        #     min = (res["ping_time_min"])
+        #     place = (res["location"])
+        #     res = f"域名: {url}\nIP: {ip}\n最大延迟: {max}\n最小延迟: {min}\n服务器归属地: {place}"
+        #     return res
+        # except Exception:
+        #     return "寄"
         try:
-            url = (res["host"])
-            ip = (res["ip"])
-            max = (res["ping_time_max"])
-            min = (res["ping_time_min"])
-            place = (res["location"])
-            res = f"域名: {url}\nIP: {ip}\n最大延迟: {max}\n最小延迟: {min}\n服务器归属地: {place}"
+            res = (await client.get(api, timeout=10)).text
             return res
         except Exception:
             return "寄"

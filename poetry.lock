@@ -553,6 +553,30 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 reference = "tsinghua"
 
 [[package]]
+name = "cashews"
+version = "6.0.2"
+description = "cache tools with async power"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "cashews-6.0.2-py3-none-any.whl", hash = "sha256:4c5ff02dc57b94b08651787e51691debfca734e79c54a18b35d4ad6ba253bdff"},
+    {file = "cashews-6.0.2.tar.gz", hash = "sha256:f2e4e6fe5aa29a10121c5e5686608d7273bf0b1f7fdeeb101b0110070d194c54"},
+]
+
+[package.extras]
+dill = ["dill"]
+diskcache = ["diskcache (>=5.0.0)"]
+redis = ["redis (>=4.3.1)"]
+speedup = ["bitarray (<3.0.0)", "hiredis", "xxhash (<4.0.0)"]
+tests = ["hypothesis", "pytest", "pytest-asyncio"]
+
+[package.source]
+type = "legacy"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+reference = "tsinghua"
+
+[[package]]
 name = "certifi"
 version = "2022.12.7"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -764,25 +788,24 @@ reference = "tsinghua"
 
 [[package]]
 name = "cookiecutter"
-version = "1.7.3"
+version = "2.1.1"
 description = "A command-line utility that creates projects from project templates, e.g. creating a Python package project from a Python package project template."
 category = "main"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+python-versions = ">=3.7"
 files = [
-    {file = "cookiecutter-1.7.3-py2.py3-none-any.whl", hash = "sha256:f8671531fa96ab14339d0c59b4f662a4f12a2ecacd94a0f70a3500843da588e2"},
-    {file = "cookiecutter-1.7.3.tar.gz", hash = "sha256:6b9a4d72882e243be077a7397d0f1f76fe66cf3df91f3115dbb5330e214fa457"},
+    {file = "cookiecutter-2.1.1-py2.py3-none-any.whl", hash = "sha256:9f3ab027cec4f70916e28f03470bdb41e637a3ad354b4d65c765d93aad160022"},
+    {file = "cookiecutter-2.1.1.tar.gz", hash = "sha256:f3982be8d9c53dac1261864013fdec7f83afd2e42ede6f6dd069c5e149c540d5"},
 ]
 
 [package.dependencies]
 binaryornot = ">=0.4.4"
-click = ">=7.0"
+click = ">=7.0,<9.0.0"
 Jinja2 = ">=2.7,<4.0.0"
 jinja2-time = ">=0.2.0"
-poyo = ">=0.5.0"
 python-slugify = ">=4.0.0"
+pyyaml = ">=5.3.1"
 requests = ">=2.23.0"
-six = ">=1.10"
 
 [package.source]
 type = "legacy"
@@ -845,6 +868,23 @@ tzlocal = "*"
 calendars = ["convertdate", "convertdate", "hijri-converter"]
 fasttext = ["fasttext"]
 langdetect = ["langdetect"]
+
+[package.source]
+type = "legacy"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+reference = "tsinghua"
+
+[[package]]
+name = "distlib"
+version = "0.3.6"
+description = "Distribution utilities"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "distlib-0.3.6-py2.py3-none-any.whl", hash = "sha256:f35c4b692542ca110de7ef0bea44d73981caeb34ca0b9b6b2e6d7790dda8f80e"},
+    {file = "distlib-0.3.6.tar.gz", hash = "sha256:14bad2d9b04d3a36127ac97f30b12a19268f211063d8f8ee4f47108896e11b46"},
+]
 
 [package.source]
 type = "legacy"
@@ -2467,30 +2507,32 @@ reference = "tsinghua"
 
 [[package]]
 name = "nb-cli"
-version = "0.6.7"
+version = "1.1.2"
 description = "CLI for nonebot2"
 category = "main"
 optional = false
-python-versions = ">=3.7.3,<4.0.0"
+python-versions = ">=3.8, <4.0"
 files = [
-    {file = "nb-cli-0.6.7.tar.gz", hash = "sha256:394bf65eabbda6aa7c410961b901e9f7320fae12143818b1c078fc43f060fa0e"},
-    {file = "nb_cli-0.6.7-py3-none-any.whl", hash = "sha256:693342ebcf4dce14fd7be4555c65e5da41707a67e5de73d7d7fe67a716a1cad9"},
+    {file = "nb-cli-1.1.2.tar.gz", hash = "sha256:155a2cd1864fce236a9db1171b33510eec4c853a230f68ab4ef37abf2d092b15"},
+    {file = "nb_cli-1.1.2-py3-none-any.whl", hash = "sha256:e6b592b8ec0aa59c2019ee0bce394e1a376de2ee2d3ba69bf196efac76198a8a"},
 ]
 
 [package.dependencies]
-click = ">=8.0.0,<9.0.0"
-colorama = ">=0.4.3,<0.5.0"
-cookiecutter = ">=1.7.2,<2.0.0"
-httpx = ">=0.18.0,<1.0.0"
-nonebot2 = ">=2.0.0-beta.1,<3.0.0"
-prompt-toolkit = ">=3.0.19,<4.0.0"
-pyfiglet = ">=0.8.post1,<0.9"
-tomlkit = ">=0.10.0,<0.11.0"
-wcwidth = ">=0.2.5,<0.3.0"
-
-[package.extras]
-deploy = ["docker-compose (>=1.29.2,<1.30.0)"]
-docker = ["docker-compose (>=1.29.2,<1.30.0)"]
+anyio = ">=3.6,<4.0"
+cashews = ">=6.0,<7.0"
+click = ">=8.1,<9.0"
+cookiecutter = ">=2.1,<3.0"
+httpx = ">=0.18,<1.0"
+importlib-metadata = {version = ">=4.6", markers = "python_version < \"3.10\""}
+jinja2 = ">=3.0,<4.0"
+noneprompt = ">=0.1.9,<1.0.0"
+pydantic = ">=1.9,<2.0"
+pyfiglet = ">=0.8.post1,<1.0.0"
+tomlkit = ">=0.10,<1.0"
+typing-extensions = ">=4.4,<5.0"
+virtualenv = ">=20.17.1,<20.18.0"
+watchfiles = ">=0.16,<1.0"
+wcwidth = ">=0.2,<1.0"
 
 [package.source]
 type = "legacy"
@@ -2811,6 +2853,26 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 reference = "tsinghua"
 
 [[package]]
+name = "noneprompt"
+version = "0.1.9"
+description = "Prompt toolkit for console interaction"
+category = "main"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "noneprompt-0.1.9-py3-none-any.whl", hash = "sha256:a54f1e6a19a3da2dedf7f365f80420e9ae49326a0ffe60a8a9c7afdee6b6eeb3"},
+    {file = "noneprompt-0.1.9.tar.gz", hash = "sha256:338b8bb89a8d22ef35f1dedb3aa7c1b228cf139973bdc43c5ffc3eef64457db9"},
+]
+
+[package.dependencies]
+prompt-toolkit = ">=3.0.19,<4.0.0"
+
+[package.source]
+type = "legacy"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+reference = "tsinghua"
+
+[[package]]
 name = "numpy"
 version = "1.23.4"
 description = "NumPy is the fundamental package for array computing with Python."
@@ -3115,6 +3177,27 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 reference = "tsinghua"
 
 [[package]]
+name = "platformdirs"
+version = "2.6.2"
+description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "platformdirs-2.6.2-py3-none-any.whl", hash = "sha256:83c8f6d04389165de7c9b6f0c682439697887bca0aa2f1c87ef1826be3584490"},
+    {file = "platformdirs-2.6.2.tar.gz", hash = "sha256:e1fea1fe471b9ff8332e229df3cb7de4f53eeea4998d3b6bfff542115e998bd2"},
+]
+
+[package.extras]
+docs = ["furo (>=2022.12.7)", "proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-autodoc-typehints (>=1.19.5)"]
+test = ["appdirs (==1.4.4)", "covdefaults (>=2.2.2)", "pytest (>=7.2)", "pytest-cov (>=4)", "pytest-mock (>=3.10)"]
+
+[package.source]
+type = "legacy"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+reference = "tsinghua"
+
+[[package]]
 name = "playwright"
 version = "1.27.1"
 description = "A high-level API to automate web browsers"
@@ -3135,23 +3218,6 @@ files = [
 greenlet = "1.1.3"
 pyee = "8.1.0"
 typing-extensions = {version = "*", markers = "python_version <= \"3.8\""}
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
-[[package]]
-name = "poyo"
-version = "0.5.0"
-description = "A lightweight YAML Parser for Python. 🐓"
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-files = [
-    {file = "poyo-0.5.0-py2.py3-none-any.whl", hash = "sha256:3e2ca8e33fdc3c411cd101ca395668395dd5dc7ac775b8e809e3def9f9fe041a"},
-    {file = "poyo-0.5.0.tar.gz", hash = "sha256:e26956aa780c45f011ca9886f044590e2d8fd8b61db7b1c1cf4e0869f48ed4dd"},
-]
 
 [package.source]
 type = "legacy"
@@ -5307,6 +5373,32 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 reference = "tsinghua"
 
 [[package]]
+name = "virtualenv"
+version = "20.17.1"
+description = "Virtual Python Environment builder"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "virtualenv-20.17.1-py3-none-any.whl", hash = "sha256:ce3b1684d6e1a20a3e5ed36795a97dfc6af29bc3970ca8dab93e11ac6094b3c4"},
+    {file = "virtualenv-20.17.1.tar.gz", hash = "sha256:f8b927684efc6f1cc206c9db297a570ab9ad0e51c16fa9e45487d36d1905c058"},
+]
+
+[package.dependencies]
+distlib = ">=0.3.6,<1"
+filelock = ">=3.4.1,<4"
+platformdirs = ">=2.4,<3"
+
+[package.extras]
+docs = ["proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-argparse (>=0.3.2)", "sphinx-rtd-theme (>=1)", "towncrier (>=22.8)"]
+testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7)", "packaging (>=21.3)", "pytest (>=7.0.1)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.2)", "pytest-mock (>=3.6.1)", "pytest-randomly (>=3.10.3)", "pytest-timeout (>=2.1)"]
+
+[package.source]
+type = "legacy"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+reference = "tsinghua"
+
+[[package]]
 name = "w3lib"
 version = "2.1.1"
 description = "Library of web-related functions"
@@ -5670,4 +5762,4 @@ reference = "tsinghua"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "94d5758ab16524b9618dd992d8cae1ce34d6ad2de5037371b18368c9ada96109"
+content-hash = "382313ecf7f4d13ebbe3794ea5363b8340a5c40adfb1f8a1897f8110888c942e"

@@ -1,0 +1,6 @@
+新好友见面语: 你好呀，这里是{nickname}，对我说“njs帮助”查看帮助吧~
+新群见面语: 大家好呀，这里是{nickname}，对我说“njs帮助”查看帮助吧~
+群新人欢迎语:
+  默认: 欢迎新人酱~{at_user}{img:.\LittlePaimon\plugins\NoticeAndRequest\resource\hy.png}
+  123456789: 针对群123456789的欢迎语
+群欢迎语禁用列表: []

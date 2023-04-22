@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=700px,initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    {src}
+  </script>
+
+  <style type="text/tailwindcss">
+    {style}
+  </style>
+  
+</head>
+<body>
+
+  <div class="bg-cover" style="background-image: url({banner});">
+    <!-- <div class="bg-gradient-to-b from-sky-800 to-transparent" style="padding-bottom: 30px;">
+      <t1 style="padding-left: 20px;">战地五战绩查询          </t1>
+    </div> -->
+    <div style="margin-left:40px;padding-top: 60px;padding-bottom: 20px; margin-right: 350px;" class="flex flex-col flex-nowarp justify-center items-center">
+      <img src="{d[avatar]}" alt="avatar" class="shadow-xl rounded-lg" width="128px"/>
+      <div class="font-bold text-3xl shadow-xl">{d[userName]}</div>
+      <div class="flex items-center font-semibold text-gray-200">
+        <img src="{d[rankImg]}" width="32px"/>
+        &nbsp;
+        Rank {d[rank]}
+      </div>
+      <div class="font-semibold text-gray-200">游戏时间：{d[__hoursPlayed]:.1f} h</div>
+      
+    </div>
+    <div class="bg-gradient-to-b from-transparent to-bb" style="padding: 3%;"> &nbsp;</div>
+  </div>
+  <t1>基本信息</t1>
+  <div class="flex flex-col justify-center grid grid-cols-5 gap-4 rounded-lg" style="margin:0px 20px; padding: 10px; background-color: rgba(255,255,255,0.05);">
+    <div>
+      <div class="text-1xl text-yellow-400">击杀</div>
+      <div class="text-2xl font-bold font-mono">{d[kills]:,}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">死亡</div>
+      <div class="text-2xl font-bold font-mono">{d[deaths]:,}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">K/D</div>
+      <div class="text-2xl font-bold font-mono">{d[killDeath]}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">KPM</div>
+      <div class="text-2xl font-bold font-mono">{d[killsPerMinute]}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">SPM</div>
+      <div class="text-2xl font-bold font-mono">{d[scorePerMinute]:,}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">拉人数</div>
+      <div class="text-2xl font-bold font-mono">{d[revives]:,.0f}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">爆头数</div>
+      <div class="text-2xl font-bold font-mono">{d[headShots]:,}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">最远爆头</div>
+      <div class="text-2xl font-bold font-mono">{d[longestHeadShot]:,.0f}m</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">胜利场数</div>
+      <div class="text-2xl font-bold font-mono">{d[wins]:,}</div>
+    </div>
+    <div>
+      <div class="text-1xl text-yellow-400">最高连杀</div>
+      <div class="text-2xl font-bold font-mono">{d[highestKillStreak]:,}</div>
+    </div>
+  </div>
+  <t1>武器信息</t1>
+  <br/>
+  <div class="flex flex-col justify-center gap-2" style="margin:0px 20px; ">
+    {weapons}
+    <div class="text-center text-slate-400">
+      使用
+      <span class="text-sky-500">
+        {prefix}{game} [玩家id/me] weapons
+      </span>
+      查看更多数据
+    </div>
+  </div>
+  <t1>载具信息</t1>
+  <div class="flex flex-col justify-center gap-2" style="margin:0px 20px;">
+    {vehicles}
+    <div class="text-center text-slate-400">
+      使用
+      <span class="text-sky-500">
+        {prefix}{game} [玩家id/me] vehicles
+      </span>
+      查看更多数据
+    </div>
+  </div>
+  <div class="bg-gradient-to-b from-bb via-sky-900 to-sky-900 flex flex-col justify-center items-center text-slate-400" style="padding-top: 30px; margin-top:30px; padding-bottom:20px;">
+    <span>powered by bfchat by nightskym31</span>
+    <span>数据更新时间：{update_time}</span>
+    
+
+  </div>
+</body>
+</html>

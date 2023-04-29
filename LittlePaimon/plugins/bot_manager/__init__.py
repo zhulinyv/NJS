@@ -23,6 +23,7 @@ from LittlePaimon.config import config
 from LittlePaimon.utils import DRIVER, NICKNAME, __version__
 from LittlePaimon.utils.files import load_json, save_json
 from LittlePaimon.utils.update import check_update, update
+from LittlePaimon.utils.requests import aiorequests
 
 __plugin_meta__ = PluginMetadata(
     name='脑积水管理',
@@ -58,6 +59,20 @@ check_update_cmd = on_command(
         'pm_name': 'bot_check_update',
         'pm_description': '从Git检查bot更新情况，需超级用户权限',
         'pm_usage': '@bot 检查更新',
+        'pm_priority': 1,
+    },
+)
+update_history = on_command(
+    '更新记录',
+    aliases={'更新历史记录'},
+    permission=SUPERUSER,
+    rule=to_me(),
+    priority=1,
+    block=True,
+    state={
+        'pm_name': 'update_history',
+        'pm_description': '从Git查看bot更新历史记录，需超级用户权限',
+        'pm_usage': '@bot 更新历史记录',
         'pm_priority': 1,
     },
 )
@@ -113,6 +128,18 @@ async def _(event: MessageEvent):
 async def _(event: MessageEvent):
     result = await check_update()
     await check_update_cmd.finish(result, at_sender=True)
+
+
+@update_history.handle()
+async def _():
+    resp = await aiorequests.get('https://api.github.com/repos/zhulinyv/NJS/commits')
+    data = resp.json()
+    if not isinstance(data, list):
+        await update_history.finish("获取更新历史记录失败，可能是网络问题，请稍后再试", at_sender=True)
+    msg = "更新记录如下: \n"
+    for i in range(10):
+        msg += data[i]["commit"]["committer"]["data"] + "\n" + data[i]["commit"]["message"] + "\n----------\n"
+    await update_history.finish(msg, at_sender=True)
 
 
 @reboot_cmd.handle()

@@ -1,25 +1,39 @@
 import re
 import traceback
+from typing import List, Union
+
+from nonebot import on_command, on_message, require
+from nonebot.adapters.onebot.v11 import Bot as V11Bot
+from nonebot.adapters.onebot.v11 import GroupMessageEvent as V11GMEvent
+from nonebot.adapters.onebot.v11 import Message as V11Msg
+from nonebot.adapters.onebot.v11 import MessageEvent as V11MEvent
+from nonebot.adapters.onebot.v11 import MessageSegment as V11MsgSeg
+from nonebot.adapters.onebot.v12 import Bot as V12Bot
+from nonebot.adapters.onebot.v12 import Message as V12Msg
+from nonebot.adapters.onebot.v12 import MessageEvent as V12MEvent
+from nonebot.adapters.onebot.v12 import MessageSegment as V12MsgSeg
 from nonebot.log import logger
-from nonebot.typing import T_State
-from nonebot.rule import Rule, to_me
+from nonebot.params import CommandArg, EventMessage, EventPlainText
 from nonebot.permission import SUPERUSER
 from nonebot.plugin import PluginMetadata
-from nonebot import on_command, on_message, require
-from nonebot.params import CommandArg, EventMessage, EventPlainText
-from nonebot.adapters.onebot.v11 import (
-    Bot,
-    MessageEvent,
-    GroupMessageEvent,
-    Message,
-    MessageSegment,
-)
+from nonebot.rule import Rule, to_me
+from nonebot.typing import T_State
 
+require("nonebot_plugin_datastore")
 require("nonebot_plugin_htmlrender")
 
+from nonebot_plugin_datastore.db import post_db_init
+
 from .config import Config
-from .shindanmaker import make_shindan, get_shindan_title, render_shindan_list
-from .shindan_list import add_shindan, del_shindan, set_shindan, get_shindan_list
+from .manager import shindan_manager
+from .shindanmaker import (
+    download_image,
+    get_shindan_title,
+    make_shindan,
+    render_shindan_list,
+)
+
+post_db_init(shindan_manager.load_shindan_records)
 
 __plugin_meta__ = PluginMetadata(
     name="趣味占卜",
@@ -30,7 +44,7 @@ __plugin_meta__ = PluginMetadata(
         "unique_name": "shindan",
         "example": "人设生成 小Q",
         "author": "meetwq <meetwq@gmail.com>",
-        "version": "0.2.11",
+        "version": "0.3.2",
     },
 )
 
@@ -62,23 +76,22 @@ async def _():
 
 
 @cmd_ls.handle()
-async def _():
-    sd_list = get_shindan_list()
-
-    if not sd_list:
+async def _(bot: Union[V11Bot, V12Bot]):
+    if not shindan_manager.shindan_records:
         await cmd_ls.finish("尚未添加任何占卜")
 
-    img = await render_shindan_list(
-        [
-            {"id": id, "command": s["command"], "title": s["title"]}
-            for id, s in sd_list.items()
-        ]
-    )
-    await cmd_ls.finish(MessageSegment.image(img))
+    img = await render_shindan_list(shindan_manager.shindan_records)
+
+    if isinstance(bot, V11Bot):
+        await cmd_ls.finish(V11MsgSeg.image(img))
+    elif isinstance(bot, V12Bot):
+        resp = await bot.upload_file(type="data", name="shindan", data=img)
+        file_id = resp["file_id"]
+        await cmd_ls.finish(V12MsgSeg.image(file_id))
 
 
 @cmd_add.handle()
-async def _(msg: Message = CommandArg()):
+async def _(msg: Union[V11Msg, V12Msg] = CommandArg()):
     arg = msg.extract_plain_text().strip()
     if not arg:
         await cmd_add.finish(add_usage)
@@ -93,18 +106,14 @@ async def _(msg: Message = CommandArg()):
     if not title:
         await cmd_add.finish("找不到该占卜，请检查id")
 
-    sd_list = get_shindan_list()
-    if id in sd_list:
-        await cmd_add.finish("该占卜已存在")
-    if command in sd_list.values():
-        await cmd_add.finish("该指令已存在")
-
-    if add_shindan(id, command, title):
+    if resp := await shindan_manager.add_shindan(id, command, title):
+        await cmd_add.finish(resp)
+    else:
         await cmd_add.finish(f"成功添加占卜“{title}”，可通过“{command} 名字”使用")
 
 
 @cmd_del.handle()
-async def _(msg: Message = CommandArg()):
+async def _(msg: Union[V11Msg, V12Msg] = CommandArg()):
     arg = msg.extract_plain_text().strip()
     if not arg:
         await cmd_del.finish(del_usage)
@@ -113,16 +122,15 @@ async def _(msg: Message = CommandArg()):
         await cmd_del.finish(del_usage)
 
     id = arg
-    sd_list = get_shindan_list()
-    if id not in sd_list:
-        await cmd_del.finish("不存在该占卜")
 
-    if del_shindan(id):
+    if resp := await shindan_manager.remove_shindan(id):
+        await cmd_add.finish(resp)
+    else:
         await cmd_del.finish("成功删除该占卜")
 
 
 @cmd_set.handle()
-async def _(msg: Message = CommandArg()):
+async def _(msg: Union[V11Msg, V12Msg] = CommandArg()):
     arg = msg.extract_plain_text().strip()
     if not arg:
         await cmd_set.finish(set_usage)
@@ -133,49 +141,65 @@ async def _(msg: Message = CommandArg()):
 
     id = args[0]
     mode = args[1]
-    sd_list = get_shindan_list()
-    if id not in sd_list:
-        await cmd_set.finish("不存在该占卜")
 
-    if set_shindan(id, mode):
+    if resp := await shindan_manager.set_shindan_mode(id, mode):
+        await cmd_add.finish(resp)
+    else:
         await cmd_set.finish("设置成功")
 
 
 def sd_handler() -> Rule:
     async def handle(
-        bot: Bot,
-        event: MessageEvent,
+        bot: Union[V11Bot, V12Bot],
+        event: Union[V11MEvent, V12MEvent],
         state: T_State,
-        msg: Message = EventMessage(),
+        msg: Union[V11Msg, V12Msg] = EventMessage(),
         msg_text: str = EventPlainText(),
     ) -> bool:
         async def get_name(command: str) -> str:
             name = ""
-            for msg_seg in msg:
-                if msg_seg.type == "at":
-                    assert isinstance(event, GroupMessageEvent)
-                    info = await bot.get_group_member_info(
-                        group_id=event.group_id, user_id=msg_seg.data["qq"]
-                    )
-                    name = info.get("card", "") or info.get("nickname", "")
-                    break
-            if not name:
-                name = msg_text[len(command) :].strip()
-            if not name:
-                name = event.sender.card or event.sender.nickname
+            if isinstance(bot, V11Bot):
+                assert isinstance(event, V11MEvent)
+                for msg_seg in msg:
+                    if msg_seg.type == "at":
+                        assert isinstance(event, V11GMEvent)
+                        info = await bot.get_group_member_info(
+                            group_id=event.group_id, user_id=msg_seg.data["qq"]
+                        )
+                        name = info.get("card", "") or info.get("nickname", "")
+                        break
+                if not name:
+                    name = msg_text[len(command) :].strip()
+                if not name:
+                    name = event.sender.card or event.sender.nickname
+            elif isinstance(bot, V12Bot):
+                assert isinstance(event, V12MEvent)
+
+                async def get_user_name(user_id: str):
+                    resp = await bot.get_user_info(user_id=user_id)
+                    return resp["user_displayname"] or resp["user_name"]
+
+                for msg_seg in msg:
+                    if msg_seg.type == "mention":
+                        name = await get_user_name(msg_seg.data["user_id"])
+                        break
+                if not name:
+                    name = msg_text[len(command) :].strip()
+                if not name:
+                    name = await get_user_name(event.user_id)
+
             return name or ""
 
-        sd_list = get_shindan_list()
-        sd_list = sorted(
-            sd_list.items(), reverse=True, key=lambda items: items[1]["command"]
-        )
-        for id, s in sd_list:
-            command = s["command"]
-            if msg_text.startswith(command):
-                name = await get_name(command)
-                state["id"] = id
+        for record in sorted(
+            shindan_manager.shindan_records,
+            reverse=True,
+            key=lambda record: record.command,
+        ):
+            if msg_text.startswith(record.command):
+                name = await get_name(record.command)
+                state["id"] = record.shindan_id
                 state["name"] = name
-                state["mode"] = s.get("mode", "image")
+                state["mode"] = record.mode
                 return True
         return False
 
@@ -186,7 +210,7 @@ sd_matcher = on_message(sd_handler(), priority=13)
 
 
 @sd_matcher.handle()
-async def _(state: T_State):
+async def _(bot: Union[V11Bot, V12Bot], state: T_State):
     id: str = state["id"]
     name: str = state["name"]
     mode: str = state["mode"]
@@ -196,14 +220,38 @@ async def _(state: T_State):
         logger.warning(traceback.format_exc())
         await sd_matcher.finish("出错了，请稍后再试")
 
+    msgs: List[Union[str, bytes]] = []
     if isinstance(res, str):
         img_pattern = r"((?:http|https)://\S+\.(?:jpg|jpeg|png|gif|bmp|webp))"
-        message = Message()
-        msgs = re.split(img_pattern, res)
-        for msg in msgs:
-            message.append(
-                MessageSegment.image(msg) if re.match(img_pattern, msg) else msg
-            )
-        await sd_matcher.finish(message)
+        for msg in re.split(img_pattern, res):
+            if re.match(img_pattern, msg):
+                try:
+                    img = await download_image(msg)
+                    msgs.append(img)
+                except:
+                    logger.warning(f"{msg} 下载出错！")
+            else:
+                msgs.append(msg)
     elif isinstance(res, bytes):
-        await sd_matcher.finish(MessageSegment.image(res))
+        msgs.append(res)
+
+    if not msgs:
+        await sd_matcher.finish()
+
+    if isinstance(bot, V11Bot):
+        message = V11Msg()
+        for msg in msgs:
+            if isinstance(msg, bytes):
+                message.append(V11MsgSeg.image(msg))
+            else:
+                message.append(msg)
+    else:
+        message = V12Msg()
+        for msg in msgs:
+            if isinstance(msg, bytes):
+                resp = await bot.upload_file(type="data", name="shindan", data=msg)
+                file_id = resp["file_id"]
+                message.append(V12MsgSeg.image(file_id))
+            else:
+                message.append(msg)
+    await sd_matcher.finish(message)

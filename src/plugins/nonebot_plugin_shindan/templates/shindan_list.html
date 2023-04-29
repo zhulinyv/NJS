@@ -70,15 +70,15 @@
   <body>
     <div class="list">
       <table>
-        {% for shindan in shindan_list %}
+        {% for record in shindan_records %}
         <tr>
           <td>
             <div class="line1">
-              <div class="id">{{ shindan["id"] }}</div>
-              <div class="command">{{ shindan["command"] }}</div>
+              <div class="id">{{ record.shindan_id }}</div>
+              <div class="command">{{ record.command }}</div>
             </div>
             <div class="line2">
-              <div class="title">{{ shindan["title"] }}</div>
+              <div class="title">{{ record.title }}</div>
             </div>
           </td>
         </tr>

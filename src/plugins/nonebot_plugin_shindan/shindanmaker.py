@@ -1,15 +1,16 @@
 import re
 import time
+from pathlib import Path
+from typing import Sequence, Tuple, Union
+
 import httpx
 import jinja2
-from pathlib import Path
 from bs4 import BeautifulSoup, Tag
-from typing import List, Tuple, Union
-
 from nonebot import get_driver
 from nonebot_plugin_htmlrender import html_to_pic
 
 from .config import Config
+from .model import ShindanRecord
 
 shindan_config = Config.parse_obj(get_driver().config.dict())
 
@@ -39,20 +40,32 @@ if shindan_config.shindanmaker_cookie:
 
 @retry
 async def get(client: httpx.AsyncClient, url: str, **kwargs):
-    return await client.get(url, headers=headers, timeout=20, **kwargs)
+    resp = await client.get(
+        url, headers=headers, timeout=20, follow_redirects=True, **kwargs
+    )
+    resp.raise_for_status()
+    return resp
 
 
 @retry
 async def post(client: httpx.AsyncClient, url: str, **kwargs):
-    return await client.post(url, headers=headers, timeout=20, **kwargs)
+    resp = await client.post(
+        url, headers=headers, timeout=20, follow_redirects=True, **kwargs
+    )
+    resp.raise_for_status()
+    return resp
+
+
+async def download_image(url: str) -> bytes:
+    async with httpx.AsyncClient() as client:
+        resp = await get(client, url)
+        return resp.read()
 
 
 async def get_shindan_title(id: str) -> str:
     url = f"https://shindanmaker.com/{id}"
     async with httpx.AsyncClient() as client:
         resp = await get(client, url)
-        if resp.status_code == 302:
-            resp = await get(client, resp.headers["location"])
         dom = BeautifulSoup(resp.text, "lxml")
         title = dom.find("h1", {"id": "shindanTitle"})
         assert title
@@ -64,11 +77,14 @@ async def make_shindan(id: str, name: str, mode="image") -> Union[str, bytes]:
     seed = time.strftime("%y%m%d", time.localtime())
     async with httpx.AsyncClient() as client:
         resp = await get(client, url)
-        if resp.status_code == 302:
-            resp = await get(client, resp.headers["location"])
         dom = BeautifulSoup(resp.text, "lxml")
         token = dom.find("form", {"id": "shindanForm"}).find("input")["value"]  # type: ignore
-        payload = {"_token": token, "shindanName": name + seed, "hiddenName": "名無しのR"}
+        payload = {
+            "_token": token,
+            "shindanName": name + seed,
+            "hiddenName": "名無しのR",
+            "type": "name",
+        }
         resp = await post(client, url, json=payload)
 
     content = resp.text
@@ -90,11 +106,23 @@ async def make_shindan(id: str, name: str, mode="image") -> Union[str, bytes]:
         return result.text.replace(seed, "")
 
 
+def remove_shindan_effects(content: Tag, type: str):
+    for tag in content.find_all("span", {"class": "shindanEffects", "data-mode": type}):
+        assert isinstance(tag, Tag)
+        if noscript := tag.find_next("noscript"):
+            noscript.replace_with_children()
+            tag.extract()
+
+
 async def render_html(content: str) -> Tuple[str, bool]:
     dom = BeautifulSoup(content, "lxml")
     result_js = str(dom.find("script", string=re.compile(r"saveResult")))
     title = str(dom.find("h1", {"id": "shindanResultAbove"}))
-    result = str(dom.find("div", {"id": "shindanResultBlock"}))
+    result = dom.find("div", {"id": "shindanResultBlock"})
+    assert isinstance(result, Tag)
+    remove_shindan_effects(result, "ef_shuffle")
+    remove_shindan_effects(result, "ef_typing")
+    result = str(result)
     has_chart = "chart.js" in content
 
     shindan_tpl = env.get_template("shindan.html")
@@ -104,9 +132,9 @@ async def render_html(content: str) -> Tuple[str, bool]:
     return html, has_chart
 
 
-async def render_shindan_list(sd_list: List[dict]) -> bytes:
+async def render_shindan_list(shindan_records: Sequence[ShindanRecord]) -> bytes:
     tpl = env.get_template("shindan_list.html")
-    html = await tpl.render_async(shindan_list=sd_list)
+    html = await tpl.render_async(shindan_records=shindan_records)
     return await html_to_pic(
         html,
         template_path=f"file://{tpl_path.absolute()}",

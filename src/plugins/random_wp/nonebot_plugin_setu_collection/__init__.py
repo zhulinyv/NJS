@@ -130,7 +130,10 @@ async def _(bot: Bot, event: MessageEvent):
             image = Message()
             for i in range(N):
                 image +=  MessageSegment.image(file = image_list[i])
-            await setu.finish(Message(msg) + image, at_sender = True)
+            msg_id = await setu.send(Message(msg) + image, at_sender = True)
+            msg_id = msg_id['message_id']
+            await asyncio.sleep(60)
+            await bot.delete_msg(message_id=msg_id)
         else:
             msg_list =[]
             for i in range(N):
@@ -145,9 +148,15 @@ async def _(bot: Bot, event: MessageEvent):
                         }
                     )
             if isinstance(event,GroupMessageEvent):
-                await bot.send_group_forward_msg(group_id = event.group_id, messages = msg_list)
+                msg_id = await bot.send_group_forward_msg(group_id = event.group_id, messages = msg_list)
+                msg_id = msg_id['message_id']
+                await asyncio.sleep(60)
+                await bot.delete_msg(message_id=msg_id)
             else:
-                await bot.send_private_forward_msg(user_id = event.user_id, messages = msg_list)
+                msg_id = await bot.send_private_forward_msg(user_id = event.user_id, messages = msg_list)
+                msg_id = msg_id['message_id']
+                await asyncio.sleep(60)
+                await bot.delete_msg(message_id=msg_id)
     # else:
     #     msg += "获取图片失败。"
     #     await setu.finish(msg, at_sender = True)

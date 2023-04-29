@@ -13,5 +13,5 @@ form = Form(title='绑定Cookie', api=api, body=[
     # ], joinValues=False, extractValue=True)
 ], actions=[Action(label='绑定', level=LevelEnum.success, confirmText='我已知晓Cookie的重要性，确认绑定', type='submit'),
             Action(label='重置', level=LevelEnum.warning, type='reset')])
-footer = Html(html=f'<div class="p-2 text-center bg-blue-100">Copyright © 2021 - 2022 <a href="https://github.com/CMHopeSunshine/LittlePaimon" target="_blank" class="link-secondary">LittlePaimon v{__version__}</a> X<a target="_blank" href="https://github.com/baidu/amis" class="link-secondary" rel="noopener"> amis v2.2.0</a></div>')
+footer = Html(html=f'<div class="p-2 text-center bg-blue-100">Copyright © 2021 - 2022 <a href="https://github.com/zhulinyv/NJS" target="_blank" class="link-secondary">NJS v{__version__}</a> X<a target="_blank" href="https://github.com/baidu/amis" class="link-secondary" rel="noopener"> amis v2.2.0</a></div>')
 bind_cookie_page = Page(title='绑定Cookie', body=[collapse, Divider(), form, footer])

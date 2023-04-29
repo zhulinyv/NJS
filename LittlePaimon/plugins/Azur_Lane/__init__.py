@@ -1,18 +1,13 @@
 from nonebot import on_command
-from nonebot.adapters.onebot.v11 import Message, MessageEvent, MessageSegment
+from nonebot.adapters.onebot.v11 import Message, MessageSegment
 from nonebot.params import CommandArg
 from nonebot.plugin import PluginMetadata
-from nonebot.rule import Rule
 
-from LittlePaimon import SUPERUSERS
-from LittlePaimon.config import config
 from LittlePaimon.utils.brower import blhx_screenshot
 
 from urllib.parse import quote
 import string
 
-async def permission_check(event: MessageEvent) -> bool:
-    return True if config.screenshot_enable else event.user_id not in SUPERUSERS
 
 
 __plugin_meta__ = PluginMetadata(
@@ -29,12 +24,9 @@ __plugin_meta__ = PluginMetadata(
 screenshot_cmd = on_command(
     '碧蓝航线wiki',
     aliases={'blhx wiki', '碧蓝航线', 'al wiki', 'az', 'blhx'},
-    priority=10, block=True, rule=Rule(permission_check), state={
-    'pm_name':        '碧蓝航线wiki',
-    'pm_description': '截图获取碧蓝任意角色武器或其它模块的wiki',
-    'pm_usage':       '碧蓝航线wiki<角色名|武器名|其它>',
-    'pm_priority':    1
-})
+    priority=10,
+    block=True
+)
 
 
 @screenshot_cmd.handle()

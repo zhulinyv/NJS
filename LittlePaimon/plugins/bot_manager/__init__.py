@@ -4,6 +4,8 @@ import os
 import random
 import sys
 from pathlib import Path
+import git
+import datetime
 
 from nonebot import get_app, get_bot, on_command
 from nonebot.adapters.onebot.v11 import (
@@ -18,6 +20,8 @@ from nonebot.permission import SUPERUSER
 from nonebot.plugin import PluginMetadata
 from nonebot.rule import to_me
 from nonebot.typing import T_State
+from nonebot.log import logger
+from git.exc import InvalidGitRepositoryError
 
 from LittlePaimon.config import config
 from LittlePaimon.utils import DRIVER, NICKNAME, __version__
@@ -132,15 +136,14 @@ async def _(event: MessageEvent):
 
 @update_history.handle()
 async def _():
+    result = await check_update()
     resp = await aiorequests.get('https://api.github.com/repos/zhulinyv/NJS/commits')
     data = resp.json()
-    if not isinstance(data, list):
-        await update_history.finish("获取更新历史记录失败，可能是网络问题，请稍后再试", at_sender=True)
     msg = "更新记录如下: \n"
     for i in range(10):
-        msg += data[i]["commit"]["committer"]["date"] + "\n" + data[i]["commit"]["message"] + "\n----------\n"
+        msg += (datetime.datetime.strptime(data[i]["commit"]["committer"]["date"], '%Y-%m-%dT%H:%M:%SZ') + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S') + "\n" + data[i]["commit"]["message"] + "\n----------\n"
     msg = msg.replace(":art:","🎨").replace(":zap:","⚡️").replace(":fire:","🔥").replace(":bug:","🐛").replace(":ambulance:","🚑️").replace(":sparkles:","✨").replace(":memo:","📝").replace(":rocket:","🚀").replace(":lipstick:","💄").replace(":tada:","🎉").replace(":white_check_mark:","✅").replace(":lock:","🔒️").replace(":closed_lock_with_key:","🔐").replace(":bookmark:","🔖").replace(":rotating_light:","🚨").replace(":construction:","🚧").replace(":green_heart:","💚").replace(":arrow_down:","⬇️").replace(":arrow_up:","⬆️").replace(":pushpin:","📌").replace(":construction_worker:","👷").replace(":chart_with_upwards_trend:","📈").replace(":recycle:","♻️").replace(":heavy_plus_sign:","➕").replace(":heavy_minus_sign:","➖").replace(":wrench:","🔧").replace(":hammer:","🔨").replace(":globe_with_meridians:","🌐").replace(":pencil2:","✏️").replace(":poop:","💩").replace(":rewind:","⏪️").replace(":twisted_rightwards_arrows:","🔀").replace(":package:","📦️").replace(":alien:","👽️").replace(":truck:","🚚").replace(":page_facing_up:","📄").replace(":boom:","💥").replace(":bento:","🍱").replace(":wheelchair:","♿️").replace(":bulb:","💡").replace(":beers:","🍻").replace(":speech_balloon:","💬").replace(":card_file_box:","🗃️").replace(":loud_sound:","🔊").replace(":mute:","🔇").replace(":busts_in_silhouette:","👥").replace(":children_crossing:","🚸").replace(":building_construction:","🏗️").replace(":iphone:","📱").replace(":clown_face:","🤡").replace(":egg:","🥚").replace(":see_no_evil:","🙈").replace(":camera_flash:","📸").replace(":alembic:","⚗️").replace(":mag:","🔍️").replace(":label:","🏷️").replace(":seedling:","🌱").replace(":triangular_flag_on_post:","🚩").replace(":goal_net:","🥅").replace(":dizzy:","💫").replace(":wastebasket:","🗑️").replace(":passport_control:","🛂").replace(":adhesive_bandage:","🩹").replace(":monocle_face:","🧐").replace(":coffin:","⚰️").replace(":test_tube:","🧪").replace(":necktie:","👔").replace(":stethoscope:","🩺").replace(":bricks:","🧱").replace(":technologist:","🧑‍💻").replace(":money_with_wings:","💸").replace(":thread:","🧵").replace(":safety_vest:", "🦺")
-    msg += "此处仅展示最近 10 条记录捏~"
+    msg += "此处仅展示最近 10 条远程更新记录捏~\n" + result
     await update_history.finish(msg, at_sender=True)
 
 

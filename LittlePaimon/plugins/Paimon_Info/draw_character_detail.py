@@ -281,7 +281,7 @@ async def draw_chara_detail(uid: str, info: Character):
                    fm.get('优设标题黑.ttf', 33),
                    '#afafaf',
                    'center')
-    await img.text('Created by LittlePaimon | Powered by Enka.Network',
+    await img.text('Created by NJS | Powered by Enka.Network',
                    (0, 1080),
                    (img.height - 80, img.height - 40),
                    fm.get('优设标题黑.ttf', 33),

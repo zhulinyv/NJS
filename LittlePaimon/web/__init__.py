@@ -26,7 +26,7 @@ responseAdaptor(api, payload, query, request, response) {
 },
 '''
 
-icon_path = 'https://s1.ax1x.com/2023/02/05/pS62DJK.png'
+icon_path = 'https://s1.ax1x.com/2023/04/29/p91qf78.png'
 
 
 @DRIVER.on_startup
@@ -42,33 +42,33 @@ def init_web():
     async def admin():
         if config.admin_enable:
             return admin_app.render(
-                site_title='LittlePaimon 后台管理',
+                site_title='NJS 后台管理',
                 site_icon=icon_path,
                 theme=config.admin_theme,
                 requestAdaptor=requestAdaptor,
                 responseAdaptor=responseAdaptor,
             )
         else:
-            return blank_page.render(site_title='LittlePaimon', site_icon=icon_path)
+            return blank_page.render(site_title='NJS', site_icon=icon_path)
 
     @app.get('/LittlePaimon/login', response_class=HTMLResponse)
     async def login():
         if config.admin_enable:
             return login_page.render(
-                site_title='登录 | LittlePaimon 后台管理',
+                site_title='登录 | NJS 后台管理',
                 site_icon=icon_path,
                 theme=config.admin_theme,
             )
         else:
-            return blank_page.render(site_title='LittlePaimon', site_icon=icon_path)
+            return blank_page.render(site_title='NJS', site_icon=icon_path)
 
     @app.get('/LittlePaimon/cookie', response_class=HTMLResponse)
     async def bind_cookie():
         if config.CookieWeb_enable:
             return bind_cookie_page.render(
-                site_title='绑定Cookie | LittlePaimon',
+                site_title='绑定Cookie | NJS',
                 site_icon=icon_path,
                 theme=config.admin_theme,
             )
         else:
-            return blank_page.render(site_title='LittlePaimon', site_icon=icon_path)
+            return blank_page.render(site_title='NJS', site_icon=icon_path)

@@ -25,16 +25,16 @@ from amis import (
 logo = Html(
     html=f'''
 <p align="center">
-    <a href="https://github.com/CMHopeSunshine/LittlePaimon/">
+    <a href="https://github.com/zhulinyv/NJS">
         <img src="https://s1.ax1x.com/2023/02/05/pS62DJK.png"
          width="256" height="256" alt="LittlePaimon">
     </a>
 </p>
-<h1 align="center">LittlePaimon 控制台 V{__version__}</h1>
+<h1 align="center">NJS 控制台 V{__version__}</h1>
 <div align="center">
-    <a href="https://github.com/CMHopeSunshine/LittlePaimon" target="_blank">
+    <a href="https://github.com/zhulinyv/NJS" target="_blank">
     Github仓库</a> &nbsp; · &nbsp;
-    <a href="https://docs.paimon.cherishmoon.fun/"
+    <a href="https://github.com/zhulinyv/NJS/blob/Bot/README.md"
      target="_blank">文档</a>
 </div>
 <br>

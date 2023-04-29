@@ -12,7 +12,7 @@ from .logger import logger
 
 
 async def check_update():
-    resp = await aiorequests.get('https://api.github.com/repos/CMHopeSunshine/LittlePaimon/commits')
+    resp = await aiorequests.get('https://api.github.com/repos/zhulinyv/NJS/commits')
     data = resp.json()
     if not isinstance(data, list):
         return '检查更新失败，可能是网络问题，请稍后再试'

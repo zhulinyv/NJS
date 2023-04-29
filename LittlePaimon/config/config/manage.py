@@ -13,7 +13,7 @@ class ConfigManager:
     @classmethod
     def set_config(cls, config_name: str, value: any):
         """
-        设置派蒙配置项
+        设置脑积水配置项
             :param config_name: 配置名
             :param value: 新配置值
         """

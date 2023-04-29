@@ -29,9 +29,10 @@
 | BOT_NICKNAME | str | 脑积水 | bot 的昵称 |
 | BOT_MASTER | str | (๑•小丫头片子•๑) | bot 主人的昵称 |
 | CHATGPT_SESSION_TOKEN | str | None | ChatGPT 的 session token (获取看下文)(如配置则优先使用) |
+| CHATGPT_MODEL | str | None | 模型，免费账号只有一个，PLUS账号可使用`gpt-4` |
 | CHATGPT_ACCOUNT | str | None | ChatGPT 的登录邮箱(不配置则使用 session token) |
 | CHATGPT_PASSWORD | str | None | ChatGPT 的登录密码(不配置则使用 session token) |
-| CHATGPT_REFRESH_INTERVAL	 | int | 30 | ChatGPT 的 session token 自动刷新时间(秒) |
+| CHATGPT_REFRESH_INTERVAL | int | 30 | ChatGPT 的 session token 自动刷新时间(秒) |
 | CHATGPT_TIMEOUT | int | 15 | 请求超时的时间 |
 | CHATGPT_API | str | [https://chat.openai.com/](https://chat.openai.com/) | API 地址，可配置反代 |
 

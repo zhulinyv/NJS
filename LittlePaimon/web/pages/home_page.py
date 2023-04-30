@@ -27,7 +27,7 @@ logo = Html(
 <p align="center">
     <a href="https://github.com/zhulinyv/NJS">
         <img src="https://s1.ax1x.com/2023/04/29/p91qf78.png"
-         width="256" height="256" alt="LittlePaimon">
+         width="256" height="256" alt="NJS">
     </a>
 </p>
 <h1 align="center">NJS 控制台 V{__version__}</h1>

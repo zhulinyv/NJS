@@ -18,7 +18,7 @@ header = Flex(
 
 
 admin_app = App(
-    brandName='LittlePaimon',
+    brandName='NJS',
     logo='https://s1.ax1x.com/2023/04/29/p91qf78.png',
     header=header,
     pages=[

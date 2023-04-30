@@ -199,8 +199,6 @@ poetry install
 
 注意: 配置项较多, 只有少部分是必须的, 可以按需配置。
 
-目前只有 ChatGPT, Apex, WoWs, 和风天气, Ai画图, 颜值评分, BingGPT 这几个必需 apikey。
-
 ### 9️⃣ 登录 脑积水
 
 1、在 NJS 目录中, 输入 `poetry run nb run` 或 `poetry run python bot.py` 来运行脑积水。首次启动较慢, 耐心等待。
@@ -293,4 +291,4 @@ poetry install
 
 ## 👥 鸣谢: 
 
-感谢 [NoneBot](https://github.com/nonebot/nonebot2)中的诸多贡献者。
+感谢 [NoneBot](https://github.com/nonebot/nonebot2) 中的诸多贡献者。

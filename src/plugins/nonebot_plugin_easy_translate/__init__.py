@@ -54,10 +54,7 @@ async def handle_fanyi(matchgroup=RegexGroup()):
     if matchgroup[0] == "翻译":
         language = detect(in_)
         if language != "zh-cn":
-            if language in ["zh-TW", "en", "ja", "ko", "fr", "ru", "de"]:
-                from_ = language
-            else:
-                await fanyi.finish(f"不支持 {language} 语种捏~", at_sender=True)
+            from_ = language
             to_ = "zh-CN"
         else:
             from_ = "zh-CN"

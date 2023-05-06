@@ -28,12 +28,29 @@ class RSSNewsModel(Model):
         table = "uo_rss_news"  # uo = UnOfficial
 
 
+class MAACopilotSubsModel(Model):
+    """抄作业"""
+    sub_groups = fields.CharField(max_length=255)               # 哪些群
+    sub_keyword = fields.CharField(max_length=255, null=True)   # 什么关键词
+    latest_upload_time = fields.BigIntField(default=0)          # 最新上传时间
+
+    latest_id = fields.BigIntField(default=0)                   # 作业编号
+    operators = fields.JSONField(null=True)                     # 阵容(干员、技能)
+    stage = fields.CharField(max_length=255, null=True)         # 关卡
+    title = fields.CharField(max_length=255, null=True)         # 作业标题
+    details = fields.CharField(max_length=255, null=True)       # 简介
+
+    class Meta:
+        table = "uo_maa_copilot_subs"  # uo = UnOfficial
+
+
 PLUGIN_SQLITE_MODEL_MODULE_NAME = __name__
 
 
 __all__ = [
     "UserSanityModel",
     "RSSNewsModel",
+    "MAACopilotSubsModel",
 
     "PLUGIN_SQLITE_MODEL_MODULE_NAME"
 ]

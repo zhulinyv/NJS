@@ -5,7 +5,9 @@ from .database import *
 from .update import *
 
 from nonebot import on_command, logger
+from nonebot.params import CommandArg
 from nonebot.plugin import PluginMetadata
+from nonebot.adapters.onebot.v11 import Message
 import httpx
 
 
@@ -19,7 +21,7 @@ async def _():
     try:
         async with httpx.AsyncClient() as client:
             await ArknightsGameData(client).download_files()
-            await ArknightsDB.init_data()
+            await ArknightsDB.init_data(force=True)
             await ArknightsGameImage(client).download_files()
     except (httpx.ConnectError, httpx.RemoteProtocolError, httpx.TimeoutException) as e:
         logger.error("下载方舟游戏素材请求出错或连接超时，请修改代理、重试或手动下载：")
@@ -30,9 +32,14 @@ async def _():
 
 
 @init_db.handle()
-async def _():
+async def _(args: Message = CommandArg()):
     await update_game_resource.send("开始更新游戏数据库，视磁盘读写性能需1分钟左右……")
-    await ArknightsDB.init_data()
+    if args.extract_plain_text().strip() == "-D":
+        await ArknightsDB.drop_data()
+        await update_game_resource.send("已彻底删除原表，开始重新写入数据库……")
+        await ArknightsDB.init_db()
+    else:
+        await ArknightsDB.init_data(force=True)
     await update_game_resource.finish("游戏数据库更新完成！")
 
 
@@ -44,6 +51,7 @@ __plugin_meta__ = PluginMetadata(
         "\n    方舟帮助 => 查看指令列表"
         "\n    更新方舟素材 => 从Github下载游戏素材(json数据与图片)"
         "\n    更新方舟数据库 => 更新本地sqlite数据库"
+        "\n    更新方舟数据库 -D => 删除原数据库各表并重新写入"
     ),
     extra={
         "name": "update_plugin_data",

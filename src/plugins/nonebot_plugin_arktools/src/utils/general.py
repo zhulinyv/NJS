@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Union, Dict, List
 from nonebot import get_driver
 from aiofiles import open as aopen
+from nonebot import logger
 
 from ..configs import PathConfig
 
@@ -21,6 +22,8 @@ EQUIP_FILE = SUB_PROF_FILE
 TEAM_FILE = gamedata_path / "excel" / "handbook_team_table.json"
 SWAP_PATH = data_path / "arknights" / "processed_data"
 GACHA_PATH = gamedata_path / "excel" / "gacha_table.json"
+STAGE_PATH = gamedata_path / "excel" / "stage_table.json"
+HANDBOOK_STAGE_PATH = gamedata_path / "excel" / "handbook_info_table.json"
 
 
 async def _name_code_swap(
@@ -31,6 +34,7 @@ async def _name_code_swap(
         *,
         layer: tuple = (0, None),
         name_key: str = "name",
+        code_key: str = None,
         data: Union[Dict, List] = None
 ):
     """
@@ -42,6 +46,7 @@ async def _name_code_swap(
     :param type_: name2code / code2name
     :param layer: 有些源文件不是一层映射，如 arknights_item_table，需要向深 1 层进入 "items"，对应 (1, "items")
     :param name_key: 有些源文件表示名字的键不叫 name，如 uniequip_table 的叫 "subProfessionName",
+    :param code_key: 有些文件要转换的代码名不是键名，如 handbook_stage 的在值中，名为 code
     :param data: 没有源文件的，直接用data写入
     :return:
     """
@@ -51,12 +56,12 @@ async def _name_code_swap(
     if swap_file.exists():
         async with aopen(swap_file, "r", encoding="utf-8") as fp:
             mapping = json.loads(await fp.read())
-        return mapping[type_].get(value, None)
+        return mapping[type_].get(value, value)
 
     if data:
         async with aopen(swap_file, "w", encoding="utf-8") as fp:
             await fp.write(json.dumps(data, ensure_ascii=False))
-        return data[type_].get(value, None)
+        return data[type_].get(value, value)
 
     os.makedirs(swap_file.parent, exist_ok=True)
     mapping = {"name2code": {}, "code2name": {}}
@@ -65,14 +70,14 @@ async def _name_code_swap(
     for i in range(layer[0]):
         data = data[layer[i+1]]
 
-    codes = list(data.keys())
+    codes = [_[code_key] for _ in data.values()] if code_key else list(data.keys())
     names = [_[name_key] for _ in data.values()]
     mapping["name2code"] = dict(zip(names, codes))
     mapping["code2name"] = dict(zip(codes, names))
     async with aopen(swap_file, "w", encoding="utf-8") as fp:
         await fp.write(json.dumps(mapping, ensure_ascii=False))
 
-    return mapping[type_].get(value, None)
+    return mapping[type_].get(value, value)
 
 
 async def character_swap(value: str, type_: str = "name2code") -> str:
@@ -156,15 +161,31 @@ async def gacha_rule_swap(value: str, type_: str = "name2code") -> str:
     return data[type_][value]
 
 
+async def stage_swap(value: str, type_: str = "name2code") -> str:
+    """关卡的名字-id互相查询，默认名字查id"""
+    swap_file = SWAP_PATH / "stage_swap.json"
+    source_file = STAGE_PATH
+    return await _name_code_swap(value, swap_file, source_file, type_, layer=(1, "stages"))
+
+
+async def handbook_stage_swap(value: str, type_: str = "name2code") -> str:
+    """悖论模拟的名字-id互相查询，默认名字查id"""
+    swap_file = SWAP_PATH / "handbook_stage_swap.json"
+    source_file = HANDBOOK_STAGE_PATH
+    return await _name_code_swap(value, swap_file, source_file, type_, layer=(1, "handbookStageData"), code_key="code")
+
+
 async def nickname_swap(value: str) -> str:
     """干员昵称/外号转换"""
     swap_file = SWAP_PATH / "nicknames.json"
-    if not swap_file.exists():
-        os.makedirs(swap_file.parent, exist_ok=True)
-        return None
-
     async with aopen(swap_file, "r", encoding="utf-8") as fp:
         data = json.loads(await fp.read())
+
+    for k, v in data.items():
+        if value == k or value in v:
+            logger.info(f"{value} -> {k}")
+            return k
+    return value
 
 
 async def get_recruitment_available() -> List[str]:
@@ -189,6 +210,10 @@ __all__ = [
     "prof_swap",
     "faction_swap",
     "gacha_rule_swap",
+    "stage_swap",
+    "handbook_stage_swap",
+
+    "nickname_swap",
 
     "get_recruitment_available"
 ]

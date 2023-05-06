@@ -29,6 +29,7 @@ class CharacterModel(Model):
     canUseActivityPotentialItem = fields.BooleanField(null=True)
     potentialItemId = fields.CharField(null=True, max_length=255)
     activityPotentialItemId = fields.CharField(null=True, max_length=255)
+    classicPotentialItemId = fields.CharField(null=True, max_length=255)
     nationId = fields.CharField(null=True, max_length=255)
     groupId = fields.CharField(null=True, max_length=255)
     teamId = fields.CharField(null=True, max_length=255)
@@ -121,6 +122,27 @@ class HandbookInfoModel(Model):
 
     class Meta:
         table = "handbook_info"
+
+
+class HandbookStageModel(Model):
+    """悖论模拟"""
+    charId = fields.CharField(null=True, max_length=255)
+    stageId = fields.CharField(null=True, max_length=255)
+    levelId = fields.CharField(null=True, max_length=255)
+    zoneId = fields.CharField(null=True, max_length=255)
+    code = fields.CharField(null=True, max_length=255)
+    name = fields.CharField(null=True, max_length=255)
+    loadingPicId = fields.CharField(null=True, max_length=255)
+    description = fields.CharField(null=True, max_length=255)
+    unlockParam = fields.JSONField(null=True)
+    rewardItem = fields.JSONField(null=True)
+    stageNameForShow = fields.CharField(null=True, max_length=255)
+    zoneNameForShow = fields.CharField(null=True, max_length=255)
+    picId = fields.CharField(null=True, max_length=255)
+    stageGetTime = fields.BigIntField(null=True)
+
+    class Meta:
+        table = "handbook_stage"
 
 
 class ItemModel(Model):
@@ -251,6 +273,61 @@ class SkinModel(Model):
         table = "skin"
 
 
+class StageModel(Model):
+    """关卡"""
+    stageType = fields.CharField(null=True, max_length=255)
+    difficulty = fields.CharField(null=True, max_length=255)
+    performanceStageFlag = fields.CharField(null=True, max_length=255)
+    diffGroup = fields.CharField(null=True, max_length=255)
+    unlockCondition = fields.JSONField(null=True)
+    stageId = fields.CharField(null=True, max_length=255)
+    levelId = fields.CharField(null=True, max_length=255)
+    zoneId = fields.CharField(null=True, max_length=255)
+    code = fields.CharField(null=True, max_length=255)
+    name = fields.CharField(null=True, max_length=255)
+    description = fields.CharField(null=True, max_length=255)
+    hardStagedId = fields.CharField(null=True, max_length=255)
+    dangerLevel = fields.CharField(null=True, max_length=255)
+    dangerPoint = fields.FloatField(null=True)
+    loadingPicId = fields.CharField(null=True, max_length=255)
+    canPractice = fields.BooleanField(null=True)
+    canBattleReplay = fields.BooleanField(null=True)
+    apCost = fields.IntField(null=True)
+    apFailReturn = fields.IntField(null=True)
+    etItemId = fields.CharField(null=True, max_length=255)
+    etCost = fields.IntField(null=True)
+    etFailReturn = fields.IntField(null=True)
+    etButtonStyle = fields.CharField(null=True, max_length=255)
+    apProtectTimes = fields.IntField(null=True)
+    diamondOnceDrop = fields.IntField(null=True)
+    practiceTicketCost = fields.IntField(null=True)
+    dailyStageDifficulty = fields.IntField(null=True)
+    expGain = fields.IntField(null=True)
+    goldGain = fields.IntField(null=True)
+    loseExpGain = fields.IntField(null=True)
+    loseGoldGain = fields.IntField(null=True)
+    passFavor = fields.IntField(null=True)
+    completeFavor = fields.IntField(null=True)
+    slProgress = fields.IntField(null=True)
+    displayMainItem = fields.CharField(null=True, max_length=255)
+    hilightMark = fields.BooleanField(null=True)
+    bossMark = fields.BooleanField(null=True)
+    isPredefined = fields.BooleanField(null=True)
+    isHardPredefined = fields.BooleanField(null=True)
+    isSkillSelectablePredefined = fields.BooleanField(null=True)
+    isStoryOnly = fields.BooleanField(null=True)
+    appearanceStyle = fields.IntField(null=True)
+    stageDropInfo = fields.JSONField(null=True)
+    startButtonOverrideId = fields.CharField(null=True, max_length=255)
+    isStagePatch = fields.BooleanField(null=True)
+    mainStageId = fields.CharField(null=True, max_length=255)
+
+    extra_can_use = fields.BooleanField(null=True)
+
+    class Meta:
+        table = "stage"
+
+
 GAME_SQLITE_MODEL_MODULE_NAME = __name__
 
 
@@ -260,6 +337,7 @@ __all__ = [
     "ConstanceModel",
     "EquipModel",
     "HandbookInfoModel",
+    "HandbookStageModel",
     "ItemModel",
     "RichTextStyleModel",
     "SkillModel",
@@ -267,6 +345,7 @@ __all__ = [
     "WorkshopFormulaModel",
     "GachaPoolModel",
     "SkinModel",
+    "StageModel",
 
     "GAME_SQLITE_MODEL_MODULE_NAME"
 ]

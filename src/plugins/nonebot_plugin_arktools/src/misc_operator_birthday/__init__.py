@@ -11,6 +11,7 @@ from PIL.ImageDraw import Draw
 from io import BytesIO
 
 from ..core.models_v3 import Character
+from ..exceptions import NoHandbookInfoException
 from ..utils import text_border
 from ..configs.path_config import PathConfig
 
@@ -26,12 +27,15 @@ today_birthday = on_command("今日干员")
 async def _():
     today = datetime.now().strftime("%m月%d日").strip("0").replace("月0", "月")
     characters = await Character.all()
+    try:
+        results: List["Character"] = [
+            cht
+            for cht in characters
+            if (await cht.get_handbook_info()).story_text_audio.birthday == today
+        ]
+    except NoHandbookInfoException as e:
+        await today_birthday.finish(f"嗯唔……干员的档案数据不全哦")
 
-    results: List["Character"] = [
-        cht
-        for cht in characters
-        if (await cht.get_handbook_info()).story_text_audio.birthday == today
-    ]
     if not results:
         await today_birthday.finish("哦呀？今天没有干员过生日哦……")
     try:

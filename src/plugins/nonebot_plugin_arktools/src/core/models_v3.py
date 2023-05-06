@@ -329,10 +329,12 @@ class Character:
     @property
     def talents(self) -> List["CharacterTalent"]:
         """天赋们"""
-        return [
-            CharacterTalent(cht=self, data=d)
-            for d in self._data["talents"][0]["candidates"]
-        ]
+        results = []
+        for t in self._data["talents"]:
+            results.extend(
+                CharacterTalent(cht=self, data=d) for d in t["candidates"]
+            )
+        return results
 
     @property
     def potential_ranks(self) -> List["CharacterPotentialRank"]:
@@ -625,9 +627,9 @@ class CharacterTrait:
         return self._character
 
     @property
-    def unlock_condition(self) -> "UnlockCondition":
+    def unlock_condition(self) -> "CharacterUnlockCondition":
         """解锁特性条件"""
-        return UnlockCondition(data=self._data["unlockCondition"])
+        return CharacterUnlockCondition(data=self._data["unlockCondition"])
 
     @property
     def required_potential_rank(self) -> int:
@@ -791,9 +793,9 @@ class CharacterTalent:
         return self._data["rangeId"] or ""
 
     @property
-    def unlock_condition(self) -> "UnlockCondition":
+    def unlock_condition(self) -> "CharacterUnlockCondition":
         """解锁条件"""
-        return UnlockCondition(data=self._data["unlockCondition"])
+        return CharacterUnlockCondition(data=self._data["unlockCondition"])
 
 
 class CharacterPotentialRank:
@@ -872,9 +874,9 @@ class CharacterAllSkill:
         return self._character
 
     @property
-    def unlock_condition(self) -> "UnlockCondition":
+    def unlock_condition(self) -> "CharacterUnlockCondition":
         """解锁条件"""
-        return UnlockCondition(data=self._data["unlockCond"])
+        return CharacterUnlockCondition(data=self._data["unlockCond"])
 
     async def get_cost(self) -> List["Item"]:
         """升级材料"""
@@ -984,6 +986,155 @@ class HandbookInfoStoryTextAudio:
         return re.findall(r"【[身高|高度]*】(.*?)\n", self._data_basic["storyText"])[0].strip()
 
 
+class HandbookStage:
+    """悖论模拟"""
+
+    def __init__(self, id_: str = None, data: Dict[str, Any] = None):
+        self._id = id_
+        self._data = data
+
+    async def init(self, id_: str, data: dict = None) -> "HandbookStage":
+        """异步实例化"""
+        self._id = id_
+        self._data = data
+        if not self._data:
+            data = await HandbookStageModel.filter(charId=self._id).first()
+            if not data:
+                raise  # TODO
+            self._data = data.__dict__
+        return self
+
+    def __str__(self):
+        return f"{self.id}({self.name})"
+
+    def __repr__(self):
+        return self.__str__()
+
+    @property
+    async def get_character(self) -> "Character":
+        """哪个干员的"""
+        return await Character().init(id_=self.id)
+
+    @property
+    def id(self) -> str:
+        """干员代码名"""
+        return self._id
+
+    @property
+    def stage_id(self) -> str:
+        """关卡代码名 (mem_amgoat_1)"""
+        return self._data["stageId"]
+
+    @property
+    def level_id(self) -> str:
+        """?"""
+        return self._data["levelId"]
+
+    @property
+    def zone_id(self) -> str:
+        """悖论模拟显示的地区id"""
+        return self._data["zoneId"]
+
+    @property
+    def code(self) -> str:
+        """代号 (mem_amgoat_1)"""
+        return self._data["code"]
+
+    @property
+    def name(self) -> str:
+        """悖论模拟显示的关卡名"""
+        return self._data["name"]
+
+    @property
+    def loading_pic_id(self) -> str:
+        """载入图"""
+        return self._data["loadingPicId"]
+
+    @property
+    def description(self) -> str:
+        """简介"""
+        return (self._data["description"] or "").replace("\\n", "")
+
+    @property
+    def description_raw(self) -> str:
+        """简介原文，有<>之类的特殊字符"""
+        return self.description
+
+    @property
+    def description_plain(self) -> str:
+        """简介，纯文字"""
+        desc = self.description
+        if "<" in desc and ">" in desc:
+            desc = re.split(r"<[@$/].*?>", desc)
+            desc = "".join(desc)
+        return desc
+
+    @property
+    def stage_name_for_show(self) -> str:
+        """进关卡时显示的关卡名"""
+        return self._data["stageNameForShow"]
+
+    @property
+    def zome_name_for_show(self) -> str:
+        """进关卡时显示的地区名"""
+        return self._data["zoneNameForShow"]
+
+    @property
+    def pic_id(self) -> str:
+        """?"""
+        return self._data["picId"]
+
+    @property
+    def stage_get_time(self) -> int:
+        """?"""
+        return self._data["stageGetTime"]
+
+    @property
+    def unlock_params(self) -> List["HandbookStageUnlockParam"]:
+        """解锁参数"""
+        return [
+            HandbookStageUnlockParam(self, _)
+            for _ in self._data["unlockParam"]
+        ]
+
+    @property
+    async def get_reward_items(self) -> List["Item"]:
+        """掉落物"""
+        items = []
+        for data in self._data["rewardItem"]:
+            items.append(
+                await Item().init(id_=data["id"], count=data["count"])
+            )
+        return items
+
+
+class HandbookStageUnlockParam:
+    """解锁参数"""
+    def __init__(self, handbook_stage: "HandbookStage", data: dict):
+        self._handbook_stage = handbook_stage
+        self._data = data
+
+    @property
+    def type(self) -> int:
+        """?"""
+        return self._data["unlockType"]
+
+    @property
+    def param1(self) -> str:
+        """?"""
+        return self._data["unlockParam1"]
+
+    @property
+    def param2(self) -> str:
+        """?"""
+        return self._data["unlockParam2"]
+
+    @property
+    def param3(self) -> str:
+        """?"""
+        return self._data["unlockParam3"]
+
+
 """SKILL"""
 class Skill:
     """干员技能"""
@@ -1080,15 +1231,15 @@ class Skill:
             raise NotImplementedError("未输入干员数据！")
         return [
             SkillLevelUpCondition(skill=self, data=d)
-            for d in self._extra_data["levelUpCostCond"]
+            for d in self._extra_data["specializeLevelUpData"]
         ]
 
     @property
-    def unlock_condition(self) -> "UnlockCondition":
+    def unlock_condition(self) -> "CharacterUnlockCondition":
         """解锁(phase, level)"""
         if not self._extra_data:
             raise NotImplementedError("未输入干员数据！")
-        return UnlockCondition(data=self._extra_data["unlockCond"])
+        return CharacterUnlockCondition(data=self._extra_data["initialUnlockCond"])
 
     # 不在 arknights_skill_table 中的
     @property
@@ -1125,9 +1276,9 @@ class SkillLevelUpCondition:
         return self._data["lvlUpTime"]
 
     @property
-    def unlock_condition(self) -> "UnlockCondition":
+    def unlock_condition(self) -> "CharacterUnlockCondition":
         """解锁条件(phase, level)"""
-        return UnlockCondition(data=self._data["unlockCond"])
+        return CharacterUnlockCondition(data=self._data["unlockCond"])
 
     async def get_cost(self) -> List["Item"]:
         """专精耗材"""
@@ -1262,7 +1413,7 @@ class SkillLevelSpData:
         return self._data["increment"]
 
 
-class UnlockCondition:
+class CharacterUnlockCondition:
     """解锁条件（phase, level）"""
 
     def __init__(self, data: Dict):
@@ -1604,9 +1755,9 @@ class Equip:
         return f"{self._data['typeName1']}{'-' + self._data['typeName2'] if self._data['typeName2'] != 'None' else ''}"
 
     @property
-    def unlock_condition(self) -> "UnlockCondition":
+    def unlock_condition(self) -> "CharacterUnlockCondition":
         """解锁条件"""
-        return UnlockCondition(
+        return CharacterUnlockCondition(
             data={
                 "phase": self._data["unlockEvolvePhase"],
                 "level": self._data["unlockLevel"],
@@ -1913,17 +2064,368 @@ class SkinDisplaySkin:
         return self._data["getTime"]
 
 
+"""STAGE"""
+class Stage:
+    """关卡"""
+
+    def __init__(self, id_: str = None, data: dict = None):
+        self._id = id_
+        self._data = data
+
+    async def init(self, id_: str, data: dict = None) -> "Stage":
+        """异步实例化"""
+        self._id = id_
+        self._data = data
+        if not self._data:
+            data = await StageModel.filter(stageId=self._id).first()
+            if not data:
+                raise  # TODO
+            self._data = data.__dict__
+        return self
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return f"{self.name}({self.id})"
+
+    @property
+    def id(self) -> str:
+        """代码名(键值)"""
+        return self._data["stageId"]
+
+    @property
+    def name(self) -> str:
+        """中文名"""
+        return self._data["name"]
+
+    @property
+    def description(self) -> str:
+        """简介"""
+        return (self._data["description"] or "").replace("\\n", "")
+
+    @property
+    def description_raw(self) -> str:
+        """简介原文，有<>之类的特殊字符"""
+        return self.description
+
+    @property
+    def description_plain(self) -> str:
+        """简介，纯文字"""
+        desc = self.description
+        if "<" in desc and ">" in desc:
+            desc = re.split(r"<[@$/].*?>", desc)
+            desc = "".join(desc)
+        return desc
+
+    @property
+    def type(self) -> str:
+        """关卡类型(主线、活动等)"""
+        return self._data["stageType"]
+
+    @property
+    def difficulty(self) -> str:
+        """关卡难度"""
+        return self._data["difficulty"]
+
+    @property
+    def performance_stage_flag(self) -> str:
+        """?"""
+        return self._data["performanceStageFlag"]
+
+    @property
+    def difficulty_group(self) -> str:
+        """?"""
+        return self._data["diffGroup"]
+
+    @property
+    def unlock_conditions(self) -> List["StageUnlockCondition"]:
+        """解锁条件"""
+        return [
+            StageUnlockCondition(self, cond)
+            for cond in self._data["unlockCondition"]
+        ]
+
+    @property
+    def level_id(self) -> str:
+        """文件路径"""
+        return self._data["levelId"]
+    
+    @property
+    def zone_id(self) -> str:
+        """?"""
+        return self._data["zoneId"] 
+    
+    @property
+    def code(self) -> str:
+        """关卡代号 (CF-EX-8)"""
+        return self._data["code"]
+    
+    @property
+    def hard_stage_id(self) -> str:
+        """?"""
+        return self._data["hardStageId"] 
+    
+    @property
+    def danger_level(self) -> str:
+        """?"""
+        return self._data["dangerLevel"] 
+    
+    @property
+    def danger_point(self) -> float:
+        """?"""
+        return self._data["dangerPoint"] 
+    
+    @property
+    def loading_pic_id(self) -> str:
+        """加载图"""
+        return self._data["loadingPicId"]
+    
+    @property
+    def can_practice(self) -> bool:
+        """演习"""
+        return self._data["canPractice"] 
+    
+    @property
+    def can_battle_replay(self) -> bool:
+        """代理"""
+        return self._data["canBattleReplay"]
+    
+    @property
+    def ap_cost(self) -> int:
+        """消耗理智"""
+        return self._data["apCost"]
+    
+    @property
+    def ap_fail_return(self) -> int:
+        """返还理智"""
+        return self._data["apFailReturn"]
+    
+    @property
+    def ap_protect_times(self) -> int:
+        """?"""
+        return self._data["apProtextTimes"]
+    
+    @property
+    def et_item_id(self) -> str:
+        """?"""
+        return self._data["etItemId"] 
+    
+    @property
+    def et_cost(self) -> int:
+        """?"""
+        return self._data["etCost"] 
+    
+    @property
+    def et_fail_return(self) -> int:
+        """?"""
+        return self._data["etFailReturn"] 
+    
+    @property
+    def et_button_style(self) -> str:
+        """?"""
+        return self._data["etButtonStyle"]
+    
+    @property
+    def diamond_once_drop(self) -> int:
+        """源石"""
+        return self._data["diamondOnceDrop"] 
+    
+    @property
+    def practice_ticket_cost(self) -> int:
+        """消耗演习券"""
+        return self._data["practiceTicketCost"]
+    
+    @property
+    def daily_stage_difficulty(self) -> int:
+        """?"""
+        return self._data["dailyStageDifficulty"]
+    
+    @property
+    def exp_gain(self) -> int:
+        """经验"""
+        return self._data["expGain"]
+    
+    @property
+    def gold_gain(self) -> int:
+        """龙门币"""
+        return self._data["goldGain"]
+    
+    @property
+    def lose_exp_gain(self) -> int:
+        """失败经验"""
+        return self._data["loseExpGain"]
+    
+    @property
+    def lose_gold_gain(self) -> int:
+        """失败龙门币"""
+        return self._data["loseGoldGain"]
+    
+    @property
+    def pass_favor(self) -> int:
+        """?好感度"""
+        return self._data["passFavor"]
+
+    @property
+    def complete_favor(self) -> int:
+        """?好感度"""
+        return self._data["completeFavor"]
+    
+    @property
+    def sl_progress(self) -> int:
+        """?"""
+        return self._data["slProgress"] 
+    
+    @property
+    def display_main_item(self) -> str:
+        """?"""
+        return self._data["displayMainItem"] 
+    
+    @property
+    def highlight_mark(self) -> bool:
+        """?"""
+        return self._data["hilightMark"]
+
+    @property
+    def boss_mark(self) -> bool:
+        """是否 boss 关"""
+        return self._data["bossMark"]
+
+    @property
+    def is_predefined(self) -> bool:
+        """?固定阵容"""
+        return self._data["isPredefined"]
+
+    @property
+    def is_hard_predefined(self) -> bool:
+        """?"""
+        return self._data["isHardPredefined"]
+
+    @property
+    def is_skill_selectable_predefined(self) -> bool:
+        """?固定技能"""
+        return self._data["isSkillSelectablePredefined"]
+
+    @property
+    def is_story_only(self) -> bool:
+        """?过视频"""
+        return self._data["isStoryOnly"]
+
+    @property
+    def appearance_style(self) -> int:
+        """?"""
+        return self._data["appearanceStyle"]
+
+    @property
+    def stage_drop_info(self) -> "StageDropInfo":
+        """掉落信息"""
+        return StageDropInfo(self, self._data["stageDropInfo"])
+
+    @property
+    def start_button_override_id(self) -> str:
+        """?"""
+        return self._data["startButtonOverrideId"]
+
+    @property
+    def is_stage_patch(self) -> bool:
+        """?"""
+        return self._data["isStagePatch"]
+
+    @property
+    def main_stage_id(self) -> str:
+        """?"""
+        return self._data["mainStageId"]
+
+
+class StageUnlockCondition:
+    """解锁条件（stageId, completeState）"""
+
+    def __init__(self, stage: "Stage", data: Dict):
+        self._stage = stage
+        self._data = data
+
+    @property
+    def stage(self) -> "Stage":
+        """哪个关卡的"""
+        return self._stage
+        
+    @property
+    def id(self) -> str:
+        """关卡代码"""
+        return self._data["stageId"]
+    
+    @property
+    def state(self) -> int:
+        """几星完成"""
+        return self._data["completeState"]
+
+
+class StageDropInfo:
+    """掉落信息"""
+
+    def __init__(self, stage: "Stage", data: dict):
+        self._stage = stage
+        self._data = data
+
+    @property
+    def stage(self) -> "Stage":
+        """哪个关卡的"""
+        return self._stage
+
+    @property
+    def first_pass_rewards(self):
+        """TODO, 现在全是 null"""
+        return
+
+    @property
+    def first_complete_rewards(self):
+        """TODO, 现在全是 null"""
+        return
+
+    @property
+    def pass_rewards(self):
+        """TODO, 现在全是 null"""
+        return
+
+    @property
+    def complete_rewards(self):
+        """TODO, 现在全是 null"""
+        return
+
+    @property
+    async def get_display_rewards(self) -> List["Item"]:
+        """?掉落"""
+        items = []
+        for data in self._data["displayRewards"]:
+            items.append(
+                await Item().init(id_=data["id"])
+            )
+        return items
+
+    @property
+    async def get_display_detail_rewards(self):
+        """?掉落"""
+        items = []
+        for data in self._data["displayDetailRewards"]:
+            items.append(
+                await Item().init(id_=data["id"])
+            )
+        return items
+
+
 """TODO"""
-class Stage: ...
 class Room: ...
 class Mission: ...
 
 
 __all__ = [
     "Character",
+    "HandbookInfo",
+    "HandbookStage",
     "Skill",
     "Item",
     "Equip",
     "GachaPool",
-    "Skin"
+    "Skin",
+    "Stage"
 ]

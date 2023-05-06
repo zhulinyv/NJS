@@ -15,6 +15,7 @@ from nonebot.adapters.onebot.v11 import Message, MessageSegment
 from .data_source import BuildOperatorInfo
 from ..core.models_v3 import Character
 from ..exceptions import *
+from ..utils.general import nickname_swap
 
 operator_info = on_command("方舟干员", aliases={"干员"})
 
@@ -26,6 +27,7 @@ async def _(arg: Message = CommandArg()):
         await operator_info.finish()
 
     try:
+        name = await nickname_swap(name)
         cht = await Character.parse_name(name)
     except NamedCharacterNotExistException as e:
         await operator_info.finish(e.msg, at_sender=True)

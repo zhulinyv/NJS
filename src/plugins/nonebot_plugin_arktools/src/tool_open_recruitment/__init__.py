@@ -6,7 +6,7 @@ from nonebot.params import Arg, RawCommand
 from nonebot.typing import T_State
 from nonebot.matcher import Matcher
 from nonebot.exception import ActionFailed
-from nonebot.adapters.onebot.v11 import Message, MessageSegment, GroupMessageEvent
+from nonebot.adapters.onebot.v11 import Message, MessageSegment, MessageEvent
 
 from typing import Union
 
@@ -17,7 +17,7 @@ recruit = on_command("公招", aliases={"公开招募"})
 
 
 @recruit.handle()
-async def _(state: T_State, event: GroupMessageEvent, matcher: Matcher, raw: str = RawCommand()):
+async def _(state: T_State, event: MessageEvent, matcher: Matcher, raw: str = RawCommand()):
     if event.reply:
         event.message = event.reply.message
 

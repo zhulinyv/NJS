@@ -3,7 +3,7 @@ from datetime import datetime
 
 import tortoise.exceptions
 from nonebot import on_command, get_bot, logger, get_driver
-from nonebot.adapters.onebot.v11 import GroupMessageEvent, Message, Bot, MessageSegment
+from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, Message, Bot, MessageSegment
 from nonebot.params import CommandArg
 from nonebot.plugin import PluginMetadata
 from nonebot_plugin_apscheduler import scheduler
@@ -18,10 +18,10 @@ check_notify = on_command("理智查看", aliases={"CHECKSAN"})
 
 
 @add_notify.handle()
-async def _(event: GroupMessageEvent, args: Message = CommandArg()):
+async def _(event: MessageEvent, args: Message = CommandArg()):
     args = args.extract_plain_text().strip().split()
     uid = event.user_id
-    gid = event.group_id
+    gid = event.group_id if isinstance(event, GroupMessageEvent) else 0
     now = datetime.now()
 
     if not args:
@@ -51,20 +51,19 @@ async def _(event: GroupMessageEvent, args: Message = CommandArg()):
                 record_time=now, notify_time=notify_time, status=1
             )
     else:
-        await add_notify.finish("小笨蛋，命令的格式是：“理智提醒 [当前理智] [回满理智]” 或 “理智提醒” 哦！",
-                                at_sender=True)
+        await add_notify.finish("小笨蛋，命令的格式是：“理智提醒 [当前理智] [回满理智]” 或 “理智提醒” 哦！")
 
-    await add_notify.finish(f"记录成功！将在 {notify_time.__str__()[:-7]} 提醒博士哦！", at_sender=True)
+    await add_notify.finish(f"记录成功！将在 {notify_time.__str__()[:-7]} 提醒博士哦！")
 
 
 @check_notify.handle()
-async def _(event: GroupMessageEvent):
+async def _(event: MessageEvent):
     uid = event.user_id
-    gid = event.group_id
+    gid = event.group_id if isinstance(event, GroupMessageEvent) else 0
 
     data = await UserSanityModel.filter(gid=gid, uid=uid, status=1).first()
     if not data:
-        await check_notify.finish("小笨蛋，你还没有记录过理智提醒哦！", at_sender=True)
+        await check_notify.finish("小笨蛋，你还没有记录过理智提醒哦！")
 
     data = data.__dict__
 
@@ -101,16 +100,22 @@ async def _():
             else:
                 if data:
                     for model in data:
-                        await bot.send_group_msg(
-                            group_id=model.gid,
-                            message=Message(MessageSegment.at(model.uid) + f"你的理智已经恢复到{model.notify_san}了哦！")
-                        )
+                        if model.gid:
+                            await bot.send_group_msg(
+                                group_id=model.gid,
+                                message=Message(MessageSegment.at(model.uid) + f"你的理智已经恢复到{model.notify_san}了哦！")
+                            )
+                        else:
+                            await bot.send_private_msg(
+                                user_id=model.uid,
+                                message=Message(MessageSegment.at(model.uid) + f"你的理智已经恢复到{model.notify_san}了哦！")
+                            )
                         await UserSanityModel.filter(gid=model.gid, uid=model.uid).update(status=0)
 
 
 __plugin_meta__ = PluginMetadata(
     name="理智提醒",
-    description="在理智回满时@用户提醒",
+    description="在理智回满时提醒用户",
     usage=(
         "命令:"
         "\n    理智提醒 => 默认记当前理智为0，回满到135时提醒"

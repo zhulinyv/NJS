@@ -27,7 +27,29 @@ class NamedPoolNotExistException(ArkBaseException):
         super().__init__(msg, details)
 
 
+class MAAFailedResponseException(ArkBaseException):
+    """响应错误"""
+    def __init__(self, msg: str = "作业站响应错误！", details: str = ""):
+        super().__init__(msg, details)
+
+
+class MAANoResultException(ArkBaseException):
+    """没有作业"""
+    def __init__(self, msg: str = "没有查询到结果！", details: str = ""):
+        super().__init__(msg, details)
+
+
+class NoHandbookInfoException(ArkBaseException):
+    """没有档案"""
+    def __init__(self, msg: str = "干员没有档案！", details: str = ""):
+        super().__init__(msg, details)
+
+
 __all__ = [
     "NamedCharacterNotExistException",
-    "NamedPoolNotExistException"
+    "NamedPoolNotExistException",
+    "NoHandbookInfoException",
+
+    "MAAFailedResponseException",
+    "MAANoResultException"
 ]

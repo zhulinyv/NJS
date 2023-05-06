@@ -136,7 +136,10 @@ class BuildOperatorInfo:
             if equip.type_icon == "original":
                 equip_icon = Image.open(gameimage_path / "equip" / "icon" / "default.png").convert("RGBA").resize((96, 96))
             else:
-                equip_icon = Image.open(gameimage_path / "equip" / "icon" / f"{equip.icon_id}.png").convert("RGBA").resize((96, 96))
+                try:
+                    equip_icon = Image.open(gameimage_path / "equip" / "icon" / f"{equip.icon_id}.png").convert("RGBA").resize((96, 96))
+                except FileNotFoundError as e:
+                    equip_icon = Image.new(mode="RGBA", size=(96, 96), color=(0, 0, 0, 0))
             icon_shadow = Image.new(mode="RGBA", size=(96, 96), color=(205, 205, 205, 200))  # 左侧阴影
             icon_shadow.paste(im=equip_icon, box=(0, 0), mask=equip_icon.split()[3])
             equip_main_backgrounds.paste(im=icon_shadow, box=(0, 0), mask=icon_shadow.split()[3])
@@ -336,6 +339,10 @@ class BuildOperatorInfo:
     async def _build_skin(self) -> Image:
         """立绘"""
         return self.character.skin.convert(mode="RGBA").resize((1176, 1176))
+
+    async def _build_talent(self) -> Image:
+        """天赋"""
+        ...
 
     @staticmethod
     def resize(img: Image, size: int):

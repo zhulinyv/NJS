@@ -71,7 +71,7 @@ def _check_nickname(bot: Bot, event: MessageEvent) -> None:
             nickname = m[1]
             log("DEBUG", f"User is calling me {nickname}")
             event.to_me = True
-            # first_msg_seg.data["text"] = first_text[m.end():]
+            first_msg_seg.data["text"] = first_text[m.end():]
 
 
 nonebot.on_command = on_command_
@@ -79,4 +79,4 @@ nonebot.on_regex = on_regex_
 nonebot.on_startswith = on_startswith_
 nonebot.on_endswith = on_endswith_
 nonebot.on_keyword = on_keyword_
-# v11.bot._check_nickname = _check_nickname
+v11.bot._check_nickname = _check_nickname

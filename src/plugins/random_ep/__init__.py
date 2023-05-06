@@ -51,3 +51,8 @@ async def _():
     img_name = random.choice(all_file_name)
     img = img_path / img_name
     await dz.send(MessageSegment.image(img))
+
+
+
+# 建议使用 API 而不是本地
+# 空间占用好大 >_<

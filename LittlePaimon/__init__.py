@@ -25,17 +25,17 @@ async def _init(self, db_config: "DBConfigType", create_db: bool):
 ConnectionHandler._init = _init
 
 logo = """<y>
-███╗   ██╗     ██╗███████╗
-████╗  ██║     ██║██╔════╝
-██╔██╗ ██║     ██║███████╗
-██║╚██╗██║██   ██║╚════██║
-██║ ╚████║╚█████╔╝███████║
-╚═╝  ╚═══╝ ╚════╝ ╚══════╝</y>"""
+███╗   ██╗       ██╗  ███████╗
+████╗  ██║       ██║  ██╔════╝
+██╔██╗ ██║       ██║  ███████╗
+██║╚██╗██║  ██   ██║  ╚════██║
+██║ ╚████║  ╚█████╔╝  ███████║
+╚═╝  ╚═══╝   ╚════╝   ╚══════╝</y>"""
 
 
 @DRIVER.on_startup
 async def startup():
-    logger.opt(colors=True).info(logo)
+    logger.opt(colors=True).success(logo)
     await database.connect()
     await PluginManager.init()
     asyncio.ensure_future(check_resource())

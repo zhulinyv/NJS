@@ -3,6 +3,7 @@
     "char_500_noirc": {
       "charID": "char_500_noirc",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -128,6 +129,7 @@
     "char_501_durin": {
       "charID": "char_501_durin",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -241,6 +243,7 @@
     "char_502_nblade": {
       "charID": "char_502_nblade",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -332,6 +335,7 @@
     "char_503_rang": {
       "charID": "char_503_rang",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -423,6 +427,7 @@
     "char_122_beagle": {
       "charID": "char_122_beagle",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -526,6 +531,7 @@
     "char_123_fang": {
       "charID": "char_123_fang",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -663,6 +669,7 @@
     "char_124_kroos": {
       "charID": "char_124_kroos",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -800,6 +807,7 @@
     "char_121_lava": {
       "charID": "char_121_lava",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -958,6 +966,7 @@
     "char_120_hibisc": {
       "charID": "char_120_hibisc",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -1061,6 +1070,7 @@
     "char_208_melan": {
       "charID": "char_208_melan",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -1198,6 +1208,7 @@
     "char_209_ardign": {
       "charID": "char_209_ardign",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -1335,6 +1346,7 @@
     "char_210_stward": {
       "charID": "char_210_stward",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -1426,6 +1438,7 @@
     "char_211_adnach": {
       "charID": "char_211_adnach",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -1517,6 +1530,7 @@
     "char_212_ansel": {
       "charID": "char_212_ansel",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -1608,6 +1622,7 @@
     "char_108_silent": {
       "charID": "char_108_silent",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -1745,6 +1760,7 @@
     "char_134_ifrit": {
       "charID": "char_134_ifrit",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -1894,6 +1910,7 @@
     "char_202_demkni": {
       "charID": "char_202_demkni",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -2009,6 +2026,7 @@
     "char_128_plosis": {
       "charID": "char_128_plosis",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -2134,6 +2152,7 @@
     "char_242_otter": {
       "charID": "char_242_otter",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -2316,6 +2335,7 @@
     "char_215_mantic": {
       "charID": "char_215_mantic",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -2453,6 +2473,7 @@
     "char_149_scave": {
       "charID": "char_149_scave",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -2602,6 +2623,7 @@
     "char_204_platnm": {
       "charID": "char_204_platnm",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -2751,6 +2773,7 @@
     "char_172_svrash": {
       "charID": "char_172_svrash",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -2933,6 +2956,7 @@
     "char_173_slchan": {
       "charID": "char_173_slchan",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -3082,6 +3106,7 @@
     "char_174_slbell": {
       "charID": "char_174_slbell",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -3231,6 +3256,7 @@
     "char_198_blackd": {
       "charID": "char_198_blackd",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -3346,6 +3372,7 @@
     "char_199_yak": {
       "charID": "char_199_yak",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -3483,6 +3510,7 @@
     "char_219_meteo": {
       "charID": "char_219_meteo",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -3632,6 +3660,7 @@
     "char_158_milu": {
       "charID": "char_158_milu",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -3769,6 +3798,7 @@
     "char_115_headbr": {
       "charID": "char_115_headbr",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -3906,6 +3936,7 @@
     "char_195_glassb": {
       "charID": "char_195_glassb",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -4043,6 +4074,7 @@
     "char_196_sunbr": {
       "charID": "char_196_sunbr",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -4201,6 +4233,7 @@
     "char_147_shining": {
       "charID": "char_147_shining",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -4316,6 +4349,7 @@
     "char_148_nearl": {
       "charID": "char_148_nearl",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -4431,6 +4465,7 @@
     "char_179_cgbird": {
       "charID": "char_179_cgbird",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -4580,6 +4615,7 @@
     "char_112_siege": {
       "charID": "char_112_siege",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -4695,6 +4731,7 @@
     "char_155_tiger": {
       "charID": "char_155_tiger",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -4832,6 +4869,7 @@
     "char_101_sora": {
       "charID": "char_101_sora",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -4981,6 +5019,7 @@
     "char_102_texas": {
       "charID": "char_102_texas",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -5130,6 +5169,7 @@
     "char_103_angel": {
       "charID": "char_103_angel",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -5312,6 +5352,7 @@
     "char_201_moeshd": {
       "charID": "char_201_moeshd",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -5449,6 +5490,7 @@
     "char_118_yuki": {
       "charID": "char_118_yuki",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -5598,6 +5640,7 @@
     "char_136_hsguma": {
       "charID": "char_136_hsguma",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -5713,6 +5756,7 @@
     "char_106_franka": {
       "charID": "char_106_franka",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -5850,6 +5894,7 @@
     "char_107_liskam": {
       "charID": "char_107_liskam",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -6020,6 +6065,7 @@
     "char_117_myrrh": {
       "charID": "char_117_myrrh",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -6157,6 +6203,7 @@
     "char_193_frostl": {
       "charID": "char_193_frostl",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -6255,11 +6302,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_frostl_set_1",
+          "storySetName": "识字本",
+          "sortId": 1,
+          "storyGetTime": 1682913600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_frostl_set_1_story_1",
+              "storySetId": "story_frostl_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "“新生活”对于一名流浪雇佣兵来说，究竟是什么呢？",
+              "storyInfo": "info/obt/memory/story_frostl_1_1",
+              "storyTxt": "obt/memory/story_frostl_1_1"
+            }
+          ],
+          "charId": "char_193_frostl"
+        }
+      ]
     },
     "char_129_bluep": {
       "charID": "char_129_bluep",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -6397,6 +6479,7 @@
     "char_143_ghost": {
       "charID": "char_143_ghost",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -6579,6 +6662,7 @@
     "char_181_flower": {
       "charID": "char_181_flower",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -6749,6 +6833,7 @@
     "char_109_fmout": {
       "charID": "char_109_fmout",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -6874,6 +6959,7 @@
     "char_126_shotst": {
       "charID": "char_126_shotst",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -7044,6 +7130,7 @@
     "char_127_estell": {
       "charID": "char_127_estell",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -7169,6 +7256,7 @@
     "char_141_nights": {
       "charID": "char_141_nights",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -7306,6 +7394,7 @@
     "char_145_prove": {
       "charID": "char_145_prove",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -7476,6 +7565,7 @@
     "char_183_skgoat": {
       "charID": "char_183_skgoat",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -7646,6 +7736,7 @@
     "char_187_ccheal": {
       "charID": "char_187_ccheal",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -7737,6 +7828,7 @@
     "char_241_panda": {
       "charID": "char_241_panda",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -7862,6 +7954,7 @@
     "char_180_amgoat": {
       "charID": "char_180_amgoat",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -8044,6 +8137,7 @@
     "char_185_frncat": {
       "charID": "char_185_frncat",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -8169,6 +8263,7 @@
     "char_150_snakek": {
       "charID": "char_150_snakek",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -8272,6 +8367,7 @@
     "char_130_doberm": {
       "charID": "char_130_doberm",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -8363,6 +8459,7 @@
     "char_163_hpsts": {
       "charID": "char_163_hpsts",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -8500,6 +8597,7 @@
     "char_144_red": {
       "charID": "char_144_red",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -8615,6 +8713,7 @@
     "char_140_whitew": {
       "charID": "char_140_whitew",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -8718,6 +8817,7 @@
     "char_171_bldsk": {
       "charID": "char_171_bldsk",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -8900,6 +9000,7 @@
     "char_002_amiya": {
       "charID": "char_002_amiya",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -8979,6 +9080,7 @@
     "char_110_deepcl": {
       "charID": "char_110_deepcl",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -9116,6 +9218,7 @@
     "char_166_skfire": {
       "charID": "char_166_skfire",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -9265,6 +9368,7 @@
     "char_240_wyvern": {
       "charID": "char_240_wyvern",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -9390,6 +9494,7 @@
     "char_236_rope": {
       "charID": "char_236_rope",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -9536,6 +9641,7 @@
     "char_237_gravel": {
       "charID": "char_237_gravel",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -9673,6 +9779,7 @@
     "char_286_cast3": {
       "charID": "char_286_cast3",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -9762,6 +9869,7 @@
     "char_285_medic2": {
       "charID": "char_285_medic2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -9851,6 +9959,7 @@
     "char_009_12fce": {
       "charID": "char_009_12fce",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -9988,6 +10097,7 @@
     "char_278_orchid": {
       "charID": "char_278_orchid",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10125,6 +10235,7 @@
     "char_235_jesica": {
       "charID": "char_235_jesica",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10250,6 +10361,7 @@
     "char_290_vigna": {
       "charID": "char_290_vigna",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10387,6 +10499,7 @@
     "char_289_gyuki": {
       "charID": "char_289_gyuki",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10490,6 +10603,7 @@
     "char_277_sqrrel": {
       "charID": "char_277_sqrrel",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10660,6 +10774,7 @@
     "char_291_aglina": {
       "charID": "char_291_aglina",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10806,6 +10921,7 @@
     "char_192_falco": {
       "charID": "char_192_falco",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10931,6 +11047,7 @@
     "npc_2005_wywu": {
       "charID": "npc_2005_wywu",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10950,6 +11067,7 @@
     "npc_2006_fmzuki": {
       "charID": "npc_2006_fmzuki",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10969,6 +11087,7 @@
     "npc_003_kalts": {
       "charID": "npc_003_kalts",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -10988,6 +11107,7 @@
     "npc_010_chen": {
       "charID": "npc_010_chen",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -11007,6 +11127,7 @@
     "npc_001_doctor": {
       "charID": "npc_001_doctor",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -11026,6 +11147,7 @@
     "char_230_savage": {
       "charID": "char_230_savage",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -11217,6 +11339,7 @@
     "char_282_catap": {
       "charID": "char_282_catap",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -11387,6 +11510,7 @@
     "char_283_midn": {
       "charID": "char_283_midn",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -11524,6 +11648,7 @@
     "char_137_brownb": {
       "charID": "char_137_brownb",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -11661,6 +11786,7 @@
     "char_164_nightm": {
       "charID": "char_164_nightm",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -11764,6 +11890,7 @@
     "char_220_grani": {
       "charID": "char_220_grani",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -11879,6 +12006,7 @@
     "char_263_skadi": {
       "charID": "char_263_skadi",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -12028,6 +12156,7 @@
     "char_284_spot": {
       "charID": "char_284_spot",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -12165,6 +12294,7 @@
     "char_281_popka": {
       "charID": "char_281_popka",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -12302,6 +12432,7 @@
     "char_308_swire": {
       "charID": "char_308_swire",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -12451,6 +12582,7 @@
     "char_253_greyy": {
       "charID": "char_253_greyy",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -12588,6 +12720,7 @@
     "char_010_chen": {
       "charID": "char_010_chen",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -12737,6 +12870,7 @@
     "char_298_susuro": {
       "charID": "char_298_susuro",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -12874,6 +13008,7 @@
     "char_151_myrtle": {
       "charID": "char_151_myrtle",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -12977,6 +13112,7 @@
     "char_274_astesi": {
       "charID": "char_274_astesi",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -13126,6 +13262,7 @@
     "char_326_glacus": {
       "charID": "char_326_glacus",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -13236,11 +13373,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_glacus_set_1",
+          "storySetName": "以我双腿",
+          "sortId": 1,
+          "storyGetTime": 1682913600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_glacus_set_1_story_1",
+              "storySetId": "story_glacus_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "无需他人认可，在格劳克斯的心中，科技自有其形状。",
+              "storyInfo": "info/obt/memory/story_glacus_1_1",
+              "storyTxt": "obt/memory/story_glacus_1_1"
+            }
+          ],
+          "charId": "char_326_glacus"
+        }
+      ]
     },
     "char_348_ceylon": {
       "charID": "char_348_ceylon",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -13378,6 +13550,7 @@
     "char_340_shwaz": {
       "charID": "char_340_shwaz",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -13527,6 +13700,7 @@
     "char_188_helage": {
       "charID": "char_188_helage",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -13676,6 +13850,7 @@
     "char_260_durnar": {
       "charID": "char_260_durnar",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -13858,6 +14033,7 @@
     "char_355_ethan": {
       "charID": "char_355_ethan",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -14007,6 +14183,7 @@
     "char_275_breeze": {
       "charID": "char_275_breeze",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -14189,6 +14366,7 @@
     "char_248_mgllan": {
       "charID": "char_248_mgllan",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -14338,6 +14516,7 @@
     "char_131_flameb": {
       "charID": "char_131_flameb",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -14453,6 +14632,7 @@
     "char_279_excu": {
       "charID": "char_279_excu",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -14568,6 +14748,7 @@
     "char_190_clour": {
       "charID": "char_190_clour",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -14671,6 +14852,7 @@
     "char_213_mostma": {
       "charID": "char_213_mostma",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -14820,6 +15002,7 @@
     "char_325_bison": {
       "charID": "char_325_bison",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -14969,6 +15152,7 @@
     "char_243_waaifu": {
       "charID": "char_243_waaifu",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -15118,6 +15302,7 @@
     "char_133_mm": {
       "charID": "char_133_mm",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -15267,6 +15452,7 @@
     "char_356_broca": {
       "charID": "char_356_broca",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -15404,6 +15590,7 @@
     "char_261_sddrag": {
       "charID": "char_261_sddrag",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -15519,6 +15706,7 @@
     "char_017_huang": {
       "charID": "char_017_huang",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -15668,6 +15856,7 @@
     "char_367_swllow": {
       "charID": "char_367_swllow",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -15783,6 +15972,7 @@
     "char_302_glaze": {
       "charID": "char_302_glaze",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -15886,6 +16076,7 @@
     "char_2014_nian": {
       "charID": "char_2014_nian",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -16035,6 +16226,7 @@
     "char_225_haak": {
       "charID": "char_225_haak",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -16184,6 +16376,7 @@
     "char_226_hmau": {
       "charID": "char_226_hmau",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -16321,6 +16514,7 @@
     "char_383_snsant": {
       "charID": "char_383_snsant",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -16470,6 +16664,7 @@
     "char_2013_cerber": {
       "charID": "char_2013_cerber",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -16619,6 +16814,7 @@
     "char_306_leizi": {
       "charID": "char_306_leizi",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -16734,6 +16930,7 @@
     "char_385_finlpp": {
       "charID": "char_385_finlpp",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -16849,6 +17046,7 @@
     "char_222_bpipe": {
       "charID": "char_222_bpipe",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -16998,6 +17196,7 @@
     "char_379_sesa": {
       "charID": "char_379_sesa",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -17108,11 +17307,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_sesa_set_1",
+          "storySetName": "致命诱惑",
+          "sortId": 1,
+          "storyGetTime": 1682913600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_sesa_set_1_story_1",
+              "storySetId": "story_sesa_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "这一次，或许是慑砂找寻真相的难得机会，抑或是一个精心设置的陷阱。",
+              "storyInfo": "info/obt/memory/story_sesa_1_1",
+              "storyTxt": "obt/memory/story_sesa_1_1"
+            }
+          ],
+          "charId": "char_379_sesa"
+        }
+      ]
     },
     "char_337_utage": {
       "charID": "char_337_utage",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -17228,6 +17462,7 @@
     "char_252_bibeak": {
       "charID": "char_252_bibeak",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -17410,6 +17645,7 @@
     "char_159_peacok": {
       "charID": "char_159_peacok",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -17513,6 +17749,7 @@
     "char_376_therex": {
       "charID": "char_376_therex",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -17602,6 +17839,7 @@
     "char_301_cutter": {
       "charID": "char_301_cutter",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -17751,6 +17989,7 @@
     "char_254_vodfox": {
       "charID": "char_254_vodfox",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -17900,6 +18139,7 @@
     "char_333_sidero": {
       "charID": "char_333_sidero",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -18049,6 +18289,7 @@
     "char_401_elysm": {
       "charID": "char_401_elysm",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -18198,6 +18439,7 @@
     "char_250_phatom": {
       "charID": "char_250_phatom",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -18347,6 +18589,7 @@
     "char_400_weedy": {
       "charID": "char_400_weedy",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -18496,6 +18739,7 @@
     "char_113_cqbw": {
       "charID": "char_113_cqbw",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -18611,6 +18855,7 @@
     "char_405_absin": {
       "charID": "char_405_absin",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -18726,6 +18971,7 @@
     "char_373_lionhd": {
       "charID": "char_373_lionhd",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -18836,11 +19082,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_lionhd_set_1",
+          "storySetName": "暗境求生",
+          "sortId": 1,
+          "storyGetTime": 1681977600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_lionhd_set_1_story_1",
+              "storySetId": "story_lionhd_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "我们一定会平安再相见的。",
+              "storyInfo": "info/obt/memory/story_lionhd_1_1",
+              "storyTxt": "obt/memory/story_lionhd_1_1"
+            }
+          ],
+          "charId": "char_373_lionhd"
+        }
+      ]
     },
     "char_378_asbest": {
       "charID": "char_378_asbest",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -18978,6 +19259,7 @@
     "char_343_tknogi": {
       "charID": "char_343_tknogi",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -19127,6 +19409,7 @@
     "char_197_poca": {
       "charID": "char_197_poca",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -19242,6 +19525,7 @@
     "char_258_podego": {
       "charID": "char_258_podego",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -19379,6 +19663,7 @@
     "char_358_lisa": {
       "charID": "char_358_lisa",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -19494,6 +19779,7 @@
     "char_328_cammou": {
       "charID": "char_328_cammou",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -19604,11 +19890,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_cammou_set_1",
+          "storySetName": "无人工房",
+          "sortId": 1,
+          "storyGetTime": 1680753600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_cammou_set_1_story_1",
+              "storySetId": "story_cammou_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "簌、簌、簌，是谁在敲门？欢迎来到，无人厂房——",
+              "storyInfo": "info/obt/memory/story_cammou_1_1",
+              "storyTxt": "obt/memory/story_cammou_1_1"
+            }
+          ],
+          "charId": "char_328_cammou"
+        }
+      ]
     },
     "char_344_beewax": {
       "charID": "char_344_beewax",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -19758,6 +20079,7 @@
     "char_336_folivo": {
       "charID": "char_336_folivo",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -19907,6 +20229,7 @@
     "char_294_ayer": {
       "charID": "char_294_ayer",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -20017,11 +20340,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_ayer_set_1",
+          "storySetName": "黄沙觅迹",
+          "sortId": 1,
+          "storyGetTime": 1681977600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_ayer_set_1_story_1",
+              "storySetId": "story_ayer_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "莱恩哈特......他是我的雇主。",
+              "storyInfo": "info/obt/memory/story_ayer_1_1",
+              "storyTxt": "obt/memory/story_ayer_1_1"
+            }
+          ],
+          "charId": "char_294_ayer"
+        }
+      ]
     },
     "char_349_chiave": {
       "charID": "char_349_chiave",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -20159,6 +20517,7 @@
     "char_345_folnic": {
       "charID": "char_345_folnic",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -20274,6 +20633,7 @@
     "char_293_thorns": {
       "charID": "char_293_thorns",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -20423,6 +20783,7 @@
     "char_218_cuttle": {
       "charID": "char_218_cuttle",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -20538,6 +20899,7 @@
     "char_272_strong": {
       "charID": "char_272_strong",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -20669,12 +21031,46 @@
             }
           ],
           "charId": "char_272_strong"
+        },
+        {
+          "storySetId": "story_strong_set_2",
+          "storySetName": "关键人物",
+          "sortId": 2,
+          "storyGetTime": 1680753600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "60",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "200",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_strong_set_2_story_1",
+              "storySetId": "story_strong_set_2",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "时代会变，曾经最熟悉的人也会变，普普通通的水产小贩因此成了“关键人物”。这一路遗落了什么，未来将要守护什么，他心里都有数。",
+              "storyInfo": "info/obt/memory/story_strong_2_1",
+              "storyTxt": "obt/memory/story_strong_2_1"
+            }
+          ],
+          "charId": "char_272_strong"
         }
       ]
     },
     "char_366_acdrop": {
       "charID": "char_366_acdrop",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -20824,6 +21220,7 @@
     "char_411_tomimi": {
       "charID": "char_411_tomimi",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -20973,6 +21370,7 @@
     "char_415_flint": {
       "charID": "char_415_flint",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -21122,6 +21520,7 @@
     "char_416_zumama": {
       "charID": "char_416_zumama",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -21237,6 +21636,7 @@
     "char_271_spikes": {
       "charID": "char_271_spikes",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -21352,6 +21752,7 @@
     "char_365_aprl": {
       "charID": "char_365_aprl",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -21489,6 +21890,7 @@
     "char_388_mint": {
       "charID": "char_388_mint",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -21638,6 +22040,7 @@
     "char_350_surtr": {
       "charID": "char_350_surtr",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -21753,6 +22156,7 @@
     "char_381_bubble": {
       "charID": "char_381_bubble",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -21868,6 +22272,7 @@
     "char_346_aosta": {
       "charID": "char_346_aosta",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -22005,6 +22410,7 @@
     "char_265_sophia": {
       "charID": "char_265_sophia",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -22142,6 +22548,7 @@
     "char_423_blemsh": {
       "charID": "char_423_blemsh",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -22291,6 +22698,7 @@
     "char_311_mudrok": {
       "charID": "char_311_mudrok",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -22406,6 +22814,7 @@
     "char_391_rosmon": {
       "charID": "char_391_rosmon",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -22521,6 +22930,7 @@
     "char_436_whispr": {
       "charID": "char_436_whispr",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -22670,6 +23080,7 @@
     "char_347_jaksel": {
       "charID": "char_347_jaksel",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -22785,6 +23196,7 @@
     "char_264_f12yin": {
       "charID": "char_264_f12yin",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -22967,6 +23379,7 @@
     "char_214_kafka": {
       "charID": "char_214_kafka",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -23082,6 +23495,7 @@
     "char_451_robin": {
       "charID": "char_451_robin",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -23197,6 +23611,7 @@
     "char_440_pinecn": {
       "charID": "char_440_pinecn",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -23346,6 +23761,7 @@
     "char_332_archet": {
       "charID": "char_332_archet",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -23495,6 +23911,7 @@
     "char_338_iris": {
       "charID": "char_338_iris",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -23644,6 +24061,7 @@
     "char_452_bstalk": {
       "charID": "char_452_bstalk",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -23793,6 +24211,7 @@
     "char_402_tuye": {
       "charID": "char_402_tuye",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -23942,6 +24361,7 @@
     "char_455_nothin": {
       "charID": "char_455_nothin",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -24091,6 +24511,7 @@
     "char_362_saga": {
       "charID": "char_362_saga",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -24206,6 +24627,7 @@
     "char_2015_dusk": {
       "charID": "char_2015_dusk",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -24355,6 +24777,7 @@
     "char_1011_lava2": {
       "charID": "char_1011_lava2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -24934,6 +25357,7 @@
     "char_472_pasngr": {
       "charID": "char_472_pasngr",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -25049,6 +25473,7 @@
     "char_363_toddi": {
       "charID": "char_363_toddi",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -25198,6 +25623,7 @@
     "char_304_zebra": {
       "charID": "char_304_zebra",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -25347,6 +25773,7 @@
     "char_1012_skadi2": {
       "charID": "char_1012_skadi2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -25462,6 +25889,7 @@
     "char_003_kalts": {
       "charID": "char_003_kalts",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -25577,6 +26005,7 @@
     "char_474_glady": {
       "charID": "char_474_glady",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -25726,6 +26155,7 @@
     "char_475_akafyu": {
       "charID": "char_475_akafyu",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -25841,6 +26271,7 @@
     "char_426_billro": {
       "charID": "char_426_billro",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -25990,6 +26421,7 @@
     "char_478_kirara": {
       "charID": "char_478_kirara",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -26172,6 +26604,7 @@
     "char_369_bena": {
       "charID": "char_369_bena",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -26287,6 +26720,7 @@
     "char_469_indigo": {
       "charID": "char_469_indigo",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -26436,6 +26870,7 @@
     "char_485_pallas": {
       "charID": "char_485_pallas",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -26551,6 +26986,7 @@
     "char_421_crow": {
       "charID": "char_421_crow",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -26666,6 +27102,7 @@
     "char_437_mizuki": {
       "charID": "char_437_mizuki",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -26815,6 +27252,7 @@
     "char_1013_chen2": {
       "charID": "char_1013_chen2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -26997,6 +27435,7 @@
     "char_486_takila": {
       "charID": "char_486_takila",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -27146,6 +27585,7 @@
     "char_479_sleach": {
       "charID": "char_479_sleach",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -27295,6 +27735,7 @@
     "char_473_mberry": {
       "charID": "char_473_mberry",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -27444,6 +27885,7 @@
     "char_484_robrta": {
       "charID": "char_484_robrta",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -27593,6 +28035,7 @@
     "char_430_fartth": {
       "charID": "char_430_fartth",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -27708,6 +28151,7 @@
     "char_431_ashlok": {
       "charID": "char_431_ashlok",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -27823,6 +28267,7 @@
     "char_1014_nearl2": {
       "charID": "char_1014_nearl2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -27972,6 +28417,7 @@
     "char_420_flamtl": {
       "charID": "char_420_flamtl",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -28087,6 +28533,7 @@
     "char_496_wildmn": {
       "charID": "char_496_wildmn",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -28236,6 +28683,7 @@
     "char_4000_jnight": {
       "charID": "char_4000_jnight",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -28291,6 +28739,7 @@
     "char_489_serum": {
       "charID": "char_489_serum",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -28440,6 +28889,7 @@
     "char_449_glider": {
       "charID": "char_449_glider",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -28589,6 +29039,7 @@
     "char_4004_pudd": {
       "charID": "char_4004_pudd",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -28704,6 +29155,7 @@
     "char_206_gnosis": {
       "charID": "char_206_gnosis",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -28819,6 +29271,7 @@
     "char_422_aurora": {
       "charID": "char_422_aurora",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -29118,6 +29571,7 @@
     "char_4013_kjera": {
       "charID": "char_4013_kjera",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -29233,6 +29687,7 @@
     "char_4025_aprot2": {
       "charID": "char_4025_aprot2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -29348,6 +29803,7 @@
     "char_476_blkngt": {
       "charID": "char_476_blkngt",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -29497,6 +29953,7 @@
     "char_377_gdglow": {
       "charID": "char_377_gdglow",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -29612,6 +30069,7 @@
     "char_492_quercu": {
       "charID": "char_492_quercu",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -29794,6 +30252,7 @@
     "char_2023_ling": {
       "charID": "char_2023_ling",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -29943,6 +30402,7 @@
     "char_322_lmlee": {
       "charID": "char_322_lmlee",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -30092,6 +30552,7 @@
     "char_1021_kroos2": {
       "charID": "char_1021_kroos2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -30207,6 +30668,7 @@
     "char_300_phenxi": {
       "charID": "char_300_phenxi",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -30356,6 +30818,7 @@
     "char_4016_kazema": {
       "charID": "char_4016_kazema",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -30471,6 +30934,7 @@
     "char_4036_forcer": {
       "charID": "char_4036_forcer",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -30586,6 +31050,7 @@
     "char_4039_horn": {
       "charID": "char_4039_horn",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -30735,6 +31200,7 @@
     "char_4040_rockr": {
       "charID": "char_4040_rockr",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -30884,6 +31350,7 @@
     "char_4041_chnut": {
       "charID": "char_4041_chnut",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -30999,6 +31466,7 @@
     "char_4045_heidi": {
       "charID": "char_4045_heidi",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -31114,6 +31582,7 @@
     "char_1023_ghost2": {
       "charID": "char_1023_ghost2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -31263,6 +31732,7 @@
     "char_4009_irene": {
       "charID": "char_4009_irene",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -31412,6 +31882,7 @@
     "char_4042_lumen": {
       "charID": "char_4042_lumen",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -31522,11 +31993,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_lumen_set_1",
+          "storySetName": "直到灯火明亮",
+          "sortId": 1,
+          "storyGetTime": 1681977600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_lumen_set_1_story_1",
+              "storySetId": "story_lumen_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "阿戈尔人，你为什么还没有离开格兰法洛？",
+              "storyInfo": "info/obt/memory/story_lumen_1_1",
+              "storyTxt": "obt/memory/story_lumen_1_1"
+            }
+          ],
+          "charId": "char_4042_lumen"
+        }
+      ]
     },
     "char_4043_erato": {
       "charID": "char_4043_erato",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -31642,6 +32148,7 @@
     "char_433_windft": {
       "charID": "char_433_windft",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -31779,7 +32286,7 @@
               "storySetId": "story_windft_set_1",
               "storySort": 1,
               "storyCanShow": true,
-              "storyIntro": "\t“今天的工厂灯火通明，像昨天傍晚我说爱你时的夕阳 。”\n——工人们最常唱的一首歌",
+              "storyIntro": "“今天的工厂灯火通明，像昨天傍晚我说爱你时的夕阳 。”\n——工人们最常唱的一首歌",
               "storyInfo": "info/obt/memory/story_windft_1_1",
               "storyTxt": "obt/memory/story_windft_1_1"
             }
@@ -31791,6 +32298,7 @@
     "char_4046_ebnhlz": {
       "charID": "char_4046_ebnhlz",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -31940,6 +32448,7 @@
     "char_1024_hbisc2": {
       "charID": "char_1024_hbisc2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -32089,6 +32598,7 @@
     "char_4047_pianst": {
       "charID": "char_4047_pianst",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -32204,6 +32714,7 @@
     "char_4048_doroth": {
       "charID": "char_4048_doroth",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -32314,11 +32825,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_doroth_set_1",
+          "storySetName": "何处是我朋友的家",
+          "sortId": 1,
+          "storyGetTime": 1682913600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_doroth_set_1_story_1",
+              "storySetId": "story_doroth_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "多萝西·弗兰克斯，我奉劝你最好配合我们的调查工作。",
+              "storyInfo": "info/obt/memory/story_doroth_1_1",
+              "storyTxt": "obt/memory/story_doroth_1_1"
+            }
+          ],
+          "charId": "char_4048_doroth"
+        }
+      ]
     },
     "char_1027_greyy2": {
       "charID": "char_1027_greyy2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -32468,6 +33014,7 @@
     "char_135_halo": {
       "charID": "char_135_halo",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -32583,6 +33130,7 @@
     "char_1026_gvial2": {
       "charID": "char_1026_gvial2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -32732,6 +33280,7 @@
     "char_4055_bgsnow": {
       "charID": "char_4055_bgsnow",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -32881,6 +33430,7 @@
     "char_497_ctable": {
       "charID": "char_497_ctable",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -32996,6 +33546,7 @@
     "char_4054_malist": {
       "charID": "char_4054_malist",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -33261,6 +33812,7 @@
     "char_4064_mlynar": {
       "charID": "char_4064_mlynar",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -33376,6 +33928,7 @@
     "char_4032_provs": {
       "charID": "char_4032_provs",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -33491,6 +34044,7 @@
     "char_4066_highmo": {
       "charID": "char_4066_highmo",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -33606,6 +34160,7 @@
     "char_511_asnipe": {
       "charID": "char_511_asnipe",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -33673,6 +34228,7 @@
     "char_510_amedic": {
       "charID": "char_510_amedic",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -33740,6 +34296,7 @@
     "char_508_aguard": {
       "charID": "char_508_aguard",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -33807,6 +34364,7 @@
     "char_509_acast": {
       "charID": "char_509_acast",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -33874,6 +34432,7 @@
     "char_513_apionr": {
       "charID": "char_513_apionr",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -33941,6 +34500,7 @@
     "char_157_dagda": {
       "charID": "char_157_dagda",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -34056,6 +34616,7 @@
     "char_4062_totter": {
       "charID": "char_4062_totter",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -34205,6 +34766,7 @@
     "char_4071_peper": {
       "charID": "char_4071_peper",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -34315,11 +34877,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_peper_set_1",
+          "storySetName": "少年雇佣兵",
+          "sortId": 1,
+          "storyGetTime": 1682913600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_peper_set_1_story_1",
+              "storySetId": "story_peper_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "太天真的萨卡兹不会有未来，臭丫头，希望你的运气足够好，尽量比我活得久一点。",
+              "storyInfo": "info/obt/memory/story_peper_1_1",
+              "storyTxt": "obt/memory/story_peper_1_1"
+            }
+          ],
+          "charId": "char_4071_peper"
+        }
+      ]
     },
     "char_4072_ironmn": {
       "charID": "char_4072_ironmn",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -34435,6 +35032,7 @@
     "char_4063_quartz": {
       "charID": "char_4063_quartz",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -34545,11 +35143,46 @@
           "unLockorNot": true
         }
       ],
-      "handbookAvgList": []
+      "handbookAvgList": [
+        {
+          "storySetId": "story_quartz_set_1",
+          "storySetName": "无需遗憾",
+          "sortId": 1,
+          "storyGetTime": 1681977600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_quartz_set_1_story_1",
+              "storySetId": "story_quartz_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": " 对不起......我别无选择。",
+              "storyInfo": "info/obt/memory/story_quartz_1_1",
+              "storyTxt": "obt/memory/story_quartz_1_1"
+            }
+          ],
+          "charId": "char_4063_quartz"
+        }
+      ]
     },
     "char_4014_lunacu": {
       "charID": "char_4014_lunacu",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -34665,6 +35298,7 @@
     "char_466_qanik": {
       "charID": "char_466_qanik",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -34780,6 +35414,7 @@
     "char_427_vigil": {
       "charID": "char_427_vigil",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -34929,6 +35564,7 @@
     "char_4065_judge": {
       "charID": "char_4065_judge",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -35044,6 +35680,7 @@
     "char_1028_texas2": {
       "charID": "char_1028_texas2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -35159,6 +35796,7 @@
     "char_4017_puzzle": {
       "charID": "char_4017_puzzle",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -35274,6 +35912,7 @@
     "char_297_hamoni": {
       "charID": "char_297_hamoni",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -35423,6 +36062,7 @@
     "char_1020_reed2": {
       "charID": "char_1020_reed2",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -35538,6 +36178,7 @@
     "char_4080_lin": {
       "charID": "char_4080_lin",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -35653,6 +36294,7 @@
     "char_4082_qiubai": {
       "charID": "char_4082_qiubai",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -35768,6 +36410,7 @@
     "char_493_firwhl": {
       "charID": "char_493_firwhl",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -35883,6 +36526,7 @@
     "char_4083_chimes": {
       "charID": "char_4083_chimes",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -35998,6 +36642,7 @@
     "char_2024_chyue": {
       "charID": "char_2024_chyue",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -36147,6 +36792,7 @@
     "char_4078_bdhkgt": {
       "charID": "char_4078_bdhkgt",
       "infoName": "Unknown",
+      "isLimited": false,
       "storyTextAudio": [
         {
           "stories": [
@@ -36558,6 +37204,1036 @@
         }
       ],
       "handbookAvgList": []
+    },
+    "char_4091_ulika": {
+      "charID": "char_4091_ulika",
+      "infoName": "Unknown",
+      "isLimited": false,
+      "storyTextAudio": [
+        {
+          "stories": [
+            {
+              "storyText": "【代号】U-Official\n【性别】女\n【直播经验】少于一年\n【出身地】未公开\n【生日】1月4日\n【种族】札拉克\n【身高】159cm\n【矿石病感染情况】\n参照医学检测报告，确认为非感染者。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "基础档案",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【物理强度】普通\n【战场机动】缺陷\n【生理耐受】普通\n【战术规划】缺陷\n【战斗技巧】缺陷\n【源石技艺适应性】普通",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "综合体检测试",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "U-Official，通称主播U，曾在某移动城市作为网络主播活动，经干员卡达介绍与罗德岛签订合作协议，在为干员们提供直播服务的同时负责活动主持等工作，也作为顾问在罗德岛与各地传媒机构合作时提供帮助。\n除了向自己伸出援手的卡达，主播U还与罗德岛上的一些干员有过一面之缘，不过那些经历似乎不甚愉快，当时主播U也并未以现在的名字行世。最终，在主播U的强烈要求之下，我们决定暂缓对她的背景调查。\n\n尤里卡？\n——偶然路过的龙舌兰\n\n你认错人了你这个道貌岸然的大骗子！\n——语无伦次的主播U",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "客观履历",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "造影检测结果显示，该干员体内脏器轮廓清晰，未见异常阴影，循环系统内源石颗粒检测未见异常，无矿石病感染迹象，现阶段可确认为非矿石病感染者。\n\n【体细胞与源石融合率】0%\n干员U-Official没有被源石感染的迹象。\n\n【血液源石结晶密度】0.12u/L\n该干员连门都不愿意出。\n不出门对预防矿石病倒也不是完全没好处，但每天一直坐着，对身体肯定不好。还是希望这位干员能多运动一下，如果觉得困难，我可以帮忙做一些基础的拉伸。\n——嘉维尔\n\n太好了！那就麻烦嘉维尔医生了！\n——初来乍到，努力想和大家打好关系的主播U\n\n太好了！嘉维尔，她在罗德岛的首播就靠你了！啊，还有，毕竟人家刚来，你下手轻一点。\n——答应帮主播U的首播出主意的可露希尔",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "临床诊断分析",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【直播记录一】\n欢迎来到我们今天的“小U有约：罗德岛帅哥专访”特别节目，我是大家的主播U！今天我们请到的嘉宾是——\n欸？傀影先生人不见了，莱恩哈特先生要出外勤，连雪绒弟弟也在忙，所以请这位......呃......阳光开朗热情大帅哥......来临时救个场？行吧......\n嘉宾是，罗德岛最热情的干员，THRM-EX先生！\n......\n“我的热量冲击无坚不摧”，真的吗？我不信。\n欸，为什么突然开始倒计时了？\n是什么惊喜吗？好期待啊！\n\n【直播记录二】\n八小时不间断直播挑战！在不打扰干员工作生活的前提下，连续八小时不冷场、不下播！如果主播赢得了挑战，请大家多多打赏！如果主播输了，明天就做嘉维尔医生的拉伸挑战第二期！\n你好，请问怎么称呼？\n初次见面，多谢你喜欢我的直播！\n......\n没错，照相器材真的非常重要......\n提示音？有什么设备报错了......好像不是我的，是你的设备吗？\n嗯？怎么了，怎么突然不说话了，是我说错什么了吗？\n......\n............\n..................\n你倒是说句话呀稀音小姐！\n\n【直播记录三】\n主播U来到罗德岛以来的第一次吃播！特邀嘉宾是——锵锵，炎国大明星，食铁兽小姐！\n......\n没事的没事的，虽然对炎国尚蜀的美食早有耳闻，但我其实也很能吃辣的。来，让我尝一尝......\n（剧烈的咳嗽声）\n不，不用涮水！既然说了是吃播，我就一定要完成预定目标！\n......\n我没事，既然直播是工作......对待工作就要......说到做到......你看，一盘肉就剩一片了......不吃完多浪费啊......\n有没有考虑去尚蜀做主持人？嘿嘿，好啊，我从来不嫌工作机会多，等我吃完这片肉......\n\n附记：主播U在吃掉最后一片肉之后因过量出汗脱水倒地，被紧急送至医疗部，所幸并无大碍。\n又及：食铁兽小姐被主播U的职业精神感动，正在替她联系尚蜀文艺界的熟人，试图为她开辟更宽阔的职业道路。",
+              "unLockType": 2,
+              "unLockParam": "100",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料一",
+          "unLockorNot": true
+        }
+      ],
+      "handbookAvgList": []
+    },
+    "char_491_humus": {
+      "charID": "char_491_humus",
+      "infoName": "Unknown",
+      "isLimited": false,
+      "storyTextAudio": [
+        {
+          "stories": [
+            {
+              "storyText": "【代号】休谟斯\n【性别】男\n【战斗经验】十八年\n【出身地】哥伦比亚\n【生日】2月20日\n【种族】丰蹄\n【身高】185cm\n【矿石病感染情况】\n参照医学检测报告，确认为感染者。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "基础档案",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【物理强度】标准 \n【战场机动】标准 \n【生理耐受】优良 \n【战术规划】普通 \n【战斗技巧】标准 \n【源石技艺适应性】标准",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "综合体检测试",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "休谟斯，哥伦比亚某拓荒地废弃物处理站的实际负责人。经当地办事处干员介绍，来罗德岛治疗矿石病，同时作为工程部的一员为罗德岛提供服务，也协助罗德岛处理日常产生的固体废弃物。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "客观履历",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "造影检测结果显示，该干员体内脏器轮廓模糊，可见异常阴影，循环系统内源石颗粒检测异常，有矿石病感染迹象，现阶段可确认为矿石病感染者。\n\n【体细胞与源石融合率】13%\n体内存在多发性矿石病病灶，所幸体积均小且处于静止状态。需要在今后的治疗中密切关注病灶的活动情况。\n\n【血液源石结晶密度】0.30u/L\n\n看这张单子，他矿石病其实挺重的，可测出来的各种身体指标都挺不错，尤其是肺活量，居然是我的二倍还多！我不得不说这是个非常具有研究价值的案例！\n——华法琳\n\n其实是你该运动了吧。\n——嘉维尔",
+              "unLockType": 2,
+              "unLockParam": "25",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "临床诊断分析",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "当后勤干员和这位憨厚壮实的丰蹄谈笑风生，并带他参观罗德岛为他分配的宿舍时，她一定想不到，短短三天之后，那间宿舍就变成了一座由二手物品、自制工具和各种零件组成的恐怖迷宫。更可怕的是，里面物件的数量还在稳步增加。\n这间险些连门都关不上的宿舍在后勤部引发了一次小小的恐慌——他只用一个三天就在宿舍里堆了这么多东西，可以想见，再过一个三天，里面的东西就要冒出来了。\n在休谟斯拍胸脯保证这样的事情不会发生，自己会对宿舍内部格局进行整顿之后，后勤部的干员们半信半疑地等了一星期。\n在那之后，休谟斯主动邀请后勤部参观他的宿舍，那里已经变得井然有序起来，除了空间狭窄、墙壁的颜色也不大对头之外，至少，看起来，房间里的杂物一件也不剩了。\n“难为你了，”后勤干员感叹道，“扔那么多东西很累吧。”\n“没扔啊。”\n“那房间里少了的东西......”\n“一件都没有少。”\n说着，休谟斯钻到了床底下。\n后勤干员以为休谟斯会从床底下把那些东西掏出来，正想说不用了，只听“啪”的一声，休谟斯似乎按动了床底下的什么开关。\n然后，从床上方一个看起来只是装饰的大挖斗里缓缓滑出一个巨大的伸缩式金属箱，箱体不断伸长、伸长、伸长，直到接触到床板时，箱门自动弹开，里面是一个伸缩式置物架，被一星期前那些二手物品、自制工具和零件塞得满满当当。\n“这是总量的五分之一，”休谟斯的声音从床底下传来，听起来有点发闷，“还有五分之一已经变成了这个收纳系统的各种组件。你想不想看剩下的五分之三？只要在床底下操作一下就能从另外几面墙后面调出来，就是有点花时间。”",
+              "unLockType": 2,
+              "unLockParam": "50",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料一",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "休谟斯擅长古怪的发明，但更擅长的是从报废的工业制品中回收那些尚可使用的部分。\n面对废旧工业制品时，一般人的想法是把能用的部分拆下来，不能用的部分就丢弃掉，而休谟斯的字典里几乎就没有“丢弃”这个词。最能佐证他这种精神的，就是那个在干员中间流传甚广的“休谟斯循环”：他用电热锅的零件做了一台面包机，用面包机的零件拼凑了一台电视机，电视机坏了之后变成了电暖气，电暖气最后又变回了电热锅。\n听到这个传言的可露希尔于是半开玩笑地扔给他一个刚从仓库里翻出来，锈迹斑斑的铁皮档案柜，想看看他能做到哪一步。第二天，休谟斯相当不好意思地告诉她，那个柜子锈得太厉害了，就算是自己，也不敢用上面的铁皮做任何有实用价值的东西。\n可露希尔刚想拍拍他的肩膀，告诉他有些东西该丢就要丢，他就从怀中掏出一件铁皮做的驮兽摆件——用柜子上最后一点勉强能用的铁皮做的，驮兽头部甚至特意留了两块锈斑充当眼睛。\n凭借着这样的才能，休谟斯很快就成了罗德岛上固体废弃物处理方面的首席顾问。尽管他时常提出一些过于激进的建议，但工程部和后勤部的每一位干员都承认，休谟斯的到来，让罗德岛各种物资的循环利用效率都提升了一大截。",
+              "unLockType": 2,
+              "unLockParam": "100",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料二",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "除了“发明创造”和物资回收利用，休谟斯还掌握着一些不大上得了台面的“小技巧”，比如用细铁丝开锁，比如不用密码打开哥伦比亚流行的终端操作系统，再比如用废金属制作外形连三岁孩子都骗不过去，但就是能在自动贩卖机里买到东西的假硬币。\n他的这些“知识”琐碎，不成体系，事倍功半，他自己常常知其然而不知其所以然，但可操作性极强，只要按照他的指示一步一步来，就一定能达到满意的结果。举个例子，他就是这样，在一个漆黑的暗夜，出于最朴素的同情心，帮助了一名素不相识的佩洛少女，指导她用地上捡到的发卡打开了罗德岛食堂厨房的锁，两个人在深夜的食堂里大快朵颐。\n从另一个角度来说，他的这些技术也在一些外勤任务中发挥了意想不到的作用。例如，在和某座移动城市的管理者商谈合作事宜时，负责谈判的干员吃了好几次闭门羹，而休谟斯摸清了管理者出门的规律，在他的必经之路上做了手脚，准确无误地弄爆了他的车胎，强行为双方创造了见面机会......\n诸如此类的事迹，休谟斯还有很多。而这些“小技巧”，近乎偏执的节约精神，还有那些稀奇古怪的“发明创造”，都与他生活了十几年的拓荒地固体废弃物处理站密不可分。",
+              "unLockType": 2,
+              "unLockParam": "150",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料三",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【权限记录】\n在哥伦比亚的官方宣传中，广阔的荒野是一片能让人实现梦想的希望之地；许多来自各个拓荒地的人却告诉我们，拓荒地上并非没有希望，只是对于普普通通的拓荒者来说，那些希望都太渺茫；而各地的固体废弃物处理站，通称“处理站”或“垃圾填埋场”，则是希望含量最稀薄的地方之一。\n原则上，这是一个拓荒地上最底层的设施，安排的是那些用拓荒者身份代替服刑的重刑犯，在其中工作的人甚至没有资格擅自离开。\n然而，很多无辜的人，只是因为得罪了什么人，或是被认为没有创造利润的能力，也会被丢进处理站，身处凶神恶煞的重刑犯中间，最后顺理成章地变成最底层中的最底层。\n好在，休谟斯站了出来。\n一开始，他只是个初来乍到，空有一身力气的毛头小伙子，在回收被源石粉尘污染的钢材时感染了矿石病；可感染之后，他并未灰心丧气，反而用种种废料拼凑出一套极为笨重的防护设备。所有人都觉得他是个倒霉蛋加傻瓜，但在某一次同样的任务开始之前，要亲自回收钢材的那个人扭扭捏捏地找到了他。\n当钢材回收完毕，那个人从装备里把自己择出来时，他浑身都被汗泡透了，整个人几乎虚脱。别人都等着看倒霉蛋二世的乐子，可当上面出于宣传需要，请医生来给处理站的人们诊断矿石病时，“倒霉蛋二世”却是回收过污染钢材的几个人里唯一一个非感染者。\n就这样，休谟斯意识到，就算是被丢到处理站自生自灭的垃圾，至少也有拒绝腐烂的资格。\n之后的事情就显得顺理成章：他左手拎着用来拆解和改装的工具箱，右手拿着沉重的镰刀，造了一些东西，打了一些架，救了一些人，最终成了整个处理站，从含冤入狱的小办事员，到心狠手黑的抢劫犯，人人心服口服的带头大哥。\n他对他们毫无保留，他们也愿意将自己的手艺倾囊相授，无论是读书写字还是溜门撬锁。因为他们知道，如果休谟斯只剩一口肉吃，他会把那块肉分给处理站的所有人，自己去舔盘底的肉汤——好在，有他的奇思妙想和学来的种种“小技巧”傍身，这样的窘境还从未出现过。",
+              "unLockType": 2,
+              "unLockParam": "200",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料四",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【权限记录】\n【2月27日，公函】\n尊敬的投诉人：\n我们非常能体会您作为一位父亲的心情，但请您理解，法律面前人人平等，您的儿子不得不为他犯下的过错负责。\n若尚有其他疑问，欢迎再次来函。\n \n【3月18日，公函】\n尊敬的投诉人：\n关于您的重审请求，我们进行了审慎的讨论，得出的结果是，法庭量刑并无不妥之处。请您理解。\n若尚有其他疑问，欢迎再次来函。\n \n【5月5日，公函】\n尊敬的投诉人：\n您投诉的案件并无重审必要。\n \n【6月1日，公函】\n尊敬的投诉人：\n您的儿子已经选择前往拓荒地。如果不希望影响他在拓荒地的发展前景，请勿就一件已经确定结果的事项反复来函。\n谢谢您的配合。\n \n【6月2日，录音】\n老头，你看不懂人话是吗？！是，你儿子就是在酒吧里和人打了一架，但你知道他打的是谁吗？你知道他打的那个人家里是做什么的？你知道我们顶了多大压力？能让他去拓荒地，我们已经尽最大程度的努力了！你知道对方跟我们提的是什么要求吗？是终身监禁，最好判个死刑！\n联系报社的人？\n你去，你尽管去——算了，我跟你直说，他们家就是联合报社的大股东，你看哪个记者敢把鼻子伸到这个案子里来？换成别人家的事，他们早凑上去了！你以为把拘留两天就结了的案子办成二十年，我们不觉得心里堵得慌吗？！\n不是，你别哭......\n唉，算我求求你了，别再写信了，好不好？",
+              "unLockType": 1,
+              "unLockParam": "2;1",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "晋升记录",
+          "unLockorNot": true
+        }
+      ],
+      "handbookAvgList": []
+    },
+    "char_154_morgan": {
+      "charID": "char_154_morgan",
+      "infoName": "Unknown",
+      "isLimited": false,
+      "storyTextAudio": [
+        {
+          "stories": [
+            {
+              "storyText": "【代号】摩根\n【性别】女\n【战斗经验】五年\n【出身地】维多利亚\n【生日】5月14日\n【种族】菲林\n【身高】165cm\n【矿石病感染情况】\n参照医学检测报告，确认为非感染者。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "基础档案",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【物理强度】标准 \n【战场机动】普通 \n【生理耐受】标准 \n【战术规划】优良 \n【战斗技巧】优良\n【源石技艺适应性】普通",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "综合体检测试",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "格拉斯哥帮成员摩根，被推进之王戏称为帮派的大脑。在罗德岛协助推进之王处理所有与格拉斯哥帮相关的事务，现兼职为罗德岛处理维多利亚办事处的相关事务。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "客观履历",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "造影检测结果显示，该干员体内脏器轮廓清晰，未见异常阴影，循环系统内源石颗粒检测未见异常，无矿石病感染迹象，现阶段可确认为非矿石病感染者。\n\n【体细胞与源石融合率】0%\n干员摩根没有被源石感染的迹象。\n\n【血液源石结晶密度】0.12u/L\n干员摩根甚少接触源石。",
+              "unLockType": 2,
+              "unLockParam": "25",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "临床诊断分析",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "罗德岛的图书管理员在尝试靠近这名装束大胆的干员时，情不自禁地探了探胸口那几本书的厚度。\n“希望能够扛得住一脚......”\n管理员在这些格拉斯哥帮的成员们登舰之后就从管理训练场的兄弟那里听说了她们的赫赫凶名。据说，那位驻扎在训练场，打得昏天黑地的因陀罗就是眼前这位黑皮肤菲林打发过去的。\n奢求这群习惯了街头生活的人遵守规矩恐怕得不到什么好脸色。\n“摩根干员您好，这是我们的图书馆使用守则，请在使用本馆期间严格遵守相关的规定。但是请放心！针对干员个人的特殊情况，我们也会有更人性化的管理方式......”\n管理员一鼓作气背完准备了很久的稿子，心里却已经问候了多次临时换班的同事。\n“太好了，我这刚好有一份书单，但是我实在看不懂这些编码是什么意思！”\n“当然了，人性化的管理......欸？”\n管理员显然没有想到眼前这位菲林会突然举起来一份比她还高的书单。上面的字迹管理员无比熟悉，毕竟那位口碑极好的乌萨斯小姐已经是图书馆的常客了。\n“可是，这上面都是些很难懂的历史文献，真的不要紧吗？”\n管理员刚说完就已经后悔了，他马上不动声色地拉开了距离。\n“我正给自己的新书找灵感呢！我朋友说这份书单正合适，和我以前看的那些给贵族老爷表功的破玩意儿完全不同。”\n管理员终于松了一口气，看来训练场的兄弟传来的都是谣言，格拉斯哥帮还是有懂规矩的文化人的。管理员惭愧地把自己胸口的书全部卸下，随后就热情地替摩根查找馆藏。\n“如果你们格拉斯哥帮有需要，我去帮你们申请更高权限的借阅卡，以后就不用总是来回跑了。”\n管理员从心底里佩服这个有想法的菲林，可惜热情满满的他都没来得及注意到这位菲林嘴角狡黠的微笑。",
+              "unLockType": 2,
+              "unLockParam": "50",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料一",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "一张曾经遗落在拳馆角落的活页，纸张已经泛黄，墨迹也已经晕开：\n【4月1日】\n汉娜没有发现。\n罗尼兄弟被她揍得很惨，街角玩具厂的拆迁队现在归我们罩着了，但我宁愿这些拆迁队从来没有出现过。\n我和贝尔德还是不知道该怎么安慰维娜，她到底为什么突然情绪这么低落了？\n\n【4月4日】\n汉娜这个呆子到底怎么回事，为什么还没发现问题？据说黎恩兄弟的远房亲戚被汉娜揍进医院了，看来他们今后是不敢跑到我们街区来造次了。\n\n【■■■■■】\n这个玩笑已经变得无聊了，我已经不奢望汉娜那个好战分子乖乖在拳馆待上一天好好听我们把话说完了。\n维娜担忧的事我和贝尔德已经讨论出了一个大概的方案，希望汉娜能够心平气和地接受我们的计划。（贝尔德说到时候她会拉住汉娜的。）\n\n【4月15日】\n汉娜已经为了那个日子忙活了大半个月，维娜也已经知道了我对汉娜的恶作剧，但是她也不忍心让忙活了这么久的汉娜伤心，决定配合我表演，刻意避开和汉娜见面。\n不过维娜的担忧已经变成现实了，越来越多的物流公司被撤出了诺伯特区，听说最后几个维护铁路的工作人员也要被调走了。街区里已经有些风言风语说看到了不少外地佬的身影，看上去不能再拖了。\n\n【■■■■■】\n拳馆已经很久没有这么热闹了，我们所有场子的小头头都到了，大家都在台下大喊维娜和汉娜的名字，我都没忍住偷偷给两人久违的决斗下了点小注。\n当然这段日子收服了大半诺伯特场子的汉娜的确有资格再次挑战维娜，可惜现实总是很残忍。不过能看到汉娜和维娜在台上玩得这么开心，我心里的罪恶感也少了不少。\n明天就是出发的日子，汉娜意外地没有对维娜准备离开诺伯特区的决定有任何的异议。我们都明白，从铁路被废弃开始，诺伯特区就已经没有未来了。",
+              "unLockType": 2,
+              "unLockParam": "100",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料二",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "摩根没有问推进之王任何问题，她知道推进之王需要一点时间，所以便主动拉着明显躁动不安的因陀罗走在最后面。\n达格达也一如既往地默默守在推进之王的身后，不近也不远。\n摩根猜测推进之王也明白，格拉斯哥帮的成员或多或少都已经猜到了她的身份，而这位帮派领袖也许只是没有想到一个好的说辞来向大家解释。\n沿着铁轨的方向，格拉斯哥帮看到曾经热闹非凡的厂区和物流站如今大多已经荒废了。少数几个占据着庇护之所的流浪汉也警惕地看着这支不知从何而来的队伍。前方就是萨迪恩区的卡口了，卡口前聚集的不少流浪汉羡慕地看着另一边来来往往的建设队伍，但是那排面无表情的边检队伍断绝了这些流浪汉溜进萨迪恩区寻找新生活的希望。\n这一幅景象，摩根曾经见到过。在她很小的时候，诺伯特区外的流浪汉也是如此羡慕地望着她们的新房子。\n“不能走那边的关卡，我知道一条路能从奥克特里格区绕出伦蒂尼姆。”\n这是摩根生平第一次踏进奥克特里格区，她发现哪怕是平时咋咋呼呼的因陀罗也被眼前的景象惊得闭上了嘴。时间给这块维多利亚历史最悠久的地区留下了难以磨灭的痕迹，但是建造伊始所创造的宁静却保留至今。\n这就是文明。\n这是摩根脑子里的第一个想法，晃神的片刻，她甚至奢望自己也能生活在这里，生活在文明之中。但那些厂区流浪汉的脸不知为何浮现在摩根的脑中，让她一阵胆寒。\n是什么让“文明”得以永存？\n是他们，也是她们。\n诺伯特区的命运也是萨迪恩区的命运。繁荣，衰退，对于生活在文明中的人来说，毫无意义。外围城区的命运永远只存在于“文明人”的一念之间，养料永远只是养料，无非品牌不同罢了。\n摩根不知不觉落在了最后，她好像望见了推进之王惭愧的眼神。\n她此刻有无数的灵感去写作，但却不知道从何起笔。",
+              "unLockType": 2,
+              "unLockParam": "150",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料三",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "骑士？我从来没有这样的想法。那是达格达总纠结的问题。我就是摩根，诺伯特区土生土长的人，追随维娜也并不会改变这一点。我和汉娜都计划好了，等伦蒂尼姆的那些破事都解决了，我们还是会回我们的拳馆，每天早上喝喝酒，下午砸砸场子，什么都不会变。\n维娜？维娜......我不知道，那时候她会是谁，亚历山德莉娜陛下还是格拉斯哥帮的推进之王？我当然希望大家能够都回到拳馆，但我也绝对尊重维娜的选择！\n害怕？当然不会，哪怕你去问汉娜，她都会毫不犹豫地承认我就是格拉斯哥帮情绪最稳定，胆子最大的人。\n......\n行吧，我承认最近有点患得患失了。以前我们只是一帮街头小子，最大的阵仗也不过是地下黑市的械斗。但现在不一样，整个伦蒂尼姆都是一片战场，从未见过的敌人，不敢想象的伤亡，这和斗殴可不是一回事！我努力在她们面前表现得和过去一样，努力成为她们内心的支柱，但我也同样需要一个自己的支柱。\n维娜？是的，维娜。以前带着我打生打死讨生活的维娜就是那个支柱，我们有着共同的经历，共同的成长环境，维娜理所应当能够理解我的心情......但自从知道维娜的身份之后，我有点不确定了。\n不，我不担心维娜会和我们越走越远，当然也不生气她一直以来隐瞒了身份，这些事情换谁都会这么做。我只是担心她会被她所害怕和厌恶的那些人越拉越远，而我毫无能力保护她。说到底，我只是一个街区长大的混混，我有什么能力实现保护那个流浪到我们街区的小女孩的承诺。\n奶油炖汤？她什么时候学会做奶油炖汤的？她已经到门口了？好吧好吧，医生，刚才我说的话都不算数！这次的预约就暂时取消吧。\n\n——未完成的咨询记录",
+              "unLockType": 2,
+              "unLockParam": "200",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料四",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "一份来自诺伯特区被摧毁的警局档案馆的尘封档案\n档案编号：LBD 209\n复审进度：已完成\n复审人：■■■■■\n受审人员：涉案人员系诺伯特区格拉斯哥帮成员，以及诺伯特区警察分局见习警员霍华德（已撤职）。\n\n初审案件描述：诺伯特区“麦克拉伦之家”录像厅恶性斗殴事件，格拉斯哥帮成员与外来人员发生肢体冲突，录像厅损失较小，判定为非致命性斗殴。由于录像厅老板麦克拉伦求情，本院决定从轻判决，判处拘留格拉斯哥帮成员三天，由格拉斯哥帮成员摩根支付保释费用，本局前见习警员霍华德经办结案。\n\n复审申请：外来人员在半月后重伤死亡，因死者系奥克特里格区居民，由奥克特里格区皇家警局提出复审申请并要求派驻总局警官监督调查。\n\n复审案件描述：【保密】\n\n复审结果：前见习警员霍华德故意顶撞负责监督的总局警官，并协助格拉斯哥帮成员摩根伪造重要证据，涉嫌帮助格拉斯哥帮首领推进之王洗脱嫌疑，干扰复审流程，现已撤职并押送至奥克特里格区总局收监。\n格拉斯哥帮成员摩根主动提交了相关证据，以该恶性事件唯一参与者的身份自首，格拉斯哥帮其余成员因证据不足，均维持原判。\n\n在档案的背面留有一段隐约的批注：\n警告，所有调取该档案的警员请注意，该复审判决已经转交总局处理，我无权批准任何申诉请求。另，安全起见，我不想再在局里听到任何有关赞赏摩根或者格拉斯哥帮的言论。这会惹上大麻烦。",
+              "unLockType": 1,
+              "unLockParam": "2;1",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "晋升记录",
+          "unLockorNot": true
+        }
+      ],
+      "handbookAvgList": [
+        {
+          "storySetId": "story_morgan_set_1",
+          "storySetName": "巨轮之下",
+          "sortId": 1,
+          "storyGetTime": 1680753600,
+          "rewardItem": [],
+          "unlockParam": [
+            {
+              "unlockType": 1,
+              "unlockParam1": "2",
+              "unlockParam2": "1",
+              "unlockParam3": null
+            },
+            {
+              "unlockType": 2,
+              "unlockParam1": "50",
+              "unlockParam2": null,
+              "unlockParam3": null
+            }
+          ],
+          "avgList": [
+            {
+              "storyId": "story_morgan_set_1_story_1",
+              "storySetId": "story_morgan_set_1",
+              "storySort": 1,
+              "storyCanShow": true,
+              "storyIntro": "“摩根回忆录”撕掉的那页上写着美好的畅想，而未来要补上什么内容，她会找到答案。",
+              "storyInfo": "info/obt/memory/story_morgan_1_1",
+              "storyTxt": "obt/memory/story_morgan_1_1"
+            }
+          ],
+          "charId": "char_154_morgan"
+        }
+      ]
+    },
+    "char_464_cement": {
+      "charID": "char_464_cement",
+      "infoName": "Unknown",
+      "isLimited": false,
+      "storyTextAudio": [
+        {
+          "stories": [
+            {
+              "storyText": "【代号】洋灰\n【性别】女\n【战斗经验】无\n【出身地】雷姆必拓\n【生日】10月25日\n【种族】札拉克\n【身高】155cm\n【矿石病感染情况】\n参照医学检测报告，确认为非感染者。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "基础档案",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【物理强度】优良 \n【战场机动】普通 \n【生理耐受】优良\n【战术规划】标准 \n【战斗技巧】普通 \n【源石技艺适应性】标准",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "综合体检测试",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "夏娜·穆伊曼，雷姆必拓夏娜工程小队负责人，精通钻探、掘进、浇筑等工程技术，在某废弃移动作业平台的翻新项目中与工程部有所接触，现作为非常驻工程顾问参与罗德岛相关任务，代号“洋灰”。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "客观履历",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "造影检测结果显示，该干员体内脏器轮廓清晰，未见异常阴影，循环系统内源石颗粒检测未见异常，无矿石病感染迹象，现阶段可确认为非矿石病感染者。\n\n【体细胞与源石融合率】0%\n干员洋灰没有被源石感染的迹象。\n\n【血液源石结晶密度】0.15u/L\n干员洋灰长期在矿井中作业，与源石粉尘接触较多，好在防护得当，暂未感染矿石病，但仍建议定期进行全面的医学检测。\n\n“话说，那面工程盾，如果灌满混凝土，大概是个什么概念？”\n“上次嘉维尔试了，她用上了双手。”\n“那洋灰......力气还蛮大的。”",
+              "unLockType": 2,
+              "unLockParam": "25",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "临床诊断分析",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "干员洋灰拥有异常灵敏的嗅觉，这是她来本舰报到那天给人留下的第一印象。据负责接待的人事干员回忆，洋灰踏进办公室的瞬间，便皱起了鼻子，眉头紧紧蹙起，他以为这位来自雷姆必拓的新朋友是对合作条款有异议，刚要解释，便看见洋灰似乎下定决心般开口：“那个......好像有东西霉掉了，应该在左边第三个抽屉。”然后人事干员便在相应的位置翻出了一包吃了大半后用橡皮筋扎紧的饼干......而根据我们查到的相关记录，洋灰曾在逼仄闷湿的矿井里，仅凭嗅觉便分辨出了岩层的异样，组织工人们避险，对安全结构重新进行浇筑，及时排除了矿井的安全隐患，由此深受大家信服。\n报到当晚，干员洋灰收到了包括罗德岛食堂、采购部、疗养庭院、龙舌兰所在的品酒协会、清流所在的环境采样分析小组等多个部门和社团的邀约，洋灰认认真真地回复了所有人。按照波登可的描述，在参观疗养庭院时，洋灰在极短时间内便能记住并分辨十多种花卉的味道，她有些怅然地表示，在雷姆必拓的森林和原野间，倒是也能见到这样花朵簇拥的景象，但在铺天盖地的尘土里，连花草也和那些时刻轰响着的大型机械一样，灰扑扑的。最后，洋灰表示自己对调香制香很感兴趣，感谢莱娜和波登可的邀请，遗憾的是，自己因工程排期紧张、无法在罗德岛本舰久留......\n洋灰很快返回了雷姆必拓。",
+              "unLockType": 2,
+              "unLockParam": "50",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料一",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【工程部干员出勤存档】\nC02，罗德岛舰桥紧急检修，主动参与工程辅助......\nC07，工程部阶梯钻头套组改造，落点误差可控制在2厘米以内，可突破岩层的硬度提高2度，整体性能提升30%。\nC12，罗德岛次级舱室系统化改造，工程图纸确认阶段，提请修正四处，已向可露希尔确认，判定无误，可执行。\n......\n工程部在施工记录的例行盘点中发现，虽然洋灰并不常驻罗德岛，但几次来本舰交接工作，共留下了十多项出勤记录。谈及她在钻探、掘进、浇筑、井下轨道维护等方面的施工技术，几位资深干员无一例外地给出了“过硬”的评价。洋灰常年在雷姆必拓各地的矿场和建筑工地上摸爬滚打，虽然不具备系统的工程学理论知识，但足够的临场经验和器械改造能力让她能准确判断图纸的可执行度与优化空间，岩层结构的特殊性与建筑材料的可能损耗，而且经她调整过的装备，在性能与精度都有保障的前提下，能应用于更加复杂、操作难度更高的施工环境。\n“钻头、工程盾、测风仪、高精度卷尺......这些工具，是我们吃饭的家伙。这一行很残酷，说到底要靠本事吃饭。技术过硬，才能站稳脚跟，才有可能去谈论其他的事情。”\n“噪音？唔，这确实是个大问题，要怎么样才能在提高性能的同时做到降噪呢？改造耳机？这也不是我的专长......”一向拍着胸脯让我们尽管放心的那个自信的洋灰，难得地脸红了起来。",
+              "unLockType": 2,
+              "unLockParam": "100",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料二",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "“夏娜工程小队”，是一支规模不过五十人的小型工程队，主要业务来源为雷姆必拓矿业公司大型联合工程中的分包项目。洋灰在洽谈环节，会反复强调小队在施工过程中应该拥有的权利并体现在合同上——当然，我们也领教过许多次：必须保证能对图纸进行确认、调整或修正；必须保证施工过程不被监工方以各种暧昧的理由干涉；必须保证工程款以及相关赔偿能按时按额支付。虽然上述要求听起来并不稀奇，但对于创业者而言，这种“不好说话”的较真姿态并不讨喜......\n但据我们调取到的资料，夏娜工程小队在雷姆必拓发展良好，原因正是洋灰本人所解释的——“技术”，技术让他们具备了足够的竞争力。这支小队从成立以来，保持着事故率为零的纪录，所承包工程的质量均超过验收标准，工程的返工与增补量极低。短短两三年，夏娜工程小队已经从名不见经传的“愣头青”迅速成长为有口皆碑的优选合作对象。\n据洋灰本人透露，夏娜工程小队目前正在稳步扩大规模，并尝试拓展自身的业务范围，开始承接除采矿、建筑等常规工程之外的项目，包括受雇于境外科技公司的远行勘探与考察型挖掘，为某些需要在冰原等特殊环境开展钻探、掘进作业的团队提供技术支持......甚至此前与工程部沟通合作方向时，洋灰并不算委婉地向可露希尔小姐提出，希望通过罗德岛牵线，前往哥伦比亚进行业务交流和学习。\n“哥伦比亚大拓荒的图景是怎样的？雷姆必拓的工人和其他地方的工人有什么不一样？\n“我们这些工人，不管在哪儿，做什么活儿，都是有意义的。”",
+              "unLockType": 2,
+              "unLockParam": "150",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料三",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "和洋灰有过接触的干员，应该都听她讲述过自己的梦想：希望雷姆必拓再也没有矿难，所有的工人在谈及自己的现在和未来时能不再神色黯然。\n洋灰出身于雷姆必拓一个普通的矿工家庭，父亲是个分包次级工程的包工头。洋灰从小跟着他出入矿场，见过还没擦去脸上污渍的工人们聚在简易的雨棚下，围着一锅铁锅炖大快朵颐，一瓶瓶源石虫啤酒传着传着很快见底；见过父亲和各路安全员在矿井边、酒桌上斡旋，熟练地应付那些挑刺一样的例行施工检查；见过新年来不及回家的工人们放露天电影，电影里的枪声将她吵醒，被父亲喂了一颗糖后续上好梦；见过那场因矿层整体安全结构受损而引发的矿难后，由于工程队收容了不少感染者，在赔偿谈判中吃了闷亏的父亲不愿意看到死难者家属的生活难以为继，拿自己的积蓄补足了赔偿金额......工程队也在不久后因亏损被迫解散。\n被问及为什么没有从父亲的事情中吸取教训，继续选择从事这个行当时，洋灰没有解释什么，只是疑惑地反问：“为什么不呢？”\n\n当然，洋灰并不是一个过于乐观，或者说只认死理的人。某次，一场突如其来的大雨打断了浇筑作业，众人在移动工棚有一搭没一搭地闲聊时，洋灰坦然地表达过对现状的思考——\n夏娜工程小队的员工多半是本就掌握了专门技术的青年工人，剩下的少数人也在洋灰的敦促和悉心教导下进步明显，但放眼整个雷姆必拓，这个充斥着探矿作业平台轰鸣声的国家，在矿场上讨生活的大多数人，并不具备能力，甚至没有机会去操作高精度器械，只能从事繁重的基础劳动，他们中许多人可能连字也不识几个，只能低着头进入矿场又离开，或者再也无法离开......\n“我承认，依靠专业能力获得不可被替代的位置，不受矿场主们欺负，是一件过于理想化的事情，甚至有些幼稚......\n“我左右不了地下的矿藏，也左右不了地上的政策，但我不能不去做事。\n“哪怕只有一点点改变的可能。”",
+              "unLockType": 2,
+              "unLockParam": "200",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料四",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【特别记录】\n1.红外仪及盾用摄制模块组件\n干员洋灰向工程部提交上述采购申请，用于适配加装在工程盾上的施工记录仪。\n\n2.薄荷糖\n备注：薄荷口味的薄荷糖，拒绝奇怪的果味实验，甜味纯粹，提神效果明显。\n有干员曾见过洋灰不小心将糖掉在了地上，随后捡起来，小心地拂去上面的渣土，然后扔进嘴里。\n\n......\n\n7.《钢铁印象》\n经查证，《钢铁印象》是雷姆必拓几家矿场的工人自发筹办的杂志，包含“大事记”“政策解读”“国外掠影”“工人文汇”“不容错过的幽默”等主题栏目，洋灰在为夏娜工程小队订阅该杂志后，主动联系编辑组，表示愿意定期提供资金支持。\n增补记录：《钢铁印象》创刊以来，已发行十五期，目前已由月刊调整为半月刊。最新一期的“工人文汇”，选登了一篇名为《萝卜根须长》的半纪实小说，讲述了一名矿工误将闯入的沙地兽当作幽灵，在复杂的矿井地形中展开追逐，最终挖入地底八千米的故事。作者夏娜·穆伊曼，文笔比较稚嫩，但颇具可读性。",
+              "unLockType": 1,
+              "unLockParam": "2;1",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "晋升记录",
+          "unLockorNot": true
+        }
+      ],
+      "handbookAvgList": []
+    },
+    "char_4087_ines": {
+      "charID": "char_4087_ines",
+      "infoName": "Unknown",
+      "isLimited": false,
+      "storyTextAudio": [
+        {
+          "stories": [
+            {
+              "storyText": "【代号】伊内丝\n【性别】女\n【战斗经验】十九年\n【出身地】卡兹戴尔\n【生日】2月19日\n【种族】未公开\n【身高】168cm\n【矿石病感染情况】\n参照医学检测报告，确认为感染者。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "基础档案",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【物理强度】标准\n【战场机动】优良\n【生理耐受】优良\n【战术规划】标准\n【战斗技巧】标准\n【源石技艺适应性】优良",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "综合体检测试",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "前萨卡兹佣兵头目，伊内丝。曾短暂参与卡兹戴尔的混乱内战，直到切尔诺伯格事件时，她借助假死彻底消失在所有人的视野中。此后，伊内丝隐藏了自己的踪迹，但通过最近的伦蒂尼姆事件，她正式与罗德岛恢复了联系。期间她经历了什么无从查验，最后在阿斯卡纶的担保下与罗德岛签订了战略合作条款。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "客观履历",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "造影检测结果显示，该干员体内脏器轮廓模糊，可见异常阴影，循环系统内源石颗粒检测异常，有矿石病感染迹象，现阶段可确认为矿石病感染者。\n\n【体细胞与源石融合率】11%\n伊内丝有明显的感染迹象，但她本人拒绝留下任何样本。\n\n【血液源石结晶密度】0.21u/L\n因常年在卡兹戴尔地区活动，并且有长时间的野外暴露史，伊内丝的感染情况是可以预见的。但是如同W一样，感染者的身份对她并没有造成任何的困扰。\n\n医疗部的干员曾经多次尝试帮助伊内丝进行全面的检查，以为其制定针对性的治疗方案。但遗憾的是，伊内丝不反对也不配合的冷淡态度让医疗部的同事信心受到了极大的挫败。尤其是每当检查好不容易进行到了关键数据的采集环节，她总是如鬼魅一般突然从所有人眼前消失，并在之后很长一段时间内都不再露面。为了干员的健康考虑，我们已经申请联络她的主管人员，希望得到协助。\n——某位医疗部干员\n\n驳回，她心中有数。\n——阿斯卡纶",
+              "unLockType": 2,
+              "unLockParam": "25",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "临床诊断分析",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "伊内丝小姐刚出现在罗德岛的时候，不少同事都对这名神出鬼没的干员抱有极大的兴趣，干员们大多都有同一个疑惑：究竟是什么人才能和W并肩作战这么久？\n于是许多干员尝试去接触伊内丝小姐，但结果却是不少号称专精追踪的鲁珀干员都铩羽而归，他们大多无法完全掌握伊内丝小姐的行踪。\n随着失败的人越来越多，舰上的干员们越来越严肃地对待“寻找伊内丝”这个游戏。毕竟不是所有人都愿意承认，这名常年混迹荒野的萨卡兹雇佣兵拥有的侦察与反侦察技巧比大多数接受过专业训练的干员更熟练。\n根据我对参与者们的回访，他们均提到，在追踪伊内丝小姐的过程中发现了她刻意遗留的影子标记。这些标记清楚地展现了他们深藏内心的所爱之物或是所惧之物。在伊内丝小姐的面前，干员们藏不住任何秘密，这让他们感到畏惧，也让干员们能够更加严肃地对待伊内丝小姐。\n不久前，凯尔希医生终于出面制止了这些荒唐的行为。但是单纯的追踪调查只是最低效的方式，我相信自己对伊内丝小姐的了解程度已经远超他人。\n我重新回顾了整起事件的过程，发现大部分人都被伊内丝小姐自身的出色才能吸引，而完全忽视了两个重大的疑点。\n疑点一：纵使伊内丝小姐有出色的情报工作经验，初到罗德岛的她也不可能立马熟悉全舰的各种路线，更不必说追踪她的干员们已经在舰上生活多年。我推测伊内丝小姐很早以前就登上过本舰，甚至在本舰生活了足够长的时间，对应其假死的记录，我隐约有了更大胆的猜测。\n疑点二：虽然收录在册的萨卡兹源石技艺种类繁多，但具备心灵探查和情绪干扰的记载却少之又少，且这类源石技艺多出现在莱塔尼亚的部分地区。但是伊内丝小姐长期活动于卡兹戴尔周边，这其中理应存在一个更为直接的联系。\n因此我从伊内丝小姐前队友W的履历入手，翻阅对照了档案馆内的日志和文献，我惊奇地发现在近十年的重大事件中均有她的身影出现。在所有这些事件中，伊内丝小姐都远远避开了漩涡的最中心，但是又似乎被一个无法摆脱的力量牵制，以致她无法真正抽身。也许我需要申请更多的权限来调查，我感觉已经接近伊内丝小姐的秘密了。\n【权限记录】\n伊内丝主动联系了这名过于好奇的文员，随后他主动放弃了后续调查。本篇记录已被要求上交封存。我将他调动到了更能发挥其才能的部门。这也是为了防止他对其他干员造成类似的困扰。\n——■■■",
+              "unLockType": 2,
+              "unLockParam": "50",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料一",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "与那些常见的、漂泊无根的萨卡兹雇佣兵不同，伊内丝在漫长的生涯中极少更换队伍。背叛与仇视在疤痕商场再常见不过，然而无论雇主如何更替，伊内丝似乎始终都忠诚地选择着她的搭档——赫德雷。\n“忠诚”这个词是否准确姑且不提，但伊内丝拒绝就其本人的人际关系透露更多。在维多利亚事件后，罗德岛与萨卡兹相关势力的接触日益频繁，普通干员尚不清楚那段过往，但对于始终陪伴在凯尔希医生和阿米娅身边的我们来说，重见旧人，并不意味着怀念，徒有沉重罢了。\n——匿名萨卡兹干员\n\n伊内丝那是不好意思说，但是赫德雷不呀。我可是听说过他们相遇的故事——而且那时候他们估计都才十多岁吧。萨卡兹从来不兴什么纪念日，打仗的时候对日期也不那么敏感，但我猜伊内丝总是记得那些日子的。\n她记得那个白桦林里的自己如何被迫手染鲜血，如何苟且偷生。更记得那个拿着刀的萨卡兹少年如何从天而降，如何冷峻地清点尸体，换算报酬，又怎么出乎意料地向她伸出了手......赫德雷讲这些话的时候完全没有表情变化，他好像真的在讲一件战场逸闻似的。他都不脸红哎！\n总之，自那之后，伊内丝迅速成为赫德雷的左膀右臂，尽管那时候小屁孩赫德雷还没有自己的队伍。据男方描述，离开白桦林之后，伊内丝每天都在用物理手段打磨自己的角，还用法术修饰——为了变成一个萨卡兹。\n什么？泄露干员个人隐私？你觉得一个萨卡兹雇佣兵用“隐私”作借口隐瞒履历和人际关系，真的对罗德岛有好处吗？我这叫尽职尽责！\n再讲了，他们仨搭伙这么多年，又曾和阿斯卡纶和Scout是战友，说得好像这些事藏得住一样......嗯？怕我被报复？她的法术？哎呀......办公室踩影子大赛只有阿斯卡纶能赢我——等等，她的法术是不是不需要碰到影子？\n——■■■\n\n伊内丝始终与其他雇佣兵——以及干员——保持着一定的距离，她的源石技艺使得她天生懂得如何小心谨慎地对待他人——特别是在战场上。但伊内丝并没有因此而排斥人际交往。她深知正确的“信赖”能带来怎样的收益，而她的法术恰巧善于筛选“信赖”。\n因此，在卡兹戴尔内战时期，伊内丝作为间谍的优秀能力毋庸置疑。她发展线人、策动叛变的任务向来完美无缺。如今的罗德岛也许不需要这些残酷的手段，但希望博士能正确认识到伊内丝作为一名士兵的能力——而不仅仅是干员——以及，希望博士能够顺利赢得她的“信赖”。她曾经非常不信任......当时的您。\n对了。在博士有认知的“罗德岛干员”中，Scout是第一批赢得伊内丝的“信赖”的。关于切尔诺伯格的事，伊内丝迟早有一天会当面说清楚。我不会替她发言。\n——阿斯卡纶的笔述\n\n啊哈，白桦林的夜晚是吧，复制一份，这可是好东西。替我跟凯尔希说一声。\n——匿名访问记录，尽管猜得到是谁干的，但出于安全考虑，人事部还是放弃了追查",
+              "unLockType": 2,
+              "unLockParam": "100",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料二",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【权限记录】\n从她把我从奥克特里格区的大火中接出来的时候，我就发现她在火焰中的影子动摇了，虽然她依然试图把自己伪装成和过去一样，但这对我来说行不通。你们确实在某种程度上改变了她，尽管这种改变她毫无知觉，或者她试图逃避改变对她产生的影响。\n我和她不一样，与你们合作，我不会有任何的改变。所以放弃尝试影响我对于你们，或者对于碎片大厦上那位殿下的看法。我只是一个竭力在战场夹缝中活下去的人，你们的宏图伟业我毫无兴趣。\n但我在意你们对待W的方式。我们曾经信任过你们一次，同意她留在你们的身边，但最后的结果你很清楚。我必须得对自己人负责，这是一套我们雇佣兵必须要遵守的迂腐规则。\n我一直尝试理解如何成为萨卡兹，虽然托赫德雷的福，我会思考很多不需要思考的东西，但这反而让我更清楚自己唯一的目的——活下去。\nW太......愚钝，她从来没有认识到自己萨卡兹的身份意味着什么，需要她承担什么。她愿意思考的时间太少，以致盲目地将那个虚无缥缈的理想视作自己的人生信条。\n你们引导她走上了这条路，但我怀疑你们是否考虑过这条路的终点会再次对她产生什么样的影响。你的影子告诉我，你有自己的计划，那你最好清楚她在这个计划中的位置。\n哼，我没有要求你的承诺，这些东西对于萨卡兹来说脆弱无力。只要她坚持走下去，那我会再信任你们一次，但是这次我会在她身边看着，我们都会。\n我只是个雇佣兵，能够付出的最惨烈的代价也无非是再粉身碎骨一次罢了。幸运的是，这种体验我已经熟悉到不会产生任何恐惧。\n是的，你可以把这当做威胁，我也的确是这么想的。\n——伊内丝给博士的话\n\n她对W这么好？啊？真的假的？W是不是收买她了？\n——可露希尔",
+              "unLockType": 2,
+              "unLockParam": "150",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料三",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "对于刚去卡兹戴尔执行任务的干员，伊内丝一直有一句忠告——不要试图用罗德岛的道德观念去掺和卡兹戴尔的争端。\n卡兹戴尔地区长期以来的冲突滋生了大量投机的军火走私生意，走私商们也乐于暗中挑拨不同雇佣兵队伍或者直接发布悬赏来推波助澜。但这些行走在卡兹戴尔的外族人却也同时成了雇佣兵眼中的肥肉，不少莱塔尼亚的武器走私贩和哥伦比亚的小承包商赌上一切却最终被劫掠一空。\n伊内丝作为雇佣兵在卡兹戴尔活动时参与这类行动的机会并不少，她曾经目睹一支莱塔尼亚的走私商队被自己的队伍迅速扫清，仅仅留下了一位卡普里尼少年。这类流落在卡兹戴尔的异族孩童并不罕见，他们在父母死去之后也没有任何利用价值。萨卡兹不愿意费力去处理他们，也许会将他们留在原地自生自灭，或者直接将他们赶进北部的大森林感受这片土地的残酷。\n萨卡兹雇佣兵们乐于见到这种“趣事”。因为总得有人来为这些走私商助长的复仇之火偿还代价，这些惊慌失措的年少异族往往就是最好的对象。而对那位卡普里尼少年，伊内丝做了萨卡兹应该做的事。她留给了少年两个选择，留在父母的尸体身边自生自灭，或者被扔到北边的桦树林里孤独死去。\n“为什么不试着放那个少年一条生路？他毫无威胁。”\n“只有萨卡兹才能在卡兹戴尔生存下来。把他扔进森林之前，我扔给了他一把锉刀，那就是他的生路。”\n罗德岛也许能够救下眼前那一个可怜人，可那些无法被我们视线捕捉到的呢？我们的能力终究有限。卡兹戴尔的战乱如同一个漩涡，将所有心怀野心的浪花卷入其中，然后酝酿着更大的浪潮，等待着席卷一切。\n“收拾好你们泛滥的同情心。除非有一天，战争真的能够结束。”\n而对那些质疑伊内丝话语真实性的干员，她会推荐他们去北边的桦树林里看看。\n“我和那个卡普里尼唯一的区别是，我曾经走出了那片桦树林，靠着那片森林教会我的东西活到了今天。”\n她描述那里不止有枯骨和美景，也有许多尝试活下去的人留下的痕迹。\n“在那片桦树林里，藏着如何在卡兹戴尔活下去的秘密。\n“不是每一次，都会有人来救你的。”伊内丝最后呢喃道。",
+              "unLockType": 2,
+              "unLockParam": "200",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料四",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "“现在站在这里的感觉如何？”\n“哼，并不怎么样，护卫不是我喜欢的工作。我更习惯自己过去的身份，只是这样行事会方便许多。”\n“请不要仅仅将自己视作护卫。以现在的形势来看，她还没有完全准备好，这就是最佳的选择。”\n“这话你可以和阿斯卡纶去说。不过你......确实变了很多，过去你的影子里充斥着看不透的复杂情绪，但现在......”\n“平静？”\n“哼......你依旧没那么讨喜。难怪W平时更愿意去找那个卡特斯。”\n“你如何看待眼前这一切？”\n“你想听萨卡兹的回答，还是我真实的想法？”\n“......”\n“口头的承诺是孱弱无力的，萨卡兹的历史已经无数次证明了这个观点。战争迟早会再次爆发，问题是谁会成为下一个导火索。下一次，你最好也能想清楚，你要站在什么位置。”",
+              "unLockType": 1,
+              "unLockParam": "2;1",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "晋升记录",
+          "unLockorNot": true
+        }
+      ],
+      "handbookAvgList": []
+    },
+    "char_1031_slent2": {
+      "charID": "char_1031_slent2",
+      "infoName": "Unknown",
+      "isLimited": false,
+      "storyTextAudio": [
+        {
+          "stories": [
+            {
+              "storyText": "【代号】赫默\n【性别】女\n【战斗经验】没有战斗经验\n【出身地】哥伦比亚\n【生日】5月18日\n【种族】黎博利\n【身高】154cm\n【矿石病感染情况】\n体表有源石结晶分布，参照医学检测报告，确认为感染者。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "基础档案",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【物理强度】普通 \n【战场机动】标准 \n【生理耐受】普通 \n【战术规划】优良 \n【战斗技巧】标准 \n【源石技艺适应性】优良",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "综合体检测试",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "《特里蒙科学伦理联合宣言》发起人，莱茵生命总辖构件科执行顾问，在医疗事务方面与罗德岛展开了深度合作。\n本人拥有丰富的医学临床经验，在罗德岛接受矿石病相关治疗的同时，为罗德岛提供医学支持。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "客观履历",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "造影检测结果显示，该干员体内脏器轮廓模糊，可见异常阴影，循环系统内源石颗粒检测异常，有矿石病感染迹象，现阶段可确认为矿石病感染者。\n\n【体细胞与源石融合率】7%\n患者赫默的矿石病病灶位于体表左腿踝关节上部，与刚加入罗德岛时相比较有一定的扩散，但是范围并不广。\n\n【血液源石结晶密度】0.25u/L\n患者赫默的内循环颗粒密度相较最初有扩散迹象，但十分轻微，目前病症进程相对稳定。",
+              "unLockType": 2,
+              "unLockParam": "25",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "临床诊断分析",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "赫默并没有和凯尔希医生以及博士一同返回罗德岛，她在特里蒙逗留了将近一个月后，才姗姗返回。\n她返回后立刻与凯尔希医生进行了长达一个下午的私人聊天，随后，在完成了一些简单的交接后，她在医疗部的办公位置就改换给了其他人。原因很简单，她如今的工作重心在特里蒙，已经无法像过去那样长期驻留在罗德岛了。\n自从赫默带着伊芙利特加入罗德岛后，她一直作为医疗部的中坚力量在诸多任务中发挥了重要作用，与许多干员建立了深厚的友谊，也有许多在本舰接受治疗的患者十分信任她。她在收拾办公桌期间，得知此事的干员和患者逐渐聚集，最终竟变成了一场意料之外的欢送会。\n当然，这并不意味着赫默将完全离开罗德岛，她本人非常直接地表示了继续与罗德岛合作的意愿。只是，如今她的立场已经不允许她以个人身份与罗德岛建立联系——她是《特里蒙科学伦理联合宣言》的发起人、莱茵生命总辖构件科执行顾问，她的背后是整个哥伦比亚科学界，与如今的她合作就意味着与哥伦比亚产生复杂的联系，罗德岛在立场上是希望避免这种联系的。\n赫默显然也理解其中的复杂之处，并主动提出了解决方案——她希望以病人的身份继续接受罗德岛的治疗。这个做法既为她保留了以个人身份与罗德岛继续接触的空间，也让日后的合作有了一些非官方的回转余地。\n毫无疑问，这是她对罗德岛释出的善意，罗德岛也愿意与这样的她继续合作。只是，在这个过程中，我们也确认了一件事——如今的赫默，确实不再是过去那个全身心投入在医学上的赫默了。",
+              "unLockType": 2,
+              "unLockParam": "50",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料一",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "事件过后，莱茵生命迎来了一次巨大的人事变动。\n塞雷娅正式卸任防卫科主任职务，由她指定的防卫科成员接任。\n雅拉正式卸任人力资源考察科主任职务，由她指定的人力资源考察科成员接任。\n帕尔维斯去世，结构科主任职务由哥伦比亚学术界相关领域带头人接任。\n能量科主任职务在空缺了将近两个月后，由重回岗位的斐尔迪南继续担任。\n如果说这几条依然属于正常范围内的调整，那么以下两条人事变动几乎预示了莱茵生命即将面临的变化。\n克丽斯腾卸下总辖职务，总辖构件科由同为创始人的塞雷娅代管。\n前结构科研究员赫默调往总辖构件科，担任执行顾问，同时兼任莱茵生命在科学伦理道德共识委员会中的代表。\n赫默如今已经成为整座特里蒙，乃至整个哥伦比亚科学界都在关注的人物。\n她发起的《特里蒙科学伦理联合宣言》，尖锐地指出了当下的科学家以及科学团体对于科学伦理的忽视乃至践踏，倡导在发展科学的同时，丰满科学扎根的土壤，创造更加人文的科研环境。\n科学伦理道德共识委员会正是《宣言》的结果之一，这个委员会的成员将会进一步地完善科学伦理的标准，并在此基础上维护科学伦理。而能在其中担任莱茵生命方面的代表，赫默的重要性不言而喻。\n当然，过去只是一介研究员的赫默如果没有人支持，不可能获得如此的地位，明眼人看到的，是在她背后角力的各方势力。\n对此，赫默的回答非常简短，但十分有力。\n“如果我的愿望只能通过这种方式实现，那我愿意接受这样的束缚。”",
+              "unLockType": 2,
+              "unLockParam": "100",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料二",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "赫默向博士分享了她的遭遇。\n在将塞雷娅从聚焦发生器的残骸中救起来后，她先返回特里蒙将塞雷娅与伊芙利特安顿好，在那之后，雅拉联络了她。\n雅拉告诉赫默，在自己退休前，她可以为赫默最后做一件事，赫默将可以见到梅兰德基金会的负责人之一，锡人。赫默知道这意味着什么，她将直接与能够左右这个国家的力量对话，问题只在于，她是否真的如自己所说做好了准备。\n“我选择了接受。只是，我没想到，在那间办公室里等着我的，不只是锡人，还有杰克逊先生。”\n哥伦比亚的副总统，康拉德·杰克逊，热情地接待了她，这令她感到困惑，但同时，她也意识到，无论如何，这是一个机会。\n她向锡人与杰克逊阐述了自己对莱茵生命这一连串事件的看法和结论，令她意外的是，她的理想得到了杰克逊的高度认可。\n“杰克逊先生说我是这个国家不可或缺的人才，过去的我或许会信以为真，但在那时，我的直觉是恐怖。”\n在那之后，一切的事情顺利得如同理所当然一般。赫默明白，这绝不是因为自己的理想有多伟大，而是自己恰好成为了那个人。如果不是自己，也会有另一个人站在那个位置上。\n而她至少知道，如果自己站在那个位置上，她真的会去实现那个在旁人看来只不过是空话的理想。\n“我知道我会遇上什么事情......所以，塞雷娅是不可或缺的，对莱茵生命，对我而言，都是。”\n对莱茵生命而言，失去了总辖等于失去了主心骨，这时候，只有同为创始人的塞雷娅有足够的威信能够稳定人心，没有人希望莱茵生命倒下。\n对她而言，过去的芥蒂在此时已经变得无足轻重，重要的是如何面对未来。她知道塞雷娅需要时间，因此，她将看护伊芙利特的责任交给了塞雷娅。而她相信，自己与塞雷娅的想法并没有本质上的矛盾，她们最终会在同一条道路上前行。\n当然，追求理想总是要付出代价。\n赫默付出的代价之一非常地显而易见，那就是伊芙利特的恼火。\n对伊芙利特而言，眼下的生活仿佛和过去反了过来，塞雷娅成了她的监护者，而赫默却成了那个很难见到的人。\n对于这个状况，赫默思索了片刻，最后还是苦笑了一声，没有说话。",
+              "unLockType": 2,
+              "unLockParam": "150",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料三",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "最近偶然听到有人说，觉得赫默现在地位高了，变得和过去不一样了，赫默自己好像也觉得，自己不像以前那么纯粹了。\n哼，他们都不理解赫默。\n赫默确实现在要去开很多会，见许多人，不能和以前一样当个医生，但是她每次回来都会关心我的病情，而且还会告诉我相关的医疗技术又有了什么样的发展。\n上周她回本舰的时候，还特地去了一趟医疗部，在那里和华法琳聊了好久的前沿医学技术，还和华法琳一起在实验室里做了一些实验......然后，她去见了以前她医治过的病人，和他们聊了一会儿天。\n赫默一————点都没有变！她只是要做的事情变多了，她只是太累了，不能温柔地对待所有人了。\n而且，好像也是因为这个，许多医生最近开始对我很照顾，他们怕我因为赫默不在而生气。\n哎呀，以前赫默老是拦着我不让我见塞雷娅，说我还小，我还不懂什么的，我当然会生气。\n但现在我知道她在特里蒙做什么，每次她回来和我们一起吃饭的时候，都会告诉我，她又做了什么事，特里蒙又发生了什么。\n我已经能听懂赫默和塞雷娅在聊的一些东西了，也能明白，赫默在做很厉害的事情，所以我才不会生气，我早就已经不是过去那个要赫默陪在身边的小孩子了。\n我也当过好几次外勤任务的队长了，我知道，领袖就是要承担更多的东西，赫默以前不想做这样的事，但她现在决定要做了，我应该支持她。\n所以，我最近也有在好好学习了，说真的，我都不知道，塞雷娅原来还挺会教人的......但是，医疗部的课程真的好难啊......\n总之，我的梦想，是有一天我能和塞雷娅还有赫默站在一起。我们三个联手的话，这片大地上不管有什么困难，都一定不是我们的对手！\n——伊芙利特的日记",
+              "unLockType": 2,
+              "unLockParam": "200",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料四",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "开完一整天的会之后，赫默发现自己无意中走到了结构科实验室门口。\n相熟的同事叫住了她，看起来很想伸手拍拍她的肩膀，但又尴尬地悬在半空。\n“你是想来了解下我们正在做的实验吗？我前两天刚给防卫科交过伦理审查报告，既然你来了，要不要我带你......参观一下？”\n“不麻烦了，阿尔贝，我知道实验室该怎么走。”\n“哈......哈哈，那就好。那你......随便看，我先下班了。”\n“嗯，再见。”\n“还有，你留下的实验，还有数据......唉，我和拉米都想问问，你以后都不会再回来了吗？”\n赫默离开罗德岛本舰的时候，医疗部的同事们也问了近似的问题。\n很可惜。\n她还从他们的眼神中读出了相同的未尽之言。\n赫默想起锁在塞雷娅书房抽屉里的那些论文草稿。近十年过去，它们或许再无发表的可能。科研领域的竞争是残酷的，她如今时间有限，即便会努力跟上，也再难以保持前沿。\n这样的抉择是正确的吗？\n或许未来的自己，依旧会被自我怀疑与不确定性折磨。\n等所有结构科的研究员们离开，赫默从熟悉的实验桌前站了起来，就像过去许多个深夜常做的那样，关上了实验室的灯。\n在她身前，是连通着莱茵所有科室的走廊，彻夜通明，一如既往。",
+              "unLockType": 1,
+              "unLockParam": "2;1",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "晋升记录",
+          "unLockorNot": true
+        }
+      ],
+      "handbookAvgList": []
+    },
+    "char_4006_melnte": {
+      "charID": "char_4006_melnte",
+      "infoName": "Unknown",
+      "isLimited": false,
+      "storyTextAudio": [
+        {
+          "stories": [
+            {
+              "storyText": "【代号】玫拉\n【性别】女\n【战斗经验】四年\n【出身地】哥伦比亚\n【生日】3月15日\n【种族】斐迪亚\n【身高】155cm\n【矿石病感染情况】\n参照医学检测报告，确认为感染者。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "基础档案",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【物理强度】标准\n【战场机动】优良\n【生理耐受】标准\n【战术规划】优良\n【战斗技巧】标准\n【源石技艺适应性】标准",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "综合体检测试",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "玫拉，曾受雇于哥伦比亚某武器测试公司，任资深武器测试员。感染矿石病后与公司解约，来罗德岛寻求治疗，并与罗德岛签订合同，担任外勤干员。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "客观履历",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "造影检测结果显示，该干员体内脏器轮廓模糊，可见异常阴影，循环系统内源石颗粒检测异常，有矿石病感染迹象，现阶段可确认为矿石病感染者。\n\n【体细胞与源石融合率】6%\n干员玫拉感染程度较浅，体表尚无源石结晶分布。\n\n【血液源石结晶密度】0.23u/L\n结合患者主诉和影像学证据，可确认玫拉的感染途径和机制较为特殊，治疗过程中需多加注意。",
+              "unLockType": 2,
+              "unLockParam": "25",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "临床诊断分析",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "在医疗部的检查和诊断告一段落之后，身材娇小的斐迪亚没跟任何人打招呼，推门走进人事办公室，掏出设计得朴素整齐的简历放在桌上，简短地说了一句“我来应聘”，然后利落地坐到了人事干员对面，期间不多说一句话，紧盯着对方的一举一动，直到当天值班的人事干员承受不住压力，以“请示上级”为理由落荒而逃。\n入职之后，干员玫拉也延续了这样的行事风格：冷漠、安静、追求效率，总是独来独往。尽管她的入职测试被一推再推，但测试完成后，她第一次出外勤，刚和敌人接战，就精准而凶猛地进行了彻底的火力压制，几乎凭一己之力把其他人的工作变成了单纯的打扫战场。\n回罗德岛之后，队长请所有人喝一杯，玫拉自然也在受邀之列。其他人闲聊、打趣、斗嘴，玫拉则在一旁静静喝自己的酒。有些队员觉得太冷落她，时不时和她聊上几句，她虽然还是显得冷淡，却也有问有答，直到碰巧也在的月见夜看到了这一幕。\n面对月见夜浮夸的态度，玫拉一开始只是一言不发。这多少有点让人担心，但毕竟月见夜的作风在罗德岛也是出了名的，在场的大多数人都等着看月见夜最终会吃一个什么样的瘪。然而，不知月见夜说错了什么话，玫拉显得越来越紧张，最终突然抓起斜靠在吧台边的电磁炮，对准了月见夜。\n这引起了一些混乱，不过好在玫拉看起来只是在威慑，并非想要攻击。事后两个人都被训了一顿，也再没进行什么交流。\n直到很长时间之后，他们两个又在酒吧碰了面，这次月见夜请了玫拉一瓶名酒，玫拉则送给月见夜一款自己调制的香水，郑重地向月见夜道了歉。\n\n我也有责任，我当时竟然没注意到你处于多么戒备、多么紧绷的状态，对以播撒幸福为己任的我来说，这是何等严重的失职......\n——月见夜\n\n面对月见夜的浮夸，玫拉再次感到摸不着头脑，但她已经不像初来乍到时那么缺乏安全感，也不再误以为月见夜的浮夸是一种居心叵测。\n因此，她没有立即举起电磁炮，而是咨询了陪在一旁的斑点的意见，预约了次日和月见夜的一对一训练。",
+              "unLockType": 2,
+              "unLockParam": "50",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料一",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【宣传资料】\n3.试制单兵用质量投射式杀伤武器\n本次展会最令人瞩目的新概念武器之一，引领哥伦比亚武器工业发展方向的创新之作......\n......极高的动能与初速度，几乎完全平直的弹道，全套智能辅助装备......\n......开创性地采用了全新的供能方式，完美解决了单兵作战的负重问题......\n\n【权限记录】\n疯了，搞出这台电磁炮的企业从上到下全都疯了。\n他们把各种东拼西凑来的新技术全塞进了这套壳子里！没错，他们确实是用最小规模的供电模块维持了最高的弹丸初速度，各项参数也确实领先，甚至轻便到可以让人背在肩上到处走，可他们有没有想过，为什么没人在他们之前做小型化？因为技术根本就不成熟，天知道这玩意儿如果出故障了会怎么样！\n对，还有，无限期推迟玫拉的入职测试，无限期，直到工程部和医疗部都同意放行为止！能把这东西做出来就已经够疯狂了，他们居然还能联系到武器测试公司，联系到的公司居然敢同意让自家员工带着这东西做实地测试！别说测试了，这东西光是待机就存在一定的危险性，启动之后几乎是一定会对周围的源石活性造成影响！我怀疑玫拉的感染和这东西脱不开干系，她每用一次病情都可能加重——\n你说什么？玫拉确实是因此感染的？她自己知道吗？\n知道？不仅知道，她还不愿意放弃这台电磁炮？\n......让她来一趟工程部，我得和她聊聊。\n\n补记：考虑到玫拉个人的强烈要求和她的战斗习惯——直说了吧，她虽然在掩饰，但显然很害怕不能在外勤中提供足够的火力支援，她觉得我们会因此解雇她，我怎么跟她解释都没用——我们最后还是帮她完成了这台电磁炮的改装工作。尽管损失了一定的破坏力，但其威力仍然不容小觑。最重要的是，经过严密的测试，它现在是安全的。",
+              "unLockType": 2,
+              "unLockParam": "100",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料二",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "来到罗德岛之前，玫拉供职于一家名不见经传的武器测试公司。这家公司规模很小，收入却十分惊人——类似的公司还有很多。不客气地说，它们是哥伦比亚军工产业除了那些巨头之外，不光彩却必要的组成部分。\n举例来说，玫拉在武器测试公司的第一次任务是测试她自己挑选的武器，一把看起来很重的弩。她在公司的前十五天接受了短期培训，第十六天就带着弩，和几位同事一起以雇佣兵身份去清剿某地的锈锤。\n战斗过程不长，锈锤在经过动能增幅的弩矢打击下溃不成军，而玫拉机械地重复着瞄准、装填和射击的动作，直到战斗结束才意识到自己的肩胛和锁骨几乎被巨大的后坐力震裂。她在事后的报告中着重提到了这一点，生产商随即在后续试制品中更换了制退器的型号，这才拿去给自家员工二次测试——不得不说，仅仅受了一些瘀伤，玫拉已经很幸运了。她的同事中不乏因武器的设计缺陷受重伤甚至丧命的，而公司也不过是象征性地给一点补偿而已。\n归根究底，除了企业形象之类的顾虑，真正左右企业选择的还是经济问题。军火巨头的员工通常有较高的选拔标准和与之相应的福利水平，一旦发生伤亡，企业不仅需要——至少在理论上需要——支付合同中规定的赔偿金额，还需要考虑额外招聘补缺带来的成本，因此倾向于把无法验证可靠性的武器测试工作外包出去；而小型武器测试公司与之完全相反，合同上的低福利高薪酬吸引的往往是一些想赚快钱的边缘群体，正好，哥伦比亚最不缺这种人。\n\n【权限记录】\n尽管如此，玫拉的电磁炮在未经罗德岛改装前很可能导致其使用者感染矿石病，这根本不用测试，生产商不可能不知道这一点。\n我现在只能想到一种解释，他们想测试的不是使用者是否会感染矿石病，他们只想知道使用者会在多长时间内感染矿石病，如果时间够长，他们就可以宣称那东西是安全的......\n他们不是疯，他们只是没把别人的生命当回事。",
+              "unLockType": 2,
+              "unLockParam": "150",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料三",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "有这样一名从黑钢国际退役的老兵，在失去了一条胳膊之后，他带着铳械和丰厚的补偿与家乡的妻女团聚，开了一家小小的杂货店。\n一天夜里，老兵的女儿被怒吼声惊醒。原来是一伙流窜作案的劫匪闯进了杂货店，他们本以为独臂的店主会束手就擒，却在老兵的顽强抵抗下遭遇了大麻烦。\n一向冷静的女儿从抽屉里摸到父亲珍藏的铳械，按照父亲教过自己的方法装填弹药，用铳口对准劫匪，却无论如何也不能击发——她就那样举着铳械，一边痛恨自己的无能，一边眼睁睁地看着独臂的父亲被逼到死角。\n最终，搏斗声惊醒了周围的住户，引来了警察，女儿因此幸免于难，老兵和他的妻子却命丧刀下......\n在向负责心理疏导的医疗干员讲述这段往事时，玫拉几乎无法维持平时冷静理智的形象。她数次暂停讲述，希望能平复心情，却还是在讲到自己无法击发那把铳械时痛哭失声。\n这场悲剧彻底改变了玫拉命运的轨迹。尽管亲戚们慷慨地负担了她的生活和学习费用，强烈的不安全感还是让她放弃了学业，选择了“武器测试公司”——当时的她一厢情愿地相信，与最先进的武器为伴，或许可以驱散一直困扰着自己的梦魇。\n工作真正开始之后，她发现自己的工作和佣兵差不多，甚至比单纯的佣兵更糟糕。抛开武器上的风险不谈，有的人战斗是为了钱，有的人为了仇恨，有的人为了信念，而她之所以对着人扣动扳机，却仅仅是为了观测武器的效果——换句话说，是为了杀伤本身而杀伤，好像杀伤别人这件事本身有什么价值一样。\n她的行事风格日渐冷酷，心中的不安全感反而与日俱增，给自己配备的自我保护手段越来越复杂。到了最后，她也不知道自己怕的究竟是什么，但她只有在确信自己能随时倾泻压倒性的火力时才能冷静下来......梦魇并未离她而去，反而越发可怖，直到她被派发了所谓的最先进武器，而这件武器却又在带给她虚假安全感的同时，让她自己成为了感染者。\n从这种意义上来讲，她的感染反倒成了她真正逃离梦魇的第一步：玫拉认为那家公司想用代付矿石病保险费的方式牢牢掌控自己，而这对她来说无异于最恶劣的背叛。如果没有这次背叛，她极有可能会在自我毁灭的高速路上狂奔到尽头。",
+              "unLockType": 2,
+              "unLockParam": "200",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料四",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "当人事干员提醒玫拉，她已经积攒了半年假期的时候，玫拉吓了一跳。她先是反复检查假期总时长，接着确认单次连续休假最长可以持续多久，然后询问假期内用不用保持待命，还问及外勤的排班和工期会不会不跟随假期往后延迟......总之，表现得比谁都像个黑心老板。\n在得知自己担心的所有问题全都不会发生之后，她小心翼翼地请了一个月的假。\n假期刚开始的那几天，玫拉还在防备有什么突发事件把自己从假期里拉出去。她维持着和没请假时差不多的作息和行动轨迹，终端和武器也不离身，只是不像平时那么紧绷。又好气又好笑的人事干员提醒她假期宝贵，她愣了几秒钟——显然又反射性地把这理解成了一种威胁——然后才理解，别人真的只是希望她好好利用假期而已。\n终于，第二天，她整整睡了一个白天，直到傍晚才睡眼惺忪地摸进食堂，饿着肚子等古米煎香肠，看起来却比任何时候都开心，甚至和搭话的古米攀谈起来，了解到真理的读书会，吃完饭后跑到真理的宿舍，借到了几本书。\n以那一天为分界线，玫拉开始出现在罗德岛上的各个角落。她有时在课堂上旁听小干员上课，有时在舰桥上吹风，有时在训练场旁观预备组训练，有时在疗养庭院看书，偶尔和其他人低声讨论调香心得......她还是那个少言寡语的斐迪亚，但她又很明显地发生了某种变化，偏偏没人说得出来变化到底在哪。\n假期的最后一天，玫拉主动找到了那位人事干员。\n“要延长假期吗？我看你这段时间挺开心的。”\n“我想......还是不用了。”\n“没问题，多留些假期以后休也不错。”\n人事干员盯着玫拉的脸看了一会儿，怕她再从自己的话里听出子虚乌有的弦外之音。幸好她并没有。\n“对了，玫拉，大家都说你最近变了，我也觉得你好像哪里不太一样，可我们谁都说不出变化到底在哪。”\n“是吗？”\n“是啊......难道你自己也没头绪？”\n玫拉皱着眉头想了一会儿，忽然浅浅一笑。\n看着玫拉的笑容，人事干员突然想到，自己确实有快一个月没看到玫拉和她的电磁炮同时出现了。",
+              "unLockType": 1,
+              "unLockParam": "2;1",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "晋升记录",
+          "unLockorNot": true
+        }
+      ],
+      "handbookAvgList": []
+    },
+    "char_4027_heyak": {
+      "charID": "char_4027_heyak",
+      "infoName": "Unknown",
+      "isLimited": false,
+      "storyTextAudio": [
+        {
+          "stories": [
+            {
+              "storyText": "【代号】霍尔海雅\n【性别】女\n【特工经验】六年\n【出身地】哥伦比亚\n【生日】7月12日\n【种族】未公开\n【身高】171cm\n【矿石病感染情况】\n参照医学检测报告，确认为非感染者。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "基础档案",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【物理强度】优良\n【战场机动】优良\n【生理耐受】标准\n【战术规划】优良\n【战斗技巧】卓越\n【源石技艺适应性】优良",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "综合体检测试",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "前梅兰德基金会所属特工，在凯尔希医生与博士的引荐下加入罗德岛。\n擅长单兵作战，并且能够应对各种极端环境，在各类隐秘行动中发挥了重大价值。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "客观履历",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "造影检测结果显示，该干员体内脏器轮廓清晰，未见异常阴影，循环系统内源石颗粒检测未见异常，无矿石病感染迹象，现阶段可确认为非矿石病感染者。\n\n【体细胞与源石融合率】0%\n干员霍尔海雅没有被源石感染的迹象。\n\n【血液源石结晶密度】0.11u/L\n干员霍尔海雅对源石的特性以及相关防护手段十分了解，推荐其他干员在这方面向她学习。\n\n从结论上来说，她的身体十分健康。至于她的寿命，医疗部会专门出一篇报告阐述这个问题。\n——华法琳",
+              "unLockType": 2,
+              "unLockParam": "25",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "临床诊断分析",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "霍尔海雅的到来给我和我身边的同事带来了不小的困惑。\n事到如今，强调罗德岛在政治上的独立性多少有些掩耳盗铃，有诸多与各国政治局势密切相关的人和我们有联系，有的甚至会时不时造访本舰。而一个来自梅兰德基金会，那个在阴影中影响着哥伦比亚这个庞然大物的影子的顶级特工......\n即使她在程序上已经脱离了那个组织，即使我们在情报方面对她做出了一些相应的封锁，但她的出身，已经决定了光是让她知道那些人的存在，或许有些情报已经来到了她的手上。这一点，她在翻阅干员名单时脸上露出的那种玩味表情已经足以证明。\n而且，几乎所有任务她都会申请独立行动，这也许是特工生涯的习惯所致，但她完全没有表现出融入，甚至哪怕只是适应罗德岛生活的意愿，这也是令人担忧的一个方面。\n当然，这或许也可以解释为她展现善意的方式。她了解自己的身份会给我们带来怎样的顾虑，与其加以掩饰，不如全盘展现，由我们去决定该如何对待她。\n诚实地说，虽然才加入没多久，但她已经展现了她在特工领域的专业性，如果我们愿意信任她，那么我们的情报工作效率将得到质的提升。事实上，她甚至向我们分享了一些梅兰德基金会的工作模式，这确实给我们提供了一些帮助，但也增加了我们的困惑。\n现在，人事部干员之间关于她的评价相当地两极分化，这样的情况可能还要持续一段时间。\n——人事部干员D.E.周报\n\n这件事我和凯尔希都有数。她的立场比你们所有人设想的都要复杂，在工作层面公事公办即可。\n至于她和罗德岛的关系......就交给博士处理吧。\n——■■■批注",
+              "unLockType": 2,
+              "unLockParam": "50",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料一",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "嗯？我在更衣室的时候还在想，要怎么应付面试官，没想到是你亲自面试我，博士。\n让别的人面试不放心？\n是对别的人不放心呢，还是对我不放心，嗯哼？\n......呵呵，算了。以我们之间的关系，一些没有必要的问答应该也可以略过吧？\n嗯？像我这样聪明的人，为什么会追求存在于传说之中的羽蛇？\n你也是这样去和我们可爱的精灵搭讪的吗，博士？\n......呵呵。是啊，现代社会已经发展到了如此的地步，单以社会地位而言，我在梅兰德基金会中的地位所能动用的资源，难道不比一个只是名为“羽蛇”的存在强？\n即使不谈权力，单论武力，一个全盛时期的“羽蛇”，能对付哥伦比亚几个师团？在那座能量井的光芒中，“羽蛇”能坚持几秒？\n我、我的父母、存在于我记忆中的一个个祖先，我们同样生活在这个文明之下，怎么可能对这些熟视无睹？\n而且，我能像这样和你聊这个话题，足以证明并没有一种真的“诅咒”让我不得不去做这件事。\n换言之，我是可以放弃它的，我的祖先们也是可以放弃它的。\n那么，为什么、为什么我们没有这么做，为什么我们还要追求它？\n——从旁观者的角度而言，这样去想理所当然。\n但是，对我而言，那是从我有意识开始就在我脑海中盘桓的执念，我在出生后喊出的第一个词，不是“爸爸”或者“妈妈”，而是“羽蛇”。\n而后，我在幼年时接受的所有教育，最后都指向了对于“羽蛇”的追求。\n我是不可能忘记这个使命的，我最多能做到的也只是短暂地背过身去。\n接受它，或者无视它。\n而一旦接受它......博士，你能明白吗？你在明显比他人短暂的寿命里为了追求一个东西耗费了一生，而最终你一无所获。\n你会愿意就此让一切付诸东流吗？还是将它交给你的后代，让他继承你的苦痛，你的愤怒，你的追求？\n说白了，这是一种我们自己给自己施加的诅咒。\n......嗯，看起来，你没有被我绕进去，真聪明。\n对，即使如此，如果我们发自内心地不愿意履行这项使命，那我们应当可以无视它。\n是的，“成为羽蛇”这个愿望会延续至今的根本原因，是因为这是我，是我们自己的选择。\n对于我们来说，历史是必修课，我们总是在历史中寻找答案。当我们在重重迷雾中发现，现代的历史被高耸的墙壁所包围，我们只是在虚构的舞台上进行一场或许无人观赏的演出时，我们所处的当下就失去了所有的吸引力。\n现代文明越是瑰丽，现代科技越是先进，那些只存在于传说中的风与雷，那些翱翔的荣耀，那些壮丽的身姿，对我们而言，只会愈发迷人。\n“羽蛇”对我们而言，在意味着绝对强大的同时，意味着历史的真实。\n你可以说这是迷信、惯性、愚昧的想法，博士，我允许你这么说，因为我时而也会这么想。\n在追求“羽蛇”的同时，我们同样在寻找着其他能代替“羽蛇”，能让我们解放自己的道路，然而，最后我们总是会回到原点。\n直到克丽斯腾对我说了那句话。\n今天，就到此为止吧，博士，之后的话......可是秘密。想要知道一个人的秘密，可是要付出努力的。\n——博士与霍尔海雅对话的录音①",
+              "unLockType": 2,
+              "unLockParam": "100",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料二",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "羽蛇曾经是萨尔贡一支非常强大的神民血脉，他们能够翱翔于天空，并且使用风雷之力，在一些萨尔贡本土部族里，至今还流传着有关他们的传说。\n而她作为背负着这种传说的人，现在的身体机能也好，源石技艺适应性也好，都只是比普通人强了不少而已。\n作为一个在血脉啊，荣耀啊之类的废话环境中长大的人来说，我倒也不是完全不理解她。\n但是，就算是这样，这法术也太超过了。\n记忆、情绪、感知等等，法术如果要对这些细腻的东西造成影响是十分困难的。据我所知，只有一些最古老的王庭传承中记载了类似的法术，而且无论哪一种使用起来都非常困难，需要付出的代价也一个比一个见鬼。\n他们使用的法术并不是萨卡兹王庭流传的任何一种，是不知道从什么传承里找到的线索，然后自己开发出的扭曲产物。\n他们的悲惨事实上并不在于寿命本身，作为神民，他们的寿命就算打了对折，也比大部分人长得多。但是，他们的一生是不完整的。霍尔海雅有过童年吗，她能享受自己的晚年吗？\n从结论上来说，导致她寿命缩短的主要原因，并不是诅咒，也不是身体机能受损，而是永久性的脑部结构变化。\n想象一下，你是一个刚出生的婴儿，你的所有身体机能都还十分稚嫩，然而有人趁着这个时期将大量的信息灌入你的大脑中，为的就是让这些信息能够切实且长久地留存在你的脑海里。\n说白了，这与其说是一项法术，不如说是一项借由法术进行的，极端粗暴的脑手术。\n发明这项手术的人毫无疑问是一个天才。\n抛开伦理因素不谈，这恐怕确实是一项只能在婴儿时期施行的法术，虽然无法模拟，但我完全可以想象，一旦婴儿建立了自我意识，那么这种粗暴的信息输入恐怕不仅会对其大脑，更会对他的人格产生粉碎性的破坏。\n以我对现代科学以及源石技艺的了解来说，这种手段根本就是闻所未闻。\n而据霍尔海雅自己说，她传承的历史自四百多年前开始，在那个医学根本还没有体系化的时代里，能够实现这样一项手术完全是天方夜谭。\n然而在同时，他也是一个该死的疯子。\n这种手术成功率并不高，我甚至不想去问她，她曾经有多少个兄弟姐妹。而即使成功，这项手术对婴儿大脑的改变是不可逆的，它是让这个本应比普通种族活得长一些的神民种族寿命打对折的罪魁祸首。\n为了所谓的传承，所谓的往昔荣耀，所谓绝对的力量，这种法术成为了流转在他们血脉之中的诅咒。\n——华法琳",
+              "unLockType": 2,
+              "unLockParam": "150",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料三",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "啊，博士，晚上好，你还是这样地热爱工作。\n......嗯？不，没什么，只是——你向我分享了失忆的感受，不是吗？\n我想，也是时候继续之前的话题了。\n......咦？你不会忘了吧？如果你忘了，我不介意用尾巴缠住你的脖子，让你好好回忆一下。\n嗯，对，“直到克丽斯腾”。\n我们相信过去蕴含着真相，真相将揭示真正的未来，而她对此嗤之以鼻，她强硬地宣称，过去不值一提，现在同样通往未来。\n她将我引入她的计划，而在计划接近完成时，她随意地将那具......维生舱？是这么叫的吗？总而言之，她将那具石棺的数据丢给了我，告诉我，现在，你可以躺进石棺，变回“羽蛇”了。同时，她问我：\n“不惜牺牲全族人的寿命，只是为了回到过去......这一切真的有价值吗？”\n这个问题在我们的历史中出现了无数次，但没有一次像那时一样让人......自我怀疑。\n克丽斯腾......她在了解这一切的基础上，依然如此下结论。我无法对此置之不理。\n后面的事情你都知道了，博士。\n我挣脱了锡人的束缚并冲入那个地下空间，目睹了“神”的陨落，将残骸带给了你们。\n我在那场与我无关的消亡之中没有获得任何东西，问题，答案，过去，未来，什么都没有。\n博士，我来到罗德岛后已经过了一段时间，我现在相信，你和凯尔希知道的不比克丽斯腾少。\n你们在那个地下空间看到了什么，听到了什么，又感受到了什么？\n......别误会，我找到你们，找到你，并不是想要得到一个回答。\n当我放下对“羽蛇”的追求以后，过去的答案已经失去了意义。克丽斯腾残忍地在推开了真理之门后抛弃了所有人，而我唯一的幸运，是在门前发现了你们的存在。\n我现在如同冲出江河而正沾沾自喜，却发现自己置身汪洋的一叶孤舟。而你，是唯一能指引方向的灯塔。\n所以，你现在有一个好消息，和一个坏消息，博士。\n好消息是，我的寿命会让我早早地在你之前死去。\n坏消息是，你的存在会流传在我之后的血脉之中，你逃不了的。\n——博士与霍尔海雅对话的录音②",
+              "unLockType": 2,
+              "unLockParam": "200",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料四",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "霍尔海雅的经历和我完全相反。\n我不会说我理解她，我大概是最无法理解她的人。\n只是......要是我每天也被自己的同族在耳边神神道道，而且寿命又一眼能看到尽头，我觉得我的状态不会比她好到哪里去。\n她拥有我没有的东西，而我也拥有她没有的东西，我只能这么说。\n不过，我不是来说这个的，博士。\n这个女人，别说面对你，就算是面对那个凯尔希，她也总是表现得很刻薄，好像什么都不在乎一样，不是吗？\n一方面，她在乎的东西确实不多，另一方面，她也很小心地将自己的其他部分藏了起来。\n这样怎么行呢，同伴之间就应该坦诚相待对吧？\n那么，我就给你分享一些独家情报吧。\n她平时最喜欢待在情报处理室里，你可能也听说过，执行任务之外，任何时间你都有可能在那里找到她，角落的那个位置，几乎已经变成她的专座。\n你应该找个夜深人静的时候偷偷去一趟情报处理室，如果你足够小心，说不定就能看到她的睡脸。\n——突然出现在你桌上的纸条，你认出是缪尔赛思的笔迹",
+              "unLockType": 1,
+              "unLockParam": "2;1",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "晋升记录",
+          "unLockorNot": true
+        }
+      ],
+      "handbookAvgList": []
+    },
+    "char_249_mlyss": {
+      "charID": "char_249_mlyss",
+      "infoName": "Unknown",
+      "isLimited": false,
+      "storyTextAudio": [
+        {
+          "stories": [
+            {
+              "storyText": "【代号】缪尔赛思\n【性别】女\n【战斗经验】没有战斗经验\n【出身地】未公开\n【生日】11月3日\n【种族】精灵\n【身高】169cm\n【矿石病感染情况】\n参照医学检测报告，确认为非感染者。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "基础档案",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【物理强度】普通\n【战场机动】卓越\n【生理耐受】普通\n【战术规划】优良\n【战斗技巧】优良\n【源石技艺适应性】缺陷",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "综合体检测试",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "缪尔赛思，莱茵生命生态科主任，哥伦比亚生命科学与环境科学领域专家，在特里蒙事件中与罗德岛取得联系，后与罗德岛签订长期合作条款，与生物工程研究室开展多项联合科研项目，并作为先锋干员参与相关作战任务。",
+              "unLockType": 0,
+              "unLockParam": "",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "客观履历",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "造影检测结果显示，该干员体内脏器轮廓清晰，未见异常阴影，循环系统内源石颗粒检测未见异常，无矿石病感染迹象，现阶段可确认为非矿石病感染者。\n\n【体细胞与源石融合率】0%\n干员缪尔赛思没有被源石感染的迹象。\n\n【血液源石结晶密度】0.015u/L\n干员缪尔赛思防护意识极强，甚少接触源石。\n\n“呀，温室里的花朵。”\n——偶然经过医疗部的霍尔海雅",
+              "unLockType": 2,
+              "unLockParam": "25",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "临床诊断分析",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "缪尔赛思小姐是哥伦比亚学界近年来备受关注的天才科学家，在不到三十的年纪便已跻身莱茵生命十杰之列，担任生态科主任，以及特里蒙多所大学的客座讲师。近十年，缪尔赛思小姐及其所带领的科研团队在生态学、遗传学、植物生物化学、植物生理学等多个领域所取得的研究成果，极大地推动了哥伦比亚生命科学与环境科学的发展。\n在初步达成合作意向后，罗德岛生物工程研究室与莱茵生命生态科很快便开展一系列联合科研项目，诸如“对模式生物的再研究”“基于物种变异现象对泰拉古生态圈的模型推演”“驮兽、源石虫与环境”“以分子生理学为支持的繁殖性状改良实验”......除去客观层面的诸多考量，上述一系列联合科研项目能够如此快速地推进，值得一提的原因是，双方负责人对于实验环境的特殊需求惊人地一致，简而言之，“洁净”。缪尔赛思小姐受邀来罗德岛参观生物工程研究室，当她踏进实验室，惊呼“清新扑鼻”，下个瞬间滤风装置将她的身躯吹成泡沫，真身微笑着出现在所有人眼前的那一刻，温蒂的眼睛也亮了。虽然缪尔赛思小姐习惯在低源石环境中工作的情况与温蒂的洁癖有本质的区别，但反映到对实验室净化系统与操作流程的高要求上，是不谋而合的。果不其然，她们两人相谈甚欢。这是一个极好的开始，后续一系列深度合作的展开，便是顺理成章的事情了。\n继多萝西·弗兰克斯小姐之后，莱茵生命又一位主任与罗德岛达成合作，这意味着我们两家公司的接触正在日渐加深，在未来并不明朗的形势下，这对双方的存续和发展都有益无害。",
+              "unLockType": 2,
+              "unLockParam": "50",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料一",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "据部分从哥伦比亚返回本舰的干员表示，缪尔赛思小姐在“为罗德岛相关人员提供帮助”这件事上很是热情，除了一些必要的支持文件与担保材料，她还给众人送来了一本厚厚的攻略笔记，内容涵盖“值得体验的假日俱乐部”“值得一去的春夏秀场”“值得入手的小众时尚单品”“蓝卡坞拍摄基地与颁奖礼最佳打卡流程”......某位深谙“侦探之道”的干员更是在浏览特里蒙城际分享平台时，发现了缪尔赛思小姐的匿名账号，一年半的时间里，她在时尚、游戏、摄影等多个版面发表了多篇评测文章，内容详实、角度刁钻，极具指导价值，收藏人数非常可观。\n也有参与了生物工程研究室联合项目的干员兴冲冲地向大家分享见闻：在等待实验结果的半个小时里，缪尔赛思紧紧盯着面前的终端，眉头紧紧蹙起，双手紧紧攥着废弃的实验切片，眼睛里写满了忧虑，他以为是实验出现了什么纰漏，忐忑地凑过去看......然后发现屏幕上是某二手奢侈品交易平台的市场参考价页面。\n“这些东西可都是我辛辛苦苦用攒下的工资买的，要是贬值了我不得心疼死！”缪尔赛思主任如此解释。\n“她甚至还有锻炼的习惯！她每天都会绕着生态园慢跑十五圈，异常自律——也有研究员质疑跑步的不是本人而是分身。没有日程安排的时候，她还会组织人去特里蒙的郊外爬山。看不出来吧？！”\n“因为我很容易生病啊。虽然锻炼治不了我的‘过敏’，但能让自己稍微安心那么一点。”缪尔赛思主任如此解释。\n“怎么说呢，虽然和第一印象不符，但缪尔赛思小姐确实是个生活得很认真的人。”",
+              "unLockType": 2,
+              "unLockParam": "100",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料二",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "缪尔赛思是莱茵生命的元老。彼时她还没有大学毕业，而克丽斯腾和塞雷娅为了项目创投而四处奔走，虽然一切都无法确定，但“莱茵”这个名字已经多次出现在了她们的企划案里。因为自己导师的关系，缪尔赛思得以与二人接触。\n据缪尔赛思本人描述，从草创期到现在，她都自然而然地充当起了团队的黏合剂，在排得满满的实验项目之中插入一些集体舞会、聚餐之类的活动，在其他人吵得不可开交的时候努力调节气氛。莱茵生命五个科研科室平时的关系更像是各有野心的公司结成的松散联盟，缪尔赛思的行为有时候便显得格外天真。\n\n【语音记录】\n“我的导师对第二天的创投项目兴趣不大，我是代替她去看看。说来也巧，当天晚上我收到了特伦多镇朋友的消息，镇上那座孤儿院要被拆掉了。我跟你说过，我的童年在那里度过，我在那里意识到了自己的特别，并开始了一路无果的追寻，我想要回去看看......但我第二天还是去了创投会——我不知道该缅怀什么，往回看，一切都是模糊的，自怜自伤没有意义，所以我必须摸索着往前走......然后我如愿认识了克丽斯腾和塞雷娅。”\n......\n“是的，我和娜斯提的研究有了很重要的进展，但又遇到了更大的瓶颈，理论上的，技术上的......那座‘城市’还看不清轮廓，这是一项等同于狂想的工程，万星园的数据虽然珍贵，但还不足以成为它的基石。放弃？我和娜斯提是很头疼没错啦，但科学语境下的瓶颈，可是质变和跃升的节点。克丽斯腾已经证明了天穹可以触摸，而我们会做到更多，现在的莱茵会做到更多。\n“你说得没错啦，念旧也好，和事佬也好，我以前怎么做的，以后依然会那么做，哪怕没有人在意......再说也不是没人在意。”",
+              "unLockType": 2,
+              "unLockParam": "150",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料三",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "缪尔赛思的卓越研究成果很大程度上要归功于她敏锐而独特的视角。很多人将之视作天赋，但很少有人知道，对于缪尔赛思来说，那是一种天性。她很难以所谓“正常人的眼光”去看待一切。面对你的疑惑，缪尔赛思一如往常对此进行了解释。\n她从你的办公桌上捧起一盆绿植放在茶几上，麻烦你向她描述这是什么。\n一种拥有确切学名的植物，绿叶，白花，长势喜人，土壤刚刚浇灌过，很湿润......这就是你的反馈，集合了人们能够使用的词语，对这盆绿植进行了全面且完整的描述。\n和缪尔赛思时常听到的，并没有多大区别。\n随后，缪尔赛思以她的方式向你描述起了她眼中看到的绿植。\n首先，缪尔赛思使用了“她”这样一个代词。\n“她”很健康，整体内循环很平稳，但有片叶子的末端出现了阻滞，或许过段时间那儿就要发黄了。\n“她”不太开心，根系已经快要触及花盆底部了，可“她”还是想要生长。而“她”向你抗议的方式之一，是把花粉撒在你手上。\n“她”的前代生长在离这里很遥远的地方，一片茂密森林。一只羽兽把“她”祖先的种子排泄到了移动城市上空，而后种子开始在城市中到处传播——\n缪尔赛思话中的信息量先是越过了观察所能得到的最大值，然后出现融合了多种感官所能感知的统一资讯，最后，她开始提及一些非实在的、跨时代的晦涩讯号。她似乎很兴奋，在发现自己的语句无法承载信息的重量后，有那么一瞬间，你察觉到她想要握住你的手，和你分享些什么，你的脑中开始有了些模糊的意识，关于眼前的这盆花，关于“她”。\n但那并没有维持多久，或者说只有一瞬间，缪尔赛思反射性地撤回了那种奇异的信息传递。\n你觉察到了，她以前也一定用这种方式来试图和别人建立联系，但即使天才如克丽斯腾，也无法感知到一分一毫。那是不同种族间无法跨越的隔阂，也是她孤独的根源——她无法让别人完整理解自己眼中的一切。\n于是，你试着用语言描述了一下她所感受到的东西，你看着她惊讶，木讷，不知所措，然后握住了你的手。她在邀请你，她渴望与你分享大地。\n你答应了。",
+              "unLockType": 2,
+              "unLockParam": "200",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "档案资料四",
+          "unLockorNot": true
+        },
+        {
+          "stories": [
+            {
+              "storyText": "【生态园植株观测记录】\n009.雪瓶子草\n数量：17（丛）\n来源地：特里蒙附属特伦多镇\n......\n备注：生长状况正常。\n\n046.方形葵\n数量：8（棵）\n来源地：萨米中部森林某部落\n......\n备注：这种植物原本生长在寒冷而少雨的萨米地区，喜阳，方形的花冠会随着太阳的移动而改变方向，根茎努力向上。移植来生态园后，花冠开始下垂，本周表现得更加明显，看起来垂头丧气的。但根据最新的检测报告，这种“水土不服”的表现，实际上是因为方形葵产生了亲水性，它们努力向下，试图贴近湿润的土壤。\n\n119.淡杉\n数量：10（棵）\n来源地：■■■■\n......\n备注：两棵成树的根部长出了厚而软的藓衣。经检测，这些藓衣并非因环境潮湿而生成的苔藓，它们准确地覆盖住了正在腐烂的根部，被破坏的纤维组织缓慢但清晰可见地恢复着。这些藓衣就像提前覆盖住伤口的痂，帮助淡杉完成了自救。\n\n“是的，这些植物本就稀少，我将它们移植进生态园，希望能利用自己植物遗传学的研究成果，改善它们的存续情况，可惜收效甚微。但这阵子，它们竟然真的发生了性状上的改变，令人欣喜。\n“多亏了你，不然它们就都被淹死了......”",
+              "unLockType": 1,
+              "unLockParam": "2;1",
+              "unLockString": ""
+            }
+          ],
+          "storyTitle": "晋升记录",
+          "unLockorNot": true
+        }
+      ],
+      "handbookAvgList": []
     }
   },
   "npcDict": {
@@ -36569,7 +38245,7 @@
       "illustList": [
         "KuroBlood"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "--",
       "displayNumber": "L205",
       "nationId": "lungmen",
@@ -36598,7 +38274,7 @@
       "illustList": [
         "KuroBlood"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "--",
       "displayNumber": "L206",
       "nationId": "lungmen",
@@ -36627,7 +38303,7 @@
       "illustList": [
         "唯@W"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "日笠阳子",
       "displayNumber": "B003",
       "nationId": "rhodes",
@@ -36656,7 +38332,7 @@
       "illustList": [
         "唯@W"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "石上静香",
       "displayNumber": "LM04",
       "nationId": "lungmen",
@@ -36685,7 +38361,7 @@
       "illustList": [
         "--"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "--",
       "displayNumber": "B101",
       "nationId": "rhodes",
@@ -36714,7 +38390,7 @@
       "illustList": [
         "熊太"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "待填写",
       "displayNumber": "RE31",
       "nationId": "rhodes",
@@ -36743,7 +38419,7 @@
       "illustList": [
         "熊太"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "待填写",
       "displayNumber": "RE18",
       "nationId": "rhodes",
@@ -36772,7 +38448,7 @@
       "illustList": [
         "熊太"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "待填写",
       "displayNumber": "RE26",
       "nationId": "rhodes",
@@ -36801,7 +38477,7 @@
       "illustList": [
         "Cornelies"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "待填写",
       "displayNumber": "RE07",
       "nationId": "rhodes",
@@ -36830,7 +38506,7 @@
       "illustList": [
         "Chuzenji"
       ],
-      "designerList": null,
+      "designerList": [],
       "cv": "待填写",
       "displayNumber": "R066",
       "nationId": "rhodes",
@@ -37014,22 +38690,22 @@
     "npc_010_chen": {
       "charId": "npc_010_chen",
       "conditionCharId": "char_010_chen",
-      "type": "INVISIBLE_IF_CHAREXIST"
+      "type": 1
     },
     "char_010_chen": {
       "charId": "char_010_chen",
       "conditionCharId": "char_010_chen",
-      "type": "DISPLAY_IF_CHAREXIST"
+      "type": 0
     },
     "npc_003_kalts": {
       "charId": "npc_003_kalts",
       "conditionCharId": "char_003_kalts",
-      "type": "INVISIBLE_IF_CHAREXIST"
+      "type": 1
     },
     "char_003_kalts": {
       "charId": "char_003_kalts",
       "conditionCharId": "char_003_kalts",
-      "type": "DISPLAY_IF_CHAREXIST"
+      "type": 0
     }
   },
   "handbookStageData": {
@@ -41295,6 +42971,296 @@
       "zoneNameForShow": "卡西米尔",
       "picId": "story_loading_Kazimierz_Final",
       "stageGetTime": 1679385600
+    },
+    "char_328_cammou": {
+      "charId": "char_328_cammou",
+      "stageId": "mem_cammou_1",
+      "levelId": "Obt/Memory/level_memory_cammou_1",
+      "zoneId": "storyMission",
+      "code": "mem_cammou_1",
+      "name": "机械援助",
+      "loadingPicId": "loading3",
+      "description": "即使是像卡达这样小有名气的户外视频制作者，为了做好拍摄和后期，钱包也总是瘪瘪的，而罗德岛的工程部不仅在维修无人机时只收取了一半不到的费用，还附带了好几项改造。虽然稍微有些不好意思，但不管怎样，为了这些便宜又好用的机械而留在一家公司，说起来也很合理嘛！",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "荒野",
+      "zoneNameForShow": "切尔诺伯格",
+      "picId": "story_loading3",
+      "stageGetTime": 1680753600
+    },
+    "char_4042_lumen": {
+      "charId": "char_4042_lumen",
+      "stageId": "mem_lumen_1",
+      "levelId": "Obt/Memory/level_memory_lumen_1",
+      "zoneId": "storyMission",
+      "code": "mem_lumen_1",
+      "name": "风浪微光",
+      "loadingPicId": "loading_SN_Town",
+      "description": "无论是作为格兰法洛的护工，伊比利亚的审判官，还是罗德岛的干员，流明始终只是竭尽自己所能，为同伴提供支持和援助。或许正是因为无论在多么猛烈的暴风雨中回头，都能看到那盏不灭的灯火，所以人们才会放下地域与种族的隔阂，敞开心扉信任他。",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "格兰法洛",
+      "zoneNameForShow": "伊比利亚",
+      "picId": "story_loading_SN_Town",
+      "stageGetTime": 1681977600
+    },
+    "char_294_ayer": {
+      "charId": "char_294_ayer",
+      "stageId": "mem_ayer_1",
+      "levelId": "Obt/Memory/level_memory_ayer_1",
+      "zoneId": "storyMission",
+      "code": "mem_ayer_1",
+      "name": " 防卫才能",
+      "loadingPicId": "loading_Kazimierz_Final",
+      "description": "无论处于何种恶劣环境，断崖始终如一地履行着自己的职责。独到的战斗方式并非他扫除障碍的唯一手段，作为护卫专家，他同样明白如何在团队行动中展现自己的才能。",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "竞技赛场",
+      "zoneNameForShow": "卡西米尔",
+      "picId": "story_loading_Kazimierz_Final",
+      "stageGetTime": 1681977600
+    },
+    "char_373_lionhd": {
+      "charId": "char_373_lionhd",
+      "stageId": "mem_lionhd_1",
+      "levelId": "Obt/Memory/level_memory_lionhd_1",
+      "zoneId": "storyMission",
+      "code": "mem_lionhd_1",
+      "name": "解构阵域",
+      "loadingPicId": "loading_SG",
+      "description": "作为一名经验丰富的天灾信使，莱恩哈特深知如何扫清传信路途中的一切障碍——首先找到一处视野开阔的高点，然后就可以尽情地向前方施展他的“爆破艺术”了。什么？你说身后怎么办？不用担心，总会有人利落地处理掉那些耍小聪明的敌人的。",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "丛林",
+      "zoneNameForShow": "萨尔贡",
+      "picId": "story_loading_SG",
+      "stageGetTime": 1681977600
+    },
+    "char_4063_quartz": {
+      "charId": "char_4063_quartz",
+      "stageId": "mem_quartz_1",
+      "levelId": "Obt/Memory/level_memory_quartz_1",
+      "zoneId": "storyMission",
+      "code": "mem_quartz_1",
+      "name": "来路无归",
+      "loadingPicId": "loading_OOD_02",
+      "description": "如今的石英，不管面对怎样的挑战与危险，纵使四方来敌，也不会再迷茫与彷徨。来吧！",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "沙漠街市",
+      "zoneNameForShow": "萨尔贡",
+      "picId": "story_loading_OOD_02",
+      "stageGetTime": 1681977600
+    },
+    "char_4048_doroth": {
+      "charId": "char_4048_doroth",
+      "stageId": "mem_doroth_1",
+      "levelId": "Obt/Memory/level_memory_doroth_1",
+      "zoneId": "storyMission",
+      "code": "mem_doroth_1",
+      "name": "重塑绿野",
+      "loadingPicId": "loading_VC_hillock1",
+      "description": "不速之客砸毁砖墙，烧光田园，多萝西耐心地诱引他们进入自己的陷阱。她绝不会允许任何人伤害自己的朋友。快回头，一切还有挽回的余地。",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "小丘郡广场",
+      "zoneNameForShow": "维多利亚",
+      "picId": "story_loading_VC_hillock1",
+      "stageGetTime": 1682913600
+    },
+    "char_4071_peper": {
+      "charId": "char_4071_peper",
+      "stageId": "mem_peper_1",
+      "levelId": "Obt/Memory/level_memory_peper_1",
+      "zoneId": "storyMission",
+      "code": "mem_peper_1",
+      "name": "“别动我的同伴！”",
+      "loadingPicId": "loading_VC_street",
+      "description": "在战场上，明椒一直以照顾好每一位同伴为己任，即便一时力有不及，她也不会置任何一位同伴于不顾。\n“我当然会救你，因为我们是一伙的！”年轻萨卡兹如是说。",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "伦蒂尼姆城区街道",
+      "zoneNameForShow": "维多利亚",
+      "picId": "story_loading_VC_street",
+      "stageGetTime": 1682913600
+    },
+    "char_379_sesa": {
+      "charId": "char_379_sesa",
+      "stageId": "mem_sesa_1",
+      "levelId": "Obt/Memory/level_memory_sesa_1",
+      "zoneId": "storyMission",
+      "code": "mem_sesa_1",
+      "name": "全面打击",
+      "loadingPicId": "loading3",
+      "description": "这一路，哪怕只有慑砂一人，面对接踵而至又复杂多变的种种危险，他也坚信凭着自己的力量，可以将其统统粉碎。",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "荒野",
+      "zoneNameForShow": "切尔诺伯格",
+      "picId": "story_loading3",
+      "stageGetTime": 1682913600
+    },
+    "char_326_glacus": {
+      "charId": "char_326_glacus",
+      "stageId": "mem_glacus_1",
+      "levelId": "Obt/Memory/level_memory_glacus_1",
+      "zoneId": "storyMission",
+      "code": "mem_glacus_1",
+      "name": "飞行管制",
+      "loadingPicId": "loading2",
+      "description": "仰望天空的时候，格劳克斯总是很羡慕那些羽兽，能自在翱翔于天际。但违规飞行的无人机会把羽兽们都吓跑，格劳克斯决定想办法帮羽兽们夺回天空。",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "屋顶",
+      "zoneNameForShow": "龙门",
+      "picId": "story_loading2",
+      "stageGetTime": 1682913600
+    },
+    "char_193_frostl": {
+      "charId": "char_193_frostl",
+      "stageId": "mem_frostl_1",
+      "levelId": "Obt/Memory/level_memory_frostl_1",
+      "zoneId": "storyMission",
+      "code": "mem_frostl_1",
+      "name": "小队",
+      "loadingPicId": "loading4",
+      "description": "少年雇佣兵来到了一个新的地方，这里的队友会向你伸出援手，这里的同伴会坚定地守住你的后背，这里的小队是你的庇护，而不是一个随时都可能会瓦解崩散的存在。少年雇佣兵站在冰天雪地中，但是内心很温暖。",
+      "unlockParam": [
+        {
+          "unlockType": 1,
+          "unlockParam1": "2",
+          "unlockParam2": "1",
+          "unlockParam3": null
+        }
+      ],
+      "rewardItem": [
+        {
+          "id": "4003",
+          "count": 200,
+          "type": "DIAMOND_SHD"
+        }
+      ],
+      "stageNameForShow": "冰封",
+      "zoneNameForShow": "切尔诺伯格",
+      "picId": "story_loading4",
+      "stageGetTime": 1682913600
     }
   },
   "handbookStageTime": [
@@ -41643,6 +43609,31 @@
         "char_325_bison",
         "char_254_vodfox",
         "char_265_sophia"
+      ]
+    },
+    {
+      "timestamp": 1680753600,
+      "charSet": [
+        "char_328_cammou"
+      ]
+    },
+    {
+      "timestamp": 1681977600,
+      "charSet": [
+        "char_4042_lumen",
+        "char_294_ayer",
+        "char_373_lionhd",
+        "char_4063_quartz"
+      ]
+    },
+    {
+      "timestamp": 1682913600,
+      "charSet": [
+        "char_4048_doroth",
+        "char_4071_peper",
+        "char_379_sesa",
+        "char_326_glacus",
+        "char_193_frostl"
       ]
     }
   ]

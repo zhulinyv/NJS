@@ -22,6 +22,7 @@ class Chatbot:
         self,
         *,
         token: str = "",
+        access_token: str = "",
         model: str = "text-davinci-002-render-sha",
         account: str = "",
         password: str = "",
@@ -37,7 +38,7 @@ class Chatbot:
         self.api_url = api
         self.proxies = proxies
         self.timeout = timeout
-        self.authorization = ""
+        self.authorization = access_token
         self.conversation_id = None
         self.parent_id = None
         self.played_name = None
@@ -263,10 +264,14 @@ class Chatbot:
                     },
                 )
             try:
-                self.session_token = (
-                    response.cookies.get(SESSION_TOKEN_KEY) or self.session_token
-                )
-                self.authorization = response.json()["accessToken"]
+                if response.status_code == 200:
+                    self.session_token = (
+                        response.cookies.get(SESSION_TOKEN_KEY) or self.session_token
+                    )
+                    self.authorization = response.json()["accessToken"]
+                else:
+                    resp_json = response.json()
+                    raise Exception(resp_json["detail"])
             except Exception as e:
                 logger.opt(colors=True, exception=e).error(
                     f"刷新会话失败: <r>HTTP{response.status_code}</r> {response.text}"

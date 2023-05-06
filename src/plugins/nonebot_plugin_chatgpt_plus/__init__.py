@@ -50,7 +50,7 @@ __plugin_meta__ = PluginMetadata(
         "unique_name": "chatgpt-plus",
         "example": """@bot 人格设定 香草""",
         "author": "A-kirami",
-        "version": "0.8.1",
+        "version": "0.8.5",
     },
 )
 __plugin_settings__ = {
@@ -67,6 +67,7 @@ __plugin_settings__ = {
 
 chat_bot = Chatbot(
     token=setting.token or config.chatgpt_session_token,
+    access_token=setting.access_token or config.chatgpt_access_token,
     model=config.chatgpt_model,
     account=config.chatgpt_account,
     password=config.chatgpt_password,
@@ -141,13 +142,13 @@ async def ai_chat(event: MessageEvent, state: T_State) -> None:
             else:
                 msg += ",请刷新会话"
     except Exception as e:
-        lockers[event.user_id] = False
         error = f"{type(e).__name__}: {e}"
         logger.opt(exception=e).error(f"ChatGPT request failed: {error}")
         await matcher.finish(
             f"请求 ChatGPT 服务器时出现问题，请稍后再试\n错误信息: {error}", reply_message=True
         )
-    lockers[event.user_id] = False
+    finally:
+        lockers[event.user_id] = False
     if config.chatgpt_image:
         if msg.count("```") % 2 != 0:
             msg += "\n```"
@@ -256,8 +257,10 @@ refresh = on_command("刷新token", block=True, rule=to_me(), permission=SUPERUS
 @refresh.handle()
 @scheduler.scheduled_job("interval", minutes=config.chatgpt_refresh_interval)
 async def refresh_session() -> None:
-    await chat_bot.refresh_session()
+    if chat_bot.session_token:
+        await chat_bot.refresh_session()
     setting.token = chat_bot.session_token
+    setting.access_token = chat_bot.authorization
     setting.save()
     session.save_sessions()
     logger.opt(colors=True).debug(

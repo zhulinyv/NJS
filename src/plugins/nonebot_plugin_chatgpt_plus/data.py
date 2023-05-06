@@ -15,6 +15,7 @@ class Setting(BaseModel):
     session: Dict[str, Dict[str, Any]] = Field(default_factory=dict)
     presets: Dict[str, str] = Field(default_factory=dict)
     token: str = ""
+    access_token: str = ""
 
     __file_path: Path = config.chatgpt_data / "setting.json"
 

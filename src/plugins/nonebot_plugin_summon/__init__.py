@@ -1,26 +1,18 @@
 ﻿"""导入依赖"""
 import nonebot
-from loguru import logger
 from nonebot.rule import to_me
 from nonebot.params import CommandArg
 from nonebot.permission import SUPERUSER
 from nonebot.plugin.on import on_command
-from nonebot.adapters.onebot.v11 import Message, GroupMessageEvent
+from nonebot.adapters.onebot.v11 import Message
+
+from .utils import *
+
 
 try:
-    import ujson as json
-except ModuleNotFoundError:
-    import json
-
-"""获取变量"""
-data_path = "./data/summon/"
-switch = 1
-
-try:
-    NICKNAME: str = nonebot.get_driver().config.nickname
+    NICKNAME: str = (str(nonebot.get_driver().config.nickname)).replace('{\'', '').replace('\'}', '')
 except:
     NICKNAME: str = "脑积水"
-
 
 
 """获取指令"""
@@ -32,50 +24,53 @@ summon = on_command("召唤", priority=60, block=True)
 poke = on_command("戳", priority=60, block=True)
 
 
-
 """执行指令"""
 @set_summoning.handle()
 async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
+    # 获取群号
+    gid = str(event.group_id)
     # 获取纯文本信息
     message = msg.extract_plain_text().strip()
     # 将字符串转换为列表
     variable_list = message.split(' ')
+    variable_list = [word.strip() for word in variable_list if word.strip()]    # 去除空字符串元素
     # 通过艾特方式获取 qid
     qid = await get_at(event)
     # 判断是否成功获取，否则将取列表的第一个元素
-    if qid == None:
-        qid = int(variable_list[0])
-    # 获取设置的昵称
-    try:
-        # 取第二个元素作为昵称
-        name = variable_list[1]
-    except Exception:
-        # 艾特方式不存在第二个元素，则取第一个元素
-        name = variable_list[0]
-    # 获取群号
-    gid = str(event.group_id)
-    # 编辑文件路径
-    global data_path_gid
-    data_path_gid = data_path + gid + "/"
-    # 文件操作
-    data = read_json()
-    data = write_json(name, qid, data)
-    logger.info(f"已设置 {name}: {qid}")
-    await set_summoning.finish("设置成功~")
+    if qid == -1:       # 通过艾特方式获取失败, 那么就通过列表的第一个元素获取
+        # 如果列表长度不为2，那么就是格式错误, 直接finish
+        await set_summoning.finish("格式错误，请检查后重试\n设置召唤+艾特(或qq号)+昵称", at_sender=True) if len(variable_list) != 2 else ...
+        # 在len=2的前提下, 判断列表第一个元素是否为数字，如果是数字，那么就是通过qq号+昵称方式，否则就是格式错误
+        qid = int(variable_list[0]) if variable_list[0].isdigit() else await set_summoning.finish("格式错误，通过qq号+昵称方式第一个参数需要为数字", at_sender=True)
+        name = variable_list[1]  # 名字
+    else:
+        # 如果qid不为-1，那么就是通过艾特方式获取，那么就直接取列表的第一个元素
+        name = variable_list[0]  # 名字
+    await set_summoning.finish("请不要尝试设置名字为空空格", at_sender=True) if name.isspace() else ...  # 如果昵称为空格，那么就finish
+    # 更新dict
+    if gid in userdata:
+        userdata[gid][name] = qid
+    else:
+        userdata[gid] = {name: qid}
+    write_json()  # 写入json
+    await set_summoning.finish(f"设置成功~{name} -> {qid}", at_sender=True)
+
 
 @del_summoning.handle()
 async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
-    name = msg.extract_plain_text().strip()
-    gid = str(event.group_id)
-    global data_path_gid
-    data_path_gid = data_path + gid + "/"
-    remove_json(name)
-    await del_summoning.finish("删除成功~")
+    name = msg.extract_plain_text().strip()     # 获取纯文本信息
+    gid = str(event.group_id)                # 获取群号
+    try:
+        del userdata[gid][name] # 删除
+    except:
+        await del_summoning.finish("删除失败，没有这个人哦~", at_sender=True)   # 如果删除失败，那么就是没有这个人
+    write_json()    # 写入json
+    await del_summoning.finish("删除成功~")   # 删除成功
+
 
 @model_switch.handle()
 async def _(switch_msg: Message = CommandArg()):
-    switch_msg = switch_msg.extract_plain_text().strip()
-    global switch
+    switch_msg = switch_msg.extract_plain_text().strip()    # 获取纯文本信息
     if switch_msg == "普通":
         switch = 1
     elif switch_msg == "增强":
@@ -84,99 +79,61 @@ async def _(switch_msg: Message = CommandArg()):
         switch = 3
     else:
         await model_switch.finish("没有这个模式哦~")
-    msg = f"切换成功~~当前召唤术为: {switch}模式".replace('1', "普通").replace('2', "增强").replace('3', "强力")
+    userdata["send_model"] = switch # 更新dict
+    write_json()    # 写入json
+    msg = f"切换成功~~当前召唤术为: {switch}模式".replace(
+        '1', "普通").replace('2', "增强").replace('3', "强力")
     await model_switch.finish(msg, at_sender=True)
+
 
 @list_summoning.handle()
 async def _(event: GroupMessageEvent):
-    gid = str(event.group_id)
-    global data_path_gid
-    data_path_gid = data_path + gid + "/"
-    data = read_json()
-    if data == {}:
-        await list_summoning.finish(f"{NICKNAME}的记忆里还没有人捏......".replace('{\'', '').replace('\'}', ''), at_sender=True)
-    msg = f"{data}".replace(' ', '').replace(':', '：').replace('{', '').replace('}', '').replace(',', '\n').replace('\'', '')
+    gid = str(event.group_id)   # 获取群号
+    if gid not in userdata or userdata[gid] == {}:    # 判断是否有这个群, 以及这个群的dict是否为空
+        await list_summoning.finish(f"在本群{NICKNAME}的记忆里还没有人捏......", at_sender=True)
+    else:
+        dataDict = userdata[gid]    # 获取dict
+    msg = ""
+    for i in dataDict:  # 遍历dict
+        msg = msg + f"{i} -> {dataDict[i]}\n"
     await list_summoning.finish(msg)
+
 
 @summon.handle()
 async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
-    gid = str(event.group_id)
-    global data_path_gid
-    data_path_gid = data_path + gid + "/"
-    name = msg.extract_plain_text().strip()
-    data = read_json()
+    gid = str(event.group_id)   # 获取群号
+    name = msg.extract_plain_text().strip()    # 获取纯文本信息
+    switch = userdata["send_model"] # 获取模式
     try:
-        qid = data[name]
-        if switch == 1:
+        qid = userdata[gid][name]   # 获取qq号
+        if switch == 1:    # 判断模式
             await summon.finish(Message(f"[CQ:poke,qq={qid}]"))
         elif switch == 2:
             await summon.finish(Message(f"[CQ:at,qq={qid}]"))
         elif switch == 3:
             await summon.send(Message(f"[CQ:poke,qq={qid}]"))
             await summon.send(Message(f"[CQ:at,qq={qid}]"))
-    except KeyError:
-        await summon.finish(f"{NICKNAME}的记忆里没有这号人捏......".replace('{\'', '').replace('\'}', ''))
+    except KeyError:    # 如果没有这个人，那么就是KeyError
+        await summon.finish(f"{NICKNAME}的记忆里没有这号人捏......")
+
 
 @poke.handle()
 async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
-    gid = str(event.group_id)
-    global data_path_gid
-    data_path_gid = data_path + gid + "/"
-    message = msg.extract_plain_text().strip()
-    variable_list = message.split(' ')
-    name = variable_list[0]
-    times = int(variable_list[1])
-    data = read_json()
+    gid = str(event.group_id)   # 获取群号
+    message = msg.extract_plain_text().strip()  # 获取纯文本信息
+    variable_list = message.split(' ')  # 以空格分割
+    variable_list = [word.strip() for word in variable_list if word.strip()]    # 去除空格
+    await poke.finish("格式错误，请检查后重试\n戳+昵称+次数(数字)", at_sender=True) if len(variable_list) < 2 else ...  # 判断列表长度
+    name = variable_list[0] # 名字
+    nums = int(variable_list[1]) if variable_list[1].isdigit() else await poke.finish("格式错误，请检查后重试\n戳+昵称+次数(数字)", at_sender=True) # 次数
+    await poke.finish(f"要人家戳这么多次, 你想让{NICKNAME}风控嘛......", at_sender=True) if nums > 10 else ... # 判断次数
     try:
-        if times <= 10:
-            qid = data[name]
-            for t in range(times):
-                await poke.send(Message(f"[CQ:poke,qq={qid}]"))
-        else:
-            await poke.finish(f"你想让{NICKNAME}风控嘛......".replace('{\'', '').replace('\'}', ''), at_sender=True)
+        qid = userdata[gid][name]   # 获取qq号
     except KeyError:
-        await poke.finish(f"{NICKNAME}的记忆里没有这号人捏......".replace('{\'', '').replace('\'}', ''), at_sender=True)
+        await poke.finish(f"{NICKNAME}的记忆里没有这号人捏......", at_sender=True)    # 如果没有这个人，那么就是KeyError
 
-
-
-"""一些工具"""
-# 获取被艾特用户 ID
-async def get_at(event: GroupMessageEvent) -> int:
-    msg=event.get_message()
-    for msg_seg in msg:
-        if msg_seg.type == "at":
-            return int(msg_seg.data["qq"])
-
-# read_json
-def read_json() -> dict:
-    try:
-        with open(data_path_gid + "userinfo.json", "r") as f_in:
-            data = json.load(f_in)
-            f_in.close()
-            return data
-    except FileNotFoundError:
+    for i in range(nums):   # 循环戳
         try:
-            import os
-            os.makedirs(data_path_gid)
-        except FileExistsError:
-            pass
-        with open(data_path_gid + "userinfo.json", mode="w") as f_out:
-            json.dump({}, f_out)
-        return {}
-
-# write_json
-def write_json(name: str, qid: str, data: dict):
-    data[name] = qid
-    with open(data_path_gid + "userinfo.json", "w") as f_out:
-        json.dump(data, f_out)
-        f_out.close()
-
-# remove_json
-def remove_json(name: str):
-    with open(data_path_gid + "userinfo.json", "r") as f_in:
-        data = json.load(f_in)
-        f_in.close()
-    data.pop(name)
-    with open(data_path_gid + "userinfo.json", "w") as f_out:
-        json.dump(data, f_out)
-        f_out.close()
+            await poke.send(Message(f"[CQ:poke,qq={qid}]"))
+        except Exception as e:
+            await poke.send(f"戳一戳失败, 错误信息: {e}")

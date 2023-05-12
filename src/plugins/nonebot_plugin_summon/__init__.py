@@ -94,7 +94,7 @@ async def _(event: GroupMessageEvent):
     data_path_gid = data_path + gid + "/"
     data = read_json()
     if data == {}:
-        await list_summoning.finish(f"{NICKNAME}的记忆里还没有人捏......".replace('{\'', '').replace('\'}', ''), at_sende=True)
+        await list_summoning.finish(f"{NICKNAME}的记忆里还没有人捏......".replace('{\'', '').replace('\'}', ''), at_sender=True)
     msg = f"{data}".replace(' ', '').replace(':', '：').replace('{', '').replace('}', '').replace(',', '\n').replace('\'', '')
     await list_summoning.finish(msg)
 
@@ -133,7 +133,7 @@ async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
             for t in range(times):
                 await poke.send(Message(f"[CQ:poke,qq={qid}]"))
         else:
-            await poke.finish(f"你想让{NICKNAME}风控嘛......".replace('{\'', '').replace('\'}', ''), at_sende=True)
+            await poke.finish(f"你想让{NICKNAME}风控嘛......".replace('{\'', '').replace('\'}', ''), at_sender=True)
     except KeyError:
         await poke.finish(f"{NICKNAME}的记忆里没有这号人捏......".replace('{\'', '').replace('\'}', ''), at_sender=True)
 

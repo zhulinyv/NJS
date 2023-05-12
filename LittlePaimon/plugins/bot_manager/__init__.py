@@ -136,14 +136,28 @@ async def _(event: MessageEvent):
 
 @update_history.handle()
 async def _():
-    result = await check_update()
+    try:
+        repo = git.Repo(Path().absolute())
+    except InvalidGitRepositoryError:
+        return '没有发现git仓库, 无法判断本地更新状态'
+    local_commit = str(repo.head.commit)
     resp = await aiorequests.get('https://api.github.com/repos/zhulinyv/NJS/commits')
     data = resp.json()
     msg = "更新记录如下: \n"
-    for i in range(10):
-        msg += (datetime.datetime.strptime(data[i]["commit"]["committer"]["date"], '%Y-%m-%dT%H:%M:%SZ') + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S') + "\n" + data[i]["commit"]["message"] + "\n----------\n"
+    num = -1
+    for i in data:
+        num += 1
+        sha = i["sha"]
+        if local_commit == sha:
+            for x in range(10):
+                try:
+                    msg += (datetime.datetime.strptime(data[num + x]["commit"]["committer"]["date"], '%Y-%m-%dT%H:%M:%SZ') + datetime.timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S') + "\n" + data[num + x]["commit"]["message"] + "\n----------\n"
+                except Exception:
+                    msg = "已落后上游仓库太多! "
+            break
     msg = msg.replace(":art:","🎨").replace(":zap:","⚡️").replace(":fire:","🔥").replace(":bug:","🐛").replace(":ambulance:","🚑️").replace(":sparkles:","✨").replace(":memo:","📝").replace(":rocket:","🚀").replace(":lipstick:","💄").replace(":tada:","🎉").replace(":white_check_mark:","✅").replace(":lock:","🔒️").replace(":closed_lock_with_key:","🔐").replace(":bookmark:","🔖").replace(":rotating_light:","🚨").replace(":construction:","🚧").replace(":green_heart:","💚").replace(":arrow_down:","⬇️").replace(":arrow_up:","⬆️").replace(":pushpin:","📌").replace(":construction_worker:","👷").replace(":chart_with_upwards_trend:","📈").replace(":recycle:","♻️").replace(":heavy_plus_sign:","➕").replace(":heavy_minus_sign:","➖").replace(":wrench:","🔧").replace(":hammer:","🔨").replace(":globe_with_meridians:","🌐").replace(":pencil2:","✏️").replace(":poop:","💩").replace(":rewind:","⏪️").replace(":twisted_rightwards_arrows:","🔀").replace(":package:","📦️").replace(":alien:","👽️").replace(":truck:","🚚").replace(":page_facing_up:","📄").replace(":boom:","💥").replace(":bento:","🍱").replace(":wheelchair:","♿️").replace(":bulb:","💡").replace(":beers:","🍻").replace(":speech_balloon:","💬").replace(":card_file_box:","🗃️").replace(":loud_sound:","🔊").replace(":mute:","🔇").replace(":busts_in_silhouette:","👥").replace(":children_crossing:","🚸").replace(":building_construction:","🏗️").replace(":iphone:","📱").replace(":clown_face:","🤡").replace(":egg:","🥚").replace(":see_no_evil:","🙈").replace(":camera_flash:","📸").replace(":alembic:","⚗️").replace(":mag:","🔍️").replace(":label:","🏷️").replace(":seedling:","🌱").replace(":triangular_flag_on_post:","🚩").replace(":goal_net:","🥅").replace(":dizzy:","💫").replace(":wastebasket:","🗑️").replace(":passport_control:","🛂").replace(":adhesive_bandage:","🩹").replace(":monocle_face:","🧐").replace(":coffin:","⚰️").replace(":test_tube:","🧪").replace(":necktie:","👔").replace(":stethoscope:","🩺").replace(":bricks:","🧱").replace(":technologist:","🧑‍💻").replace(":money_with_wings:","💸").replace(":thread:","🧵").replace(":safety_vest:", "🦺")
-    msg += "以上仅展示最近 10 条远程更新记录捏~\n\n" + result
+    result = await check_update()
+    msg += "以上仅展示最近 10 条本地更新记录捏~\n\n" + result
     await update_history.finish(msg, at_sender=True)
 
 

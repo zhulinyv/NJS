@@ -147,6 +147,7 @@ async def _(event:Event, bot:Bot, msg: Message = CommandArg()):
         else:
             await search.send("找到以下图片捏~")
             for i in range(3):
+                pic = MessageSegment.image(str(res["data"][i]["Url"]))
                 await search.send(pic)
                 asyncio.sleep(0.25)
     elif code == '-1':

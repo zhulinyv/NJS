@@ -1,17 +1,17 @@
 import math
 import random
-from typing import Dict
-from datetime import datetime
 from collections import namedtuple
-from PIL import Image, ImageDraw, ImageFilter, ImageEnhance
+from datetime import datetime
+from typing import Dict
 
 from nonebot_plugin_imageutils import Text2Image
 from nonebot_plugin_imageutils.fonts import Font
-from nonebot_plugin_imageutils.gradient import LinearGradient, ColorStop
+from nonebot_plugin_imageutils.gradient import ColorStop, LinearGradient
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
-from .utils import *
 from .depends import *
 from .download import load_image
+from .utils import *
 
 TEXT_TOO_LONG = "文字太长了哦，改短点再试吧~"
 NAME_TOO_LONG = "名字太长了哦，改短点再试吧~"
@@ -2425,4 +2425,33 @@ def name_generator(img: BuildImage = UserImg(), arg=NoArg()):
         stroke_ratio=0.07,
         stroke_fill="white",
     )
+    return frame.save_jpg()
+
+
+def beat_head(img: BuildImage = UserImg(), arg: str = Arg()):
+    text = "怎么说话呢你" if not arg else arg
+    locs = [(160, 121, 76, 76), (172, 124, 69, 69), (208, 166, 52, 52)]
+    img = img.convert("RGBA")
+    frames: List[IMG] = []
+    for i in range(3):
+        x, y, w, h = locs[i]
+        frame = load_image(f"beat_head/{i}.png")
+        frame.paste(img.resize((w, h)), (x, y), below=True)
+        try:
+            frame.draw_text(
+                (175, 28, 316, 82),
+                text,
+                max_fontsize=50,
+                min_fontsize=10,
+                allow_wrap=True,
+            )
+        except:
+            return TEXT_TOO_LONG
+        frames.append(frame.image)
+    return save_gif(frames, 0.05)
+
+
+def bubble_tea(img: BuildImage = UserImg(), arg=NoArg()):
+    frame = load_image("bubble_tea/0.png")
+    frame.paste(img.convert("RGBA").resize((500, 500), keep_ratio=True), below=True)
     return frame.save_jpg()

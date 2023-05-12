@@ -3,6 +3,7 @@ import nonebot
 from pathlib import Path
 from nonebot import require
 from nonebot import on_command
+from nonebot.log import logger
 from nonebot.params import CommandArg
 from nonebot.exception import ActionFailed
 from nonebot.adapters.onebot.v11 import (
@@ -73,21 +74,25 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
                 else:
                     await njs_help.finish('功能扩建中...', at_sender=True)
             except ActionFailed:
-                if isinstance(event, GroupMessageEvent):
-                    msgs = []
-                    message_list = []
-                    message_list.append('指令如下: \n' + MessageSegment.image(help_image))
-                    for msg in message_list:
-                        msgs.append({
-                            'type': 'node',
-                            'data': {
-                                'name': f"{NICKNAME}",
-                                'uin': bot.self_id,
-                                'content': msg
-                            }
-                        })
-                    await bot.call_api('send_group_forward_msg', group_id=event.group_id, messages=msgs)
-                else:
+                try:
+                    if isinstance(event, GroupMessageEvent):
+                        msgs = []
+                        message_list = []
+                        message_list.append('指令如下: \n' + MessageSegment.image(help_image))
+                        for msg in message_list:
+                            msgs.append({
+                                'type': 'node',
+                                'data': {
+                                    'name': f"{NICKNAME}",
+                                    'uin': bot.self_id,
+                                    'content': msg
+                                }
+                            })
+                        await bot.call_api('send_group_forward_msg', group_id=event.group_id, messages=msgs)
+                    else:
+                        await njs_help.finish("指令发不出来啦~! 请查看帮助文档:\n优先: zhulinyv.github.io/NJS\n备用: cnblogs.com/xytpz/p/NJS.html", at_sender=True)
+                except Exception as e:
+                    logger.error(f"错误日志{e}")
                     await njs_help.finish("指令发不出来啦~! 请查看帮助文档:\n优先: zhulinyv.github.io/NJS\n备用: cnblogs.com/xytpz/p/NJS.html", at_sender=True)
     else:
         await njs_help.finish('功能扩建中...', at_sender=True)

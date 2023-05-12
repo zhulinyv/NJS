@@ -92,7 +92,8 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
                     else:
                         await njs_help.finish("指令发不出来啦~! 请查看帮助文档:\n优先: zhulinyv.github.io/NJS\n备用: cnblogs.com/xytpz/p/NJS.html", at_sender=True)
                 except Exception as e:
-                    logger.error(f"错误日志{e}")
+                    error = f"{type(e).__name__}: {e}"
+                    logger.error(f"错误日志{error}")
                     await njs_help.finish("指令发不出来啦~! 请查看帮助文档:\n优先: zhulinyv.github.io/NJS\n备用: cnblogs.com/xytpz/p/NJS.html", at_sender=True)
     else:
         await njs_help.finish('功能扩建中...', at_sender=True)

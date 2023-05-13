@@ -74,7 +74,7 @@ help_reply = {
     "h71_r": "以下指令均需要艾特\n基本的聊天对话 -> 基本会话 (默认【chat2】触发) \n连续对话 -> chat/聊天/开始聊天\n结束聊天 -> stop/结束/结束聊天\n切换会话 -> 切换群聊/切换会话/切换\n重置会话记录 -> 刷新/重置对话\n重置AI人格 -> 重置人格\n设置AI人格 -> 设置人格\n导出历史会话 -> 导出会话/导出对话\n回答渲染为图片 -> 图片渲染 (默认关闭) ",
     "h72_r": "开启/添加防撤回, enable + 群号1 群号2 ...\n关闭/删除防撤回, disable + 群号1 群号2 ...\n查看防撤回群聊\n开启/关闭绕过管理层\n防撤回菜单\n开启/关闭防撤回私聊gid uid\n查看防撤回私聊",
     "h73_r": "gscode / 兑换码",
-    "h74_r": "签到\n我的好感",
+    "h74_r": "签到/盖章\n收集册(+QQ号/艾特)",
     "h75_r": "ping  + 网址\nqrcode + 网址\nwhois + 网址\nhttpcat + HTTP状态码",
     "h77_r": "[兽音加密]/[convert]\n[兽音解密]/[deconvert]\n[切噜一下]/[cherulize]\n[切噜～]/[decherulize]\n",
     "h78_r": ".aidraw loli,cute --ntags big breast --seed 114514\n\n指令使用shell解析输入的参数\nsquare为指定画幅, 支持简写为s, 其他画幅为portrait和landscape, 同样支持简写, 默认为portrait\nseed若省略则为自动生成\n词条使用英文, 使用逗号 (中英都行, 代码里有转换) 分割, 中文会自动机翻为英文, 不支持其他语种\n如果你不想用.aidraw, 可以用 绘画 、 咏唱 或 召唤 代替。\n在消息中添加图片或者回复带有图片的消息自动切换为以图生图模式\n\n.aidraw on/off\n启动/关闭本群的aidraw\n\n.anlas check\n查看自己拥有的点数\n\n.anlas\n查看帮助\n\n.anlas [数字] @[某人]\n将自己的点数分给别人(superuser点数无限)\n\n.tagget [图片]\n获取图片的TAG\n如果你不想用.tagget, 可以用 鉴赏 或 查书 代替。\n\n详细指令: https://nb.novelai.dev/main/aidraw.html#%E6%8C%87%E4%BB%A4%E5%BC%80%E5%A4%B4",

@@ -1273,8 +1273,8 @@ gscode / 兑换码
 <details>
 <summary><b>指令: </summary></b>
 <pre><p>
-签到
-我的好感
+签到/盖章
+收集册(+QQ号/艾特)
 </p></pre>
 </details>
 

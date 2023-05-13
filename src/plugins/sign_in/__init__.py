@@ -137,7 +137,7 @@ async def _(bot: Bot, event: Union[GroupMessageEvent, GuildMessageEvent, Private
     if isinstance(event, GroupMessageEvent):
         lucky_user_card = await get_user_card(bot, gid, uid)
         try:
-            storage.finish(f'『{lucky_user_card}』的收集册:\n' + img + f'图鉴完成度: {normalize_digit_format(len(cards_num))}/{normalize_digit_format(len(card_file_names_all))}\n当前群排名: {ranking_desc}', at_sender=True)
+            await storage.finish(f'『{lucky_user_card}』的收集册:\n' + img + f'图鉴完成度: {normalize_digit_format(len(cards_num))}/{normalize_digit_format(len(card_file_names_all))}\n当前群排名: {ranking_desc}', at_sender=True)
         except ActionFailed:
             logger.warning("直接发送失败, 尝试以转发形式发送!")
             msgs = []

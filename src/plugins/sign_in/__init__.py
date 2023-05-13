@@ -54,16 +54,19 @@ async def _(event: GroupMessageEvent):
     with open(GOODWILL_PATH / "goodwill.json", "r", encoding="utf-8") as f:
         data = json.load(f)
         try:
-            user_goodwill = data[str(uid)]
+            user_goodwill = data[str(gid)][str(uid)]
         except:
             user_goodwill = 0
     f.close()
     with open(GOODWILL_PATH / "goodwill.json", "w", encoding="utf-8") as f:
-        data[str(uid)] = user_goodwill + goodwill
+        if str(gid) in data:
+            data[str(gid)][str(uid)] = user_goodwill + goodwill
+        else:
+            data[str(gid)] = {str(uid): user_goodwill + goodwill}
         json.dump(data, f, indent=4, ensure_ascii=False)
     f.close()
 
-    await give_okodokai.send(f'\n欢迎回来, 主人~!' + image + f'\n好感+{goodwill}! 当前好感: {data[str(uid)]}\n' + f'主人今天要{todo}吗? \n\n今日一言: {response_text}', at_sender=True)
+    await give_okodokai.send(f'\n欢迎回来, 主人~!' + image + f'\n好感 + {goodwill}! 当前好感: {data[str(gid)][str(uid)]}\n' + f'主人今天要{todo}吗? \n\n今日一言: {response_text}', at_sender=True)
 
 
 

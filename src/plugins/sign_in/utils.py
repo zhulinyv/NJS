@@ -46,12 +46,12 @@ font = ImageFont.truetype(os.path.join(os.path.dirname(__file__), 'arial.ttf'), 
 card_file_names_all = []
 
 if not os.path.exists(GOODWILL_PATH):
-    # 不存在文件夹就创建文件夹
+    # 不存在就创建文件
     os.makedirs(GOODWILL_PATH)
-userdata = {}
-with open(GOODWILL_PATH / "goodwill.json", "w", encoding="utf-8") as f:
-    json.dump(userdata, f, indent=4, ensure_ascii=False)
-    f.close()
+    userdata = {}
+    with open(GOODWILL_PATH / "goodwill.json", "w", encoding="utf-8") as f:
+        json.dump(userdata, f, indent=4, ensure_ascii=False)
+        f.close()
 
 # 资源预检
 image_cache = {}

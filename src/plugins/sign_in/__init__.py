@@ -2,8 +2,11 @@ import httpx
 import base64
 import random
 import nonebot
+
 from io import BytesIO
 from typing import Union
+from nonebot import require
+require("nonebot_plugin_guild_patch")
 from nonebot_plugin_guild_patch import GuildMessageEvent
 from nonebot.adapters.onebot.v11.exception import ActionFailed
 

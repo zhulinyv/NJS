@@ -94,4 +94,4 @@ async def get_user_card(bot: Bot, group_id, qid):
         user_card = user_info["nickname"]
     return user_card
 
-lmt = DailyNumberLimiter(10)
+lmt = DailyNumberLimiter(1)

@@ -49,5 +49,5 @@ class CardRecordDAO:
         return sum(n > user_card_num for n in cards_num.values()) + 1
 
 
-DB_PATH = os.path.expanduser("~/.hoshino/pcr_stamp.db")
+DB_PATH = "./data/nonebot_plugin_hoshino_sign/db/pcr_stamp.db"
 db = CardRecordDAO(DB_PATH)

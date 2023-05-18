@@ -1,3 +1,4 @@
+import time
 import httpx
 import base64
 import random
@@ -51,40 +52,50 @@ async def _(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMessageEve
     else:
         await give_okodokai.finish()
 
+    # 日期
+    time_tuple = time.localtime(time.time())
+    last_time = f"{time_tuple[0]}年{time_tuple[1]}月{time_tuple[2]}日"
+
     # 签到
-    if not lmt.check(f"{uid}@{gid}"):
-        await give_okodokai.finish('今天已经签到过啦，明天再来叭~', at_sender=True)
-    lmt.increase(f"{uid}@{gid}")
+    with open(GOODWILL_PATH + "goodwill.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+        try:
+            if data[str(gid)][str(uid)][1] == last_time:
+                await give_okodokai.finish('今天已经签到过啦，明天再来叭~', at_sender=True)
+        except KeyError:
+            pass
+
     todo = random.choice(todo_list)
+    goodwill = random.randint(1,10)
     stamp = random.choice(card_file_names_all)
-    path = DIR_PATH / stamp
+    path = STAMP_PATH / stamp
     image = MessageSegment.image(path)
     card_id = stamp[:-4]
     db.add_card_num(gid, uid, card_id)
 
     # 一言
-    async with httpx.AsyncClient() as client:
-        response = await client.get("https://api.vvhan.com/api/ian")
-        response_text = response.text
-    goodwill = random.randint(1,10)
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get("https://api.vvhan.com/api/ian")
+            response_text = response.text
+    except Exception as error:
+        response_text = error
 
     # 读写数据
-    with open(GOODWILL_PATH / "goodwill.json", "r", encoding="utf-8") as f:
+    with open(GOODWILL_PATH + "goodwill.json", "r", encoding="utf-8") as f:
         data = json.load(f)
         try:
-            user_goodwill = data[str(gid)][str(uid)]
+            user_goodwill = data[str(gid)][str(uid)][0]
         except:
             user_goodwill = 0
-    f.close()
-    with open(GOODWILL_PATH / "goodwill.json", "w", encoding="utf-8") as f:
+    with open(GOODWILL_PATH + "goodwill.json", "w", encoding="utf-8") as f:
         if str(gid) in data:
-            data[str(gid)][str(uid)] = user_goodwill + goodwill
+            data[str(gid)][str(uid)] = [user_goodwill + goodwill, last_time]
         else:
-            data[str(gid)] = {str(uid): user_goodwill + goodwill}
+            data[str(gid)] = {str(uid): [user_goodwill + goodwill, last_time]}
         json.dump(data, f, indent=4, ensure_ascii=False)
-    f.close()
 
-    await give_okodokai.send(f'\n欢迎回来, 主人 ~ !' + image + f'\n好感 + {goodwill} ! 当前好感: {data[str(gid)][str(uid)]}\n' + f'主人今天要{todo}吗? \n\n今日一言: {response_text}', at_sender=True)
+    await give_okodokai.send(f'\n欢迎回来, 主人 ~ !' + image + f'\n好感 + {goodwill} ! 当前好感: {data[str(gid)][str(uid)][0]}\n' + f'主人今天要{todo}吗? \n\n今日一言: {response_text}', at_sender=True)
 
 
 

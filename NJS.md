@@ -5,17 +5,24 @@
 
 ——2023年1月20日17时43分38秒
 
-## 1.头像表情包制作 [nonebot_plugin_petpet](https://github.com/noneplugin/nonebot-plugin-petpet)
+## 1.头像表情包制作(已与文字表情包合并) [nonebot_plugin_petpet](https://github.com/noneplugin/nonebot-plugin-memes)
 <details>
 <summary><b>指令: </b></summary>
-<a href="https://smms.app/image/ygMJk1Kl4Iz37BZ" target="_blank"><img src="https://s2.loli.net/2022/12/11/ygMJk1Kl4Iz37BZ.png" ></a>
-<p>头像表情包</p>
-<p><b>其它指令: </b></p>
-<p dir="auto">随机表情 + @user/qq号/自己/图片</p>
-<p><b>以下为超管指令: </b></p>
-<p dir="auto">发送 <code>启用表情/禁用表情 [表情名]</code>, 如: <code>禁用表情 摸</code>、<code>启用表情 petpet 贴 爬</code></p>
-<p dir="auto">发送 <code>全局启用表情 [表情名]</code> 可将表情设为黑名单模式; </p>
-<p dir="auto">发送 <code>全局禁用表情 [表情名]</code> 可将表情设为白名单模式; </p>
+<p dir="auto"><b>注意：指令和信息之间需要空格!</b></p>
+<p dir="auto">发送 “表情包制作” 查看表情列表</p>
+<p dir="auto">发送 “表情详情 + 表情名/关键词” 查看 表情详细信息 和 表情预览</p>
+<p dir="auto">发送 “关键词 + 图片/文字” 制作表情</p>
+<p dir="auto">可使用 “自己”、“@某人” 获取指定用户的头像作为图片</p>
+<p dir="auto">可使用 “@ + 用户id” 指定任意用户获取头像，如 “摸 @114514”</p>
+<p dir="auto">可回复包含图片的消息作为图片输入</p>
+<p dir="auto">发送 “随机表情 + 图片/文字” 可随机制作表情</p>
+<p dir="auto">随机范围为 图片/文字 数量符合要求的表情</p>
+<p dir="auto"><b>超管指令：</b></p>
+<p dir="auto">群主 / 管理员 / 超级用户 可以启用或禁用某些表情包</p>
+<p dir="auto">发送 <code>启用表情/禁用表情 [表情名/表情关键词]</code>，如：<code>禁用表情 摸</code></p>
+<p dir="auto">超级用户 可以设置某个表情包的管控模式（黑名单/白名单）</p>
+<p dir="auto">发送 <code>全局启用表情 [表情名/表情关键词]</code> 可将表情设为黑名单模式；</p>
+<p dir="auto">发送 <code>全局禁用表情 [表情名/表情关键词]</code> 可将表情设为白名单模式；</p>
 </details>
 
 ## 2.**~~涩图~~** 二次元图片 [nonebot_plugin_setu4](https://github.com/Special-Week/nonebot_plugin_setu4)
@@ -1289,18 +1296,24 @@ httpcat + HTTP状态码
 </p></pre>
 </details>
 
-## 76.文字表情包制作 [nonebot-plugin-memes](https://github.com/noneplugin/nonebot-plugin-memes)
+## 76.文字表情包制作(已与头像表情包合并) [nonebot-plugin-memes](https://github.com/noneplugin/nonebot-plugin-memes)
 <details>
 <summary><b>指令: </summary></b>
-<p dir="auto">发送“文字表情包”显示下图的列表: </p>
-<div align="left" dir="auto">
-  <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/027c5cc19e141cec8d1144530d1c066f2114e7d4d50a9c58a5edb584abb9b2cc/68747470733a2f2f73322e6c6f6c692e6e65742f323032322f31312f32392f34393650414d6232354767547579712e6a7067" one-link-mark="yes"><img src="https://camo.githubusercontent.com/027c5cc19e141cec8d1144530d1c066f2114e7d4d50a9c58a5edb584abb9b2cc/68747470733a2f2f73322e6c6f6c692e6e65742f323032322f31312f32392f34393650414d6232354767547579712e6a7067" width="500" data-canonical-src="https://s2.loli.net/2022/11/29/496PAMb25GgTuyq.jpg" style="max-width: 100%;"></a>
-</div>
-<b>超管指令: </b>
-<p dir="auto">发送 <code>启用文字表情/禁用文字表情 [表情名]</code>, 如: <code>禁用文字表情 鲁迅说</code></p>
+<p dir="auto"><b>注意：指令和信息之间需要空格!</b></p>
+<p dir="auto">发送 “表情包制作” 查看表情列表</p>
+<p dir="auto">发送 “表情详情 + 表情名/关键词” 查看 表情详细信息 和 表情预览</p>
+<p dir="auto">发送 “关键词 + 图片/文字” 制作表情</p>
+<p dir="auto">可使用 “自己”、“@某人” 获取指定用户的头像作为图片</p>
+<p dir="auto">可使用 “@ + 用户id” 指定任意用户获取头像，如 “摸 @114514”</p>
+<p dir="auto">可回复包含图片的消息作为图片输入</p>
+<p dir="auto">发送 “随机表情 + 图片/文字” 可随机制作表情</p>
+<p dir="auto">随机范围为 图片/文字 数量符合要求的表情</p>
+<p dir="auto"><b>超管指令：</b></p>
+<p dir="auto">群主 / 管理员 / 超级用户 可以启用或禁用某些表情包</p>
+<p dir="auto">发送 <code>启用表情/禁用表情 [表情名/表情关键词]</code>，如：<code>禁用表情 摸</code></p>
 <p dir="auto">超级用户 可以设置某个表情包的管控模式（黑名单/白名单）</p>
-<p dir="auto">发送 <code>全局启用文字表情 [表情名]</code> 可将表情设为黑名单模式; </p>
-<p dir="auto">发送 <code>全局禁用文字表情 [表情名]</code> 可将表情设为白名单模式; </p>
+<p dir="auto">发送 <code>全局启用表情 [表情名/表情关键词]</code> 可将表情设为黑名单模式；</p>
+<p dir="auto">发送 <code>全局禁用表情 [表情名/表情关键词]</code> 可将表情设为白名单模式；</p>
 </details>
 
 ## 77.兽语译者 [nonebot_plugin_animalVoice](https://github.com/ANGJustinl/nonebot_plugin_animalVoice/)

@@ -5,12 +5,12 @@ from fastapi import Depends, FastAPI, Form, HTTPException, Response, UploadFile
 from pil_utils.types import ColorType, FontStyle, FontWeight
 from pydantic import BaseModel, ValidationError
 
-from meme_generator.config import meme_config
-from meme_generator.exception import MemeGeneratorException, NoSuchMeme
-from meme_generator.log import LOGGING_CONFIG, setup_logger
-from meme_generator.manager import get_meme, get_meme_keys, get_memes
-from meme_generator.meme import Meme, MemeArgsModel
-from meme_generator.utils import TextProperties, render_meme_list
+from .config import meme_config
+from .exception import MemeGeneratorException, NoSuchMeme
+from .log import LOGGING_CONFIG, setup_logger
+from .manager import get_meme, get_meme_keys, get_memes
+from .meme import Meme, MemeArgsModel
+from .utils import TextProperties, render_meme_list
 
 app = FastAPI()
 

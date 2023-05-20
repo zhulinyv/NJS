@@ -6,12 +6,12 @@ from typing import Any, Dict, List
 
 import filetype
 
-from meme_generator.app import run_server
-from meme_generator.config import meme_config
-from meme_generator.download import check_resources
-from meme_generator.exception import MemeGeneratorException, NoSuchMeme
-from meme_generator.log import setup_logger
-from meme_generator.manager import get_meme, get_memes
+from .app import run_server
+from .config import meme_config
+from .download import check_resources
+from .exception import MemeGeneratorException, NoSuchMeme
+from .log import setup_logger
+from .manager import get_meme, get_memes
 
 parser = ArgumentParser("meme")
 subparsers = parser.add_subparsers(dest="handle")

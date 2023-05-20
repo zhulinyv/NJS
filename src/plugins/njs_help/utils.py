@@ -9,6 +9,7 @@ help_reply_foot = """更详细内容: 《脑积水使用手册》
 备用: cnblogs.com/xytpz/p/NJS.html"""
 
 help_reply = {
+    "h1_r": "触发方式: “关键词 + 图片/文字”\n发送 “表情详情 + 关键词” 查看表情参数和预览\n目前支持的表情列表: ",
     "h2_r": "命令头: setu|色图|涩图|想色色|来份色色|来份色图|想涩涩|多来点|来点色图|来张setu|来张色图|来点色色|色色|涩涩  (任意一个)\n张数: 1 2 3 4 ... 张|个|份  (可不填, 默认1)\nr18: 不填则不会出现r18图片, 填了会根据r18模式管理中的数据判断是否可返回r18图片\n关键词: 任意 (可不填)\n获取插件帮助信息: \"setu_help\" | \"setu_帮助\" | \"色图_help\" | \"色图_帮助\"\n查询黑白名单: \"setu_roste\" | \"色图名单\"\n\n超管指令: \n白名单管理: setu_wl add / del\n黑名单管理: setu_ban add / del\nr18模式管理: setu_r18 on / off\ncd时间更新: setu_cd xxx\n撤回时间更新: setu_wd xxx\n最大张数更新: setu_mn xxx\n更换setu代理服务器: setu_proxy xxx\n更新涩图数据库: setu_db",
     "h3_r": "无赌注轮盘/自由轮盘: 开启群内随机ban人游戏\n拨动滚轮 重新装弹: 重置子弹的位置。\n开枪: 顾名思义, 开枪。\n\n超管指令: \n指令【管理员, 群主, 超管】: 开启自由轮盘 关闭自由轮盘\n指令【管理员, 群主, 超管】: @bot添加名单 代号 @name\n指令【管理员, 群主, 超管】: 禁言 代号/@name\n指令【管理员, 群主, 超管】: 解封 解封 代号/@name",
     "h4_r": "sx lsp; 缩写 lsp\nlsp可任意替换, 支持数字。",
@@ -77,6 +78,7 @@ help_reply = {
     "h73_r": "gscode / 兑换码",
     "h74_r": "签到\n我的好感",
     "h75_r": "ping  + 网址\nqrcode + 网址\nwhois + 网址\nhttpcat + HTTP状态码",
+    "h76_r": "触发方式: “关键词 + 图片/文字”\n发送 “表情详情 + 关键词” 查看表情参数和预览\n目前支持的表情列表: ",
     "h77_r": "[兽音加密]/[convert]\n[兽音解密]/[deconvert]\n[切噜一下]/[cherulize]\n[切噜～]/[decherulize]\n",
     "h78_r": ".aidraw loli,cute --ntags big breast --seed 114514\n\n指令使用shell解析输入的参数\nsquare为指定画幅, 支持简写为s, 其他画幅为portrait和landscape, 同样支持简写, 默认为portrait\nseed若省略则为自动生成\n词条使用英文, 使用逗号 (中英都行, 代码里有转换) 分割, 中文会自动机翻为英文, 不支持其他语种\n如果你不想用.aidraw, 可以用 绘画 、 咏唱 或 召唤 代替。\n在消息中添加图片或者回复带有图片的消息自动切换为以图生图模式\n\n.aidraw on/off\n启动/关闭本群的aidraw\n\n.anlas check\n查看自己拥有的点数\n\n.anlas\n查看帮助\n\n.anlas [数字] @[某人]\n将自己的点数分给别人(superuser点数无限)\n\n.tagget [图片]\n获取图片的TAG\n如果你不想用.tagget, 可以用 鉴赏 或 查书 代替。\n\n详细指令: https://nb.novelai.dev/main/aidraw.html#%E6%8C%87%E4%BB%A4%E5%BC%80%E5%A4%B4",
     "h79_r": "对联 <上联内容> (数量)\n· 数量可选, 默认为1",

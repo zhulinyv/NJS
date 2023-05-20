@@ -5,15 +5,15 @@ from io import BytesIO
 from itertools import chain
 from typing import Any, Dict, List, NoReturn, Type, Union
 
-from .meme_generator.exception import (
+from meme_generator.exception import (
     ArgMismatch,
     ArgParserExit,
     MemeGeneratorException,
     TextOrNameNotEnough,
     TextOverLength,
 )
-from .meme_generator.meme import Meme, MemeParamsType
-from .meme_generator.utils import TextProperties, render_meme_list
+from meme_generator.meme import Meme, MemeParamsType
+from meme_generator.utils import TextProperties, render_meme_list
 from nonebot import on_command, on_message, require
 from nonebot.adapters.onebot.v11 import Bot as V11Bot
 from nonebot.adapters.onebot.v11 import GroupMessageEvent as V11GMEvent

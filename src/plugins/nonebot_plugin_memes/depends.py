@@ -1,6 +1,6 @@
 from typing import List
 
-from .meme_generator.meme import Meme
+from meme_generator.meme import Meme
 from nonebot.adapters.onebot.v11 import Bot as V11Bot
 from nonebot.adapters.onebot.v11 import Message as V11Msg
 from nonebot.adapters.onebot.v11 import MessageEvent as V11MEvent

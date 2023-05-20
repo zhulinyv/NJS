@@ -4,8 +4,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import yaml
-from .meme_generator.manager import get_memes
-from .meme_generator.meme import Meme
+from meme_generator.manager import get_memes
+from meme_generator.meme import Meme
 from nonebot.log import logger
 from nonebot_plugin_localstore import get_config_file
 from pydantic import BaseModel

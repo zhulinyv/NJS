@@ -3,7 +3,7 @@ import shlex
 from typing import List
 
 import httpx
-from .meme_generator.meme import Meme
+from meme_generator.meme import Meme
 from nonebot.log import logger
 
 from .config import memes_config
@@ -71,7 +71,7 @@ def meme_info(meme: Meme) -> str:
 
 
 if memes_config.memes_check_resources_on_startup:
-    from .meme_generator.download import check_resources
+    from meme_generator.download import check_resources
     from nonebot import get_driver
 
     driver = get_driver()

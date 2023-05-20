@@ -42,7 +42,7 @@ Mako==1.2.4
 matplotlib==3.6.2
 meme-generator==0.0.11
 nb-cli==1.1.2
-nonebot-adapter-onebot==2.2.0
+nonebot-adapter-onebot==2.2.3
 nonebot-plugin-apscheduler==0.2.0
 nonebot-plugin-chatrecorder==0.2.3
 nonebot-plugin-datastore==0.6.2
@@ -50,7 +50,7 @@ nonebot-plugin-gocqhttp==0.6.10
 nonebot-plugin-guild-patch==0.2.2
 nonebot-plugin-htmlrender==0.2.0.1
 nonebot-plugin-imageutils==0.1.13.4
-nonebot-plugin-localstore==0.2.0
+nonebot-plugin-localstore==0.4.1
 nonebot2==2.0.0rc2
 numpy==1.23.4
 openai==0.27.0

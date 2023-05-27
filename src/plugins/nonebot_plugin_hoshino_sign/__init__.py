@@ -77,9 +77,13 @@ async def _(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMessageEve
     try:
         async with httpx.AsyncClient() as client:
             response = await client.get("https://api.vvhan.com/api/ian")
-            response_text = response.text
+            status_code = response.status_code
+            if status_code == 200:
+                response_text = response.text
+            else:
+                response_text = f"今日一言: 请求错误: {status_code}"
     except Exception as error:
-        response_text = error
+        logger.warning(error)
 
     # 读写数据
     with open(GOODWILL_PATH + "goodwill.json", "r", encoding="utf-8") as f:

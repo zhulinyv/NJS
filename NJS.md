@@ -1357,7 +1357,7 @@ httpcat + HTTP状态码
 </table>
 </details>
 
-## 78.AI画图(使用本地SDWebUI) [nonebot-plugin-novelai](https://github.com/sena-nana/nonebot-plugin-novelai)
+## 78.AI画图(使用本地SDWebUI) [https://github.com/DiaoDaiaChan/nonebot-plugin-stable-diffusion-diao](https://github.com/DiaoDaiaChan/nonebot-plugin-stable-diffusion-diao)
 <details>
 <summary><b>指令: </summary></b>
 <p dir="auto">.aidraw loli,cute --ntags big breast --seed 114514</p>

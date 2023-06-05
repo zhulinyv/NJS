@@ -1,14 +1,26 @@
+
+from nonebot.adapters.onebot.v11 import Event, Message, GroupUploadNoticeEvent, GroupDecreaseNoticeEvent, GroupAdminNoticeEvent
 from nonebot.plugin import on_notice
-from nonebot.adapters.onebot.v11 import Event, Message, GroupUploadNoticeEvent, \
-    GroupDecreaseNoticeEvent, GroupAdminNoticeEvent
 from nonebot.rule import Rule
+from nonebot import get_bot
+import nonebot
+
 from datetime import datetime
 
 
-# 机器人QQ号
-bot_qq = 1255891784
-# 开发者QQ号
-super_qq = [1797213784]
+try:
+    super_qq: str = list(nonebot.get_driver().config.superusers)[0]
+except:
+    super_qq: str = "123456789"
+try:
+    notice: list = nonebot.get_driver().config.notice
+except:
+    notice: list = []
+try:
+    bot = get_bot()
+    bot_qq = int(bot.self_id)
+except:
+    bot_qq = 1255891784
 
 
 # 群成员减少
@@ -60,9 +72,9 @@ def admin_change(sub_type, user_id):
     return admin_msg
 
 def del_user_bey(add_time, user_id):
-    global groups_all, del_user_msg
+    global del_user_msg
     del_time = datetime.fromtimestamp(add_time)
-    if user_id in super_qq:
+    if user_id in int(super_qq):
         del_user_msg = f"<{del_time}>@{user_id}主人离开啦，好伤心~"
     else:
         del_user_msg = f"<{del_time}>QQ号为：{user_id}的小可爱离开了我们，天下没有不散的筵席，有缘再见吖~" \

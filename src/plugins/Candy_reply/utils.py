@@ -1,3 +1,12 @@
+import nonebot
+
+try:
+    candy_reply: list = nonebot.get_driver().config.candy_reply
+except:
+    candy_reply: list = []
+
+
+
 candy_reply = [
     "你这糖……没毒叭？！",
     "快给我，人家要吃！",

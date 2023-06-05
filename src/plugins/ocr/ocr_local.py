@@ -1,4 +1,9 @@
-import easyocr
+from nonebot.log import logger
+
+try:
+    import easyocr
+except ImportError:
+    logger.warning("未能成功导入easyocr")
 
 def ocr_local():
     reader = easyocr.Reader(['ch_sim','en'], gpu=True)

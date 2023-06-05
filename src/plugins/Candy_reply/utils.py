@@ -1,9 +1,9 @@
 import nonebot
 
 try:
-    candy_reply: list = nonebot.get_driver().config.candy_reply
+    candy_group: list = nonebot.get_driver().config.candy_reply
 except:
-    candy_reply: list = []
+    candy_group: list = []
 
 
 

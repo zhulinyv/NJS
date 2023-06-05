@@ -31,7 +31,7 @@ async def candy_handle(event: Union[GroupMessageEvent, GuildMessageEvent, Privat
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         if face_ids.count('147') == 1:
             await candy.finish(Message("一根棒棒糖也想骗走人家？不可能！"))
         elif face_ids.count('147') <= 3:
@@ -52,7 +52,7 @@ async def hj_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMe
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await hj.finish(Message(f"没事别老发滑稽") + MessageSegment.face(178))
 
 # 狗头
@@ -70,7 +70,7 @@ async def gt_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMe
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await gt.finish(f"手动狗头 x {num} " + Message(MessageSegment.face(277)))
 
 # 微笑
@@ -86,7 +86,7 @@ async def wx_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMe
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await wx.finish(f"{random.choice(wx_reply)}")
 
 # 笑哭
@@ -102,7 +102,7 @@ async def xk_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMe
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await xk.finish("有什么好笑的，说来听听U•ェ•U")
 
 # 大哭
@@ -118,7 +118,7 @@ async def dk_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMe
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await dk.finish(f"{random.choice(dk_reply)}", at_sender=True)
 
 # 委屈
@@ -134,7 +134,7 @@ async def dk_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMe
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await wq.finish(f"{random.choice(dk_reply)}", at_sender=True)
 
 # 捂脸
@@ -150,7 +150,7 @@ async def wl_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMe
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await wl.finish(f"{random.choice(dk_reply)}", at_sender=True)
 
 # 傲娇
@@ -166,7 +166,7 @@ async def aj_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMe
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await aj.finish(f"{random.choice(aj_reply)}")
 
 # 右亲亲
@@ -182,7 +182,7 @@ async def yqq_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateM
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await yqq.finish(MessageSegment.face(109))
 
 # 左亲亲
@@ -198,7 +198,7 @@ async def zqq_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateM
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await zqq.finish(MessageSegment.face(305))
 
 # 爱心
@@ -214,7 +214,7 @@ async def ah_handle(event: Union[GroupMessageEvent, GuildMessageEvent, PrivateMe
         gid = event.guild_id
     elif isinstance(event, PrivateMessageEvent):
         gid = uid
-    if gid in candy_reply:
+    if gid in candy_group:
         await ax.finish(f"{random.choice(ax_r)}")
 
 

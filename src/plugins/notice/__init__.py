@@ -16,11 +16,7 @@ try:
     notice: list = nonebot.get_driver().config.notice
 except:
     notice: list = []
-try:
-    bot = get_bot()
-    bot_qq = int(bot.self_id)
-except:
-    bot_qq = 1255891784
+
 
 
 # 群成员减少
@@ -59,6 +55,11 @@ async def handle_first_receive(event: GroupUploadNoticeEvent):
 
 def admin_change(sub_type, user_id):
     admin_msg = ""
+    try:
+        bot = get_bot()
+        bot_qq = int(bot.self_id)
+    except:
+        bot_qq = 123456798
     if sub_type == "set":
         if user_id == bot_qq:
             admin_msg = f"芜湖，脑积水以后也是管理了~"

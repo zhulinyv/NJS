@@ -60,7 +60,7 @@ peewee==3.15.3
 pil-utils==0.1.7
 playwright==1.27.1
 psutil==5.9.4
-pydantic==1.10.2
+pydantic==1.10.5
 PyJWT==2.6.0
 pymongo==4.3.2
 pypinyin==0.47.1

@@ -74,7 +74,7 @@ peewee = "3.15.3"
 pil-utils = "0.1.7"
 playwright = "1.27.1"
 psutil = "5.9.4"
-pydantic = "1.10.2"
+pydantic = "1.10.5"
 pyjwt = "2.6.0"
 pymongo = "4.3.2"
 pypinyin = "0.47.1"
@@ -99,6 +99,7 @@ ujson = "5.5.0"
 urllib3 = "1.26.12"
 win32-setctime = "1.1.0"
 wordcloud = "1.8.2.2"
+nonebot-plugin-send-anything-anywhere = "^0.2.4"
 
 [tool.nonebot]
 plugins = ["nonebot_plugin_gocqhttp", "nonebot_plugin_guild_patch"]

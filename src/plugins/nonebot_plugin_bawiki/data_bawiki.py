@@ -1,7 +1,7 @@
 import asyncio
 import datetime
 from io import BytesIO
-from typing import Any, Dict, List, TypedDict
+from typing import Any, Dict, List, Literal, Optional, TypedDict, cast, overload
 
 from nonebot.adapters.onebot.v11 import MessageSegment
 from pil_utils import BuildImage
@@ -17,8 +17,18 @@ class MangaDict(TypedDict):
     pics: List[str]
 
 
-async def db_get(suffix, raw=False):
-    return await async_req(f"{config.ba_bawiki_db_url}{suffix}", raw=raw)
+@overload
+async def db_get(suffix: str, raw: Literal[False] = False) -> Any:
+    ...
+
+
+@overload
+async def db_get(suffix: str, raw: Literal[True] = True) -> bytes:
+    ...
+
+
+async def db_get(suffix: str, raw=False):
+    return await async_req(f"{config.ba_bawiki_db_url}{suffix}", raw=raw)  # type: ignore
 
 
 async def db_get_wiki_data() -> Dict[str, Any]:
@@ -95,7 +105,7 @@ async def db_wiki_raid(raid_id, servers=None, is_wiki=False, terrain=None):
     terrain_raid = None
     if terrain:
         if t := boss["terrains"].get(
-            recover_alia(terrain, await db_get_terrain_alias())
+            recover_alia(terrain, await db_get_terrain_alias()),
         ):
             terrain_raid = t
         else:
@@ -107,10 +117,7 @@ async def db_wiki_raid(raid_id, servers=None, is_wiki=False, terrain=None):
             return "该总力战Boss暂无机制介绍"
         img.append(wiki_url)
     else:
-        if terrain_raid:
-            img_ = [terrain_raid]
-        else:
-            img_ = list(boss["terrains"].values())
+        img_ = [terrain_raid] if terrain_raid else list(boss["terrains"].values())
         for i in img_:
             for s in servers:
                 img.append(i[s])
@@ -140,7 +147,7 @@ async def db_wiki_time_atk(raid_id):
         return f"没有找到该综合战术考试（目前共有{len(wiki)}个综合战术考试）"
     raid_id -= 1
 
-    return MessageSegment.image(await db_get(wiki[raid_id], True))
+    return MessageSegment.image(await db_get(wiki[raid_id], True))  # type: ignore
 
 
 async def db_wiki_craft():
@@ -159,9 +166,13 @@ async def db_wiki_furniture():
     ]
 
 
-async def db_global_future(date: datetime.datetime = None, num=1, all_img=False):
+async def db_global_future(
+    date: Optional[datetime.datetime] = None,
+    num=1,
+    all_img=False,
+):
     data = (await db_get_wiki_data())["global_future"]
-    img = await db_get(data["img"], True)
+    img = cast(bytes, await db_get(data["img"], True))
 
     if all_img:
         return MessageSegment.image(img)

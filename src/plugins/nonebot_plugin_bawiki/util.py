@@ -1,7 +1,17 @@
 import datetime
 import json
 from copy import deepcopy
-from typing import Dict, Iterator, List, TypeVar, Union
+from typing import (
+    Any,
+    Dict,
+    Iterable,
+    List,
+    Literal,
+    Optional,
+    TypeVar,
+    Union,
+    overload,
+)
 
 from aiohttp import ClientSession
 from nonebot.adapters.onebot.v11 import Message
@@ -14,7 +24,78 @@ _T = TypeVar("_T")
 req_cache = {}
 
 
-def format_timestamp(t):
+@overload
+async def async_req(
+    url,
+    *,
+    is_json: Literal[True] = True,
+    raw: Literal[False] = False,
+    ignore_cache=False,
+    proxy=config.ba_proxy,
+    method="GET",
+    session: Optional[ClientSession] = None,
+    **kwargs,
+) -> Union[Dict[str, Any], list]:
+    ...
+
+
+@overload
+async def async_req(
+    url,
+    *,
+    is_json: Literal[False] = False,
+    raw: Literal[True] = True,
+    ignore_cache=False,
+    proxy=config.ba_proxy,
+    method="GET",
+    session: Optional[ClientSession] = None,
+    **kwargs,
+) -> bytes:
+    ...
+
+
+@overload
+async def async_req(
+    url,
+    *,
+    is_json: Literal[False] = False,
+    raw: Literal[False] = False,
+    ignore_cache=False,
+    proxy=config.ba_proxy,
+    method="GET",
+    session: Optional[ClientSession] = None,
+    **kwargs,
+) -> str:
+    ...
+
+
+async def async_req(
+    url,
+    is_json=True,
+    raw=False,
+    ignore_cache=False,
+    proxy=config.ba_proxy,
+    method="GET",
+    session: Optional[ClientSession] = None,
+    **kwargs,
+):
+    if (not ignore_cache) and (c := req_cache.get(url)):
+        return c
+
+    async with (session or ClientSession()) as c:
+        async with c.request(method, url, **kwargs, proxy=proxy) as r:
+            ret = (await r.read()) if raw else (await r.text())
+            if is_json and (not raw):
+                ret = json.loads(ret)
+            req_cache[url] = ret
+            return ret
+
+
+def clear_req_cache():
+    req_cache.clear()
+
+
+def format_timestamp(t: int):
     return datetime.datetime.fromtimestamp(t).strftime("%Y-%m-%d %H:%M:%S")
 
 
@@ -30,7 +111,7 @@ def recover_alia(origin: str, alia_dict: Dict[str, List[str]]):
     # 没找到，模糊匹配
     origin_ = origin.replace(" ", "")
     for k, li in alia_dict.items():
-        li = [x.replace(" ", "") for x in ([k] + li)]
+        li = [x.replace(" ", "") for x in ([k, *li])]
         for v in li:
             if origin_ in v:
                 return k
@@ -51,50 +132,23 @@ def img_invert_rgba(im: Image.Image):
     rgb_image = Image.merge("RGB", (r, g, b))
     inverted_image = ImageOps.invert(rgb_image)
     r2, g2, b2 = inverted_image.split()
-    final_transparent_image = Image.merge("RGBA", (r2, g2, b2, a))
-    return final_transparent_image
-
-
-async def async_req(
-    url,
-    is_json=True,
-    raw=False,
-    ignore_cache=False,
-    proxy=config.ba_proxy,
-    method="GET",
-    session: ClientSession = None,
-    **kwargs,
-) -> Union[str, bytes, dict, list]:
-    if (not ignore_cache) and (c := req_cache.get(url)):
-        return c
-
-    async with (session or ClientSession()) as c:
-        async with c.request(method, url, **kwargs, proxy=proxy) as r:
-            ret = (await r.read()) if raw else (await r.text())
-            if is_json and (not raw):
-                ret = json.loads(ret)
-            req_cache[url] = ret
-            return ret
-
-
-def clear_req_cache():
-    req_cache.clear()
+    return Image.merge("RGBA", (r2, g2, b2, a))
 
 
 def replace_brackets(original: str):
     return original.replace("（", "(").replace("）", "(")
 
 
-def splice_msg(msgs):
+def splice_msg(msgs: list) -> Message:
     im = Message()
     for i, v in enumerate(msgs):
-        if isinstance(v, str) and (not i == 0):
+        if isinstance(v, str) and (i != 0):
             v = f"\n{v}"
         im += v
     return im
 
 
-def split_list(li: Iterator[_T], length: int) -> List[List[_T]]:
+def split_list(li: Iterable[_T], length: int) -> List[List[_T]]:
     latest = []
     tmp = []
     for n, i in enumerate(li):

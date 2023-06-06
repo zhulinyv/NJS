@@ -10,6 +10,7 @@ from typing import Dict, List, Optional
 from nonebot import on_command, on_shell_command
 from nonebot.adapters.onebot.v11 import (
     ActionFailed,
+    GroupMessageEvent,
     Message,
     MessageEvent,
     MessageSegment,
@@ -62,7 +63,7 @@ from .data_schaledb import (
     schale_get_stu_dict,
     schale_get_stu_info,
 )
-from .gacha import gacha
+from .gacha import gacha, get_gacha_cool_down, set_gacha_cool_down
 from .util import async_req, clear_req_cache, recover_alia, splice_msg
 
 
@@ -114,7 +115,7 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
                     for x in (
                         await asyncio.gather(*[schale_calender(x) for x in servers])
                     )
-                ]
+                ],
             )
             await matcher.finish()
         else:
@@ -123,7 +124,7 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
         raise
     except:
         logger.exception("绘制日程表图片出错")
-        return await matcher.finish("绘制日程表图片出错，请检查后台输出")
+        await matcher.finish("绘制日程表图片出错，请检查后台输出")
 
 
 async def send_wiki_page(sid, matcher: Matcher):
@@ -134,7 +135,7 @@ async def send_wiki_page(sid, matcher: Matcher):
         img = await game_kee_get_page(url)
     except:
         logger.exception(f"截取wiki页面出错 {url}")
-        return await matcher.finish("截取页面出错，请检查后台输出")
+        await matcher.finish("截取页面出错，请检查后台输出")
 
     await matcher.finish(MessageSegment.image(img))
 
@@ -146,19 +147,19 @@ stu_schale = on_command("ba学生图鉴")
 async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
     arg = cmd_arg.extract_plain_text().strip()
     if not arg:
-        return await matcher.finish("请提供学生名称")
+        await matcher.finish("请提供学生名称")
 
     try:
         ret = await schale_get_stu_dict()
     except:
         logger.exception("获取学生列表出错")
-        return await matcher.finish("获取学生列表表出错，请检查后台输出")
+        await matcher.finish("获取学生列表表出错，请检查后台输出")
 
     if not ret:
-        return await matcher.finish("没有获取到学生列表数据")
+        await matcher.finish("没有获取到学生列表数据")
 
     if not (data := ret.get(await recover_stu_alia(arg))):
-        return await matcher.finish("未找到该学生")
+        await matcher.finish("未找到该学生")
 
     stu_name = data["PathName"]
     await matcher.send(f"请稍等，正在截取SchaleDB页面～\n{config.ba_schale_url}?chara={stu_name}")
@@ -167,7 +168,7 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
         img = MessageSegment.image(await schale_get_stu_info(stu_name))
     except:
         logger.exception(f"截取schale db页面出错 chara={stu_name}")
-        return await matcher.finish("截取页面出错，请检查后台输出")
+        await matcher.finish("截取页面出错，请检查后台输出")
 
     await matcher.finish(img)
 
@@ -179,7 +180,7 @@ stu_rank = on_command("ba学生评价", aliases={"ba角评"})
 async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
     arg = cmd_arg.extract_plain_text().strip()
     if not arg:
-        return await matcher.finish("请提供学生名称")
+        await matcher.finish("请提供学生名称")
 
     if arg == "总览" or arg == "全部" or arg.lower() == "all":
         arg = "all"
@@ -190,7 +191,7 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
         im = await db_wiki_stu(arg)
     except:
         logger.exception("获取角评出错")
-        return await matcher.finish("获取角评出错，请检查后台输出")
+        await matcher.finish("获取角评出错，请检查后台输出")
 
     await matcher.finish(im)
 
@@ -202,19 +203,19 @@ stu_wiki = on_command("ba学生wiki", aliases={"ba学生Wiki", "ba学生WIKI"})
 async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
     arg = cmd_arg.extract_plain_text().strip()
     if not arg:
-        return await matcher.finish("请提供学生名称")
+        await matcher.finish("请提供学生名称")
 
     try:
         ret = await game_kee_get_stu_cid_li()
     except:
         logger.exception("获取学生列表出错")
-        return await matcher.finish("获取学生列表出错，请检查后台输出")
+        await matcher.finish("获取学生列表出错，请检查后台输出")
 
     if not ret:
-        return await matcher.finish("没有获取到学生列表数据")
+        await matcher.finish("没有获取到学生列表数据")
 
     if not (sid := ret.get(await recover_stu_alia(arg, True))):
-        return await matcher.finish("未找到该学生")
+        await matcher.finish("未找到该学生")
 
     await send_wiki_page(sid, matcher)
 
@@ -226,29 +227,29 @@ fav = on_command("ba好感度", aliases={"ba羁绊", "bal2d", "baL2D", "balive2d
 async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
     async def get_l2d(stu_name):
         if r := (await db_get_extra_l2d_list()).get(stu_name):
-            return f"{config.ba_bawiki_db_url}{r}"
+            return [f"{config.ba_bawiki_db_url}{x}" for x in r]
 
         return await game_kee_grab_l2d((await game_kee_get_stu_cid_li()).get(stu_name))
 
     arg = cmd_arg.extract_plain_text().strip()
     if not arg:
-        return await matcher.finish("请提供学生名称或所需的羁绊等级")
+        await matcher.finish("请提供学生名称或所需的羁绊等级")
 
     # 好感度等级
     if arg.isdigit():
         arg = int(arg)
         if arg > 9:
-            return await matcher.finish("学生解锁L2D最高只需要羁绊等级9")
+            await matcher.finish("学生解锁L2D最高只需要羁绊等级9")
         if arg < 1:
-            return await matcher.finish("学生解锁L2D最低只需要羁绊等级1")
+            await matcher.finish("学生解锁L2D最低只需要羁绊等级1")
 
         try:
             p = await draw_fav_li(arg)
         except:
             logger.exception("绘制图片出错")
-            return await matcher.finish("绘制图片出错，请检查后台输出")
+            await matcher.finish("绘制图片出错，请检查后台输出")
 
-        return await matcher.finish(p)
+        await matcher.finish(p)
 
     # 学生名称
     arg = await recover_stu_alia(arg)
@@ -257,11 +258,11 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
         ret = await schale_get_stu_dict()
     except:
         logger.exception("获取学生列表出错")
-        return await matcher.finish("获取学生列表表出错，请检查后台输出")
+        await matcher.finish("获取学生列表表出错，请检查后台输出")
 
     if stu := ret.get(arg):
         if not (lvl := stu["MemoryLobby"]):
-            return await matcher.finish("该学生没有L2D")
+            await matcher.finish("该学生没有L2D")
 
         im = MessageSegment.text(f'{stu["Name"]} 在羁绊等级 {lvl[0]} 时即可解锁L2D\nL2D预览：')
         if p := await get_l2d(await schale_to_gamekee(arg)):
@@ -273,14 +274,17 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
                 "- GameKee页面爬取不到角色L2D图片\n"
                 "- GameKee和插件没有收录该学生的L2D\n"
             )
-        return await matcher.finish(im)
+        await matcher.finish(im)
 
-    return await matcher.finish("未找到学生")
+    await matcher.finish("未找到学生")
 
 
 raid_wiki_parser = ArgumentParser("ba总力战")
 raid_wiki_parser.add_argument(
-    "name", nargs="?", default=None, help="总力战Boss名称，不指定默认取当前服务器总力战Boss"
+    "name",
+    nargs="?",
+    default=None,
+    help="总力战Boss名称，不指定默认取当前服务器总力战Boss",
 )
 raid_wiki_parser.add_argument(
     "-s",
@@ -291,7 +295,10 @@ raid_wiki_parser.add_argument(
 )
 raid_wiki_parser.add_argument("-t", "--terrain", help="指定总力战环境，不指定默认全选，不带Boss名称该参数无效")
 raid_wiki_parser.add_argument(
-    "-w", "--wiki", action="store_true", help="发送该总力战Boss的技能机制而不是配队推荐"
+    "-w",
+    "--wiki",
+    action="store_true",
+    help="发送该总力战Boss的技能机制而不是配队推荐",
 )
 
 raid_wiki = on_shell_command("ba总力战", parser=raid_wiki_parser)
@@ -327,14 +334,14 @@ async def _(matcher: Matcher, args: Namespace = ShellCommandArgs()):
                 raid = common["regions"][s]["current_raid"]
                 if (r := find_current_event(raid)) and (raid := r[0]["raid"]) < 1000:
                     tasks.append(
-                        db_wiki_raid(raid, [s], args.wiki, r[0].get("terrain"))
+                        db_wiki_raid(raid, [s], args.wiki, r[0].get("terrain")),
                     )
         except:
             logger.exception("获取当前总力战失败")
-            return await matcher.finish("获取当前总力战失败")
+            await matcher.finish("获取当前总力战失败")
 
         if not tasks:
-            return await matcher.finish("目前服务器没有正在进行的总力战，请手动指定")
+            await matcher.finish("目前服务器没有正在进行的总力战，请手动指定")
     else:
         tasks.append(
             db_wiki_raid(
@@ -346,14 +353,14 @@ async def _(matcher: Matcher, args: Namespace = ShellCommandArgs()):
                     if args.terrain
                     else None
                 ),
-            )
+            ),
         )
 
     try:
         ret = await asyncio.gather(*tasks)
     except:
         logger.exception("获取总力战wiki失败")
-        return await matcher.finish("获取图片失败，请检查后台输出")
+        await matcher.finish("获取图片失败，请检查后台输出")
 
     await matcher.finish(splice_msg(ret))
 
@@ -366,9 +373,9 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
     arg = cmd_arg.extract_plain_text().lower().strip()
 
     server = []
-    if arg.startswith("日") or arg.startswith("j") or (not arg):
+    if arg.startswith(("日", "j")) or not arg:
         server.append(0)
-    if arg.startswith("国") or arg.startswith("g") or (not arg):
+    if arg.startswith(("国", "g")) or not arg:
         server.append(1)
 
     events = []
@@ -381,7 +388,7 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
                     events.append((e[0]["event"]) % 10000)
         except:
             logger.exception("获取当前活动失败")
-            return await matcher.finish("获取当前活动失败")
+            await matcher.finish("获取当前活动失败")
 
         if not events:
             await matcher.finish("当前服务器没有正在进行的活动")
@@ -393,7 +400,7 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
         ret = await asyncio.gather(*[db_wiki_event(x) for x in events])
     except:
         logger.exception("获取活动wiki出错")
-        return await matcher.finish("获取图片出错，请检查后台输出")
+        await matcher.finish("获取图片出错，请检查后台输出")
 
     await matcher.finish(splice_msg(ret))
 
@@ -406,9 +413,9 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
     arg = cmd_arg.extract_plain_text().lower().strip()
 
     server = []
-    if arg.startswith("日") or arg.startswith("j") or (not arg):
+    if arg.startswith(("日", "j")) or not arg:
         server.append(0)
-    if arg.startswith("国") or arg.startswith("g") or (not arg):
+    if arg.startswith(("国", "g")) or not arg:
         server.append(1)
 
     events = []
@@ -421,7 +428,7 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
                     events.append(raid)
         except:
             logger.exception("获取当前综合战术考试失败")
-            return await matcher.finish("获取当前综合战术考试失败")
+            await matcher.finish("获取当前综合战术考试失败")
 
         if not events:
             await matcher.finish("当前服务器没有正在进行的综合战术考试")
@@ -435,7 +442,7 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
         ret = await asyncio.gather(*[db_wiki_time_atk(x) for x in events])
     except:
         logger.exception("获取综合战术考试wiki出错")
-        return await matcher.finish("获取图片出错，请检查后台输出")
+        await matcher.finish("获取图片出错，请检查后台输出")
 
     await matcher.finish(splice_msg(ret))
 
@@ -449,9 +456,9 @@ async def _(matcher: Matcher):
         im = await db_wiki_craft()
     except:
         logger.exception("获取合成wiki图片错误")
-        return await matcher.finish("获取图片失败，请检查后台输出")
+        await matcher.finish("获取图片失败，请检查后台输出")
 
-    await matcher.finish(im)
+    await matcher.finish(Message(im))
 
 
 global_future = on_command("ba国际服千里眼", aliases={"ba千里眼", "ba国际服前瞻", "ba前瞻"})
@@ -488,17 +495,19 @@ async def _(matcher: Matcher, arg: Message = CommandArg()):
         date = parsed_date
         if date.year == 1900:
             now = datetime.datetime.now().replace(
-                hour=0, minute=0, second=0, microsecond=0
+                hour=0,
+                minute=0,
+                second=0,
+                microsecond=0,
             )
             date = date.replace(year=now.year)
             if date < now:
                 date = date.replace(year=now.year + 1)
 
-    if isinstance(num, str):
-        if (not num.isdigit()) or (num := int(num)) < 1:
-            await matcher.finish("前瞻项目数量格式不正确！")
+    if isinstance(num, str) and ((not num.isdigit()) or (num := int(num)) < 1):
+        await matcher.finish("前瞻项目数量格式不正确！")
 
-    await matcher.finish(await db_global_future(date, num))
+    await matcher.finish(await db_global_future(date or None, num))
 
 
 furniture_wiki = on_command("ba互动家具")
@@ -510,9 +519,9 @@ async def _(matcher: Matcher):
         im = await db_wiki_furniture()
     except:
         logger.exception("获取互动家具wiki图片错误")
-        return await matcher.finish("获取图片失败，请检查后台输出")
+        await matcher.finish("获取图片失败，请检查后台输出")
 
-    await matcher.finish(im)
+    await matcher.finish(Message(im))
 
 
 voice = on_command("ba语音")
@@ -522,7 +531,7 @@ voice = on_command("ba语音")
 async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
     arg = cmd_arg.extract_plain_text().strip()
     if not arg:
-        return await matcher.finish("请提供学生名称")
+        await matcher.finish("请提供学生名称")
 
     arg = arg.split()
     arg_len = len(arg)
@@ -533,20 +542,20 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
         ret = await game_kee_get_stu_cid_li()
     except:
         logger.exception("获取学生列表出错")
-        return await matcher.finish("获取学生列表出错，请检查后台输出")
+        await matcher.finish("获取学生列表出错，请检查后台输出")
 
     if not ret:
-        return await matcher.finish("没有获取到学生列表数据")
+        await matcher.finish("没有获取到学生列表数据")
 
     try:
         org_stu_name = await recover_stu_alia(name, True)
         stu_name = await schale_to_gamekee(org_stu_name)
     except:
         logger.exception("还原学生别名失败")
-        return await matcher.finish("还原学生别名失败，请检查后台输出")
+        await matcher.finish("还原学生别名失败，请检查后台输出")
 
     if not (sid := ret.get(stu_name)):
-        return await matcher.finish("未找到该学生")
+        await matcher.finish("未找到该学生")
 
     voices = await game_kee_get_voice(sid)
     if v_type:
@@ -568,12 +577,14 @@ async def _(matcher: Matcher, cmd_arg: Message = CommandArg()):
 
 def get_1st_pool(data: dict) -> Optional[GachaPool]:
     if not data:
-        return
+        return None
 
     pool_data = data["current_pools"]
+    if not pool_data:
+        return None
+
     pool = pool_data[0]
-    pool_obj = GachaPool(name=pool["name"], pool=pool["pool"], index=0)
-    return pool_obj
+    return GachaPool(name=pool["name"], pool=pool["pool"], index=0)
 
 
 change_pool = on_command("ba切换卡池")
@@ -594,7 +605,7 @@ async def _(matcher: Matcher, event: MessageEvent, cmd_arg: Message = CommandArg
                 stu_alias = await db_get_stu_alias()
             except:
                 logger.exception("获取学生列表或别名失败")
-                return await matcher.finish("获取学生列表或别名失败，请检查后台输出")
+                await matcher.finish("获取学生列表或别名失败，请检查后台输出")
 
             for i in arg.split():
                 if not (stu := stu_li.get(recover_alia(i, stu_alias))):
@@ -613,13 +624,14 @@ async def _(matcher: Matcher, event: MessageEvent, cmd_arg: Message = CommandArg
             gacha_data = await db_get_gacha_data()
         except:
             logger.exception("获取抽卡基本数据失败")
-            return await matcher.finish("获取抽卡基本数据失败，请检查后台输出")
+            await matcher.finish("获取抽卡基本数据失败，请检查后台输出")
 
         pool_data = gacha_data["current_pools"]
-        if not pool_data:
+        first_pool = get_1st_pool(gacha_data)
+        if not first_pool:
             await matcher.finish("当前没有可切换的卡池")
 
-        pool_obj = gacha_pool_index.get(qq) or get_1st_pool(gacha_data)
+        pool_obj = gacha_pool_index.get(qq) or first_pool
         if not pool_obj:
             await matcher.finish("当前没有UP池可供切换")
 
@@ -642,21 +654,28 @@ gacha_once = on_command("ba抽卡")
 
 @gacha_once.handle()
 async def _(matcher: Matcher, event: MessageEvent, cmd_arg: Message = CommandArg()):
+    user_id = event.user_id
+    group_id = event.group_id if isinstance(event, GroupMessageEvent) else None
+
+    if cool_down := get_gacha_cool_down(user_id, group_id):
+        await matcher.finish(f"你先别急，先等 {cool_down} 秒再来抽吧qwq")
+
+    set_gacha_cool_down(user_id, group_id)
+
     arg = cmd_arg.extract_plain_text().strip().lower()
 
     gacha_times = 10
-    if arg:
-        if (not arg.isdigit()) or (not (1 <= (gacha_times := int(arg)) <= 90)):
-            await matcher.finish("请输入有效的抽卡次数，在1~90之间")
+    if arg and ((not arg.isdigit()) or (not (1 <= (gacha_times := int(arg)) <= 90))):
+        await matcher.finish("请输入有效的抽卡次数，在1~90之间")
 
     try:
         gacha_data = await db_get_gacha_data()
     except:
         logger.exception("获取抽卡基本数据失败")
-        return await matcher.finish("获取抽卡基本数据失败，请检查后台输出")
+        await matcher.finish("获取抽卡基本数据失败，请检查后台输出")
 
     pool_obj = gacha_pool_index.get(qq := event.get_user_id()) or get_1st_pool(
-        gacha_data
+        gacha_data,
     )
     if not pool_obj:
         await matcher.finish("目前没有UP池，请使用[ba切换卡池]指令来切换到常驻池或组建一个自定义UP池")
@@ -670,12 +689,12 @@ async def _(matcher: Matcher, event: MessageEvent, cmd_arg: Message = CommandArg
                     10 if gacha_times >= 10 else gacha_times,
                     gacha_data,
                     pool_obj.pool,
-                )
+                ),
             )
             gacha_times -= 10
     except:
         logger.exception("抽卡错误")
-        return await matcher.finish("抽卡出错了，请检查后台输出")
+        await matcher.finish("抽卡出错了，请检查后台输出")
 
     await matcher.finish(MessageSegment.at(qq) + f"当前抽取卡池：{pool_obj.name}" + img)
 
@@ -690,7 +709,7 @@ async def _(matcher: Matcher):
         emo = await db_get(random.choice(emojis), True)
     except:
         logger.exception("获取表情失败")
-        return await matcher.finish("获取表情失败，请检查后台输出")
+        await matcher.finish("获取表情失败，请检查后台输出")
     await matcher.finish(MessageSegment.image(emo))
 
 
@@ -710,10 +729,10 @@ async def _(matcher: Matcher):
         pics = await asyncio.gather(*[get_pic(x) for x in manga["pics"]])
     except:
         logger.exception("获取漫画失败")
-        return await matcher.finish("获取漫画失败，请检查后台输出")
+        await matcher.finish("获取漫画失败，请检查后台输出")
 
     await matcher.finish(
         Message()
         + f'{manga["title"]}\n-=-=-=-=-=-=-=-\n{manga["detail"]}'
-        + [MessageSegment.image(x) for x in pics]
+        + [MessageSegment.image(x) for x in pics],
     )

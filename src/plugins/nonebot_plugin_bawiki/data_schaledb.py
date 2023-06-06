@@ -3,14 +3,15 @@ import math
 import time
 from datetime import datetime
 from io import BytesIO
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Literal, cast, overload
 
 from nonebot import logger
 from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot_plugin_htmlrender import get_new_page
 from PIL import Image, ImageFilter
+from PIL.Image import Resampling
 from pil_utils import BuildImage, text2image
-from playwright.async_api import ViewportSize
+from playwright.async_api import Page, ViewportSize
 
 from .config import config
 from .resource import RES_CALENDER_BANNER, RES_GRADIENT_BG
@@ -22,8 +23,18 @@ PAGE_KWARGS = {
 }
 
 
+@overload
+async def schale_get(suffix: str, raw: Literal[False] = False, **kwargs) -> Any:
+    ...
+
+
+@overload
+async def schale_get(suffix: str, raw: Literal[True] = True, **kwargs) -> bytes:
+    ...
+
+
 async def schale_get(suffix, raw=False, **kwargs):
-    return await async_req(f"{config.ba_schale_url}{suffix}", raw=raw, **kwargs)
+    return await async_req(f"{config.ba_schale_url}{suffix}", raw=raw, **kwargs)  # type: ignore
 
 
 async def schale_get_stu_data(loc: str = "cn") -> List[Dict[str, Any]]:
@@ -35,11 +46,11 @@ async def schale_get_common() -> Dict[str, Any]:
 
 
 async def schale_get_localization(loc: str = "cn") -> Dict[str, Any]:
-    return await schale_get(f"data/{loc}/localization.min.json")
+    return cast(dict, await schale_get(f"data/{loc}/localization.min.json"))
 
 
 async def schale_get_raids(loc: str = "cn") -> Dict[str, Any]:
-    return await schale_get(f"data/{loc}/raids.min.json")
+    return cast(dict, await schale_get(f"data/{loc}/raids.min.json"))
 
 
 async def schale_get_stu_dict(key="Name"):
@@ -47,7 +58,7 @@ async def schale_get_stu_dict(key="Name"):
 
 
 async def schale_get_stu_info(stu):
-    async with get_new_page(**PAGE_KWARGS) as page:  # type:Page
+    async with cast(Page, get_new_page(**PAGE_KWARGS)) as page:
         await page.goto(
             f"{config.ba_schale_mirror_url}?chara={stu}",
             timeout=60 * 1000,
@@ -72,7 +83,7 @@ async def schale_calender(server):
                     schale_get_raids(),
                 )
             ),
-        )
+        ),
     )
 
 
@@ -85,6 +96,7 @@ def find_current_event(ev, now=None):
         if _start <= now < _end:
             _remain = _end - now
             return _e, _start, _end, _remain
+    return None
 
 
 async def schale_get_calender(server, students, common, localization, raids):
@@ -104,7 +116,10 @@ async def schale_get_calender(server, students, common, localization, raids):
 
     async def draw_gacha():
         pic = pic_bg.copy().draw_text(
-            (25, 25, 1375, 150), "特选招募", weight="bold", max_fontsize=80
+            (25, 25, 1375, 150),
+            "特选招募",
+            weight="bold",
+            max_fontsize=80,
         )
         c_gacha = region["current_gacha"]
         if r := find_current_event(c_gacha):
@@ -112,7 +127,11 @@ async def schale_get_calender(server, students, common, localization, raids):
             t = format_time(*(r[1:]))
             pic = pic.paste(
                 ti := text2image(
-                    t, (255, 255, 255, 0), fontsize=45, max_width=1350, align="center"
+                    t,
+                    (255, 255, 255, 0),
+                    fontsize=45,
+                    max_width=1350,
+                    align="center",
                 ),
                 (int((1400 - ti.width) / 2), 150),
                 True,
@@ -126,8 +145,8 @@ async def schale_get_calender(server, students, common, localization, raids):
                             await schale_get(
                                 f'images/student/collection/{s["CollectionTexture"]}.webp',
                                 raw=True,
-                            )
-                        )
+                            ),
+                        ),
                     )
                     .resize((300, 340))
                     .paste(
@@ -149,10 +168,14 @@ async def schale_get_calender(server, students, common, localization, raids):
                 x_index += p.width + 25
 
             return pic
+        return None
 
     async def draw_event():
         pic = pic_bg.copy().draw_text(
-            (25, 25, 1375, 150), "当前活动", weight="bold", max_fontsize=80
+            (25, 25, 1375, 150),
+            "当前活动",
+            weight="bold",
+            max_fontsize=80,
         )
         c_event = region["current_events"]
         if r := find_current_event(c_event):
@@ -160,7 +183,11 @@ async def schale_get_calender(server, students, common, localization, raids):
             t = format_time(*(r[1:]))
             pic = pic.paste(
                 ti := text2image(
-                    t, (255, 255, 255, 0), fontsize=45, max_width=1350, align="center"
+                    t,
+                    (255, 255, 255, 0),
+                    fontsize=45,
+                    max_width=1350,
+                    align="center",
                 ),
                 (int((1400 - ti.width) / 2), 150),
                 True,
@@ -175,7 +202,8 @@ async def schale_get_calender(server, students, common, localization, raids):
             ev_bg, ev_img = await asyncio.gather(
                 schale_get(f"images/campaign/Campaign_Event_{ev}_Normal.png", True),
                 schale_get(
-                    f"images/eventlogo/Event_{ev}_{'Tw' if server else 'Jp'}.png", True
+                    f"images/eventlogo/Event_{ev}_{'Tw' if server else 'Jp'}.png",
+                    True,
                 ),
             )
 
@@ -211,6 +239,7 @@ async def schale_get_calender(server, students, common, localization, raids):
                 )
             )
             return pic.paste(ev_bg, (int((pic.width - ev_bg.width) / 2), 250), True)
+        return None
 
     async def draw_raid():
         pic = pic_bg.copy()
@@ -219,7 +248,11 @@ async def schale_get_calender(server, students, common, localization, raids):
             t = format_time(*(r[1:]))
             pic = pic.paste(
                 ti := text2image(
-                    t, (255, 255, 255, 0), fontsize=45, max_width=1350, align="center"
+                    t,
+                    (255, 255, 255, 0),
+                    fontsize=45,
+                    max_width=1350,
+                    align="center",
                 ),
                 (int((1400 - ti.width) / 2), 150),
                 True,
@@ -272,7 +305,7 @@ async def schale_get_calender(server, students, common, localization, raids):
                     schale_get("images/ui/Type_Defense_s.png", True),
                     schale_get("images/ui/Type_Attack_s.png", True),
                     schale_get(f"images/ui/Terrain_{terrain}.png", True),
-                ]
+                ],
             )
 
             icon_def = (
@@ -345,10 +378,14 @@ async def schale_get_calender(server, students, common, localization, raids):
                 )
             )
             return pic.paste(c_bg, (int((pic.width - c_bg.width) / 2), 250), True)
+        return None
 
     async def draw_birth():
         pic = pic_bg.copy().draw_text(
-            (25, 25, 1375, 150), "学生生日", weight="bold", max_fontsize=80
+            (25, 25, 1375, 150),
+            "学生生日",
+            weight="bold",
+            max_fontsize=80,
         )
         now_t = time.mktime(now.date().timetuple())
         now_w = now.weekday()
@@ -360,7 +397,7 @@ async def schale_get_calender(server, students, common, localization, raids):
         birth_next_week = []
         for s in [x for x in students.values() if x["IsReleased"][server]]:
             birth = time.mktime(
-                time.strptime(f'{now.year}/{s["BirthDay"]}', "%Y/%m/%d")
+                time.strptime(f'{now.year}/{s["BirthDay"]}', "%Y/%m/%d"),
             )
             if this_week_t <= birth < next_week_t:
                 birth_this_week.append(s)
@@ -385,10 +422,11 @@ async def schale_get_calender(server, students, common, localization, raids):
                 for x in await asyncio.gather(
                     *[
                         schale_get(
-                            f'images/student/icon/{x["CollectionTexture"]}.png', True
+                            f'images/student/icon/{x["CollectionTexture"]}.png',
+                            True,
                         )
                         for x in birth_this_week + birth_next_week
-                    ]
+                    ],
                 )
             ]
             y_index = int((415 - p_h) / 2) + 125
@@ -427,14 +465,18 @@ async def schale_get_calender(server, students, common, localization, raids):
                     x_index += 180 + 10
 
             return pic
+        return None
 
     img = await asyncio.gather(  # type: ignore
-        draw_gacha(), draw_event(), draw_raid(), draw_birth()
+        draw_gacha(),
+        draw_event(),
+        draw_raid(),
+        draw_birth(),
     )
     img: List[BuildImage] = [x for x in img if x]
     if not img:
         img.append(
-            pic_bg.copy().draw_text((0, 0, 1400, 640), "没有获取到任何数据", max_fontsize=60)
+            pic_bg.copy().draw_text((0, 0, 1400, 640), "没有获取到任何数据", max_fontsize=60),
         )
 
     bg_w = 1500
@@ -451,7 +493,10 @@ async def schale_get_calender(server, students, common, localization, raids):
             halign="left",
         )
         .paste(
-            RES_GRADIENT_BG.copy().resize((1500, bg_h - 150), resample=Image.NEAREST),
+            RES_GRADIENT_BG.copy().resize(
+                (1500, bg_h - 150),
+                resample=Resampling.NEAREST,
+            ),
             (0, 150),
         )
     )
@@ -491,7 +536,8 @@ async def draw_fav_li(lvl):
         length = line_max_icon
 
     img = RES_GRADIENT_BG.copy().resize(
-        (icon_w * length, icon_h * line + 5), resample=Image.NEAREST
+        (icon_w * length, icon_h * line + 5),
+        resample=Resampling.NEAREST,
     )
 
     async def draw_stu(name_, dev_name_, line_, index_):
@@ -499,10 +545,11 @@ async def draw_fav_li(lvl):
         top = line_ * icon_h + 5
 
         ret = await schale_get(
-            f"images/student/lobby/Lobbyillust_Icon_{dev_name_}_01.png", True
+            f"images/student/lobby/Lobbyillust_Icon_{dev_name_}_01.png",
+            True,
         )
         icon_img = Image.open(BytesIO(ret)).convert("RGBA")
-        img.paste(icon_img, (left, top), icon_img)
+        img.paste(icon_img, (left, top), True)
         img.draw_text(
             (left, top + pic_h, left + icon_w, top + icon_h),
             name_,
@@ -522,5 +569,5 @@ async def draw_fav_li(lvl):
     await asyncio.gather(*task_li)
 
     return MessageSegment.text(f"羁绊等级 {lvl} 时解锁L2D的学生有以下这些：") + MessageSegment.image(
-        img.save("png")
+        img.save("png"),
     )

@@ -1,17 +1,19 @@
 import asyncio
+import contextlib
 import re
 import time
 from dataclasses import dataclass
 from datetime import datetime
 from io import BytesIO
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Union, cast
 
 from bs4 import BeautifulSoup, ResultSet, Tag
 from nonebot import logger
 from nonebot.adapters.onebot.v11 import MessageSegment
 from nonebot_plugin_htmlrender import get_new_page
-from PIL import Image
+from PIL.Image import Resampling
 from pil_utils import BuildImage, text2image
+from playwright.async_api import Page
 
 from .config import config
 from .resource import RES_CALENDER_BANNER, RES_GRADIENT_BG
@@ -19,8 +21,14 @@ from .util import async_req, parse_time_delta
 
 
 async def game_kee_request(url, **kwargs) -> Union[List, Dict[str, Any]]:
-    ret = await async_req(
-        url, headers={"game-id": "0", "game-alias": "ba"}, proxy=None, **kwargs
+    ret = cast(
+        dict,
+        await async_req(
+            url,
+            headers={"game-id": "0", "game-alias": "ba"},
+            proxy=None,
+            **kwargs,
+        ),
     )
     if ret["code"] != 0:
         raise ConnectionError(ret["msg"])
@@ -28,7 +36,7 @@ async def game_kee_request(url, **kwargs) -> Union[List, Dict[str, Any]]:
 
 
 async def game_kee_get_calender():
-    ret: List = await game_kee_request(f"{config.ba_gamekee_url}v1/wiki/index")
+    ret = cast(list, await game_kee_request(f"{config.ba_gamekee_url}v1/wiki/index"))
 
     for i in ret:
         if i["module"]["id"] == 12:
@@ -42,15 +50,19 @@ async def game_kee_get_calender():
             li.sort(key=lambda x: x["importance"], reverse=True)
             return li
 
+    return []
+
 
 async def game_kee_get_stu_li():
-    ret = await game_kee_request(f"{config.ba_gamekee_url}v1/wiki/entry")
+    ret = cast(dict, await game_kee_request(f"{config.ba_gamekee_url}v1/wiki/entry"))
 
     for i in ret["entry_list"]:
         if i["id"] == 23941:
             for ii in i["child"]:
                 if ii["id"] == 49443:
                     return {x["name"]: x for x in ii["child"]}
+
+    return {}
 
 
 async def game_kee_get_stu_cid_li():
@@ -62,31 +74,30 @@ def game_kee_page_url(sid):
 
 
 async def game_kee_get_page(url):
-    async with get_new_page() as page:  # type:Page
+    async with cast(Page, get_new_page()) as page:
         await page.goto(url, timeout=60 * 1000)
 
         # 删掉header
         await page.add_script_tag(
             content='document.getElementsByClassName("wiki-header")'
-            ".forEach((v)=>{v.remove()})"
+            ".forEach((v)=>{v.remove()})",
         )
 
         # 展开折叠的语音
         folds = await page.query_selector_all('xpath=//div[@class="fold-table-btn"]')
         for i in folds:
-            try:
+            with contextlib.suppress(Exception):
                 await i.click()
-            except:
-                pass
 
         # 隐藏 header 和 footer
         js_str = "(obj) => { obj.style.display = 'none' }"
         await page.eval_on_selector(".wiki-header", js_str)
         await page.eval_on_selector(".wiki-footer", js_str)
 
-        return await (
-            await page.query_selector('xpath=//div[@class="wiki-detail-body"]')
-        ).screenshot()
+        element = await page.query_selector('xpath=//div[@class="wiki-detail-body"]')
+        if not element:
+            raise ValueError
+        return await element.screenshot()
 
 
 async def game_kee_calender():
@@ -122,10 +133,16 @@ async def game_kee_get_calender_page(ret, has_pic=True):
         # logger.debug(f'{it["title"]} | {started} | {time_remain}')
 
         title_p = text2image(
-            f'[b]{it["title"]}[/b]', "#ffffff00", max_width=1290, fontsize=65
+            f'[b]{it["title"]}[/b]',
+            "#ffffff00",
+            max_width=1290,
+            fontsize=65,
         )
         time_p = text2image(
-            f"{begin} ~ {end}", "#ffffff00", max_width=1290, fontsize=40
+            f"{begin} ~ {end}",
+            "#ffffff00",
+            max_width=1290,
+            fontsize=40,
         )
         desc_p = (
             text2image(
@@ -155,7 +172,8 @@ async def game_kee_get_calender_page(ret, has_pic=True):
             + remain_p.height
         )
         img = BuildImage.new("RGBA", (1400, h), (255, 255, 255, 70)).draw_rectangle(
-            (0, 0, 10, h), "#fc6475" if it["importance"] else "#4acf75"
+            (0, 0, 10, h),
+            "#fc6475" if it["importance"] else "#4acf75",
         )
 
         if not started:
@@ -179,7 +197,7 @@ async def game_kee_get_calender_page(ret, has_pic=True):
         return img
 
     pics: List[BuildImage] = await asyncio.gather(  # type: ignore
-        *[draw(x) for x in ret]
+        *[draw(x) for x in ret],
     )
 
     bg_w = 1500
@@ -196,7 +214,10 @@ async def game_kee_get_calender_page(ret, has_pic=True):
             halign="left",
         )
         .paste(
-            RES_GRADIENT_BG.copy().resize((1500, bg_h - 150), resample=Image.NEAREST),
+            RES_GRADIENT_BG.copy().resize(
+                (1500, bg_h - 150),
+                resample=Resampling.NEAREST,
+            ),
             (0, 150),
         )
     )
@@ -210,16 +231,19 @@ async def game_kee_get_calender_page(ret, has_pic=True):
 
 
 async def game_kee_grab_l2d(cid):
-    r: dict = await game_kee_request(f"{config.ba_gamekee_url}v1/content/detail/{cid}")
-    r: str = r["content"]
+    ret = cast(
+        dict,
+        await game_kee_request(f"{config.ba_gamekee_url}v1/content/detail/{cid}"),
+    )
+    content: str = ret["content"]
 
-    i = r.find('<div class="input-wrapper">官方介绍</div>')
-    i = r.find('class="slide-item" data-index="2"', i)
-    ii = r.find('data-index="3"', i)
+    x = content.find('<div class="input-wrapper">官方介绍</div>')
+    x = content.find('class="slide-item" data-index="2"', x)
+    y = content.find('data-index="3"', x)
 
-    r: str = r[i:ii]
+    content: str = content[x:y]
 
-    img = re.findall('data-real="([^"]*)"', r)
+    img = re.findall('data-real="([^"]*)"', content)
 
     return [f"https:{x}" for x in img]
 
@@ -234,24 +258,27 @@ class GameKeeVoice:
 
 async def game_kee_get_voice(cid) -> List[GameKeeVoice]:
     wiki_html = (
-        await game_kee_request(f"{config.ba_gamekee_url}v1/content/detail/{cid}")
+        cast(
+            dict,
+            await game_kee_request(f"{config.ba_gamekee_url}v1/content/detail/{cid}"),
+        )
     )["content"]
     bs = BeautifulSoup(wiki_html, "lxml")
     audios = bs.select(".mould-table>tbody>tr>td>div>div>audio")
 
     parsed: List[GameKeeVoice] = []
     for au in audios:
-        url: str = au["src"]
+        url: str = cast(str, au["src"])
         if not url.startswith("http"):
             url = f"https:{url}"
 
-        tr1: Tag = au.parent.parent.parent.parent
+        tr1: Tag = au.parent.parent.parent.parent  # type: ignore
         tds: ResultSet[Tag] = tr1.find_all("td")
         title = tds[0].text.strip()
         jp = "\n".join(tds[2].stripped_strings)
 
         tr2 = tr1.next_sibling
-        cn = "\n".join(tr2.stripped_strings)
+        cn = "\n".join(tr2.stripped_strings)  # type: ignore
         parsed.append(GameKeeVoice(title, jp, cn, url))
 
     return parsed

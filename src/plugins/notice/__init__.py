@@ -67,7 +67,7 @@ def admin_change(sub_type, user_id, bot_qq):
     return admin_msg
 
 def del_user_bey(add_time, user_id):
-    global del_user_msg
+    global groups_all, del_user_msg
     del_time = datetime.fromtimestamp(add_time)
     if user_id in int(super_qq):
         del_user_msg = f"<{del_time}>@{user_id}主人离开啦，好伤心~"

@@ -44,7 +44,7 @@ __plugin_meta__ = PluginMetadata(
         "unique_name": "shindan",
         "example": "人设生成 小Q",
         "author": "meetwq <meetwq@gmail.com>",
-        "version": "0.3.2",
+        "version": "0.3.4",
     },
 )
 

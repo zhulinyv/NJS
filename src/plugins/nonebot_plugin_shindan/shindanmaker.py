@@ -78,12 +78,15 @@ async def make_shindan(id: str, name: str, mode="image") -> Union[str, bytes]:
     async with httpx.AsyncClient() as client:
         resp = await get(client, url)
         dom = BeautifulSoup(resp.text, "lxml")
-        token = dom.find("form", {"id": "shindanForm"}).find("input")["value"]  # type: ignore
+        form = dom.find("form", {"id": "shindanForm"})
+        _token = form.find("input", {"name": "_token"})["value"]  # type: ignore
+        shindan_token = form.find("input", {"name": "shindan_token"})["value"]  # type: ignore
         payload = {
-            "_token": token,
+            "_token": _token,
             "shindanName": name + seed,
             "hiddenName": "名無しのR",
             "type": "name",
+            "shindan_token": shindan_token,
         }
         resp = await post(client, url, json=payload)
 
@@ -116,7 +119,7 @@ def remove_shindan_effects(content: Tag, type: str):
 
 async def render_html(content: str) -> Tuple[str, bool]:
     dom = BeautifulSoup(content, "lxml")
-    result_js = str(dom.find("script", string=re.compile(r"saveResult")))
+    result_js = str(dom.find("script", string=re.compile(r"savedShindanResult")))
     title = str(dom.find("h1", {"id": "shindanResultAbove"}))
     result = dom.find("div", {"id": "shindanResultBlock"})
     assert isinstance(result, Tag)

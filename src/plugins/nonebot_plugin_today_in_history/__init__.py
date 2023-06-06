@@ -1,15 +1,25 @@
-from datetime import date
-import httpx
-import json
+import re
 
-import nonebot
-from nonebot import on_command, on_fullmatch
+from nonebot import get_bot, get_driver, on_command, require
+from nonebot.adapters.onebot.v11 import (
+    Bot,
+    Message,
+    MessageEvent,
+    MessageSegment,
+    GroupMessageEvent
+)
+from nonebot.log import logger
+from nonebot.matcher import Matcher
+from nonebot.params import Arg, CommandArg
+from nonebot.typing import T_State
 from nonebot.plugin import PluginMetadata
-from nonebot.adapters.onebot.v11 import Message, MessageEvent, MessageSegment
-from nonebot_plugin_apscheduler import scheduler
-from nonebot_plugin_htmlrender import text_to_pic
 
-from .config import Config
+require("nonebot_plugin_apscheduler")
+require("nonebot_plugin_htmlrender")
+from nonebot_plugin_apscheduler import scheduler
+
+from .config import Config, PUSHDATA_ENV, HOUR_ENV, MINUTE_ENV, GROUP_ALL_ENV
+from .utils import *
 
 __plugin_meta__ = PluginMetadata(
     name="历史上的今天",
@@ -18,96 +28,173 @@ __plugin_meta__ = PluginMetadata(
     config=Config
 )
 
-global_config = nonebot.get_driver().config
-plugin_config = Config(**global_config.dict())
-
-history_matcher = on_fullmatch('历史上的今天', priority=15)
+driver = get_driver()
 
 
-@history_matcher.handle()
-async def _(event: MessageEvent):
-    await history_matcher.finish(Message(await get_history_info()))
+@driver.on_startup
+async def subscribe_jobs():
+    PUSHDATA = read_json()
+    PUSHDATA_ENV.update(PUSHDATA)
+    write_json(PUSHDATA_ENV)
+    logger.info(f"history_env: {PUSHDATA_ENV}")
+    logger.info(f"history_env_all_group: {GROUP_ALL_ENV}")
+
+    for id, times in PUSHDATA_ENV.items():
+        scheduler.add_job(
+            push_send,
+            "cron",
+            args=[id],
+            id=f"history_push_{id}",
+            replace_existing=True,
+            hour=times["hour"],
+            minute=times["minute"],
+        )
+        logger.debug(f"history_push_{id},{times['hour']}:{times['minute']}")
+
+@driver.on_bot_connect
+async def _(bot:Bot):
+    if GROUP_ALL_ENV:
+        scheduler.add_job(
+            push_all_group_scheduler,
+            "cron",
+            args=[bot],
+            id=f"history_push_group_all",
+            replace_existing=True,
+            hour=HOUR_ENV,
+            minute=MINUTE_ENV,
+        )
+        logger.info(f"history_push_group_all,{HOUR_ENV}:{MINUTE_ENV}")
 
 
-# api处理->json
-def text_handle(text: str) -> json:
-    text = text.replace("<\/a>", "")
-    text = text.replace("\n", "")
-
-    # 去除html标签
-    while True:
-        address_head = text.find("<a target=")
-        address_end = text.find(">", address_head)
-        if address_head == -1 or address_end == -1:
-            break
-        text_middle = text[address_head:address_end + 1]
-        text = text.replace(text_middle, "")
-
-    # 去除api返回内容中不符合json格式的部分
-    # 去除key:desc值
-    address_head: int = 0
-    while True:
-        address_head = text.find('"desc":', address_head)
-        address_end = text.find('"cover":', address_head)
-        if address_head == -1 or address_end == -1:
-            break
-        text_middle = text[address_head + 8:address_end - 2]
-        address_head = address_end
-        text = text.replace(text_middle, "")
-
-    # 去除key:title中多引号
-    address_head: int = 0
-    while True:
-        address_head = text.find('"title":', address_head)
-        address_end = text.find('"festival"', address_head)
-        if address_head == -1 or address_end == -1:
-            break
-        text_middle = text[address_head + 9:address_end - 2]
-        if '"' in text_middle:
-            text_middle = text_middle.replace('"', " ")
-            text = text[:address_head + 9] + text_middle + text[address_end - 2:]
-        address_head = address_end
-
-    data = json.loads(text)
-    return data
+async def push_send(id: str):
+    bot = get_bot()
+    if id[0:2] == "g_":
+        msg = await get_history_info("image")
+        await bot.call_api("send_group_msg", group_id=int(id[2:]), message=msg)
+    else:
+        msg = await get_history_info("text")
+        await bot.call_api("send_private_msg", user_id=id[2:], message=msg)
 
 
-# 信息获取
-async def get_history_info() -> MessageSegment:
-    async with httpx.AsyncClient() as client:
-        month = date.today().strftime("%m")
-        day = date.today().strftime("%d")
-        url = f"https://baike.baidu.com/cms/home/eventsOnHistory/{month}.json"
-        r = await client.get(url)
-        if r.status_code == 200:
-            r.encoding = "unicode_escape"
-            data = text_handle(r.text)
-            today = f"{month}{day}"
-            s = f"历史上的今天 {today}\n"
-            len_max = len(data[month][month + day])
-            for i in range(0, len_max):
-                str_year = data[month][today][i]["year"]
-                str_title = data[month][today][i]["title"]
-                if i == len_max - 1:
-                    s = s + f"{str_year} {str_title}"  # 去除段末空行
-                else:
-                    s = s + f"{str_year} {str_title}\n"
-            return MessageSegment.image(await text_to_pic(s))
+def calendar_subscribe(id: str, hour: int, minute: int) -> None:
+    PUSHDATA_NEW = {}
+    PUSHDATA_NEW.setdefault(
+        id,
+        {
+            "hour": hour,
+            "minute": minute
+        }
+    )
+    PUSHDATA = read_json()
+    PUSHDATA.update(PUSHDATA_NEW)
+    write_json(PUSHDATA)
+
+    scheduler.add_job(
+        push_send,
+        "cron",
+        args=[id],
+        id=f"history_push_{id}",
+        replace_existing=True,
+        hour=hour,
+        minute=minute,
+    )
+    logger.info(f"[{id}]设置历史上的今天推送时间为：{hour}:{minute}")
+
+
+push_matcher = on_command("历史上的今天")
+
+
+@push_matcher.handle()
+async def _(
+    event: MessageEvent,
+    matcher: Matcher,
+    args: Message = CommandArg()
+):
+    if isinstance(event, GroupMessageEvent):
+        id = "g_{}".format(event.group_id)
+    else:
+        id = "f_{}".format(event.user_id)
+    if cmdarg := args.extract_plain_text():
+        if "状态" in cmdarg:
+            push_state = scheduler.get_job(f"history_push_{id}")
+            if push_state:
+                PUSHDATA = read_json()
+                push_data = PUSHDATA.get(id)
+                msg = (
+                    f"推送时间: {push_data['hour']}:{push_data['minute']}"
+                )
+                await matcher.finish(msg)
+        elif "设置" in cmdarg or "推送" in cmdarg:
+            if ":" in cmdarg or "：" in cmdarg:
+                matcher.set_arg("time_arg", args)
+        elif "取消" in cmdarg or "关闭" in cmdarg:
+            PUSHDATA = read_json()
+            PUSHDATA.pop(id)
+            write_json(PUSHDATA)
+            scheduler.remove_job(f"history_push_{id}")
+            logger.info(f"[{id}] 取消历史上的今天推送")
+            await matcher.finish("历史上的今天推送已禁用")
         else:
-            return MessageSegment.text("获取失败，请重试")
+            await matcher.finish("历史上的今天的推送参数不正确")
+    else:
+        msg = await get_history_info("image")
+        await matcher.finish(msg)
 
 
-# 消息发送
-async def send_msg_today_in_histoty():
-    msg = await get_history_info()
-    for qq in plugin_config.history_qq_friends:
-        await nonebot.get_bot().send_private_msg(user_id=qq, message=Message(msg))
+@push_matcher.got("time_arg", prompt="请发送每日定时推送日历的时间，格式为：小时:分钟")
+async def handle_time(
+    event: MessageEvent,
+    matcher: Matcher,
+    state: T_State,
+    time_arg: Message = Arg()
+):
+    state.setdefault("max_times", 0)
+    time = time_arg.extract_plain_text()
+    if any(cancel in time for cancel in ["取消", "放弃", "退出"]):
+        await matcher.finish("已退出历史上的今天推送时间设置")
+    match = re.search(r"(\d*)[:：](\d*)", time)
+    if match and match[1] and match[2]:
+        if isinstance(event, GroupMessageEvent):
+            calendar_subscribe("g_{}".format(event.group_id), int(match[1]), int(match[2]))
+        else:
+            calendar_subscribe("f_{}".format(event.user_id), int(match[1]), int(match[2]))
+        await matcher.finish(f"历史上的今天的每日推送时间已设置为：{match[1]}:{match[2]}")
+    else:
+        state["max_times"] += 1
+        if state["max_times"] >= 3:
+            await matcher.finish("你的错误次数过多，已退出历史上的今天推送时间设置")
+        await matcher.reject("设置时间失败，请输入正确的格式，格式为：小时:分钟")
 
-    for qq_group in plugin_config.history_qq_groups:
-        await nonebot.get_bot().send_group_msg(group_id=qq_group, message=Message(msg))
 
+async def push_all_group_scheduler(bot:Bot):
+    """为bot所在全部群聊添加推送任务"""
+    group_list = await refresh_group_list(bot)
+    PUSHDATA = read_json()
+    for group in group_list:
+        id = "g_{}".format(group)
+        # 如果群聊未被自定义，使用全局定时时间
+        if id not in PUSHDATA.keys():
+            PUSHDATA_NEW = {}
+            PUSHDATA_NEW.setdefault(
+                id,
+                {
+                    "hour": int(HOUR_ENV),
+                    "minute": int(MINUTE_ENV)
+                }
+            )
+            PUSHDATA.update(PUSHDATA_NEW)
 
-# 定时任务
-for index, time in enumerate(plugin_config.history_inform_time):
-    nonebot.logger.info("id:{},time:{}".format(index, time))
-    scheduler.add_job(send_msg_today_in_histoty, 'cron', hour=time.hour, minute=time.minute)
+            # 不支持创建此刻定时任务
+            await push_send(id)
+            scheduler.add_job(
+                push_send,
+                "cron",
+                args=[id],
+                id=f"history_push_{id}",
+                replace_existing=True,
+                hour=int(HOUR_ENV),
+                minute=int(MINUTE_ENV),
+            )
+            logger.debug(f"history_push_{id},{HOUR_ENV}:{MINUTE_ENV}")
+
+    write_json(PUSHDATA)

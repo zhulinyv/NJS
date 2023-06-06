@@ -1,10 +1,16 @@
 import re
 import emoji
+from typing import Union
 
 from nonebot import on_regex
 from nonebot.params import RegexDict
 from nonebot.plugin import PluginMetadata
-from nonebot.adapters.onebot.v11 import MessageSegment
+
+from nonebot.adapters.onebot.v11 import Bot as V11Bot
+from nonebot.adapters.onebot.v11 import MessageSegment as V11MsgSeg
+
+from nonebot.adapters.onebot.v12 import Bot as V12Bot
+from nonebot.adapters.onebot.v12 import MessageSegment as V12MsgSeg
 
 from .config import Config
 from .data_source import mix_emoji
@@ -18,7 +24,7 @@ __plugin_meta__ = PluginMetadata(
         "unique_name": "emojimix",
         "example": "😎+😁",
         "author": "meetwq <meetwq@gmail.com>",
-        "version": "0.1.8",
+        "version": "0.2.0",
     },
 )
 
@@ -33,11 +39,16 @@ emojimix = on_regex(
 
 
 @emojimix.handle()
-async def _(msg: dict = RegexDict()):
+async def _(bot: Union[V11Bot, V12Bot], msg: dict = RegexDict()):
     emoji_code1 = msg["code1"]
     emoji_code2 = msg["code2"]
     result = await mix_emoji(emoji_code1, emoji_code2)
     if isinstance(result, str):
         await emojimix.finish(result)
-    else:
-        await emojimix.finish(MessageSegment.image(result))
+
+    if isinstance(bot, V11Bot):
+        await emojimix.finish(V11MsgSeg.image(result))
+    elif isinstance(bot, V12Bot):
+        resp = await bot.upload_file(type="data", name="emojimix", data=result)
+        file_id = resp["file_id"]
+        await emojimix.finish(V12MsgSeg.image(file_id))

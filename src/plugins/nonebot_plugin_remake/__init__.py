@@ -36,7 +36,6 @@ remake = on_command(
     "remake",
     aliases={"liferestart", "人生重开", "人生重来"},
     block=True,
-    rule=to_me(),
     priority=12,
 )
 

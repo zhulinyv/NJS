@@ -1,8 +1,8 @@
-import httpx
 from dataclasses import dataclass
 from difflib import SequenceMatcher
-from typing import Any, Dict, List, Protocol, Optional, Tuple
+from typing import Any, Dict, List, Optional, Protocol, Tuple
 
+import httpx
 from nonebot.adapters.onebot.v11 import MessageSegment
 
 
@@ -78,17 +78,27 @@ async def search_kuwo(keyword: str) -> Optional[MessageSegment]:
 
             if info := result["data"]["songinfo"]:
                 play_url = "https://kuwo.cn/api/v1/www/music/playUrl"
-                params = {"mid": rid, "type": "music", "httpsStatus": 1}
+                params = {
+                    "mid": rid,
+                    "type": "convert_url3",
+                    "httpsStatus": 1,
+                    "br": "128kmp3",
+                }
                 resp = httpx.get(play_url, params=params)
-                result = resp.json()
+                result: Dict = resp.json()
 
-                if data := result["data"]:
-                    return MessageSegment.music_custom(
-                        url=f"https://kuwo.cn/play_detail/{rid}",
-                        audio=data["url"],
-                        title=info["songName"],
-                        content=info["artist"],
-                        img_url=info["pic"],
+                if data := result.get("data"):
+                    return MessageSegment(
+                        "music",
+                        {
+                            "type": "custom",
+                            "subtype": "kuwo",
+                            "url": f"https://kuwo.cn/play_detail/{rid}",
+                            "voice": data["url"],
+                            "title": info["songName"],
+                            "content": info["artist"],
+                            "image": info["pic"],
+                        },
                     )
 
 
@@ -119,12 +129,17 @@ async def search_kugou(keyword: str) -> Optional[MessageSegment]:
             resp = await client.get(song_url, params=params)
 
             if info := resp.json():
-                return MessageSegment.music_custom(
-                    url=f"https://www.kugou.com/song/#hash={hash}&album_id={album_id}",
-                    audio=info["url"],
-                    title=info["songName"],
-                    content=info["author_name"],
-                    img_url=str(info["imgUrl"]).format(size=240),
+                return MessageSegment(
+                    "music",
+                    {
+                        "type": "custom",
+                        "subtype": "kugou",
+                        "url": f"https://www.kugou.com/song/#hash={hash}&album_id={album_id}",
+                        "voice": info["url"],
+                        "title": info["songName"],
+                        "content": info["author_name"],
+                        "image": str(info["imgUrl"]).format(size=240),
+                    },
                 )
 
 
@@ -142,12 +157,17 @@ async def search_migu(keyword: str) -> Optional[MessageSegment]:
             reverse=True,
         )
         info = songs[0]
-        return MessageSegment.music_custom(
-            url=f"https://music.migu.cn/v3/music/song/{info['copyrightId']}",
-            audio=info["mp3"],
-            title=info["title"],
-            content=info["singerName"],
-            img_url=info["cover"],
+        return MessageSegment(
+            "music",
+            {
+                "type": "custom",
+                "subtype": "migu",
+                "url": f"https://music.migu.cn/v3/music/song/{info['copyrightId']}",
+                "voice": info["mp3"],
+                "title": info["title"],
+                "content": info["singerName"],
+                "image": info["cover"],
+            },
         )
 
 
@@ -164,13 +184,26 @@ async def search_bili(keyword: str) -> Optional[MessageSegment]:
             reverse=True,
         )
         info = songs[0]
-        return MessageSegment.music_custom(
-            url=f"https://www.bilibili.com/audio/au{info['id']}",
-            audio=info["play_url_list"][0]["url"],
-            title=info["title"],
-            content=info["author"],
-            img_url=info["cover"],
-        )
+        return MessageSegment.text(f"https://www.bilibili.com/audio/au{info['id']}")
+
+        # return MessageSegment.share(
+        #     url=f"https://www.bilibili.com/audio/au{info['id']}",
+        #     title=info["title"],
+        #     content=info["author"],
+        #     image=info["cover"],
+        # )
+
+        """https://github.com/Mrs4s/go-cqhttp/issues/1495"""
+        # return MessageSegment(
+        #     "music",
+        #     {
+        #         "type": "custom",
+        #         "url": f"https://www.bilibili.com/audio/au{info['id']}",
+        #         "title": info["title"],
+        #         "content": info["author"],
+        #         "image": info["cover"],
+        #     },
+        # )
 
 
 class Func(Protocol):

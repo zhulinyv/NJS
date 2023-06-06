@@ -1,16 +1,25 @@
-from typing import Any, Dict, List, Tuple, Optional
+from typing import Any, Dict, List, Tuple, Optional, Union
 
 from nonebot.plugin import PluginMetadata
+from nonebot.adapters import Bot as BaseBot
 from nonebot import get_driver, on_command, on_notice
-from nonebot.internal.adapter import Bot as BaseBot
-from nonebot.adapters.onebot.v11 import (
-    Bot,
-    Message,
-    MessageEvent,
-    GroupMessageEvent,
-    GroupRecallNoticeEvent,
+from nonebot.params import CommandArg, CommandStart, EventToMe
+
+from nonebot.adapters.onebot.v11 import Bot as V11Bot
+from nonebot.adapters.onebot.v11 import Message as V11Msg
+from nonebot.adapters.onebot.v11 import GroupRecallNoticeEvent
+from nonebot.adapters.onebot.v11 import MessageEvent as V11MEvent
+from nonebot.adapters.onebot.v11 import GroupMessageEvent as V11GMEvent
+
+from nonebot.adapters.onebot.v12 import Bot as V12Bot
+from nonebot.adapters.onebot.v12 import Message as V12Msg
+from nonebot.adapters.onebot.v12 import MessageEvent as V12MEvent
+from nonebot.adapters.onebot.v12 import GroupMessageEvent as V12GMEvent
+from nonebot.adapters.onebot.v12 import ChannelMessageEvent as V12CMEvent
+from nonebot.adapters.onebot.v12 import (
+    GroupMessageDeleteEvent,
+    ChannelMessageDeleteEvent,
 )
-from nonebot.params import Command, CommandArg, RawCommand
 
 from .config import Config
 
@@ -26,20 +35,23 @@ __plugin_meta__ = PluginMetadata(
         "unique_name": "withdraw",
         "example": "@小Q 撤回\n@小Q 撤回 1\n@小Q 撤回 0-3",
         "author": "meetwq <meetwq@gmail.com>",
-        "version": "0.2.3",
+        "version": "0.3.0",
     },
 )
 
 
-msg_ids: Dict[str, List[int]] = {}
+msg_ids: Dict[str, List[str]] = {}
 max_size = withdraw_config.withdraw_max_size
 
 
-def get_key(msg_type: str, id: int):
-    return f"{msg_type}_{id}"
+def get_key(bot: BaseBot, msg_type: str, id: str, sub_id: str = ""):
+    key = f"{bot.self_id}_{msg_type}_{id}"
+    if sub_id:
+        key += f"_{sub_id}"
+    return key
 
 
-async def save_msg_id(
+async def save_msg_id_v11(
     bot: BaseBot, e: Optional[Exception], api: str, data: Dict[str, Any], result: Any
 ):
     try:
@@ -54,8 +66,8 @@ async def save_msg_id(
             id = data["group_id"]
         else:
             return
-        key = get_key(msg_type, id)
-        msg_id = int(result["message_id"])
+        key = get_key(bot, msg_type, id)
+        msg_id = str(result["message_id"])
 
         if key not in msg_ids:
             msg_ids[key] = []
@@ -66,33 +78,88 @@ async def save_msg_id(
         pass
 
 
-Bot.on_called_api(save_msg_id)
+V11Bot.on_called_api(save_msg_id_v11)
+
+
+async def save_msg_id_v12(
+    bot: BaseBot, e: Optional[Exception], api: str, data: Dict[str, Any], result: Any
+):
+    try:
+        if api in ["send_message"]:
+            msg_type = data["detail_type"]
+            sub_id = ""
+            if msg_type == "group":
+                id = data["group_id"]
+            elif msg_type == "channel":
+                id = data["guild_id"]
+                sub_id = data["channel_id"]
+            else:
+                id = data.get("user_id", "")
+        else:
+            return
+        key = get_key(bot, msg_type, id, sub_id)
+        msg_id = result["message_id"]
+
+        if key not in msg_ids:
+            msg_ids[key] = []
+        msg_ids[key].append(msg_id)
+        if len(msg_ids) > max_size:
+            msg_ids[key].pop(0)
+    except:
+        pass
+
+
+V12Bot.on_called_api(save_msg_id_v12)
+
+
+def remove_msg_id(key: str, msg_id: str):
+    print(msg_ids)
+    if key in msg_ids and msg_id in msg_ids[key]:
+        msg_ids[key].remove(msg_id)
+    print(msg_ids)
 
 
 # 命令前缀为空则需要to_me，否则不需要
-def smart_to_me(
-    event: MessageEvent, cmd: Tuple[str, ...] = Command(), raw_cmd: str = RawCommand()
-) -> bool:
-    return not raw_cmd.startswith(cmd[0]) or event.is_tome()
+def smart_to_me(command_start: str = CommandStart(), to_me: bool = EventToMe()) -> bool:
+    return bool(command_start) or to_me
 
 
 withdraw = on_command("withdraw", aliases={"撤回"}, block=True, rule=smart_to_me)
 
 
 @withdraw.handle()
-async def _(bot: Bot, event: MessageEvent, msg: Message = CommandArg()):
-    if isinstance(event, GroupMessageEvent):
-        msg_type = "group"
-        id = event.group_id
+async def _(
+    bot: Union[V11Bot, V12Bot],
+    event: Union[V11MEvent, V12MEvent],
+    msg: Union[V11Msg, V12Msg] = CommandArg(),
+):
+    sub_id = ""
+    if isinstance(event, V11MEvent):
+        msg_type = event.message_type
+        id = str(event.group_id if isinstance(event, V11GMEvent) else event.user_id)
     else:
-        msg_type = "private"
-        id = event.user_id
-    key = get_key(msg_type, id)
+        msg_type = event.detail_type
+        if isinstance(event, V12GMEvent):
+            id = event.group_id
+        elif isinstance(event, V12CMEvent):
+            id = event.guild_id
+            sub_id = event.channel_id
+        else:
+            id = event.user_id
+
+    key = get_key(bot, msg_type, id, sub_id)
+
+    async def delete_message(msg_id: str):
+        if isinstance(bot, V11Bot):
+            await bot.delete_msg(message_id=int(msg_id))
+        else:
+            await bot.delete_message(message_id=msg_id)
 
     if event.reply:
-        msg_id = event.reply.message_id
+        msg_id = str(event.reply.message_id)
         try:
-            await bot.delete_msg(message_id=msg_id)
+            await delete_message(msg_id)
+            remove_msg_id(key, msg_id)
             return
         except:
             await withdraw.finish("撤回失败，可能已超时")
@@ -120,7 +187,7 @@ async def _(bot: Bot, event: MessageEvent, msg: Message = CommandArg()):
     message_ids = [msg_ids[key][-num - 1] for num in range(start_num, end_num)]
     for message_id in message_ids:
         try:
-            await bot.delete_msg(message_id=message_id)
+            await delete_message(message_id)
             msg_ids[key].remove(message_id)
         except:
             if not res:
@@ -132,17 +199,29 @@ async def _(bot: Bot, event: MessageEvent, msg: Message = CommandArg()):
         await withdraw.finish(res)
 
 
-async def _group_recall(bot: Bot, event: GroupRecallNoticeEvent) -> bool:
-    return str(event.user_id) == str(bot.self_id)
-
-
-withdraw_notice = on_notice(_group_recall)
+withdraw_notice = on_notice()
 
 
 @withdraw_notice.handle()
-async def _(event: GroupRecallNoticeEvent):
+def _(bot: V11Bot, event: GroupRecallNoticeEvent):
+    if str(event.user_id) != bot.self_id:
+        return
+    msg_id = str(event.message_id)
+    id = str(event.group_id)
+    key = get_key(bot, "group", id)
+    remove_msg_id(key, msg_id)
+
+
+@withdraw_notice.handle()
+def _(bot: V12Bot, event: Union[GroupMessageDeleteEvent, ChannelMessageDeleteEvent]):
     msg_id = event.message_id
-    id = event.group_id
-    key = get_key("group", id)
-    if key in msg_ids and msg_id in msg_ids[key]:
-        msg_ids[key].remove(msg_id)
+    if isinstance(event, GroupMessageDeleteEvent):
+        msg_type = "group"
+        id = event.group_id
+        sub_id = ""
+    else:
+        msg_type = "channel"
+        id = event.guild_id
+        sub_id = event.channel_id
+    key = get_key(bot, msg_type, id, sub_id)
+    remove_msg_id(key, msg_id)

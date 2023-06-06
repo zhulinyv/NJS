@@ -23,7 +23,7 @@ __plugin_meta__ = PluginMetadata(
     usage="直接发送 谁@我了？",
     extra={
         "author": "SEAFHMC <soku_ritsuki@outlook.com>",
-        "version": "0.2.7",
+        "version": "0.3.1",
     },
 )
 plugin_config = Config.parse_obj(get_driver().config)
@@ -44,10 +44,14 @@ async def create_record(bot: Bot, event: GroupMessageEvent, target_id):
         if segment.type == "at":
             card = get_member_name(
                 await bot.get_group_member_info(
-                    group_id=event.group_id, user_id=segment.data["qq"]
+                    group_id=event.group_id, user_id=int(target_id)
                 )
             )
-            message.append(f"@{MessageSegment.text(card)}")
+            message.append(
+                f"@{MessageSegment.text(card)}"
+                if segment.data["qq"] != "all"
+                else "@全体成员"
+            )
             continue
         message.append(segment)
 
@@ -65,10 +69,18 @@ async def create_record(bot: Bot, event: GroupMessageEvent, target_id):
 @monitor.handle()
 async def _(bot: Bot, event: GroupMessageEvent, message=EventMessage()):
     if event.reply:
-        target_id = event.reply.sender.user_id
-        await create_record(bot=bot, event=event, target_id=target_id)
+        reply_qq = {segment.data["qq"] for segment in event.original_message["at"]}
+        for target_id in reply_qq:
+            await create_record(bot=bot, event=event, target_id=target_id)
         return
-    if member_at := extract_member_at(message=message):
+    member_at = [
+        target_id
+        for target_id in await extract_member_at(
+            event.group_id, message=message, bot=bot
+        )
+        if target_id != str(event.user_id)
+    ]
+    if member_at:
         for target_id in member_at:
             await create_record(bot=bot, event=event, target_id=target_id)
         return
@@ -145,10 +157,10 @@ async def handle_first_receive(matcher: Matcher, args: Message = CommandArg()):
 
 
 @clear_db_all.got("confirm", prompt="该操作将清楚数据库全部内容，是否继续？")
-async def _(YesNo: str = ArgPlainText("confirm")):
-    if YesNo in CHINESE_AGREE_WORD:
+async def _(yes_or_no: str = ArgPlainText("confirm")):
+    if yes_or_no in CHINESE_AGREE_WORD:
         MainTable.delete().where(MainTable.target_id).execute()
         await clear_db.finish("已清理全部数据库")
-    elif YesNo in CHINESE_DECLINE_WORD:
+    elif yes_or_no in CHINESE_DECLINE_WORD:
         await clear_db.finish("已取消操作")
     await clear_db.reject("不太明白你的意思呢")

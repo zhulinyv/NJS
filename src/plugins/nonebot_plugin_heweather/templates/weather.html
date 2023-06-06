@@ -4,11 +4,32 @@
   <meta charset="utf8">
   <link rel="stylesheet" href="css/weather.css">
   <link rel="stylesheet" href="css/qweather-icons.css">
+  <script>
+window.onload = function () {
+    color();
+};
+function color() {
+    var date = new Date();
+    var current_hour = date.getHours();
+
+    if (!(current_hour >= 6 && current_hour < 18)) {
+        document.body.style.backgroundImage = "linear-gradient(rgb(25 23 58), rgb(25 29 45))";
+        document.getElementById("today-weather").style.backgroundImage = "linear-gradient(225deg, #0d3447, #0e0e2c)";
+        document.getElementById("air").style.backgroundImage = "linear-gradient(225deg, #191a5b, #090b1e)";
+        document.getElementById("days-weather").style.backgroundImage = "linear-gradient(225deg, #0f2a4b, #0f0f14)";
+        air = document.getElementsByName("warning-box");
+        for (var i = 0; i <air.length; i++) {
+          air[i].style.backgroundImage = "linear-gradient(225deg, #55112a, #160511)";
+        }
+        document.body.style.color = "#cecece";
+    }
+}
+</script>
 </head>
 
 <body>
   <div class="main">
-    <div class="today-weather">
+    <div class="today-weather" id="today-weather">
       <div class="today-top">
         <div class="text-center">
           <h1 class="city">{{ city }}</h1>
@@ -45,7 +66,7 @@
     </div>
 
     {% for w in warning["warning"] %}
-    <div class="warning-box">
+    <div class="warning-box" id="warning-box" name="warning-box">
       <div class="warning-side">
         <div class="warning-icon"><em class="qi-{{ w['type'] }}"></em></div>
         <div class="warning-header">
@@ -60,7 +81,7 @@
     {% endfor %}
 
     {% if air %}
-    <div class="air">
+    <div class="air" id="air">
       <div class="air-box-top">
           <span class="air-tag" style="background-color:{{ air['tag_color'] }};">{{ air["aqi"] }} {{ air["category"] }}</span>
       </div>
@@ -99,7 +120,7 @@
   </div>
   {% endif %}
 
-    <div class="days-weather">
+    <div class="days-weather" id="days-weather">
       {% for day in days %}
       <div class="days">
         <!-- 1 -->

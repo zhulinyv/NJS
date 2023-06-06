@@ -1,6 +1,10 @@
 from typing import List
 from pathlib import Path
 
+from nonebot import require
+
+require("nonebot_plugin_htmlrender")
+
 from nonebot_plugin_htmlrender import template_to_pic
 
 from .model import Air, Daily

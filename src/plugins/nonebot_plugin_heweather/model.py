@@ -63,4 +63,4 @@ class Warning(BaseModel, extra=Extra.allow):
 
 class WarningApi(BaseModel, extra=Extra.allow):
     code: str
-    warning: List[Warning]
+    warning: Optional[List[Warning]]

@@ -1,8 +1,7 @@
 
-from nonebot.adapters.onebot.v11 import Event, Message, GroupUploadNoticeEvent, GroupDecreaseNoticeEvent, GroupAdminNoticeEvent
+from nonebot.adapters.onebot.v11 import Bot, Event, Message, GroupUploadNoticeEvent, GroupDecreaseNoticeEvent, GroupAdminNoticeEvent
 from nonebot.plugin import on_notice
 from nonebot.rule import Rule
-from nonebot import get_bot
 import nonebot
 
 from datetime import datetime
@@ -42,8 +41,8 @@ async def send_rongyu(event: GroupDecreaseNoticeEvent):
     rely_msg = del_user_bey(event.time, event.user_id)
     await del_user.finish(message=Message(rely_msg))
 @admin.handle()
-async def send_rongyu(event: GroupAdminNoticeEvent):
-    rely_msg = admin_change(event.sub_type, event.user_id)
+async def send_rongyu(bot: Bot, event: GroupAdminNoticeEvent):
+    rely_msg = admin_change(event.sub_type, event.user_id, bot.self_id)
     await admin.finish(message=Message(rely_msg))
 @files.handle()
 async def handle_first_receive(event: GroupUploadNoticeEvent):
@@ -53,13 +52,8 @@ async def handle_first_receive(event: GroupUploadNoticeEvent):
     await files.finish(message=Message(rely))
 
 
-def admin_change(sub_type, user_id):
+def admin_change(sub_type, user_id, bot_qq):
     admin_msg = ""
-    try:
-        bot = get_bot()
-        bot_qq = int(bot.self_id)
-    except:
-        bot_qq = 123456798
     if sub_type == "set":
         if user_id == bot_qq:
             admin_msg = f"芜湖，脑积水以后也是管理了~"

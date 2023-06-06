@@ -8,9 +8,9 @@ from datetime import datetime
 
 
 try:
-    super_qq: str = list(nonebot.get_driver().config.superusers)[0]
+    super_qq: list = nonebot.get_driver().config.superusers
 except:
-    super_qq: str = "123456789"
+    super_qq: list = []
 try:
     notice: list = nonebot.get_driver().config.notice
 except:
@@ -38,18 +38,27 @@ admin = on_notice(Rule(_is_admin_change), priority=50, block=True)
 
 @del_user.handle()
 async def send_rongyu(event: GroupDecreaseNoticeEvent):
-    rely_msg = del_user_bey(event.time, event.user_id)
-    await del_user.finish(message=Message(rely_msg))
+    if event.group_id in notice:
+        rely_msg = del_user_bey(event.time, event.user_id)
+        await del_user.finish(message=Message(rely_msg))
+    else:
+        await del_user.finish()
 @admin.handle()
 async def send_rongyu(bot: Bot, event: GroupAdminNoticeEvent):
-    rely_msg = admin_change(event.sub_type, event.user_id, bot.self_id)
-    await admin.finish(message=Message(rely_msg))
+    if event.group_id in notice:
+        rely_msg = admin_change(event.sub_type, event.user_id, bot.self_id)
+        await admin.finish(message=Message(rely_msg))
+    else:
+        await admin.finish()
 @files.handle()
 async def handle_first_receive(event: GroupUploadNoticeEvent):
-    rely = f'[CQ:at,qq={event.user_id}]\n' \
-           f'[CQ:image,file=https://q4.qlogo.cn/headimg_dl?dst_uin={event.user_id}&spec=640]' \
-           f'\n 上传了新文件，群贡献值+1~[CQ:face,id=175]'
-    await files.finish(message=Message(rely))
+    if event.group_id in notice:
+        rely = f'[CQ:at,qq={event.user_id}]\n' \
+            f'[CQ:image,file=https://q4.qlogo.cn/headimg_dl?dst_uin={event.user_id}&spec=640]' \
+            f'\n 上传了新文件，群贡献值+1~[CQ:face,id=175]'
+        await files.finish(message=Message(rely))
+    else:
+        await files.finish()
 
 
 def admin_change(sub_type, user_id, bot_qq):
@@ -69,7 +78,7 @@ def admin_change(sub_type, user_id, bot_qq):
 def del_user_bey(add_time, user_id):
     global groups_all, del_user_msg
     del_time = datetime.fromtimestamp(add_time)
-    if user_id in int(super_qq):
+    if user_id in super_qq:
         del_user_msg = f"<{del_time}>@{user_id}主人离开啦，好伤心~"
     else:
         del_user_msg = f"<{del_time}>QQ号为：{user_id}的小可爱离开了我们，天下没有不散的筵席，有缘再见吖~" \

@@ -62,7 +62,7 @@ get_models = on_command(
 change_models = on_command("更换模型", priority=1, block=True)
 control_net = on_command("以图绘图", aliases={"以图生图"})
 control_net_list = on_command("controlnet", aliases={"控制网"})
-super_res = on_command("图片修复", aliases={"图片超分", "超分"})
+super_res = on_command("本地图片修复", aliases={"本地图片超分", "本地超分"})
 get_backend_status = on_command("后端", aliases={"查看后端"})
 get_emb = on_command("emb", aliases={"embs"})
 get_lora = on_command("lora", aliases={"loras"})

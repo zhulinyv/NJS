@@ -91,7 +91,7 @@ def same_month(dateString):
     return d1.month == d2.month \
               and d1.year == d2.year
 
-jrrp = on_command("jrrp",None,aliases={'j','今日人品','今日运势'})
+jrrp = on_command("jrrp",None,aliases={'j','今日人品'})
 @jrrp.handle()
 async def jrrp_handle(bot: Bot, event: Event):
     rnd = random.Random()
@@ -101,7 +101,7 @@ async def jrrp_handle(bot: Bot, event: Event):
         insert_tb(event.get_user_id(),lucknum,date.today().strftime("%y%m%d"))
     await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您今日的幸运指数是{lucknum}，为"{luck_simple(lucknum)[0]}"，{luck_simple(lucknum)[1]}'))
 
-alljrrp = on_command("alljrrp",None,aliases={'总人品','平均人品','平均运势'})
+alljrrp = on_command("alljrrp",None,aliases={'总人品','平均人品'})
 @alljrrp.handle()
 async def alljrrp_handle(bot: Bot, event: Event):
     alldata = select_tb_all(event.get_user_id())
@@ -113,7 +113,7 @@ async def alljrrp_handle(bot: Bot, event: Event):
         allnum = allnum + int(i[1])
     await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您一共使用了{times}天jrrp，您历史平均的幸运指数是{round(allnum / times,1)}'))
 
-monthjrrp = on_command("monthjrrp",None,aliases={'本月人品','本月运势','月运势'})
+monthjrrp = on_command("monthjrrp",None,aliases={'本月人品', '月人品'})
 @monthjrrp.handle()
 async def monthjrrp_handle(bot: Bot, event: Event):
     alldata = select_tb_all(event.get_user_id())
@@ -128,7 +128,7 @@ async def monthjrrp_handle(bot: Bot, event: Event):
     await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您本月共使用了{times}天jrrp，平均的幸运指数是{round(allnum / times,1)}'))
 
 
-weekjrrp = on_command("weekjrrp",None,aliases={'本周人品','本周运势','周运势'})
+weekjrrp = on_command("weekjrrp",None,aliases={'本周人品','周人品'})
 @weekjrrp.handle()
 async def weekjrrp_handle(bot: Bot, event: Event):
     alldata = select_tb_all(event.get_user_id())

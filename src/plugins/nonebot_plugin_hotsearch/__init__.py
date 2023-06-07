@@ -15,7 +15,7 @@ __plugin_meta__ = PluginMetadata(
 )
 
 
-def render_forward_msg(msg_list: list, uid: str, name='脑积水~'):
+def render_forward_msg(msg_list: list, uid: str, name='小白猫~'):
 	forward_msg = []
 	for msg in msg_list:
 		forward_msg.append({

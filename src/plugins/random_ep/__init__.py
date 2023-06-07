@@ -4,6 +4,8 @@ from pathlib import Path
 from nonebot import on_command
 from nonebot.adapters.onebot.v11 import MessageSegment
 
+from .nonebot_plugin_randomnana import *
+
 
 dz = on_command('我测你们码', aliases={'随机丁真', '丁真', '一眼丁真'}, priority=50, block=True)
 ikun = on_command("ikun", aliases={'小黑子', '坤坤', '随机坤坤'}, priority=50, block=True)

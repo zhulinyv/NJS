@@ -65,6 +65,7 @@ nonebot-plugin-guild-patch = "0.2.2"
 nonebot-plugin-htmlrender = "0.2.0.1"
 nonebot-plugin-imageutils = "0.1.13.4"
 nonebot-plugin-localstore = "0.4.1"
+nonebot-plugin-send-anything-anywhere = "0.2.6"
 nonebot2 = "2.0.0"
 numpy = "1.23.4"
 openai = "0.27.0"
@@ -100,7 +101,6 @@ ujson = "5.5.0"
 urllib3 = "1.26.12"
 win32-setctime = "1.1.0"
 wordcloud = "1.8.2.2"
-nonebot-plugin-send-anything-anywhere = "^0.2.4"
 
 [tool.nonebot]
 plugins = ["nonebot_plugin_gocqhttp", "nonebot_plugin_guild_patch"]

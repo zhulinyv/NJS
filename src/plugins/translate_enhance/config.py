@@ -1,9 +1,9 @@
 from nonebot import get_driver
 from nonebot.log import logger
-from pydantic import BaseSettings
+from pydantic import BaseModel, Extra
 
 
-class Config(BaseSettings):
+class Config(BaseModel, extra=Extra.ignore):
     novelai_retry: int = 3 # post失败后重试的次数
     # 翻译API设置
     bing_key: str = None  # bing的翻译key
@@ -14,6 +14,6 @@ class Config(BaseSettings):
     vits_site: str = None
 
 
-config = Config(**get_driver().config.dict())
-logger.info(f"加载config完成" + str(config))
+global_config = get_driver().config
+config = Config.parse_obj(global_config)
 

@@ -16,7 +16,7 @@ from httpx import AsyncClient
 命令:#星座天蝎座 #星座巨蟹座
 '''
 
-xingzuo = on_command("星座")
+xingzuo = on_command("星座", priority=50, block=True)
 
 
 @xingzuo.handle()
@@ -26,4 +26,4 @@ async def xz(arg: Message = CommandArg()):
         get_data = await r.get(url)
     msg = get_data.text
     msg = msg.replace('{br}', '\n')
-    await xingzuo.finish(Message(msg))
+    await xingzuo.finish(Message(msg), at_sender=True)

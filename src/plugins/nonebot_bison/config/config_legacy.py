@@ -1,41 +1,57 @@
+import json
 import os
 from collections import defaultdict
+from datetime import datetime
 from os import path
+from pathlib import Path
 from typing import DefaultDict, Literal, Mapping, TypedDict
 
 import nonebot
 from nonebot.log import logger
 from tinydb import Query, TinyDB
 
-from .platform import platform_manager
-from .plugin_config import plugin_config
-from .types import Target, User
-from .utils import Singleton
+from ..platform import platform_manager
+from ..plugin_config import plugin_config
+from ..types import Target, User
+from ..utils import Singleton
+from .utils import NoSuchSubscribeException, NoSuchUserException
 
 supported_target_type = platform_manager.keys()
 
 
-def get_config_path() -> str:
+def get_config_path() -> tuple[str, str]:
     if plugin_config.bison_config_path:
         data_dir = plugin_config.bison_config_path
     else:
         working_dir = os.getcwd()
         data_dir = path.join(working_dir, "data")
-    if not path.isdir(data_dir):
-        os.makedirs(data_dir)
     old_path = path.join(data_dir, "hk_reporter.json")
     new_path = path.join(data_dir, "bison.json")
+    deprecated_maker_path = path.join(data_dir, "bison.json.deprecated")
     if os.path.exists(old_path) and not os.path.exists(new_path):
         os.rename(old_path, new_path)
-    return new_path
+    return new_path, deprecated_maker_path
 
 
-class NoSuchUserException(Exception):
-    pass
-
-
-class NoSuchSubscribeException(Exception):
-    pass
+def drop():
+    config = Config()
+    if plugin_config.bison_config_path:
+        data_dir = plugin_config.bison_config_path
+    else:
+        working_dir = os.getcwd()
+        data_dir = path.join(working_dir, "data")
+    old_path = path.join(data_dir, "bison.json")
+    deprecated_marker_path = path.join(data_dir, "bison.json.deprecated")
+    if os.path.exists(old_path):
+        config.db.close()
+        config.available = False
+        with open(deprecated_marker_path, "w") as file:
+            content = {
+                "migration_time": datetime.now().isoformat(),
+            }
+            file.write(json.dumps(content))
+        return True
+    return False
 
 
 class SubscribeContent(TypedDict):
@@ -47,24 +63,35 @@ class SubscribeContent(TypedDict):
 
 
 class ConfigContent(TypedDict):
-    user: str
+    user: int
     user_type: Literal["group", "private"]
     subs: list[SubscribeContent]
 
 
 class Config(metaclass=Singleton):
+    "Dropping it!"
 
     migrate_version = 2
 
     def __init__(self):
-        self.db = TinyDB(get_config_path(), encoding="utf-8")
-        self.kv_config = self.db.table("kv")
-        self.user_target = self.db.table("user_target")
-        self.target_user_cache: dict[str, defaultdict[Target, list[User]]] = {}
-        self.target_user_cat_cache = {}
-        self.target_user_tag_cache = {}
-        self.target_list = {}
-        self.next_index: DefaultDict[str, int] = defaultdict(lambda: 0)
+        self._do_init()
+
+    def _do_init(self):
+        path, deprecated_marker_path = get_config_path()
+        if Path(deprecated_marker_path).exists():
+            self.available = False
+        elif Path(path).exists():
+            self.available = True
+            self.db = TinyDB(path, encoding="utf-8")
+            self.kv_config = self.db.table("kv")
+            self.user_target = self.db.table("user_target")
+            self.target_user_cache: dict[str, defaultdict[Target, list[User]]] = {}
+            self.target_user_cat_cache = {}
+            self.target_user_tag_cache = {}
+            self.target_list = {}
+            self.next_index: DefaultDict[str, int] = defaultdict(lambda: 0)
+        else:
+            self.available = False
 
     def add_subscribe(
         self, user, user_type, target, target_name, target_type, cats, tags
@@ -220,9 +247,11 @@ class Config(metaclass=Singleton):
 
 def start_up():
     config = Config()
+    if not config.available:
+        return
     if not (search_res := config.kv_config.search(Query().name == "version")):
         config.kv_config.insert({"name": "version", "value": config.migrate_version})
-    elif search_res[0].get("value") < config.migrate_version:
+    elif search_res[0].get("value") < config.migrate_version:  # type: ignore
         query = Query()
         version_query = query.name == "version"
         cur_version = search_res[0].get("value")
@@ -238,6 +267,3 @@ def start_up():
         config.kv_config.update({"value": config.migrate_version}, version_query)
         # do migration
     config.update_send_cache()
-
-
-nonebot.get_driver().on_startup(start_up)

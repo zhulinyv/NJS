@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/bison/static/css/main.26fba2bd.css",
-    "main.js": "/bison/static/js/main.039fffd2.js",
-    "static/js/787.d90ce399.chunk.js": "/bison/static/js/787.d90ce399.chunk.js",
+    "main.css": "/bison/static/css/main.6830c7d7.css",
+    "main.js": "/bison/static/js/main.bc402205.js",
+    "static/js/787.72b3b523.chunk.js": "/bison/static/js/787.72b3b523.chunk.js",
     "index.html": "/bison/index.html",
-    "main.26fba2bd.css.map": "/bison/static/css/main.26fba2bd.css.map",
-    "main.039fffd2.js.map": "/bison/static/js/main.039fffd2.js.map",
-    "787.d90ce399.chunk.js.map": "/bison/static/js/787.d90ce399.chunk.js.map"
+    "main.6830c7d7.css.map": "/bison/static/css/main.6830c7d7.css.map",
+    "main.bc402205.js.map": "/bison/static/js/main.bc402205.js.map",
+    "787.72b3b523.chunk.js.map": "/bison/static/js/787.72b3b523.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.26fba2bd.css",
-    "static/js/main.039fffd2.js"
+    "static/css/main.6830c7d7.css",
+    "static/js/main.bc402205.js"
   ]
 }

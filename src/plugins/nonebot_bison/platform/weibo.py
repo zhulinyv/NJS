@@ -1,15 +1,23 @@
 import json
 import re
+from collections.abc import Callable
 from datetime import datetime
 from typing import Any, Optional
 
 from bs4 import BeautifulSoup as bs
+from httpx import AsyncClient
 from nonebot.log import logger
 
 from ..post import Post
 from ..types import *
-from ..utils import http_client
+from ..utils import SchedulerConfig, http_client
 from .platform import NewMessage
+
+
+class WeiboSchedConf(SchedulerConfig):
+    name = "weibo.com"
+    schedule_type = "interval"
+    schedule_setting = {"seconds": 3}
 
 
 class Weibo(NewMessage):
@@ -25,43 +33,44 @@ class Weibo(NewMessage):
     name = "新浪微博"
     enabled = True
     is_common = True
-    schedule_type = "interval"
-    schedule_kw = {"seconds": 3}
+    scheduler = WeiboSchedConf
     has_target = True
     parse_target_promot = "请输入用户主页（包含数字UID）的链接"
 
-    async def get_target_name(self, target: Target) -> Optional[str]:
-        async with http_client() as client:
-            param = {"containerid": "100505" + target}
-            res = await client.get(
-                "https://m.weibo.cn/api/container/getIndex", params=param
-            )
-            res_dict = json.loads(res.text)
-            if res_dict.get("ok") == 1:
-                return res_dict["data"]["userInfo"]["screen_name"]
-            else:
-                return None
+    @classmethod
+    async def get_target_name(
+        cls, client: AsyncClient, target: Target
+    ) -> Optional[str]:
+        param = {"containerid": "100505" + target}
+        res = await client.get(
+            "https://m.weibo.cn/api/container/getIndex", params=param
+        )
+        res_dict = json.loads(res.text)
+        if res_dict.get("ok") == 1:
+            return res_dict["data"]["userInfo"]["screen_name"]
+        else:
+            return None
 
-    async def parse_target(self, target_text: str) -> Target:
+    @classmethod
+    async def parse_target(cls, target_text: str) -> Target:
         if re.match(r"\d+", target_text):
             return Target(target_text)
         elif match := re.match(r"(?:https?://)?weibo\.com/u/(\d+)", target_text):
             # 都2202年了应该不会有http了吧，不过还是防一手
             return Target(match.group(1))
         else:
-            raise self.ParseTargetException()
+            raise cls.ParseTargetException()
 
     async def get_sub_list(self, target: Target) -> list[RawPost]:
-        async with http_client() as client:
-            params = {"containerid": "107603" + target}
-            res = await client.get(
-                "https://m.weibo.cn/api/container/getIndex?", params=params, timeout=4.0
-            )
-            res_data = json.loads(res.text)
-            if not res_data["ok"]:
-                return []
-            custom_filter: Callable[[RawPost], bool] = lambda d: d["card_type"] == 9
-            return list(filter(custom_filter, res_data["data"]["cards"]))
+        params = {"containerid": "107603" + target}
+        res = await self.client.get(
+            "https://m.weibo.cn/api/container/getIndex?", params=params, timeout=4.0
+        )
+        res_data = json.loads(res.text)
+        if not res_data["ok"] and res_data["msg"] != "这里还没有内容":
+            raise ApiError(res.request.url)
+        custom_filter: Callable[[RawPost], bool] = lambda d: d["card_type"] == 9
+        return list(filter(custom_filter, res_data["data"]["cards"]))
 
     def get_id(self, post: RawPost) -> Any:
         return post["mblog"]["id"]
@@ -138,10 +147,9 @@ class Weibo(NewMessage):
             retweeted = True
         pic_num = info["retweeted_status"]["pic_num"] if retweeted else info["pic_num"]
         if info["isLongText"] or pic_num > 9:
-            async with http_client() as client:
-                res = await client.get(
-                    "https://m.weibo.cn/detail/{}".format(info["mid"]), headers=header
-                )
+            res = await self.client.get(
+                "https://m.weibo.cn/detail/{}".format(info["mid"]), headers=header
+            )
             try:
                 match = re.search(r'"status": ([\s\S]+),\s+"call"', res.text)
                 assert match
@@ -160,12 +168,18 @@ class Weibo(NewMessage):
             else info.get("pics", [])
         )
         pic_urls = [img["large"]["url"] for img in raw_pics_list]
+        pics = []
+        for pic_url in pic_urls:
+            async with http_client(headers={"referer": "https://weibo.com"}) as client:
+                res = await client.get(pic_url)
+                res.raise_for_status()
+                pics.append(res.content)
         detail_url = "https://weibo.com/{}/{}".format(info["user"]["id"], info["bid"])
         # return parsed_text, detail_url, pic_urls
         return Post(
             "weibo",
             text=parsed_text,
             url=detail_url,
-            pics=pic_urls,
+            pics=pics,
             target_name=info["user"]["screen_name"],
         )

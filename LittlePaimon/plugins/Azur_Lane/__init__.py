@@ -23,7 +23,6 @@ __plugin_meta__ = PluginMetadata(
 
 screenshot_cmd = on_command(
     '碧蓝航线wiki',
-    aliases={'blhx wiki', '碧蓝航线', 'al wiki', 'az', 'blhx'},
     priority=10,
     block=True
 )

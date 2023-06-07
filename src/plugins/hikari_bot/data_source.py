@@ -4,8 +4,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Tuple
 
+from nonebot import get_driver
+
 dir_path = Path(__file__).parent
 template_path = dir_path / "template"
+config = get_driver().config
 
 
 @dataclass
@@ -191,6 +194,12 @@ async def set_recentparams(List):
     except Exception:
         traceback.print_exc()
 
+async def set_shipSelectparams(List):
+    try:
+        result = {"data": List}
+        return result
+    except Exception:
+        traceback.print_exc()
 
 async def set_shipparams(List):
     try:

@@ -1,15 +1,14 @@
 import asyncio
 import html
-import json
 import os
 import platform
 import random
 import re
 import sys
 import traceback
-from pathlib import Path
 
 import httpx
+import orjson
 from loguru import logger
 from nonebot import get_driver, on_command, on_fullmatch, on_message, require
 from nonebot.adapters.onebot.v11 import (
@@ -28,13 +27,13 @@ from nonebot_plugin_guild_patch import GuildMessageEvent
 from nonebot_plugin_htmlrender import text_to_pic
 
 from .command_select import select_command
-from .data_source import nb2_file
+from .data_source import nb2_file, template_path
 from .game.ocr import downlod_OcrResult, pic2txt_byOCR, upload_OcrResult
 from .game.pupu import get_pupu_msg
-from .mqtt import mqtt_run
+from .HttpClient_pool import client_default, client_yuyuko
+from .moudle.wws_clan import ClanSecletProcess
+from .moudle.wws_ship import ShipSecletProcess
 from .utils import DailyNumberLimiter, FreqLimiter, download, get_bot
-from .wws_clan import ClanSecletProcess
-from .wws_ship import ShipSecletProcess
 
 scheduler = require("nonebot_plugin_apscheduler").scheduler
 
@@ -43,9 +42,7 @@ EXCEED_NOTICE = f"您今天已经冲过{_max}次了，请明早5点后再来！"
 is_first_run = True
 _nlmt = DailyNumberLimiter(_max)
 _flmt = FreqLimiter(3)
-__version__ = "0.3.6.5"
-dir_path = Path(__file__).parent
-template_path = dir_path / "template"
+__version__ = "0.3.9.1"
 
 bot = on_command("wws", block=False, aliases={"WWS"}, priority=54)
 bot_pupu = on_fullmatch("噗噗", block=False, priority=5)
@@ -60,15 +57,9 @@ driver = get_driver()
 async def main(bot: Bot, ev: MessageEvent, matchmsg: Message = CommandArg()):
     try:
         server_type = None
-        if isinstance(ev, PrivateMessageEvent) and (
-            driver.config.private or str(ev.user_id) in driver.config.superusers
-        ):  # 私聊事件,superusers默认不受影响
+        if isinstance(ev, PrivateMessageEvent) and (driver.config.private or str(ev.user_id) in driver.config.superusers):  # 私聊事件,superusers默认不受影响
             server_type = "QQ"
-        elif (
-            isinstance(ev, GroupMessageEvent)
-            and driver.config.group
-            and ev.group_id not in driver.config.ban_group_list
-        ):  # 群聊事件
+        elif isinstance(ev, GroupMessageEvent) and driver.config.group and ev.group_id not in driver.config.ban_group_list:  # 群聊事件
             server_type = "QQ"
         elif isinstance(ev, GuildMessageEvent) and driver.config.channel:  # 频道事件
             if driver.config.all_channel or ev.channel_id in driver.config.channel_list:
@@ -88,7 +79,7 @@ async def main(bot: Bot, ev: MessageEvent, matchmsg: Message = CommandArg()):
             return False
         _flmt.start_cd(qqid)
         _nlmt.increase(qqid)
-        if random.randint(1,1000) == 1:
+        if random.randint(1, 1000) == 1:
             await bot.send(ev, "一天到晚惦记你那b水表，就nm离谱")
             return False
         searchtag = html.unescape(str(matchmsg)).strip()
@@ -135,18 +126,14 @@ async def main(bot: Bot, ev: MessageEvent, matchmsg: Message = CommandArg()):
 async def send_bot_help():
     try:
         url = "https://benx1n.oss-cn-beijing.aliyuncs.com/version.json"
-        async with httpx.AsyncClient() as client:
-            resp = await client.get(url, timeout=10)
-            result = json.loads(resp.text)
+        resp = await client_default.get(url, timeout=10)
+        result = orjson.loads(resp.text)
         latest_version = result["latest_version"]
         url = "https://benx1n.oss-cn-beijing.aliyuncs.com/wws_help.txt"
-        async with httpx.AsyncClient() as client:
-            resp = await client.get(url, timeout=10)
-            result = resp.text
+        resp = await client_default.get(url, timeout=10)
+        result = resp.text
         result = f"""帮助列表                                                当前版本{__version__}  最新版本{latest_version}\n{result}"""
-        img = await text_to_pic(
-            text=result, css_path=str(template_path / "text-help.css"), width=800
-        )
+        img = await text_to_pic(text=result, css_path=str(template_path / "text-help.css"), width=800)
         return img
     except Exception:
         logger.warning(traceback.format_exc())
@@ -162,17 +149,13 @@ async def change_select_state(ev: MessageEvent):
         if ShipSecletProcess[qqid].SelectList and str(msg).isdigit():
             if int(msg) <= len(ShipSecletProcess[qqid].SelectList):
                 ShipSecletProcess[qqid] = ShipSecletProcess[qqid]._replace(state=True)
-                ShipSecletProcess[qqid] = ShipSecletProcess[qqid]._replace(
-                    SlectIndex=int(msg)
-                )
+                ShipSecletProcess[qqid] = ShipSecletProcess[qqid]._replace(SlectIndex=int(msg))
             else:
                 await bot.send(ev, "请选择列表中的序号哦~")
         if ClanSecletProcess[qqid].SelectList and str(msg).isdigit():
             if int(msg) <= len(ClanSecletProcess[qqid].SelectList):
                 ClanSecletProcess[qqid] = ClanSecletProcess[qqid]._replace(state=True)
-                ClanSecletProcess[qqid] = ClanSecletProcess[qqid]._replace(
-                    SlectIndex=int(msg)
-                )
+                ClanSecletProcess[qqid] = ClanSecletProcess[qqid]._replace(SlectIndex=int(msg))
             else:
                 await bot.send(ev, "请选择列表中的序号哦~")
     except Exception:
@@ -214,12 +197,14 @@ async def update_Hikari(ev: MessageEvent, bot: Bot):
 
         await bot.send(ev, "正在更新Hikari，完成后将自动重启，如果没有回复您已上线的消息，请登录服务器查看")
         if hasattr(driver.config, "nb2_path"):
-            await asyncio.gather(
-                *[
-                    download(each["url"], f"{driver.config.nb2_path}\{each['name']}")
-                    for each in nb2_file
-                ]
-            )
+            # 并发fastgit会429，改为顺序请求
+            for each in nb2_file:
+                await download(each["url"], f"{driver.config.nb2_path}\{each['name']}")
+                await asyncio.sleep(0.5)
+
+            # await asyncio.gather(
+            #    *[download(each["url"], f"{driver.config.nb2_path}\{each['name']}") for each in nb2_file]
+            # )
         logger.info(f"当前解释器路径{sys.executable}")
         os.system(f"{sys.executable} -m pip install --upgrade hikari-bot")
         os.system(f"{sys.executable} -m pip install --upgrade nonebot-plugin-gocqhttp")
@@ -235,11 +220,7 @@ async def update_Hikari(ev: MessageEvent, bot: Bot):
                 # not compatible with cmdline with '\n'
                 os.execv(
                     os.readlink("/proc/self/exe"),
-                    open("/proc/self/cmdline", "rb")
-                    .read()
-                    .replace(b"\0", b"\n")
-                    .decode()
-                    .split("\n")[:-1],
+                    open("/proc/self/cmdline", "rb").read().replace(b"\0", b"\n").decode().split("\n")[:-1],
                 )
             except Exception:
                 logger.error(traceback.format_exc())
@@ -257,9 +238,8 @@ async def check_version():
     try:
         bot = get_bot()
         url = "https://benx1n.oss-cn-beijing.aliyuncs.com/version.json"
-        async with httpx.AsyncClient() as client:
-            resp = await client.get(url, timeout=10)
-            result = json.loads(resp.text)
+        resp = await client_default.get(url, timeout=10)
+        result = orjson.loads(resp.text)
         superid = driver.config.superusers
         match, msg = False, f"发现新版本"
         for each in result["data"]:
@@ -278,9 +258,7 @@ async def check_version():
                 return
         else:
             for each in superid:
-                await bot.send_private_msg(
-                    user_id=int(each), message="Hikari:当前已经是最新版本了"
-                )
+                await bot.send_private_msg(user_id=int(each), message="Hikari:当前已经是最新版本了")
             try:
                 await bot_checkversion.send("Hikari:当前已经是最新版本了")
             except Exception:
@@ -299,7 +277,7 @@ async def startup():
         url = "https://benx1n.oss-cn-beijing.aliyuncs.com/template_Hikari_Latest/template.json"
         async with httpx.AsyncClient() as client:
             resp = await client.get(url, timeout=20)
-            result = resp.json()
+            result = orjson.loads(resp.content)
             for each in result:
                 for name, url in each.items():
                     tasks.append(asyncio.ensure_future(startup_download(url, name)))
@@ -313,12 +291,10 @@ async def startup():
 
 @driver.on_bot_connect
 async def remind(bot: Bot):
-    superid = driver.config.superusers
+    """superid = driver.config.superusers
     bot_info = await bot.get_login_info()
-    """for each in superid:
-        await bot.send_private_msg(
-            user_id=int(each), message=f"Hikari已上线，当前版本{__version__}"
-        )"""
+    for each in superid:
+        await bot.send_private_msg(user_id=int(each), message=f"Hikari已上线，当前版本{__version__}")"""
     logger.success("脑积水启动完成")
     # global is_first_run
     # if is_first_run:
@@ -328,7 +304,7 @@ async def remind(bot: Bot):
 
 async def startup_download(url, name):
     async with httpx.AsyncClient() as client:
-        resp = resp = await client.get(url, timeout=20)
+        resp = await client.get(url, timeout=20)
         with open(template_path / name, "wb+") as file:
             file.write(resp.content)
 
@@ -345,12 +321,7 @@ scheduler.add_job(downlod_OcrResult, "interval", minutes=10)
 @bot_pupu.handle()
 async def send_pupu_msg(ev: MessageEvent, bot: Bot):
     try:
-        if (
-            driver.config.pupu
-            and isinstance(ev, GroupMessageEvent)
-            and driver.config.group
-            and ev.group_id not in driver.config.ban_group_list
-        ):
+        if driver.config.pupu and isinstance(ev, GroupMessageEvent) and driver.config.group and ev.group_id not in driver.config.ban_group_list:
             msg = await get_pupu_msg()
             await bot.send(ev, msg)
     except ActionFailed:

@@ -1,24 +1,25 @@
 from dataclasses import dataclass
 from typing import Protocol, Tuple
 
+from .game.ban_search import get_BanInfo
 from .game.box_check import check_christmas_box
 from .game.ocr import get_Random_Ocr_Pic
 from .game.roll import roll_ship
 from .game.sx import get_sx_info
-from .publicAPI import get_ship_name
-from .wws_bind import (
+from .moudle.publicAPI import get_ship_name
+from .moudle.wws_bind import (
     change_BindInfo,
     delete_BindInfo,
     get_BindInfo,
     set_BindInfo,
     set_special_BindInfo,
 )
-from .wws_clan import get_ClanInfo
-from .wws_info import get_AccountInfo
-from .wws_recent import get_RecentInfo
-from .wws_record import get_record
-from .wws_ship import get_ShipInfo, get_ShipInfoRecent
-from .wws_shiprank import get_ShipRank
+from .moudle.wws_clan import get_ClanInfo
+from .moudle.wws_info import get_AccountInfo
+from .moudle.wws_recent import get_RecentInfo
+from .moudle.wws_record import get_record
+from .moudle.wws_ship import get_ShipInfo, get_ShipInfoRecent
+from .moudle.wws_shiprank import get_ShipRank
 
 
 class Func(Protocol):
@@ -47,6 +48,7 @@ first_command_list = [  # 同指令中越长的匹配词越靠前
     command(("随机表情包",), get_Random_Ocr_Pic),
     command(("roll", "随机"), roll_ship),
     command(("sx", "扫雪"), get_sx_info),
+    command(("ban","封号记录"),get_BanInfo),
     command(("box", "sd", "圣诞船池"), check_christmas_box),
     command(("搜船名", "查船名", "船名"), get_ship_name),
 ]

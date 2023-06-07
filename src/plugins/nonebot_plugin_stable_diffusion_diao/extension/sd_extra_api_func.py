@@ -67,7 +67,7 @@ get_backend_status = on_command("后端", aliases={"查看后端"})
 get_emb = on_command("emb", aliases={"embs"})
 get_lora = on_command("lora", aliases={"loras"})
 get_sampler = on_command("采样器", aliases={"获取采样器"})
-translate_ = on_command("翻译")
+# translate_ = on_command("翻译")
 hr_fix = on_command("高清修复") # 欸，还没写呢，就是玩
 random_tags = on_command("随机tag")
 find_pic = on_command("找图片")
@@ -634,11 +634,11 @@ async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
     await risk_control(bot, event, model_list+module_list, True)
 
 
-@translate_.handle()
-async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
-    txt_msg = msg.extract_plain_text()
-    en = await translate(txt_msg, "en")
-    await risk_control(bot=bot, event=event, message=[en])
+# @translate_.handle()
+# async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
+#     txt_msg = msg.extract_plain_text()
+#     en = await translate(txt_msg, "en")
+#     await risk_control(bot=bot, event=event, message=[en])
 
 
 @random_tags.handle()

@@ -1,21 +1,13 @@
 import json
-from typing import Any, Optional
+from typing import Any
 
 from bs4 import BeautifulSoup as bs
-from httpx import AsyncClient
 from nonebot.plugin import require
 
 from ..post import Post
 from ..types import Category, RawPost, Target
-from ..utils.scheduler_config import SchedulerConfig
-from .platform import CategoryNotRecognize, NewMessage, StatusChange
-
-
-class ArknightsSchedConf(SchedulerConfig):
-
-    name = "arknights"
-    schedule_type = "interval"
-    schedule_setting = {"seconds": 30}
+from ..utils import http_client
+from .platform import CategoryNotSupport, NewMessage, StatusChange
 
 
 class Arknights(NewMessage):
@@ -26,20 +18,19 @@ class Arknights(NewMessage):
     enable_tag = False
     enabled = True
     is_common = False
-    scheduler = ArknightsSchedConf
+    schedule_type = "interval"
+    schedule_kw = {"seconds": 30}
     has_target = False
 
-    @classmethod
-    async def get_target_name(
-        cls, client: AsyncClient, target: Target
-    ) -> Optional[str]:
+    async def get_target_name(self, _: Target) -> str:
         return "明日方舟游戏信息"
 
     async def get_sub_list(self, _) -> list[RawPost]:
-        raw_data = await self.client.get(
-            "https://ak-conf.hypergryph.com/config/prod/announce_meta/IOS/announcement.meta.json"
-        )
-        return json.loads(raw_data.text)["announceList"]
+        async with http_client() as client:
+            raw_data = await client.get(
+                "https://ak-conf.hypergryph.com/config/prod/announce_meta/IOS/announcement.meta.json"
+            )
+            return json.loads(raw_data.text)["announceList"]
 
     def get_id(self, post: RawPost) -> Any:
         return post["announceId"]
@@ -53,7 +44,8 @@ class Arknights(NewMessage):
     async def parse(self, raw_post: RawPost) -> Post:
         announce_url = raw_post["webUrl"]
         text = ""
-        raw_html = await self.client.get(announce_url)
+        async with http_client() as client:
+            raw_html = await client.get(announce_url)
         soup = bs(raw_html.text, "html.parser")
         pics = []
         if soup.find("div", class_="standerd-container"):
@@ -79,7 +71,7 @@ class Arknights(NewMessage):
         elif pic := soup.find("img", class_="banner-image"):
             pics.append(pic["src"])  # type: ignore
         else:
-            raise CategoryNotRecognize("未找到可渲染部分")
+            raise CategoryNotSupport()
         return Post(
             "arknights",
             text=text,
@@ -99,22 +91,21 @@ class AkVersion(StatusChange):
     enable_tag = False
     enabled = True
     is_common = False
-    scheduler = ArknightsSchedConf
+    schedule_type = "interval"
+    schedule_kw = {"seconds": 30}
     has_target = False
 
-    @classmethod
-    async def get_target_name(
-        cls, client: AsyncClient, target: Target
-    ) -> Optional[str]:
+    async def get_target_name(self, _: Target) -> str:
         return "明日方舟游戏信息"
 
     async def get_status(self, _):
-        res_ver = await self.client.get(
-            "https://ak-conf.hypergryph.com/config/prod/official/IOS/version"
-        )
-        res_preanounce = await self.client.get(
-            "https://ak-conf.hypergryph.com/config/prod/announce_meta/IOS/preannouncement.meta.json"
-        )
+        async with http_client() as client:
+            res_ver = await client.get(
+                "https://ak-conf.hypergryph.com/config/prod/official/IOS/version"
+            )
+            res_preanounce = await client.get(
+                "https://ak-conf.hypergryph.com/config/prod/announce_meta/IOS/preannouncement.meta.json"
+            )
         res = res_ver.json()
         res.update(res_preanounce.json())
         return res
@@ -156,20 +147,17 @@ class MonsterSiren(NewMessage):
     enable_tag = False
     enabled = True
     is_common = False
-    scheduler = ArknightsSchedConf
+    schedule_type = "interval"
+    schedule_kw = {"seconds": 30}
     has_target = False
 
-    @classmethod
-    async def get_target_name(
-        cls, client: AsyncClient, target: Target
-    ) -> Optional[str]:
+    async def get_target_name(self, _: Target) -> str:
         return "明日方舟游戏信息"
 
     async def get_sub_list(self, _) -> list[RawPost]:
-        raw_data = await self.client.get(
-            "https://monster-siren.hypergryph.com/api/news"
-        )
-        return raw_data.json()["data"]["list"]
+        async with http_client() as client:
+            raw_data = await client.get("https://monster-siren.hypergryph.com/api/news")
+            return raw_data.json()["data"]["list"]
 
     def get_id(self, post: RawPost) -> Any:
         return post["cid"]
@@ -182,15 +170,16 @@ class MonsterSiren(NewMessage):
 
     async def parse(self, raw_post: RawPost) -> Post:
         url = f'https://monster-siren.hypergryph.com/info/{raw_post["cid"]}'
-        res = await self.client.get(
-            f'https://monster-siren.hypergryph.com/api/news/{raw_post["cid"]}'
-        )
-        raw_data = res.json()
-        content = raw_data["data"]["content"]
-        content = content.replace("</p>", "</p>\n")
-        soup = bs(content, "html.parser")
-        imgs = list(map(lambda x: x["src"], soup("img")))
-        text = f'{raw_post["title"]}\n{soup.text.strip()}'
+        async with http_client() as client:
+            res = await client.get(
+                f'https://monster-siren.hypergryph.com/api/news/{raw_post["cid"]}'
+            )
+            raw_data = res.json()
+            content = raw_data["data"]["content"]
+            content = content.replace("</p>", "</p>\n")
+            soup = bs(content, "html.parser")
+            imgs = list(map(lambda x: x["src"], soup("img")))
+            text = f'{raw_post["title"]}\n{soup.text.strip()}'
         return Post(
             "monster-siren",
             text=text,
@@ -210,20 +199,19 @@ class TerraHistoricusComic(NewMessage):
     enable_tag = False
     enabled = True
     is_common = False
-    scheduler = ArknightsSchedConf
+    schedule_type = "interval"
+    schedule_kw = {"seconds": 30}
     has_target = False
 
-    @classmethod
-    async def get_target_name(
-        cls, client: AsyncClient, target: Target
-    ) -> Optional[str]:
+    async def get_target_name(self, _: Target) -> str:
         return "明日方舟游戏信息"
 
     async def get_sub_list(self, _) -> list[RawPost]:
-        raw_data = await self.client.get(
-            "https://terra-historicus.hypergryph.com/api/recentUpdate"
-        )
-        return raw_data.json()["data"]
+        async with http_client() as client:
+            raw_data = await client.get(
+                "https://terra-historicus.hypergryph.com/api/recentUpdate"
+            )
+            return raw_data.json()["data"]
 
     def get_id(self, post: RawPost) -> Any:
         return f'{post["comicCid"]}/{post["episodeCid"]}'

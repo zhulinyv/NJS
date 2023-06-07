@@ -38,7 +38,8 @@ class Version():
             self.lastcheck = time.time()
         # 如果没有推送，则启动推送流程
         if not self.ispushed:
-            await sendtosuperuser(self.push_txt())
+            # await sendtosuperuser(self.push_txt())
+            logger.info(self.push_txt())
             self.ispushed = True
 
     def push_txt(self):

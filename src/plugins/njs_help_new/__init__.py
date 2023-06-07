@@ -1,7 +1,6 @@
 import os
 import ujson as json
 
-from nonebot.log import logger
 from nonebot.params import CommandArg
 from nonebot.plugin.on import on_command
 from nonebot.adapters.onebot.v11 import (

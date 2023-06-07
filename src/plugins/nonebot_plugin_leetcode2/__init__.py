@@ -10,7 +10,7 @@ from .get_user_data import *
 
 
 
-request_today = on_command("lc每日一题",aliases={"lc","leetcode"},priority = 10,block = True)
+request_today = on_command("lc每日",aliases={"lc","leetcode"},priority = 10,block = True)
 
 request_search = on_command("lc查找",aliases={"lc搜索","leetcode搜索"},priority = 10,block = True)
 

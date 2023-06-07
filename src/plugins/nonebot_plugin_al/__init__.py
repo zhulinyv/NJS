@@ -31,7 +31,7 @@ __plugin_meta__ = PluginMetadata(
 )
 
 al_command = on_command('al',aliases={'碧蓝航线'},priority=30,block=True)
-tag_ser = on_command('alhelp',aliases={'碧蓝航线指令','碧蓝航线帮助'},priority=25,block=True)
+tag_ser = on_command('alhelp',aliases={'碧蓝航线指令','碧蓝航线帮助'},priority=30,block=True)
 tags = ['强度榜','装备榜','金部件榜','萌新榜','兵器榜','专武榜',
         '兑换榜','研发榜','改造榜','跨队榜','pt榜','氪金榜','打捞主线榜','打捞作战榜']
 with open((Path(__file__).parent.joinpath("ship.json")),
@@ -40,13 +40,13 @@ with open((Path(__file__).parent.joinpath("ship.json")),
 
 @tag_ser.handle()
 async def _(matcher:Matcher):
-    msg = '指令:碧蓝航线+\n----------'
+    msg = '指令:碧蓝+\n----------'
     data:str = ''
     for one in tags:
         data += f'{one} | '
     msg += data
     msg += "----------"
-    msg += "碧蓝角色【角色名称】"
+    msg += "碧蓝航线角色【角色名称】"
     await matcher.finish(msg)
 
 @al_command.handle()
@@ -57,6 +57,7 @@ async def _(matcher:Matcher,args:Message = CommandArg()):
         await matcher.finish(MessageSegment.image(await get_data(await jinghao(word))))
     elif word.startswith("角色"):
         # 舰船搜索
+        word = word[3:]
         for key, value in ships.items():
             if any(word in sublist for sublist in value):
                 await matcher.finish(MessageSegment.image(await get_ship_msg(key)))

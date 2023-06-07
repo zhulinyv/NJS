@@ -31,7 +31,7 @@ __plugin_meta__ = PluginMetadata(
 )
 
 al_command = on_command('al',aliases={'碧蓝航线'},priority=30,block=True)
-tag_ser = on_command('alhelp',aliases={'碧蓝指令','碧蓝帮助'},priority=30,block=True)
+tag_ser = on_command('alhelp',aliases={'碧蓝航线指令','碧蓝航线帮助'},priority=25,block=True)
 tags = ['强度榜','装备榜','金部件榜','萌新榜','兵器榜','专武榜',
         '兑换榜','研发榜','改造榜','跨队榜','pt榜','氪金榜','打捞主线榜','打捞作战榜']
 with open((Path(__file__).parent.joinpath("ship.json")),

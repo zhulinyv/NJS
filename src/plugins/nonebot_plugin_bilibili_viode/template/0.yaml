@@ -1,0 +1,102 @@
+base: # 基础配置
+  width: 960 # 宽度
+  height: 1219 # 高度
+
+background_image: # 底层背景图
+  type: "image" # 背景类型，可选值：image, color
+  visible: true # 是否可见
+  path: "0.png" # 背景图片路径
+  # 如果不指定图片路径，将使用纯色背景
+  # color: "#000000" # 背景颜色
+  # 如果不指定图片路径，也不指定背景颜色，将使用默认背景颜色
+
+title: # 标题
+  type: "text" # 文本类型，可选值：text, image
+  visible: true # 是否可见
+  x: 125 # x坐标
+  y: 703 # y坐标
+  font: SourceHanSansSC-Bold.otf # 字体文件路径
+  font_size: 45 # 字体大小
+  font_color: "#000000" # 字体颜色
+  font_max_width: 685 # 单行最大宽度
+  font_max_lines: 2 # 最大行数
+
+cover: # 封面图
+  type: "image"
+  visible: true # 是否可见
+  x: 120 # x坐标
+  y: 205 # y坐标
+  width: 723 # 宽度
+  height: 411 # 高度
+  radius: 50 # 圆角半径
+
+pubdate: # 发布时间
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 133
+  y: 912
+  font: SourceHanSansSC-Light.otf
+  font_size: 33
+  font_color: "#a9a9a9"
+
+view: # 播放量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 125
+  y: 835
+  font: SourceHanSansSC-Normal.otf
+  font_size: 35
+  font_color: "#878789"
+
+like: # 点赞量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 325
+  y: 835
+  font: SourceHanSansSC-Normal.otf
+  font_size: 35
+  font_color: "#878789"
+
+danmaku: # 弹幕量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 525
+  y: 835
+  font: SourceHanSansSC-Normal.otf
+  font_size: 35
+  font_color: "#878789"
+
+up_name: # 作者名称
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 195
+  y: 1050
+  font: SourceHanSansSC-Bold.otf
+  font_size: 35
+  font_color: "#575757"
+
+up_face: # 作者头像
+  type: "image" # 文本类型，可选值：text, image
+  visible: true
+  x: 70
+  y: 1055
+  width: 100
+  height: 100
+  radius: 50
+
+up_follower: # 作者粉丝量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 195
+  y: 1110
+  font: SourceHanSansSC-Normal.otf
+  font_size: 30
+  font_color: "#333333"
+
+qrcode: # 二维码
+  type: "image" # 文本类型，可选值：text, image
+  visible: true
+  x: 755
+  y: 1048
+  width: 130
+  height: 130

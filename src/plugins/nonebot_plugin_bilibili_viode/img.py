@@ -2,263 +2,313 @@ import time
 from io import BytesIO
 from pathlib import Path
 
+import httpx
 import qrcode
-from httpx import AsyncClient
+from nonebot.log import logger
 from PIL import Image, ImageDraw, ImageFont
 
-from .model import VideoInfo
-from .utils import format_number, get_video_info
+from .models.bilibili import VideoInfo
+from .models.config import ImageItem, TextItem
+from .utils import format_number, load_config
+
+IMG_DIR = Path(__file__).parent / 'resource/image'
+FONT_DIR = Path(__file__).parent / 'resource/font'
 
 
-def circle_corner(img, radii):  # 把原图片变成圆角，
+def _str2color(color: str) -> tuple:
+    """
+    将颜色字符串转换为RGB元组
+    """
+    if color.startswith('#'):
+        color = color[1:]
+        return tuple(int(color[i:i + 2], 16) for i in (0, 2, 4))
+    elif color.startswith('rgb('):
+        color = color[4:-1]
+        return tuple(int(c) for c in color.split(','))
+    else:
+        raise ValueError('不支持的颜色格式')
+
+
+def _font_wight(font: ImageFont, text: str) -> int:
+    """
+    计算文本的宽度
+    """
+    return font.getlength(text)
+
+
+def _font_remove(
+    text: str,
+    font: ImageFont,
+    max_width: int,
+) -> str:
+    """
+    根据最大宽度，移除文本中的部分字符,并在末尾添加省略号（由于添加省略号后宽度可能超过最大宽度，所以需要多次调用该方法）
+    """
+    while _font_wight(font, text) > max_width:
+        text = text[:-1]
+    return text + '...' if text != '' else ''
+
+
+def _text_split(
+    text: str,
+    font: ImageFont,
+    max_width: int,
+    max_lines: int,
+) -> str:
+    """
+    根据最大宽度和最大行数，将文本分割为多行
+    """
+    lines = []
+    line = ''
+    for c in text:
+        if _font_wight(font, line + c) <= max_width:
+            line += c
+        else:
+            lines.append(line)
+            line = c
+    lines.append(line)
+    # 如果行数超过最大行数，则截断多余的行，并移除多余的字符
+    if len(lines) > max_lines:
+        lines = lines[:max_lines]
+        lines[-1] = _font_remove(lines[-1], font, max_width)
+    result = ''
+    for line in lines:
+        result += line + '\n'
+    return result[:-1]
+
+
+def _circle_image(img: Image, radius: int) -> Image:
     """
     圆角处理
     :param img: 源图象。
-    :param radii: 半径，如：30。
+    :param radius: 半径，如：30。
     :return: 返回一个圆角处理后的图象。
     """
-
+    """
+    圆角处理
+    :param img: 源图象。
+    :param radius: 半径，如：30。
+    :return: 返回一个圆角处理后的图象。
+    """
+    if radius <= 0:
+        return img
     # 画圆（用于分离4个角）
-    circle = Image.new("L", (radii * 2, radii * 2), 0)  # 创建一个黑色背景的画布
+    circle = Image.new('L', (radius * 2, radius * 2), 0)  # 创建一个黑色背景的画布
     draw = ImageDraw.Draw(circle)
-    draw.ellipse((0, 0, radii * 2, radii * 2), fill=255)  # 画白色圆形
-
+    draw.ellipse((0, 0, radius * 2, radius * 2), fill=255)  # 画白色圆形
     # 原图
     img = img.convert("RGBA")
     w, h = img.size
 
     # 画4个角（将整圆分离为4个部分）
-    alpha = Image.new("L", img.size, 255)
-    alpha.paste(circle.crop((0, 0, radii, radii)), (0, 0))  # 左上角
-    alpha.paste(circle.crop((radii, 0, radii * 2, radii)), (w - radii, 0))  # 右上角
-    alpha.paste(
-        circle.crop((radii, radii, radii * 2, radii * 2)), (w - radii, h - radii)
-    )  # 右下角
-    alpha.paste(circle.crop((0, radii, radii, radii * 2)), (0, h - radii))  # 左下角
+    alpha = Image.new('L', img.size, 255)
+    alpha.paste(circle.crop((0, 0, radius, radius)), (0, 0))  # 左上角
+    alpha.paste(circle.crop((radius, 0, radius * 2, radius)),
+                (w - radius, 0))  # 右上角
+    alpha.paste(circle.crop((radius, radius, radius * 2, radius * 2)),
+                (w - radius, h - radius))  # 右下角
+    alpha.paste(circle.crop((0, radius, radius, radius * 2)),
+                (0, h - radius))  # 左下角
     # alpha.show()
 
     img.putalpha(alpha)  # 白色区域透明可见，黑色区域不可见
     return img
 
-    # 创建二维码
-    qrcode = Image.new("RGB", (300, 300), (255, 255, 255))
-    # 创建二维码的Draw对象
-    draw = ImageDraw.Draw(qrcode)
+
+def _url2QRcode(url: str) -> Image:
+    """
+    将url转换为二维码图片
+    :param url: url
+    :return: 二维码图片
+    """
+    qr = qrcode.QRCode(version=1,
+                       error_correction=qrcode.constants.ERROR_CORRECT_L,
+                       box_size=10,
+                       border=0)
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black",
+                        back_color=(255, 255, 255, 0)).convert('RGBA')
+    img_data = img.getdata()
+    new_data = []
+    for item in img_data:
+        if item[3] == 0:
+            new_data.append((255, 255, 255, 0))
+        else:
+            new_data.append(item)
+    img.putdata(new_data)
+    return img
 
 
-async def build_get_share_info(video_info: VideoInfo) -> bytes:
+def _url2Image(url: str, size: tuple = (0, 0)) -> Image:
     """
-    构建获取分享链接的图片
-    :param video_id: 视频id
-    :return: 图片
+    将url转换为Image对象
+    :param url: url
+    :param size: 图片大小,默认为(0,0)，表示不改变图片大小
     """
-    if not video_info:
-        return None
-    # 图片尺寸 1750 x 1500
-    img_width = 1750
-    img_height = 1500
-    # 创建一个空白图片，背景色为白色
-    img = Image.new("RGB", (img_width, img_height), (255, 255, 255))
-    # 绘制UP主信息
-    # UP头像贴到左上角
-    async with AsyncClient() as client:
-        resp = await client.get(video_info.upInfo.face)
-        img_up_icon = Image.open(BytesIO(resp.content))
-        img_up_icon = img_up_icon.resize((150, 150))
-        img.paste(img_up_icon, (25, 25))
-    # UP名字绘制到头像右侧，间距为25
-    draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("msyh.ttc", 60)
-    draw.text(
-        (img_up_icon.width + 50, 30), video_info.upInfo.name, (251, 114, 153), font
-    )
-    # 发布时间绘制到UP名字下方，间距为25
-    font = ImageFont.truetype("msyh.ttc", 80)
-    # 计算发布时间
-    now_time = int(time.time())
-    time_diff = now_time - video_info.pubdate
-    if time_diff < 60:
-        time_str = "刚刚"
-    elif time_diff < 3600:
-        time_str = f"{int(time_diff / 60)}分钟前"
-    elif time_diff < 3600 * 24:
-        hours = int(time_diff / 3600 % 24)
-        time_str = f"{hours}小时前"
+    response = httpx.get(url, verify=False, timeout=None)
+    if response.status_code == 200:
+        img = Image.open(BytesIO(response.content))
+        if size != (0, 0):
+            img = img.resize(size)
+        return img
+
+
+def _render_image(draw, data, config: ImageItem):
+    """
+    在底层画布上绘制一个图像。
+
+    参数：
+    - draw：底层画布
+    - data：图像数据，一个Image对象
+    - config：图像配置项，一个字典，包括以下字段：
+        - x：图像左上角在画布上的x坐标
+        - y：图像左上角在画布上的y坐标
+        - width：图像的宽度
+        - height：图像的高度
+        - opacity：不透明度（0-255）
+
+    返回值：无
+
+    """
+    # 如果指定了图像文件名
+    if config.path:
+        # 如果文件名是一个url，则先下载图像
+        if config.path.startswith('http'):
+            data = _url2Image(config.path)
+        # 如果文件名是一个本地文件，则直接读取图像
+        else:
+            data = Image.open(IMG_DIR / config.path)
+    # 如果没有指定宽度和高度，则使用原图的宽度和高度
+    _width = config.width if config.width else data.width
+    _height = config.height if config.height else data.height
+    # 如果有指定圆角半径，则将图像裁剪为圆形
+    if config.radius:
+        data = _circle_image(data, config.radius)
     else:
-        days = int(time_diff / 3600 / 24)
-        time_str = f"{days}天前"
-    # 绘制发布时间,字体颜色为灰色
-    font = ImageFont.truetype("msyh.ttc", 50)
-    draw.text(
-        (img_up_icon.width + 50, 105),
-        time_str,
-        (128, 128, 128),
-        font,
-    )
-    # 将网络图片转换为PIL图片
-    async with AsyncClient() as client:
-        resp = await client.get(video_info.pic)
-        if resp.status_code == 200:
-            picture = Image.open(BytesIO(resp.content))
-            # 将图片缩放到宽度与空白图片左右留白25像素一致，高度自适应
-            picture = picture.resize(
-                (img_width - 50, int(picture.height * (img_width - 50) / picture.width))
-            )
-            # 将图片绘制到空白图片上
-            img.paste(picture, (25, 300))
-
-    # 绘制视频信息
-    # 视频标题绘制到图片上，左边距为25
-    title = video_info.title
-    font = ImageFont.truetype("msyh.ttc", 90)
-    if img_width - 50 < font.getsize(title)[0]:
-        sum = 0
-        for i in range(len(title)):
-            sum += font.getsize(title[i])[0]
-            if sum > img_width - 50:
-                title = title[: i - 1] + "···"
-                break
-    # 在空白图片绘制文字,上边距为190，左边距为25，字体大小为60，字体颜色为黑
-    draw.text((25, 180), title, (0, 0, 0), font=font)
-    # 绘制视频简介
-    desc = video_info.desc.replace("\n", "")
-    font = ImageFont.truetype("msyh.ttc", 50)
-    _height = 0
-    # 如果视频简介超出2行
-    if font.getsize(desc)[0] > (img_width - 50) * 2:
-        # 计算简介字符的超出位数
-        sum = 0
-        n = 0
-        for i in range(len(desc)):
-            sum += font.getsize(desc[i])[0]
-            if sum > (img_width - 50) * 2:
-                # 将简介字符超出的部分删除
-                desc = desc[: i - 5] + "···"
-                break
-            if sum > (img_width - 50):
-                if n == 0:
-                    n = i
-        _height = img_height - font.getsize(desc)[1] * 2 - 5
-        for i in range(0, len(desc), n):
-            draw.text((25, _height), desc[i : i + n], (0, 0, 0), font=font)
-            _height += font.getsize(desc[i : i + n])[1]
-    # 如果简介不足2行，则图片高度裁剪70像素
-    elif font.getsize(desc)[0] < (img_width - 50):
-        img = img.crop((0, 0, img_width, img_height - 70))
-        img_height -= 70
-        _height = img_height - font.getsize(desc)[1] - 5
-        draw = ImageDraw.Draw(img)
-        # 在空白图片底部绘制文字,下边距为font高度乘2加25，左边距为25，字体颜色为黑
-        draw.text((25, _height), desc, (0, 0, 0), font=font)
-
-    # 将图片转换为PIL图片
-    img = img.convert("RGB")
-    # 将PIL图片转换为bytes
-    img_bytes = BytesIO()
-    img.save(img_bytes, "png")
-    return img_bytes.getvalue()
+        data = data.convert('RGBA')
+    # 将图像缩放到指定大小
+    data = data.resize((_width, _height), Image.ANTIALIAS)
+    # 将图像粘贴到画布上
+    draw.paste(data, (config.x, config.y), data)
+    return draw
 
 
-async def build_video_poster(video_info: VideoInfo):
+def _render_text(draw, text, config: TextItem):
     """
-    生成视频海报
-    :param video_id: 视频id
-    :return: 视频海报
+    在底层画布上绘制一段文本。
+
+    参数：
+    - draw：底层画布
+    - text：文本内容，一个字符串
+    - config：文本配置项，一个字典，包括以下字段：
+        - x：文本左上角在画布上的x坐标
+        - y：文本左上角在画布上的y坐标
+        - font：字体文件路径
+        - font_size：字体大小
+        - color：文本颜色，一个#开头的十六进制颜色值
+        - font_max_width：文本最大宽度，超过该宽度则自动换行
+        - font_max_lines：文本最大行数，超过该行数则自动截断
+
+    返回值：无
     """
-    if video_info is None:
-        return None
-    res_path = Path(__file__).parent.joinpath("resource")
-    base_img = Image.open(res_path / "image/template.png")
-    # 封面图片
-    async with AsyncClient(verify=False) as client:
-        resp = await client.get(video_info.pic)
-        if resp.status_code == 200:
-            picture = Image.open(BytesIO(resp.content))
-            # 将图片缩放到宽度为725，高度自适应
-            picture = picture.resize((722, 410), Image.ANTIALIAS)
-            picture = circle_corner(picture, 10)
-            # 将图片绘制到base图片上
-            base_img.paste(picture, (120, 205), picture)
-    # UP头像
-    async with AsyncClient(verify=False) as client:
-        resp = await client.get(video_info.upInfo.face)
-        if resp.status_code == 200:
-            picture = Image.open(BytesIO(resp.content))
-            # 将图片缩放到宽度为100，高度自适应
-            picture = picture.resize((100, 100), Image.ANTIALIAS)
-            picture = circle_corner(picture, 50)
-            # 将图片绘制到base图片上
-            base_img.paste(picture, (70, 1055), picture)
-    # 二维码
-    qr = qrcode.QRCode(
-        version=3,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=50,
-        border=4,
-    )
-    qr.add_data(video_info.shareUrl)
-    qr.make()
-    picture = qr.make_image(fill_color="black", back_color="white")
-    picture = picture.resize((150, 150))
-    picture = circle_corner(picture, 20)
-    base_img.paste(picture, (745, 1038), picture)
+    font = ImageFont.truetype(str(FONT_DIR / config.font), config.font_size)
+    # 如果指定了最大宽度，
+    if config.font_max_width:
+        # 如果指定了最大行数
+        if config.font_max_lines:
+            # 如果文本的宽度大于最大宽度乘以最大行数，则先分割文本为多行
+            if _font_wight(font, text) > config.font_max_width:
+                text = _text_split(text, font, config.font_max_width,
+                                   config.font_max_lines)
+        # 如果没有指定最大行数，则直接移除文本中的部分字符
+        else:
+            text = _font_remove(text, font, config.font_max_width)
+    # 将颜色转换为RGBA格式
+    color = _str2color(config.font_color)
+    draw.text(xy=(config.x, config.y), text=str(text), font=font, fill=color)
+    return draw
 
-    draw = ImageDraw.Draw(base_img)
 
-    # 视频标题
-    title = video_info.title
-    # 每行文字最大宽度为685，如果超出2行则截取
-    font = ImageFont.truetype(
-        (res_path / "font/SourceHanSansSC-Bold.otf").__str__(), 45
-    )
-    # 如果视频标题超出1行
-    if font.getsize(title)[0] > 685:
-        # 计算标题字符的超出位数
-        sum = 0
-        for i in range(len(title)):
-            sum += font.getsize(title[i])[0]
-            if sum > 685:
-                title = title[:i] + "\n" + title[i:]
-                break
-    # 如果视频标题超出2行
-    if font.getsize(title)[0] > 685 * 2:
-        # 计算标题字符的超出位数
-        sum = font.getsize("···")[0]
-        for i in range(len(title)):
-            sum += font.getsize(title[i])[0]
-            if sum > 685 * 2:
-                # 将标题字符超出的部分删除
-                title = title[:i] + "···"
-                break
+def render_img(video_info: VideoInfo, config: str) -> Image:
+    """
+    根据视频信息和配置项生成视频封面。
 
-    # 将标题绘制到base图片上
-    draw.text((125, 703), title, (0, 0, 0), font=font)
-    # 视频信息
-    tmp = f"{format_number(video_info.stat.view)}播放· {format_number(video_info.stat.like)}点赞 · {format_number(video_info.stat.danmaku)}弹幕"
-    font = ImageFont.truetype(
-        (res_path / "font/SourceHanSansSC-Normal.otf").__str__(), 35
-    )
-    draw.text((125, 835), tmp, "#878789", font=font)
-    # 视频发布时间
-    tmp = "发布于：" + time.strftime("%Y-%m-%d %H:%M", time.localtime(video_info.pubdate))
-    font = ImageFont.truetype(
-        (res_path / "font/SourceHanSansSC-Light.otf").__str__(), 35
-    )
-    draw.text((133, 910), tmp, "#a9a9a9", font=font)
-    # UP主信息
-    tmp = video_info.upInfo.name
-    font = ImageFont.truetype(
-        (res_path / "font/SourceHanSansSC-Bold.otf").__str__(), 35
-    )
-    draw.text((195, 1070), tmp, "#575757", font=font)
-    # UP主粉丝数
-    tmp = f"{format_number(video_info.upInfo.fans)}粉丝"
-    font = ImageFont.truetype(
-        (res_path / "font/SourceHanSansSC-Normal.otf").__str__(), 30
-    )
-    draw.text((195, 1120), tmp, "#828385", font=font)
+    参数：
+    - video_info：视频信息，一个VideoInfo对象
+    - config：配置项索引，默认值为0，表示使用templates目录下的0.yaml配置文件
 
-    base_img = base_img.convert("RGB")
-    img_bytes = BytesIO()
-    base_img.save(img_bytes, "png")
-    return img_bytes.getvalue()
+    返回值：一个Image对象
+    """
+    start_time = time.time()
+
+    # 读取配置文件
+    config = load_config(config)
+    logger.debug(f"读取配置文件耗时：{time.time()-start_time}秒")
+    # 创建画布
+    canvas_config = config['base']
+    w = canvas_config.get('width')
+    h = canvas_config.get('height')
+    c = canvas_config.get('color', (255, 255, 255, 0))
+    # 如果没有指定宽度和高度，则尝试使用background_image的宽度和高度
+    if not w or not h:
+        try:
+            background_image = config.get('background_image')
+            if background_image:
+                w = background_image.get('width')
+                h = background_image.get('height')
+            else:
+                raise ValueError("未指定宽度和高度")
+        except Exception as e:
+            raise e
+    canvas = Image.new('RGBA', (w, h), c)
+    config.pop('base')
+    draw = ImageDraw.Draw(canvas)
+    logger.debug(f"创建画布耗时：{time.time()-start_time}秒")
+    # 预处理 VideoInfo, 将其中的数据转换
+    video_data = {
+        'title':
+        video_info.title,  # 视频标题
+        'cover':
+        _url2Image(video_info.pic),  # 封面
+        'duration':
+        time.strftime("%M:%S", time.gmtime(video_info.duration)),  # 时长
+        'pubdate':
+        time.strftime("发布于 %Y-%m-%d %H:%M:%S",
+                      time.localtime(video_info.pubdate)),  # 发布时间
+        'view':
+        format_number(video_info.stat.view) + " 播放",  # 播放量
+        'danmaku':
+        format_number(video_info.stat.danmaku) + " 弹幕",  # 弹幕数
+        'favorite':
+        format_number(video_info.stat.favorite) + " 收藏",  # 收藏数
+        'coin':
+        format_number(video_info.stat.coin) + " 硬币",  # 硬币数
+        'share':
+        format_number(video_info.stat.share) + " 分享",  # 分享数
+        'like':
+        format_number(video_info.stat.like) + " 点赞",  # 点赞数
+        'up_name':
+        video_info.owner.name,  # up主名字
+        'up_face':
+        _url2Image(video_info.owner.face, (300, 300)),  # up主头像
+        'up_mid':
+        video_info.owner.mid,  # up主mid
+        'up_follower':
+        format_number(video_info.owner.follower) + "粉丝",  # up主粉丝数
+        'qrcode':
+        _url2QRcode(video_info.share_url),  # 二维码
+    }
+    logger.debug(f"预处理VideoInfo耗时：{time.time()-start_time}秒")
+    # 循环从配置文件读取每个配置项，并根据配置项的类型调用相应的渲染函数
+    for k, v in config.items():
+        if v.get('type') == 'image':
+            c = ImageItem(**v)
+            _render_image(canvas, video_data.get(k), c)
+        elif v.get('type') == 'text':
+            c = TextItem(**v)
+            _render_text(draw, video_data.get(k), c)
+        else:
+            raise ValueError("未知的配置项类型")
+    logger.debug(f"渲染耗时：{time.time()-start_time}秒")
+    return canvas

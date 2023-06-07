@@ -1,0 +1,135 @@
+base: # 基础配置
+  width: 960 # 宽度
+  height: 500 # 高度
+  color: "#ffffff" # 背景颜色
+
+cover: # 封面图
+  type: "image" # 文本类型，可选值：text, image
+  visible: true # 是否可见
+  x: 35 # x坐标
+  y: 150 # y坐标
+  width: 560 # 宽度
+  height: 315 # 高度
+  radius: 0 # 圆角半径
+
+background_image:
+  type: "image" # 文本类型，可选值：text, image
+  path: "1.png" # 背景图片路径
+
+title: # 标题
+  type: "text" # 文本类型，可选值：text, image
+  visible: true # 是否可见
+  x: 620 # x坐标
+  y: 151 # y坐标
+  font: SourceHanSansSC-Bold.otf # 字体文件路径
+  font_size: 28 # 字体大小
+  font_color: "#000000" # 字体颜色
+  font_max_width: 315 # 单行最大宽度
+  font_max_lines: 3 # 最大行数
+
+pubdate: # 发布时间
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 350
+  y: 435
+  font: SourceHanSansSC-Bold.otf
+  font_size: 18
+  font_color: "#ffffff"
+
+duration: # 视频时长
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 43
+  y: 435
+  font: SourceHanSansSC-Bold.otf
+  font_size: 18
+  font_color: "#ffffff"
+
+view: # 播放量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 652
+  y: 283
+  font: SourceHanSansSC-Bold.otf
+  font_size: 16
+  font_color: "#000000"
+
+danmaku: # 弹幕量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 652
+  y: 315
+  font: SourceHanSansSC-Bold.otf
+  font_size: 16
+  font_color: "#000000"
+
+like: # 点赞量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 652
+  y: 347
+  font: SourceHanSansSC-Bold.otf
+  font_size: 16
+  font_color: "#000000"
+
+coin: # 投币量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 652
+  y: 379
+  font: SourceHanSansSC-Bold.otf
+  font_size: 16
+  font_color: "#000000"
+
+favorite: # 收藏量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 652
+  y: 411
+  font: SourceHanSansSC-Bold.otf
+  font_size: 16
+  font_color: "#000000"
+
+share: # 分享量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 652
+  y: 443
+  font: SourceHanSansSC-Bold.otf
+  font_size: 16
+  font_color: "#000000"
+
+up_name: # 作者名称
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 715
+  y: 46
+  font: SourceHanSansSC-Bold.otf
+  font_size: 18
+  font_color: "#000000"
+
+up_follower: # 作者粉丝量
+  type: "text" # 文本类型，可选值：text, image
+  visible: true
+  x: 715
+  y: 89
+  font: SourceHanSansSC-Normal.otf
+  font_size: 18
+  font_color: "#000000"
+
+up_face: # 作者头像
+  type: "image" # 文本类型，可选值：text, image
+  visible: true
+  x: 620
+  y: 35
+  width: 80
+  height: 80
+  radius: 40
+
+qrcode: # 二维码
+  type: "image" # 文本类型，可选值：text, image
+  visible: true
+  x: 805
+  y: 345
+  width: 120
+  height: 120

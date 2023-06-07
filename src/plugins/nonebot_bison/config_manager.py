@@ -1,25 +1,33 @@
 import asyncio
 from datetime import datetime
-from typing import Optional, Type
+from typing import Optional, Type, cast
 
 from nonebot import on_command
 from nonebot.adapters.onebot.v11 import Bot, Event, MessageEvent
 from nonebot.adapters.onebot.v11.event import GroupMessageEvent, PrivateMessageEvent
 from nonebot.adapters.onebot.v11.message import Message
 from nonebot.adapters.onebot.v11.permission import GROUP_ADMIN, GROUP_OWNER
+from nonebot.adapters.onebot.v11.utils import unescape
 from nonebot.internal.params import ArgStr
 from nonebot.internal.rule import Rule
-from nonebot.log import logger
 from nonebot.matcher import Matcher
 from nonebot.params import Depends, EventPlainText, EventToMe
 from nonebot.permission import SUPERUSER
 from nonebot.rule import to_me
 from nonebot.typing import T_State
+from nonebot_plugin_saa import (
+    MessageFactory,
+    PlatformTarget,
+    TargetQQGroup,
+    extract_target,
+)
 
-from .config import Config
-from .platform import Platform, check_sub_target, platform_manager
+from .apis import check_sub_target
+from .config import config
+from .config.db_config import SubscribeDupException
+from .platform import Platform, platform_manager
 from .plugin_config import plugin_config
-from .types import Category, Target, User
+from .types import Category, Target
 from .utils import parse_text
 
 
@@ -59,12 +67,8 @@ def ensure_user_info(matcher: Type[Matcher]):
 
 
 async def set_target_user_info(event: MessageEvent, state: T_State):
-    if isinstance(event, GroupMessageEvent):
-        user = User(event.group_id, "group")
-        state["target_user_info"] = user
-    elif isinstance(event, PrivateMessageEvent):
-        user = User(event.user_id, "private")
-        state["target_user_info"] = user
+    user = extract_target(event)
+    state["target_user_info"] = user
 
 
 def do_add_sub(add_sub: Type[Matcher]):
@@ -117,9 +121,7 @@ def do_add_sub(add_sub: Type[Matcher]):
             ) + "请输入订阅用户的id\n查询id获取方法请回复:“查询”"
         else:
             state["id"] = "default"
-            state["name"] = await platform_manager[state["platform"]].get_target_name(
-                Target("")
-            )
+            state["name"] = await check_sub_target(state["platform"], Target(""))
 
     async def parse_id(event: MessageEvent, state: T_State):
         if not isinstance(state["id"], Message):
@@ -131,7 +133,7 @@ def do_add_sub(add_sub: Type[Matcher]):
             if target == "取消":
                 raise KeyboardInterrupt
             platform = platform_manager[state["platform"]]
-            target = await platform.parse_target(target)
+            target = await platform.parse_target(unescape(target))
             name = await check_sub_target(state["platform"], target)
             if not name:
                 raise ValueError
@@ -183,7 +185,7 @@ def do_add_sub(add_sub: Type[Matcher]):
         if not platform_manager[state["platform"]].enable_tag:
             state["tags"] = []
             return
-        state["_prompt"] = '请输入要订阅/屏蔽的tag(不含#号)\n多个tag请使用空格隔开\n具体规则回复"详情"'
+        state["_prompt"] = '请输入要订阅/屏蔽的标签(不含#号)\n多个标签请使用空格隔开\n订阅所有标签输入"全部标签"\n具体规则回复"详情"'
 
     async def parser_tags(event: MessageEvent, state: T_State):
         if not isinstance(state["tags"], Message):
@@ -192,29 +194,30 @@ def do_add_sub(add_sub: Type[Matcher]):
             await add_sub.finish("已中止订阅")
         if str(event.get_message()).strip() == "详情":
             await add_sub.reject(
-                '订阅tag直接输入tag内容\n订阅所有tag输入"全部标签"\n屏蔽tag请在tag名称前添加~号\n详见https://nonebot-bison.netlify.app/usage/#平台订阅标签-tag'
+                "订阅标签直接输入标签内容\n屏蔽标签请在标签名称前添加~号\n详见https://nonebot-bison.netlify.app/usage/#%E5%B9%B3%E5%8F%B0%E8%AE%A2%E9%98%85%E6%A0%87%E7%AD%BE-tag"
             )
-        if str(event.get_message()).strip() == "全部标签":
+        if str(event.get_message()).strip() in ["全部标签", "全部", "全标签"]:
             state["tags"] = []
         else:
             state["tags"] = str(event.get_message()).strip().split()
 
     @add_sub.got("tags", _gen_prompt_template("{_prompt}"), [Depends(parser_tags)])
     async def add_sub_process(event: Event, state: T_State):
-        config = Config()
-        user = state.get("target_user_info")
-        assert isinstance(user, User)
-        config.add_subscribe(
-            # state.get("_user_id") or event.group_id,
-            # user_type="group",
-            user=user.user,
-            user_type=user.user_type,
-            target=state["id"],
-            target_name=state["name"],
-            target_type=state["platform"],
-            cats=state.get("cats", []),
-            tags=state.get("tags", []),
-        )
+        user = cast(PlatformTarget, state.get("target_user_info"))
+        assert isinstance(user, PlatformTarget)
+        try:
+            await config.add_subscribe(
+                user=user,
+                target=state["id"],
+                target_name=state["name"],
+                platform_name=state["platform"],
+                cats=state.get("cats", []),
+                tags=state.get("tags", []),
+            )
+        except SubscribeDupException:
+            await add_sub.finish(f"添加 {state['name']} 失败: 已存在该订阅")
+        except Exception as e:
+            await add_sub.finish(f"添加 {state['name']} 失败: {e}")
         await add_sub.finish("添加 {} 成功".format(state["name"]))
 
 
@@ -222,31 +225,30 @@ def do_query_sub(query_sub: Type[Matcher]):
     query_sub.handle()(ensure_user_info(query_sub))
 
     @query_sub.handle()
-    async def _(state: T_State):
-        config: Config = Config()
+    async def _(bot: Bot, state: T_State):
         user_info = state["target_user_info"]
-        assert isinstance(user_info, User)
-        sub_list = config.list_subscribe(
-            # state.get("_user_id") or event.group_id, "group"
-            user_info.user,
-            user_info.user_type,
-        )
+        assert isinstance(user_info, PlatformTarget)
+        sub_list = await config.list_subscribe(user_info)
         res = "订阅的帐号为：\n"
         for sub in sub_list:
             res += "{} {} {}".format(
-                sub["target_type"], sub["target_name"], sub["target"]
+                # sub["target_type"], sub["target_name"], sub["target"]
+                sub.target.platform_name,
+                sub.target.target_name,
+                sub.target.target,
             )
-            platform = platform_manager[sub["target_type"]]
+            platform = platform_manager[sub.target.platform_name]
             if platform.categories:
                 res += " [{}]".format(
                     ", ".join(
-                        map(lambda x: platform.categories[Category(x)], sub["cats"])
+                        map(lambda x: platform.categories[Category(x)], sub.categories)
                     )
                 )
             if platform.enable_tag:
-                res += " {}".format(", ".join(sub["tags"]))
+                res += " {}".format(", ".join(sub.tags))
             res += "\n"
-        await query_sub.finish(Message(await parse_text(res)))
+        await MessageFactory(await parse_text(res)).send()
+        await query_sub.finish()
 
 
 def do_del_sub(del_sub: Type[Matcher]):
@@ -254,15 +256,10 @@ def do_del_sub(del_sub: Type[Matcher]):
 
     @del_sub.handle()
     async def send_list(bot: Bot, event: Event, state: T_State):
-        config: Config = Config()
         user_info = state["target_user_info"]
-        assert isinstance(user_info, User)
+        assert isinstance(user_info, PlatformTarget)
         try:
-            sub_list = config.list_subscribe(
-                # state.get("_user_id") or event.group_id, "group"
-                user_info.user,
-                user_info.user_type,
-            )
+            sub_list = await config.list_subscribe(user_info)
             assert sub_list
         except AssertionError:
             await del_sub.finish("暂无已订阅账号\n请使用“添加订阅”命令添加订阅")
@@ -271,24 +268,30 @@ def do_del_sub(del_sub: Type[Matcher]):
             state["sub_table"] = {}
             for index, sub in enumerate(sub_list, 1):
                 state["sub_table"][index] = {
-                    "target_type": sub["target_type"],
-                    "target": sub["target"],
+                    "platform_name": sub.target.platform_name,
+                    "target": sub.target.target,
                 }
                 res += "{} {} {} {}\n".format(
-                    index, sub["target_type"], sub["target_name"], sub["target"]
+                    index,
+                    sub.target.platform_name,
+                    sub.target.target_name,
+                    sub.target.target,
                 )
-                platform = platform_manager[sub["target_type"]]
+                platform = platform_manager[sub.target.platform_name]
                 if platform.categories:
                     res += " [{}]".format(
                         ", ".join(
-                            map(lambda x: platform.categories[Category(x)], sub["cats"])
+                            map(
+                                lambda x: platform.categories[Category(x)],
+                                sub.categories,
+                            )
                         )
                     )
                 if platform.enable_tag:
-                    res += " {}".format(", ".join(sub["tags"]))
+                    res += " {}".format(", ".join(sub.tags))
                 res += "\n"
             res += "请输入要删除的订阅的序号\n输入'取消'中止"
-            await bot.send(event=event, message=Message(await parse_text(res)))
+            await MessageFactory(await parse_text(res)).send()
 
     @del_sub.receive()
     async def do_del(event: Event, state: T_State):
@@ -297,16 +300,9 @@ def do_del_sub(del_sub: Type[Matcher]):
             await del_sub.finish("删除中止")
         try:
             index = int(user_msg)
-            config = Config()
             user_info = state["target_user_info"]
-            assert isinstance(user_info, User)
-            config.del_subscribe(
-                # state.get("_user_id") or event.group_id,
-                # "group",
-                user_info.user,
-                user_info.user_type,
-                **state["sub_table"][index],
-            )
+            assert isinstance(user_info, PlatformTarget)
+            await config.del_subscribe(user_info, **state["sub_table"][index])
         except Exception as e:
             await del_sub.reject("删除错误")
         else:
@@ -388,7 +384,7 @@ async def do_choose_group_number(state: T_State):
     group_number_idx: dict[int, int] = state["group_number_idx"]
     idx: int = state["group_idx"]
     group_id = group_number_idx[idx]
-    state["target_user_info"] = User(user=group_id, user_type="group")
+    state["target_user_info"] = TargetQQGroup(group_id=group_id)
 
 
 async def _check_command(event_msg: str = EventPlainText()):

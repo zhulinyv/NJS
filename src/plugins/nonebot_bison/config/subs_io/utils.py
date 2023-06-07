@@ -1,0 +1,6 @@
+class NBESFVerMatchErr(Exception):
+    ...
+
+
+class NBESFParseErr(Exception):
+    ...

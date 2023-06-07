@@ -4,14 +4,24 @@ from typing import Union
 
 import nonebot
 from bs4 import BeautifulSoup as bs
-from nonebot.adapters.onebot.v11.message import MessageSegment
 from nonebot.log import default_format, logger
 from nonebot.plugin import require
+from nonebot_plugin_saa import Image, MessageSegmentFactory, Text
 
 from ..plugin_config import plugin_config
+from .context import ProcessContext
 from .http import http_client
+from .scheduler_config import SchedulerConfig, scheduler
 
-__all__ = ["http_client", "Singleton", "parse_text", "html_to_text"]
+__all__ = [
+    "http_client",
+    "Singleton",
+    "parse_text",
+    "ProcessContext",
+    "html_to_text",
+    "SchedulerConfig",
+    "scheduler",
+]
 
 
 class Singleton(type):
@@ -23,15 +33,15 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-async def parse_text(text: str) -> MessageSegment:
+async def parse_text(text: str) -> MessageSegmentFactory:
     "return raw text if don't use pic, otherwise return rendered opcode"
     if plugin_config.bison_use_pic:
         require("nonebot_plugin_htmlrender")
         from nonebot_plugin_htmlrender import text_to_pic as _text_to_pic
 
-        return MessageSegment.image(await _text_to_pic(text))
+        return Image(await _text_to_pic(text))
     else:
-        return MessageSegment.text(text)
+        return Text(text)
 
 
 if not plugin_config.bison_skip_browser_check:
@@ -88,3 +98,14 @@ if plugin_config.bison_filter_log:
         if config.log_level is None
         else config.log_level
     )
+
+
+def jaccard_text_similarity(str1: str, str2: str) -> float:
+    """
+    计算两个字符串(基于字符)的
+    [Jaccard相似系数](https://zh.wikipedia.org/wiki/雅卡尔指数)
+    是否达到阈值
+    """
+    set1 = set(str1)
+    set2 = set(str2)
+    return len(set1 & set2) / len(set1 | set2)

@@ -1,146 +1,216 @@
 import nonebot
-from nonebot.adapters.onebot.v11.bot import Bot
+from fastapi import status
+from fastapi.exceptions import HTTPException
+from fastapi.param_functions import Depends
+from fastapi.routing import APIRouter
+from fastapi.security.oauth2 import OAuth2PasswordBearer
+from nonebot_plugin_saa import TargetQQGroup
+from nonebot_plugin_saa.utils.auto_select_bot import get_bot
 
-from ..config import Config, NoSuchSubscribeException, NoSuchUserException
-from ..platform import check_sub_target, platform_manager
-from .jwt import pack_jwt
+from ..apis import check_sub_target
+from ..config import (
+    NoSuchSubscribeException,
+    NoSuchTargetException,
+    NoSuchUserException,
+    config,
+)
+from ..config.db_config import SubscribeDupException
+from ..platform import platform_manager
+from ..types import Target as T_Target
+from ..types import WeightConfig
+from ..utils.get_bot import get_groups
+from .jwt import load_jwt, pack_jwt
 from .token_manager import token_manager
+from .types import (
+    AddSubscribeReq,
+    GlobalConf,
+    PlatformConfig,
+    StatusResp,
+    SubscribeConfig,
+    SubscribeGroupDetail,
+    SubscribeResp,
+    TokenResp,
+)
+
+router = APIRouter(prefix="/api", tags=["api"])
+
+oath_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
-async def test():
-    return {"status": 200, "text": "test"}
+async def get_jwt_obj(token: str = Depends(oath_scheme)):
+    obj = load_jwt(token)
+    if not obj:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    return obj
 
 
-async def get_global_conf():
+async def check_group_permission(
+    groupNumber: int, token_obj: dict = Depends(get_jwt_obj)
+):
+    groups = token_obj["groups"]
+    for group in groups:
+        if int(groupNumber) == group["id"]:
+            return
+    raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+
+
+async def check_is_superuser(token_obj: dict = Depends(get_jwt_obj)):
+    if token_obj.get("type") != "admin":
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+
+
+@router.get("/global_conf")
+async def get_global_conf() -> GlobalConf:
     res = {}
     for platform_name, platform in platform_manager.items():
-        res[platform_name] = {
-            "platformName": platform_name,
-            "categories": platform.categories,
-            "enabledTag": platform.enable_tag,
-            "name": platform.name,
-            "hasTarget": getattr(platform, "has_target"),
-        }
-    return {"platformConf": res}
+        res[platform_name] = PlatformConfig(
+            platformName=platform_name,
+            categories=platform.categories,
+            enabledTag=platform.enable_tag,
+            name=platform.name,
+            hasTarget=getattr(platform, "has_target"),
+        )
+    return GlobalConf(platformConf=res)
 
 
 async def get_admin_groups(qq: int):
-    bot = nonebot.get_bot()
-    groups = await bot.call_api("get_group_list")
     res = []
-    for group in groups:
+    for group in await get_groups():
         group_id = group["group_id"]
-        users = await bot.call_api("get_group_member_list", group_id=group_id)
+        bot = get_bot(TargetQQGroup(group_id=group_id))
+        if not bot:
+            continue
+        users = await bot.get_group_member_list(group_id=group_id)
         for user in users:
             if user["user_id"] == qq and user["role"] in ("owner", "admin"):
                 res.append({"id": group_id, "name": group["group_name"]})
     return res
 
 
-async def auth(token: str):
+@router.get("/auth")
+async def auth(token: str) -> TokenResp:
     if qq_tuple := token_manager.get_user(token):
         qq, nickname = qq_tuple
-        bot = nonebot.get_bot()
-        assert isinstance(bot, Bot)
-        groups = await bot.call_api("get_group_list")
         if str(qq) in nonebot.get_driver().config.superusers:
             jwt_obj = {
-                "id": str(qq),
+                "id": qq,
+                "type": "admin",
                 "groups": list(
                     map(
                         lambda info: {
                             "id": info["group_id"],
                             "name": info["group_name"],
                         },
-                        groups,
+                        await get_groups(),
                     )
                 ),
             }
-            ret_obj = {
-                "type": "admin",
-                "name": nickname,
-                "id": str(qq),
-                "token": pack_jwt(jwt_obj),
-            }
-            return {"status": 200, **ret_obj}
+            ret_obj = TokenResp(
+                type="admin",
+                name=nickname,
+                id=qq,
+                token=pack_jwt(jwt_obj),
+            )
+            return ret_obj
         if admin_groups := await get_admin_groups(int(qq)):
-            jwt_obj = {"id": str(qq), "groups": admin_groups}
-            ret_obj = {
-                "type": "user",
-                "name": nickname,
-                "id": str(qq),
-                "token": pack_jwt(jwt_obj),
-            }
-            return {"status": 200, **ret_obj}
+            jwt_obj = {"id": str(qq), "type": "user", "groups": admin_groups}
+            ret_obj = TokenResp(
+                type="user",
+                name=nickname,
+                id=qq,
+                token=pack_jwt(jwt_obj),
+            )
+            return ret_obj
         else:
-            return {"status": 400, "type": "", "name": "", "id": "", "token": ""}
+            raise HTTPException(400, "permission denied")
     else:
-        return {"status": 400, "type": "", "name": "", "id": "", "token": ""}
+        raise HTTPException(400, "code error")
 
 
-async def get_subs_info(jwt_obj: dict):
+@router.get("/subs")
+async def get_subs_info(jwt_obj: dict = Depends(get_jwt_obj)) -> SubscribeResp:
     groups = jwt_obj["groups"]
-    res = {}
+    res: SubscribeResp = {}
     for group in groups:
         group_id = group["id"]
-        config = Config()
+        raw_subs = await config.list_subscribe(TargetQQGroup(group_id=group_id))
         subs = list(
             map(
-                lambda sub: {
-                    "platformName": sub["target_type"],
-                    "target": sub["target"],
-                    "targetName": sub["target_name"],
-                    "cats": sub["cats"],
-                    "tags": sub["tags"],
-                },
-                config.list_subscribe(group_id, "group"),
+                lambda sub: SubscribeConfig(
+                    platformName=sub.target.platform_name,
+                    targetName=sub.target.target_name,
+                    cats=sub.categories,
+                    tags=sub.tags,
+                    target=sub.target.target,
+                ),
+                raw_subs,
             )
         )
-        res[group_id] = {"name": group["name"], "subscribes": subs}
+        res[group_id] = SubscribeGroupDetail(name=group["name"], subscribes=subs)
     return res
 
 
-async def get_target_name(platform_name: str, target: str, jwt_obj: dict):
-    return {"targetName": await check_sub_target(platform_name, target)}
+@router.get("/target_name", dependencies=[Depends(get_jwt_obj)])
+async def get_target_name(platformName: str, target: str):
+    return {"targetName": await check_sub_target(platformName, T_Target(target))}
 
 
-async def add_group_sub(
-    group_number: str,
-    platform_name: str,
-    target: str,
-    target_name: str,
-    cats: list[int],
-    tags: list[str],
-):
-    config = Config()
-    config.add_subscribe(
-        int(group_number), "group", target, target_name, platform_name, cats, tags
-    )
-    return {"status": 200, "msg": ""}
-
-
-async def del_group_sub(group_number: str, platform_name: str, target: str):
-    config = Config()
+@router.post("/subs", dependencies=[Depends(check_group_permission)])
+async def add_group_sub(groupNumber: int, req: AddSubscribeReq) -> StatusResp:
     try:
-        config.del_subscribe(int(group_number), "group", target, platform_name)
-    except (NoSuchUserException, NoSuchSubscribeException):
-        return {"status": 400, "msg": "删除错误"}
-    return {"status": 200, "msg": ""}
+        await config.add_subscribe(
+            TargetQQGroup(group_id=groupNumber),
+            T_Target(req.target),
+            req.targetName,
+            req.platformName,
+            req.cats,
+            req.tags,
+        )
+        return StatusResp(ok=True, msg="")
+    except SubscribeDupException:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "subscribe duplicated")
 
 
-async def update_group_sub(
-    group_number: str,
-    platform_name: str,
-    target: str,
-    target_name: str,
-    cats: list[int],
-    tags: list[str],
-):
-    config = Config()
+@router.delete("/subs", dependencies=[Depends(check_group_permission)])
+async def del_group_sub(groupNumber: int, platformName: str, target: str):
     try:
-        config.update_subscribe(
-            int(group_number), "group", target, target_name, platform_name, cats, tags
+        await config.del_subscribe(
+            TargetQQGroup(group_id=groupNumber), target, platformName
         )
     except (NoSuchUserException, NoSuchSubscribeException):
-        return {"status": 400, "msg": "更新错误"}
-    return {"status": 200, "msg": ""}
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "no such user or subscribe")
+    return StatusResp(ok=True, msg="")
+
+
+@router.patch("/subs", dependencies=[Depends(check_group_permission)])
+async def update_group_sub(groupNumber: int, req: AddSubscribeReq):
+    try:
+        await config.update_subscribe(
+            TargetQQGroup(group_id=groupNumber),
+            req.target,
+            req.targetName,
+            req.platformName,
+            req.cats,
+            req.tags,
+        )
+    except (NoSuchUserException, NoSuchSubscribeException):
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "no such user or subscribe")
+    return StatusResp(ok=True, msg="")
+
+
+@router.get("/weight", dependencies=[Depends(check_is_superuser)])
+async def get_weight_config():
+    return await config.get_all_weight_config()
+
+
+@router.put("/weight", dependencies=[Depends(check_is_superuser)])
+async def update_weigth_config(
+    platformName: str, target: str, weight_config: WeightConfig
+):
+    try:
+        await config.update_time_weight_config(
+            T_Target(target), platformName, weight_config
+        )
+    except NoSuchTargetException:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "no such subscribe")
+    return StatusResp(ok=True, msg="")

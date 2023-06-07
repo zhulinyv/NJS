@@ -44,12 +44,12 @@ class Chatbot:
         self.played_name = None
         self.presets = presets
 
-        if self.session_token:
+        if self.session_token or self.authorization:
             self.auto_auth = False
         elif self.account and self.password:
             self.auto_auth = True
         else:
-            raise ValueError("至少需要配置 session_token 或者 account 和 password")
+            raise ValueError("至少需要配置 session_token 或者 access_token 或者 account 和 password")
         if self.api_url.startswith('https://chat.openai.com'):
             raise ValueError("无法使用官方API，请使用第三方API")
 

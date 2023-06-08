@@ -32,7 +32,7 @@ async def supported_platform_rule(event: Event):
     try:
         extract_target(event)
     except RuntimeError:
-        logger.warning("SAA 不支持的平台，取消响应")
+        logger.debug("SAA 不支持的平台，取消响应")
         return False
 
     return True

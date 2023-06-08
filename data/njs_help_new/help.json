@@ -409,7 +409,7 @@
         {
             "插件名": "游戏抽卡",
             "导包名": "nonebot_plugin_gamedraw",
-            "显示颜色": "绿色",
+            "显示颜色": "蓝色",
             "帮助文字": "",
             "帮助图片": "",
             "帮助文档": "./data/njs_help_new/nonebot_plugin_gamedraw/help.md",
@@ -706,7 +706,7 @@
         {
             "插件名": "AI绘图(使用本地SDWebUI)",
             "导包名": "nonebot_plugin_stable_diffusion_diao",
-            "显示颜色": "绿色",
+            "显示颜色": "蓝色",
             "帮助文字": "",
             "帮助图片": "",
             "帮助文档": "./data/njs_help_new/nonebot_plugin_stable_diffusion_diao/help.md",

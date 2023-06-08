@@ -99,12 +99,12 @@ tinydb = "4.7.0"
 toml = "0.10.2"
 tortoise-orm = "0.19.2"
 tqdm = "4.64.1"
+tweepy = "4.14.0"
 typing-extensions = "4.4.0"
 ujson = "5.5.0"
 urllib3 = "1.26.12"
 win32-setctime = "1.1.0"
 wordcloud = "1.8.2.2"
-tweepy = "4.14.0"
 
 [tool.nonebot]
 plugins = ["nonebot_plugin_gocqhttp", "nonebot_plugin_guild_patch"]

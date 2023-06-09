@@ -1,44 +1,45 @@
-from PIL import Image, ImageDraw, ImageFont
-from typing import Optional, Tuple, Dict, List
-from pathlib import Path
+import json
 import random
-try:
-    import ujson as json
-except ModuleNotFoundError:
-    import json
+from pathlib import Path
+from typing import List, Optional, Tuple
 
-from .config import fortune_config
+from PIL import Image, ImageDraw, ImageFont
+
+from .config import fortune_config, themes_flag_config
+
 
 def get_copywriting() -> Tuple[str, str]:
     '''
-        Read the copywriting.json, choice a luck with a random content
+            Read the copywriting.json, choice a luck with a random content
     '''
     _p: Path = fortune_config.fortune_path / "fortune" / "copywriting.json"
 
     with open(_p, "r", encoding="utf-8") as f:
         content = json.load(f).get("copywriting")
-        
+
     luck = random.choice(content)
-    
+
     title: str = luck.get("good-luck")
     text: str = random.choice(luck.get("content"))
 
     return title, text
 
-def randomBasemap(theme: str, spec_path: Optional[str] = None) -> Path:
+
+def random_basemap(theme: str, spec_path: Optional[str] = None) -> Path:
     if isinstance(spec_path, str):
         p: Path = fortune_config.fortune_path / "img" / spec_path
         return p
 
     if theme == "random":
         __p: Path = fortune_config.fortune_path / "img"
-        
-        # Each dir is a theme, remember add _flag after the names of themes
-        themes: List[str] = [f.name for f in __p.iterdir() if f.is_dir() and themes_flag_check(f.name)]
+
+        # Each dir is a theme.
+        themes: List[str] = [f.name for f in __p.iterdir(
+        ) if f.is_dir() and theme_flag_check(f.name)]
         picked: str = random.choice(themes)
 
         _p: Path = __p / picked
-        
+
         # Each file is a posix path of images directory
         images_dir: List[Path] = [i for i in _p.iterdir() if i.is_file()]
         p: Path = random.choice(images_dir)
@@ -46,18 +47,19 @@ def randomBasemap(theme: str, spec_path: Optional[str] = None) -> Path:
         _p: Path = fortune_config.fortune_path / "img" / theme
         images_dir: List[Path] = [i for i in _p.iterdir() if i.is_file()]
         p: Path = random.choice(images_dir)
-    
+
     return p
+
 
 def drawing(gid: str, uid: str, theme: str, spec_path: Optional[str] = None) -> Path:
     # 1. Random choice a base image
-    imgPath: Path = randomBasemap(theme, spec_path)
+    imgPath: Path = random_basemap(theme, spec_path)
     img: Image.Image = Image.open(imgPath)
     draw = ImageDraw.Draw(img)
-    
+
     # 2. Random choice a luck text with title
     title, text = get_copywriting()
-    
+
     # 3. Draw
     font_size = 45
     color = "#F5F5F5"
@@ -77,14 +79,14 @@ def drawing(gid: str, uid: str, theme: str, spec_path: Optional[str] = None) -> 
         fill=color,
         font=ttfront,
     )
-    
+
     # Text rendering
     font_size = 25
     color = "#323232"
     image_font_center = [140, 297]
     ttfront = ImageFont.truetype(fontPath["text"], font_size)
     slices, result = decrement(text)
-    
+
     for i in range(slices):
         font_height: int = len(result[i]) * (font_size + 4)
         textVertical: str = "\n".join(result[i])
@@ -96,65 +98,59 @@ def drawing(gid: str, uid: str, theme: str, spec_path: Optional[str] = None) -> 
         )
         y: int = int(image_font_center[1] - font_height / 2)
         draw.text((x, y), textVertical, fill=color, font=ttfront)
-    
+
     # Save
-    outPath: Path = exportFilePath(imgPath, gid, uid)
+    outDir: Path = fortune_config.fortune_path / "out"
+    if not outDir.exists():
+        outDir.mkdir(exist_ok=True, parents=True)
+
+    outPath = outDir / f"{gid}_{uid}.png"
+
     img.save(outPath)
     return outPath
 
-def exportFilePath(originalFilePath: Path, gid: str, uid: str) -> Path:
-    dirPath: Path = fortune_config.fortune_path / "out"
-    if not dirPath.exists():
-        dirPath.mkdir(exist_ok=True, parents=True)
-
-    outPath: Path = originalFilePath.parent.parent.parent / "out" / f"{gid}_{uid}.png" 
-    return outPath
 
 def decrement(text: str) -> Tuple[int, List[str]]:
     '''
-        Split the text, return the number of columns and text list
-        TODO: Now, it ONLY fit with 2 columns of text
+            Split the text, return the number of columns and text list
+            TODO: Now, it ONLY fit with 2 columns of text
     '''
     length: int = len(text)
     result: List[str] = []
     cardinality = 9
     if length > 4 * cardinality:
         raise Exception
-    
+
     col_num: int = 1
     while length > cardinality:
         col_num += 1
         length -= cardinality
-    
+
     # Optimize for two columns
     space = " "
-    length = len(text) # Value of length is changed!
-    
+    length = len(text)  # Value of length is changed!
+
     if col_num == 2:
         if length % 2 == 0:
             # even
             fillIn = space * int(9 - length / 2)
-            return col_num, [text[: int(length / 2)] + fillIn, fillIn + text[int(length / 2) :]]
+            return col_num, [text[: int(length / 2)] + fillIn, fillIn + text[int(length / 2):]]
         else:
             # odd number
             fillIn = space * int(9 - (length + 1) / 2)
-            return col_num, [text[: int((length + 1) / 2)] + fillIn, fillIn + space + text[int((length + 1) / 2) :]]
-    
+            return col_num, [text[: int((length + 1) / 2)] + fillIn, fillIn + space + text[int((length + 1) / 2):]]
+
     for i in range(col_num):
         if i == col_num - 1 or col_num == 1:
-            result.append(text[i * cardinality :])
+            result.append(text[i * cardinality:])
         else:
-            result.append(text[i * cardinality : (i + 1) * cardinality])
-            
+            result.append(text[i * cardinality: (i + 1) * cardinality])
+
     return col_num, result
 
-def themes_flag_check(theme: str) -> bool:
+
+def theme_flag_check(theme: str) -> bool:
     '''
-        Read the config json, return the status of a theme
+            check wether a theme is enabled in themes_flag_config
     '''
-    flags_config_path: Path = fortune_config.fortune_path / "fortune_config.json"
-    
-    with flags_config_path.open("r", encoding="utf-8") as f:
-        data: Dict[str, bool] = json.load(f)
-    
-        return data.get((theme + "_flag"), False)
+    return themes_flag_config.dict().get(theme + "_flag", False)

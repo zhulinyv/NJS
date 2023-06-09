@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "njs"
-version = "1.9.9"
+version = "2.0.0"
 description = "基于 NoneBot 的 QQ 机器人——脑积水！"
 authors = ["zhulinyv <zhulinyv2005@outlook.com>"]
 license = "AGPL"
@@ -8,7 +8,7 @@ readme = "README.md"
 
 [[tool.poetry.source]]
 name = "tsinghua"
-default = false
+default = true
 url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
 
 [tool.poetry.dependencies]

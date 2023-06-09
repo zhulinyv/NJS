@@ -8,8 +8,13 @@ readme = "README.md"
 
 [[tool.poetry.source]]
 name = "tsinghua"
-default = true
 url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+default = true
+
+[[tool.poetry.source]]
+name = 'pypi_'
+url = 'https://pypi.python.org/simple'
+secondary = true
 
 [tool.poetry.dependencies]
 python = "^3.10"

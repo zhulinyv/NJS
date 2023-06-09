@@ -244,7 +244,7 @@ async def _(event: MessageEvent):
                     await ai.finish(MessageSegment.text(res),at_sender=True)          # 发送结果
             else:
                 await ai.finish(MessageSegment.text(f"{Bot_NICKNAME}冷却中... 剩余时间 {api_cd_time - cd:.0f} 秒"),at_sender=True)
-    await ai.finish(Message(result))
+    await ai.finish(Message(result), at_sender=True)
 
 
 

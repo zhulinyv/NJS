@@ -9,7 +9,7 @@ readme = "README.md"
 [[tool.poetry.source]]
 name = "tsinghua"
 url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
-default = true
+secondary = true
 
 [[tool.poetry.source]]
 name = 'pypi_'

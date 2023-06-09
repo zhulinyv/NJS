@@ -18,11 +18,6 @@ memcached = ["aiomcache (>=0.5.2)"]
 msgpack = ["msgpack (>=0.5.5)"]
 redis = ["aioredis (>=0.3.3)", "aioredis (>=1.0.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "aiofiles"
 version = "0.8.0"
@@ -34,11 +29,6 @@ files = [
     {file = "aiofiles-0.8.0-py3-none-any.whl", hash = "sha256:7a973fc22b29e9962d0897805ace5856e6a566ab1f0c8e5c91ff6c866519c937"},
     {file = "aiofiles-0.8.0.tar.gz", hash = "sha256:8334f23235248a3b2e83b2c3a78a22674f39969b96397126cc93664d9a901e59"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "aiohttp"
@@ -149,11 +139,6 @@ yarl = ">=1.0,<2.0"
 [package.extras]
 speedups = ["Brotli", "aiodns", "cchardet"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "aiosignal"
 version = "1.3.1"
@@ -169,11 +154,6 @@ files = [
 [package.dependencies]
 frozenlist = ">=1.1.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "aiosqlite"
 version = "0.17.0"
@@ -188,11 +168,6 @@ files = [
 
 [package.dependencies]
 typing_extensions = ">=3.7.2"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "alembic"
@@ -213,11 +188,6 @@ SQLAlchemy = ">=1.3.0"
 [package.extras]
 tz = ["python-dateutil"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "amis-python"
 version = "1.0.6"
@@ -233,11 +203,6 @@ files = [
 [package.dependencies]
 jinja2 = ">=3.1.2,<4.0.0"
 pydantic = ">=1.9.2,<2.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "anyio"
@@ -260,11 +225,6 @@ doc = ["packaging", "sphinx-autodoc-typehints (>=1.2.0)", "sphinx-rtd-theme"]
 test = ["contextlib2", "coverage[toml] (>=4.5)", "hypothesis (>=4.0)", "mock (>=4)", "pytest (>=7.0)", "pytest-mock (>=3.6.1)", "trustme", "uvloop (<0.15)", "uvloop (>=0.15)"]
 trio = ["trio (>=0.16,<0.22)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "appdirs"
 version = "1.4.4"
@@ -276,11 +236,6 @@ files = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},
     {file = "appdirs-1.4.4.tar.gz", hash = "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "apscheduler"
@@ -313,11 +268,6 @@ tornado = ["tornado (>=4.3)"]
 twisted = ["twisted"]
 zookeeper = ["kazoo"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "arrow"
 version = "1.2.3"
@@ -333,11 +283,6 @@ files = [
 [package.dependencies]
 python-dateutil = ">=2.7.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "async-timeout"
 version = "4.0.2"
@@ -349,11 +294,6 @@ files = [
     {file = "async-timeout-4.0.2.tar.gz", hash = "sha256:2163e1640ddb52b7a8c80d0a67a08587e5d245cc9c553a74a847056bc2976b15"},
     {file = "async_timeout-4.0.2-py3-none-any.whl", hash = "sha256:8ca1e4fcf50d07413d66d1a5e416e42cfdf5851c981d679a09851a6853383b3c"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "asyncio"
@@ -368,11 +308,6 @@ files = [
     {file = "asyncio-3.4.3-py3-none-any.whl", hash = "sha256:c4d18b22701821de07bd6aea8b53d21449ec0ec5680645e5317062ea21817d2d"},
     {file = "asyncio-3.4.3.tar.gz", hash = "sha256:83360ff8bc97980e4ff25c964c7bd3923d333d177aa4f7fb736b019f26c7cb41"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "attrs"
@@ -392,11 +327,6 @@ docs = ["furo", "sphinx", "sphinx-notfound-page", "zope.interface"]
 tests = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "zope.interface"]
 tests-no-zope = ["cloudpickle", "coverage[toml] (>=5.0.2)", "hypothesis", "mypy (>=0.900,!=0.940)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "bbcode"
 version = "1.1.0"
@@ -408,11 +338,6 @@ files = [
     {file = "bbcode-1.1.0-py2.py3-none-any.whl", hash = "sha256:83802f4b40c92426841a98350bd6ff9ea8fdf8f9b37df1968a88c5864fd225fa"},
     {file = "bbcode-1.1.0.tar.gz", hash = "sha256:eac4fb1d0f6c7ce5c41e4b5c0522562b15a1ac036fb9131adc59e9a28c7dc1d0"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "beautifulsoup4"
@@ -433,11 +358,6 @@ soupsieve = ">1.2"
 html5lib = ["html5lib"]
 lxml = ["lxml"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "bidict"
 version = "0.22.1"
@@ -455,11 +375,6 @@ docs = ["furo", "sphinx", "sphinx-copybutton"]
 lint = ["pre-commit"]
 test = ["hypothesis", "pytest", "pytest-benchmark[histogram]", "pytest-cov", "pytest-xdist", "sortedcollections", "sortedcontainers", "sphinx"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "binaryornot"
 version = "0.4.4"
@@ -474,11 +389,6 @@ files = [
 
 [package.dependencies]
 chardet = ">=3.0.2"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "bingimagecreator"
@@ -497,15 +407,10 @@ httpx = "*"
 regex = "*"
 requests = "*"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "bs4"
 version = "0.0.1"
-description = "Screen-scraping library"
+description = "Dummy package for Beautiful Soup"
 category = "main"
 optional = false
 python-versions = "*"
@@ -515,11 +420,6 @@ files = [
 
 [package.dependencies]
 beautifulsoup4 = "*"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "cachetools"
@@ -532,11 +432,6 @@ files = [
     {file = "cachetools-5.2.0-py3-none-any.whl", hash = "sha256:f9f17d2aec496a9aa6b76f53e3b614c965223c061982d434d160f930c698a9db"},
     {file = "cachetools-5.2.0.tar.gz", hash = "sha256:6a94c6402995a99c3970cc7e4884bb60b4a8639938157eeed436098bf9831757"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "cashews"
@@ -557,11 +452,6 @@ redis = ["redis (>=4.3.1)"]
 speedup = ["bitarray (<3.0.0)", "hiredis", "xxhash (<4.0.0)"]
 tests = ["hypothesis", "pytest", "pytest-asyncio"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "certifi"
 version = "2023.5.7"
@@ -574,11 +464,6 @@ files = [
     {file = "certifi-2023.5.7.tar.gz", hash = "sha256:0f0d56dc5a6ad56fd4ba36484d6cc34451e1c6548c61daad8c320169f91eddc7"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "chardet"
 version = "5.1.0"
@@ -590,11 +475,6 @@ files = [
     {file = "chardet-5.1.0-py3-none-any.whl", hash = "sha256:362777fb014af596ad31334fde1e8c327dfdb076e1960d1694662d46a6917ab9"},
     {file = "chardet-5.1.0.tar.gz", hash = "sha256:0d62712b956bc154f85fb0a266e2a3c5913c2967e00348701b32411d6def31e5"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "charset-normalizer"
@@ -611,11 +491,6 @@ files = [
 [package.extras]
 unicode-backport = ["unicodedata2"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "chevron"
 version = "0.14.0"
@@ -627,11 +502,6 @@ files = [
     {file = "chevron-0.14.0-py3-none-any.whl", hash = "sha256:fbf996a709f8da2e745ef763f482ce2d311aa817d287593a5b990d6d6e4f0443"},
     {file = "chevron-0.14.0.tar.gz", hash = "sha256:87613aafdf6d77b6a90ff073165a61ae5086e21ad49057aa0e53681601800ebf"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "click"
@@ -647,11 +517,6 @@ files = [
 
 [package.dependencies]
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "cn2an"
@@ -670,11 +535,6 @@ proces = ">=0.1.0"
 "ruamel.yaml" = ">=0.16.0"
 setuptools = ">=47.3.1"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "colorama"
 version = "0.4.6"
@@ -686,11 +546,6 @@ files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "contourpy"
@@ -767,11 +622,6 @@ mypy = ["contourpy[bokeh]", "docutils-stubs", "mypy (==0.991)", "types-Pillow"]
 test = ["Pillow", "matplotlib", "pytest"]
 test-no-images = ["pytest"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "cookiecutter"
 version = "2.1.1"
@@ -793,11 +643,6 @@ python-slugify = ">=4.0.0"
 pyyaml = ">=5.3.1"
 requests = ">=2.23.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "cssselect"
 version = "1.2.0"
@@ -810,11 +655,6 @@ files = [
     {file = "cssselect-1.2.0.tar.gz", hash = "sha256:666b19839cfaddb9ce9d36bfe4c969132c647b92fc9088c4e23f786b30f1b3dc"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "cycler"
 version = "0.11.0"
@@ -826,11 +666,6 @@ files = [
     {file = "cycler-0.11.0-py3-none-any.whl", hash = "sha256:3a27e95f763a428a739d2add979fa7494c912a32c17c4c38c4d5f082cad165a3"},
     {file = "cycler-0.11.0.tar.gz", hash = "sha256:9c87405839a19696e837b3b818fed3f5f69f16f1eec1a1ad77e043dcea9c772f"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "dateparser"
@@ -855,11 +690,6 @@ calendars = ["convertdate", "convertdate", "hijri-converter"]
 fasttext = ["fasttext"]
 langdetect = ["langdetect"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "distlib"
 version = "0.3.6"
@@ -871,11 +701,6 @@ files = [
     {file = "distlib-0.3.6-py2.py3-none-any.whl", hash = "sha256:f35c4b692542ca110de7ef0bea44d73981caeb34ca0b9b6b2e6d7790dda8f80e"},
     {file = "distlib-0.3.6.tar.gz", hash = "sha256:14bad2d9b04d3a36127ac97f30b12a19268f211063d8f8ee4f47108896e11b46"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "dnspython"
@@ -898,11 +723,6 @@ idna = ["idna (>=2.1,<4.0)"]
 trio = ["trio (>=0.14,<0.23)"]
 wmi = ["wmi (>=1.5.1,<2.0.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "ecdsa"
 version = "0.18.0"
@@ -921,11 +741,6 @@ six = ">=1.9.0"
 [package.extras]
 gmpy = ["gmpy"]
 gmpy2 = ["gmpy2"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "edgegpt"
@@ -948,11 +763,6 @@ requests = "*"
 rich = "*"
 websockets = "*"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "emoji"
 version = "2.1.0"
@@ -967,11 +777,6 @@ files = [
 [package.extras]
 dev = ["coverage", "coveralls", "pytest"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "expandvars"
 version = "0.9.0"
@@ -983,11 +788,6 @@ files = [
     {file = "expandvars-0.9.0-py3-none-any.whl", hash = "sha256:ae90b9c6167e876a0d67892ae18cf2c1ea2e336b2b5542113239d33bf9267497"},
     {file = "expandvars-0.9.0.tar.gz", hash = "sha256:6a0e7821e55ff1ab44f8ca08b50d2b2d01c076a9bc979da940467cb7f105c565"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "expiringdict"
@@ -1004,11 +804,6 @@ files = [
 [package.extras]
 tests = ["coverage", "coveralls", "dill", "mock", "nose"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "faker"
 version = "16.4.0"
@@ -1023,11 +818,6 @@ files = [
 
 [package.dependencies]
 python-dateutil = ">=2.4"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "fastapi"
@@ -1051,11 +841,6 @@ dev = ["pre-commit (>=2.17.0,<3.0.0)", "ruff (==0.0.138)", "uvicorn[standard] (>
 doc = ["mdx-include (>=1.4.1,<2.0.0)", "mkdocs (>=1.1.2,<2.0.0)", "mkdocs-markdownextradata-plugin (>=0.1.7,<0.3.0)", "mkdocs-material (>=8.1.4,<9.0.0)", "pyyaml (>=5.3.1,<7.0.0)", "typer-cli (>=0.0.13,<0.0.14)", "typer[all] (>=0.6.1,<0.8.0)"]
 test = ["anyio[trio] (>=3.2.1,<4.0.0)", "black (==22.10.0)", "coverage[toml] (>=6.5.0,<8.0)", "databases[sqlite] (>=0.3.2,<0.7.0)", "email-validator (>=1.1.1,<2.0.0)", "flask (>=1.1.2,<3.0.0)", "httpx (>=0.23.0,<0.24.0)", "isort (>=5.0.6,<6.0.0)", "mypy (==0.982)", "orjson (>=3.2.1,<4.0.0)", "passlib[bcrypt] (>=1.7.2,<2.0.0)", "peewee (>=3.13.3,<4.0.0)", "pytest (>=7.1.3,<8.0.0)", "python-jose[cryptography] (>=3.3.0,<4.0.0)", "python-multipart (>=0.0.5,<0.0.6)", "pyyaml (>=5.3.1,<7.0.0)", "ruff (==0.0.138)", "sqlalchemy (>=1.3.18,<1.4.43)", "types-orjson (==3.6.2)", "types-ujson (==5.6.0.0)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0,<6.0.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "feedparser"
 version = "6.0.10"
@@ -1070,11 +855,6 @@ files = [
 
 [package.dependencies]
 sgmllib3k = "*"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "filelock"
@@ -1092,11 +872,6 @@ files = [
 docs = ["furo (>=2023.3.27)", "sphinx (>=6.1.3)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)"]
 testing = ["covdefaults (>=2.3)", "coverage (>=7.2.3)", "diff-cover (>=7.5)", "pytest (>=7.3.1)", "pytest-cov (>=4)", "pytest-mock (>=3.10)", "pytest-timeout (>=2.1)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "filetype"
 version = "1.2.0"
@@ -1108,11 +883,6 @@ files = [
     {file = "filetype-1.2.0-py2.py3-none-any.whl", hash = "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"},
     {file = "filetype-1.2.0.tar.gz", hash = "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "fonttools"
@@ -1139,11 +909,6 @@ type1 = ["xattr"]
 ufo = ["fs (>=2.2.0,<3)"]
 unicode = ["unicodedata2 (>=15.0.0)"]
 woff = ["brotli (>=1.0.1)", "brotlicffi (>=0.8.0)", "zopfli (>=0.1.4)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "frozenlist"
@@ -1229,11 +994,6 @@ files = [
     {file = "frozenlist-1.3.3.tar.gz", hash = "sha256:58bcc55721e8a90b88332d6cd441261ebb22342e238296bb330968952fbb3a6a"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "fuzzywuzzy"
 version = "0.18.0"
@@ -1249,11 +1009,6 @@ files = [
 [package.extras]
 speedup = ["python-levenshtein (>=0.12)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "gitdb"
 version = "4.0.10"
@@ -1268,11 +1023,6 @@ files = [
 
 [package.dependencies]
 smmap = ">=3.0.1,<6"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "githubkit"
@@ -1298,11 +1048,6 @@ auth-app = ["PyJWT (>=2.4.0,<3.0.0)", "cryptography (>=38.0.3,<39.0.0)"]
 auth-oauth-device = ["anyio (>=3.6.1,<4.0.0)"]
 jwt = ["PyJWT (>=2.4.0,<3.0.0)", "cryptography (>=38.0.3,<39.0.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "gitpython"
 version = "3.1.29"
@@ -1317,11 +1062,6 @@ files = [
 
 [package.dependencies]
 gitdb = ">=4.0.1,<5"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "greenlet"
@@ -1390,11 +1130,6 @@ files = [
 [package.extras]
 docs = ["Sphinx"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "h11"
 version = "0.12.0"
@@ -1406,11 +1141,6 @@ files = [
     {file = "h11-0.12.0-py3-none-any.whl", hash = "sha256:36a3cb8c0a032f56e2da7084577878a035d3b61d104230d4bd49c0c6b555a9c6"},
     {file = "h11-0.12.0.tar.gz", hash = "sha256:47222cb6067e4a307d535814917cd98fd0a57b6788ce715755fa2b6c28b56042"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "h2"
@@ -1428,11 +1158,6 @@ files = [
 hpack = ">=4.0,<5"
 hyperframe = ">=6.0,<7"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "hpack"
 version = "4.0.0"
@@ -1444,11 +1169,6 @@ files = [
     {file = "hpack-4.0.0-py3-none-any.whl", hash = "sha256:84a076fad3dc9a9f8063ccb8041ef100867b1878b25ef0ee63847a5d53818a6c"},
     {file = "hpack-4.0.0.tar.gz", hash = "sha256:fc41de0c63e687ebffde81187a948221294896f6bdc0ae2312708df339430095"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "httpcore"
@@ -1471,11 +1191,6 @@ sniffio = ">=1.0.0,<2.0.0"
 [package.extras]
 http2 = ["h2 (>=3,<5)"]
 socks = ["socksio (>=1.0.0,<2.0.0)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "httptools"
@@ -1531,11 +1246,6 @@ files = [
 [package.extras]
 test = ["Cython (>=0.29.24,<0.30.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "httpx"
 version = "0.23.0"
@@ -1561,11 +1271,6 @@ cli = ["click (>=8.0.0,<9.0.0)", "pygments (>=2.0.0,<3.0.0)", "rich (>=10,<13)"]
 http2 = ["h2 (>=3,<5)"]
 socks = ["socksio (>=1.0.0,<2.0.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "humanize"
 version = "4.4.0"
@@ -1581,11 +1286,6 @@ files = [
 [package.extras]
 tests = ["freezegun", "pytest", "pytest-cov"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "hyperframe"
 version = "6.0.1"
@@ -1598,11 +1298,6 @@ files = [
     {file = "hyperframe-6.0.1.tar.gz", hash = "sha256:ae510046231dc8e9ecb1a6586f63d2347bf4c8905914aa84ba585ae85f28a914"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "idna"
 version = "3.4"
@@ -1614,11 +1309,6 @@ files = [
     {file = "idna-3.4-py3-none-any.whl", hash = "sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2"},
     {file = "idna-3.4.tar.gz", hash = "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "importlib-metadata"
@@ -1640,11 +1330,6 @@ docs = ["jaraco.packaging (>=9)", "rst.linker (>=1.9)", "sphinx"]
 perf = ["ipython"]
 testing = ["flufl.flake8", "importlib-resources (>=1.3)", "packaging", "pyfakefs", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-flake8", "pytest-mypy (>=0.9.1)", "pytest-perf (>=0.9.2)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "iso8601"
 version = "1.1.0"
@@ -1657,11 +1342,6 @@ files = [
     {file = "iso8601-1.1.0.tar.gz", hash = "sha256:32811e7b81deee2063ea6d2e94f8819a86d1f3811e49d23623a41fa832bef03f"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "jieba"
 version = "0.42.1"
@@ -1672,11 +1352,6 @@ python-versions = "*"
 files = [
     {file = "jieba-0.42.1.tar.gz", hash = "sha256:055ca12f62674fafed09427f176506079bc135638a14e23e25be909131928db2"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "jinja2"
@@ -1696,11 +1371,6 @@ MarkupSafe = ">=2.0"
 [package.extras]
 i18n = ["Babel (>=2.7)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "jinja2-time"
 version = "0.2.0"
@@ -1717,11 +1387,6 @@ files = [
 arrow = "*"
 jinja2 = "*"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "joblib"
 version = "1.2.0"
@@ -1733,11 +1398,6 @@ files = [
     {file = "joblib-1.2.0-py3-none-any.whl", hash = "sha256:091138ed78f800342968c523bdde947e7a305b8594b910a0fea2ab83c3c6d385"},
     {file = "joblib-1.2.0.tar.gz", hash = "sha256:e1cee4a79e4af22881164f218d4311f60074197fb707e082e803b61f6d137018"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "kiwisolver"
@@ -1817,11 +1477,6 @@ files = [
     {file = "kiwisolver-1.4.4.tar.gz", hash = "sha256:d41997519fcba4a1e46eb4a2fe31bc12f0ff957b2b81bac28db24744f333e955"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "langdetect"
 version = "1.0.9"
@@ -1836,11 +1491,6 @@ files = [
 
 [package.dependencies]
 six = "*"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "littlepaimon-utils"
@@ -1858,11 +1508,6 @@ files = [
 httpx = ">=0.23.0,<0.24.0"
 pillow = ">=9.1.1,<10.0.0"
 tqdm = ">=4.64.0,<5.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "loguru"
@@ -1882,11 +1527,6 @@ win32-setctime = {version = ">=1.0.0", markers = "sys_platform == \"win32\""}
 
 [package.extras]
 dev = ["Sphinx (>=4.1.1)", "black (>=19.10b0)", "colorama (>=0.3.4)", "docutils (==0.16)", "flake8 (>=3.7.7)", "isort (>=5.1.1)", "pytest (>=4.6.2)", "pytest-cov (>=2.7.1)", "sphinx-autobuild (>=0.7.1)", "sphinx-rtd-theme (>=0.4.3)", "tox (>=3.9.0)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "lxml"
@@ -1974,11 +1614,6 @@ html5 = ["html5lib"]
 htmlsoup = ["BeautifulSoup4"]
 source = ["Cython (>=0.29.7)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "mako"
 version = "1.2.4"
@@ -1999,11 +1634,6 @@ babel = ["Babel"]
 lingua = ["lingua"]
 testing = ["pytest"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "markdown"
 version = "3.4.3"
@@ -2018,11 +1648,6 @@ files = [
 
 [package.extras]
 testing = ["coverage", "pyyaml"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "markdown-it-py"
@@ -2048,11 +1673,6 @@ plugins = ["mdit-py-plugins"]
 profiling = ["gprof2dot"]
 rtd = ["attrs", "myst-parser", "pyyaml", "sphinx", "sphinx-copybutton", "sphinx-design", "sphinx_book_theme"]
 testing = ["coverage", "pytest", "pytest-cov", "pytest-regressions"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "markupsafe"
@@ -2113,11 +1733,6 @@ files = [
     {file = "MarkupSafe-2.1.3-cp39-cp39-win_amd64.whl", hash = "sha256:3fd4abcb888d15a94f32b75d8fd18ee162ca0c064f35b11134be77050296d6ba"},
     {file = "MarkupSafe-2.1.3.tar.gz", hash = "sha256:af598ed32d6ae86f1b747b82783958b1a4ab8f617b06fe68795c7f026abbdcad"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "matplotlib"
@@ -2181,11 +1796,6 @@ pillow = ">=6.2.0"
 pyparsing = ">=2.2.1"
 python-dateutil = ">=2.7"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "mdurl"
 version = "0.1.2"
@@ -2197,11 +1807,6 @@ files = [
     {file = "mdurl-0.1.2-py3-none-any.whl", hash = "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"},
     {file = "mdurl-0.1.2.tar.gz", hash = "sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "meme-generator"
@@ -2227,11 +1832,6 @@ toml = ">=0.10.2,<0.11.0"
 tqdm = ">=4.60.0,<5.0.0"
 typing-extensions = ">=4.0.0"
 uvicorn = ">0.17.0,<1.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "msgpack"
@@ -2305,11 +1905,6 @@ files = [
     {file = "msgpack-1.0.5-cp39-cp39-win_amd64.whl", hash = "sha256:06f5174b5f8ed0ed919da0e62cbd4ffde676a374aba4020034da05fab67b9164"},
     {file = "msgpack-1.0.5.tar.gz", hash = "sha256:c075544284eadc5cddc70f4757331d99dcbc16b2bbd4849d15f8aae4cf36d31c"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "multidict"
@@ -2395,11 +1990,6 @@ files = [
     {file = "multidict-6.0.4.tar.gz", hash = "sha256:3666906492efb76453c0e7b97f2cf459b0682e7402c0489a95484965dbc1da49"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "nb-cli"
 version = "1.1.2"
@@ -2428,11 +2018,6 @@ virtualenv = ">=20.17.1,<20.18.0"
 watchfiles = ">=0.16,<1.0"
 wcwidth = ">=0.2,<1.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "nonebot-adapter-onebot"
 version = "2.2.3"
@@ -2448,11 +2033,6 @@ files = [
 [package.dependencies]
 msgpack = ">=1.0.3,<2.0.0"
 nonebot2 = ">=2.0.0-beta.3,<3.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "nonebot-plugin-apscheduler"
@@ -2470,11 +2050,6 @@ files = [
 apscheduler = ">=3.7.0,<4.0.0"
 nonebot2 = ">=2.0.0-rc.1,<3.0.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "nonebot-plugin-chatrecorder"
 version = "0.2.3"
@@ -2491,11 +2066,6 @@ files = [
 nonebot-adapter-onebot = ">=2.2.0,<3.0.0"
 nonebot-plugin-datastore = ">=0.6.0a0,<0.7.0"
 nonebot2 = {version = ">=2.0.0-rc.1,<3.0.0", extras = ["fastapi"]}
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "nonebot-plugin-datastore"
@@ -2522,11 +2092,6 @@ cli = ["anyio (>=3.6)", "click (>=8.0)", "typing-extensions (>=4.4)"]
 toml = ["rtoml (>=0.9.0,<0.10.0)"]
 yaml = ["pyyaml (>=6.0,<7.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "nonebot-plugin-gocqhttp"
 version = "0.6.10"
@@ -2551,11 +2116,6 @@ py-cpuinfo = ">=8,<10"
 [package.extras]
 proxy = ["proxy.py (>=2.4.3,<3.0.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "nonebot-plugin-guild-patch"
 version = "0.2.2"
@@ -2571,11 +2131,6 @@ files = [
 [package.dependencies]
 nonebot-adapter-onebot = ">=2.1.0,<3.0.0"
 nonebot2 = ">=2.0.0-beta.1,<3.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "nonebot-plugin-htmlrender"
@@ -2598,11 +2153,6 @@ playwright = ">=1.17.2,<2.0.0"
 Pygments = ">=2.10.0,<3.0.0"
 pymdown-extensions = ">=9.1,<10.0"
 python-markdown-math = ">=0.8,<0.9"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "nonebot-plugin-imageutils"
@@ -2627,11 +2177,6 @@ numpy = ">=1.20.0,<2.0.0"
 opencv-python-headless = ">=4.0.0,<5.0.0"
 Pillow = ">=9.0.0,<10.0.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "nonebot-plugin-localstore"
 version = "0.4.1"
@@ -2647,11 +2192,6 @@ files = [
 [package.dependencies]
 nonebot2 = ">=2.0.0-rc.1,<3.0.0"
 typing-extensions = ">=4.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "nonebot-plugin-send-anything-anywhere"
@@ -2671,11 +2211,6 @@ nonebot2 = ">=2.0.0,<3.0.0"
 pydantic = ">=1.10.5,<2.0.0"
 strenum = ">=0.4.8,<0.5.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.python.org/simple"
-reference = 'pypi_'
-
 [[package]]
 name = "nonebot-plugin-txt2img"
 version = "0.3.0"
@@ -2693,11 +2228,6 @@ httpx = ">=0.23.0,<0.24.0"
 nonebot-adapter-onebot = ">=2.1.3,<3.0.0"
 nonebot2 = {version = ">=2.0.0rc1,<3.0.0", extras = ["fastapi"]}
 pillow = ">=9.0.0,<10.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "nonebot2"
@@ -2730,11 +2260,6 @@ httpx = ["httpx[http2] (>=0.20.0,<1.0.0)"]
 quart = ["Quart (>=0.18.0,<1.0.0)", "uvicorn[standard] (>=0.20.0,<1.0.0)"]
 websockets = ["websockets (>=10.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.python.org/simple"
-reference = 'pypi_'
-
 [[package]]
 name = "noneprompt"
 version = "0.1.9"
@@ -2749,11 +2274,6 @@ files = [
 
 [package.dependencies]
 prompt-toolkit = ">=3.0.19,<4.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "numpy"
@@ -2793,11 +2313,6 @@ files = [
     {file = "numpy-1.23.4.tar.gz", hash = "sha256:ed2cc92af0efad20198638c69bb0fc2870a58dabfba6eb722c933b48556c686c"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "oauthlib"
 version = "3.2.2"
@@ -2814,11 +2329,6 @@ files = [
 rsa = ["cryptography (>=3.0.0)"]
 signals = ["blinker (>=1.4.0)"]
 signedtoken = ["cryptography (>=3.0.0)", "pyjwt (>=2.0.0,<3)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "openai"
@@ -2842,11 +2352,6 @@ datalib = ["numpy", "openpyxl (>=3.0.7)", "pandas (>=1.2.3)", "pandas-stubs (>=1
 dev = ["black (>=21.6b0,<22.0)", "pytest (>=6.0.0,<7.0.0)", "pytest-asyncio", "pytest-mock"]
 embeddings = ["matplotlib", "numpy", "openpyxl (>=3.0.7)", "pandas (>=1.2.3)", "pandas-stubs (>=1.1.0.11)", "plotly", "scikit-learn (>=1.0.2)", "scipy", "tenacity (>=8.0.1)"]
 wandb = ["numpy", "openpyxl (>=3.0.7)", "pandas (>=1.2.3)", "pandas-stubs (>=1.1.0.11)", "wandb"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "opencv-python-headless"
@@ -2874,11 +2379,6 @@ numpy = [
     {version = ">=1.17.0", markers = "python_version >= \"3.7\""},
     {version = ">=1.17.3", markers = "python_version >= \"3.8\""},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "orjson"
@@ -2936,11 +2436,6 @@ files = [
     {file = "orjson-3.9.0.tar.gz", hash = "sha256:f6dd27c71cd6e146795f876449a8eae74f67ae1e4e244dfc1203489103eb2d94"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "packaging"
 version = "23.1"
@@ -2952,11 +2447,6 @@ files = [
     {file = "packaging-23.1-py3-none-any.whl", hash = "sha256:994793af429502c4ea2ebf6bf664629d07c1a9fe974af92966e4b8d2df7edc61"},
     {file = "packaging-23.1.tar.gz", hash = "sha256:a392980d2b6cffa644431898be54b0045151319d1e7ec34f0cfed48767dd334f"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "paho-mqtt"
@@ -2971,11 +2461,6 @@ files = [
 
 [package.extras]
 proxy = ["PySocks"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "parsel"
@@ -2995,11 +2480,6 @@ lxml = "*"
 packaging = "*"
 w3lib = ">=1.19.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "peewee"
 version = "3.15.3"
@@ -3010,11 +2490,6 @@ python-versions = "*"
 files = [
     {file = "peewee-3.15.3.tar.gz", hash = "sha256:cc934286d0c0842203abe66a3c6583d1463371e633b03d6da054d0f74e70706f"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "pil-utils"
@@ -3035,11 +2510,6 @@ matplotlib = ">=3.0.0,<4.0.0"
 numpy = ">=1.20.0,<2.0.0"
 opencv-python-headless = ">=4.0.0,<5.0.0"
 Pillow = ">=9.2.0,<10.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "pillow"
@@ -3121,11 +2591,6 @@ files = [
 docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline-tabs", "sphinx-removed-in", "sphinxext-opengraph"]
 tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "platformdirs"
 version = "2.6.2"
@@ -3141,11 +2606,6 @@ files = [
 [package.extras]
 docs = ["furo (>=2022.12.7)", "proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-autodoc-typehints (>=1.19.5)"]
 test = ["appdirs (==1.4.4)", "covdefaults (>=2.2.2)", "pytest (>=7.2)", "pytest-cov (>=4)", "pytest-mock (>=3.10)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "playwright"
@@ -3168,11 +2628,6 @@ files = [
 greenlet = "1.1.3"
 pyee = "8.1.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "proces"
 version = "0.1.4"
@@ -3184,11 +2639,6 @@ files = [
     {file = "proces-0.1.4-py3-none-any.whl", hash = "sha256:66303eb348ff053f65903d7be3fc051bc76d2129dae8efb4a8e3b3744975390b"},
     {file = "proces-0.1.4.tar.gz", hash = "sha256:2ff88a846b5202c089460c9857074d03f34b521fdffc91a9c656be6049a13a12"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "prompt-toolkit"
@@ -3204,11 +2654,6 @@ files = [
 
 [package.dependencies]
 wcwidth = "*"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "psutil"
@@ -3237,11 +2682,6 @@ files = [
 [package.extras]
 test = ["enum34", "ipaddress", "mock", "pywin32", "wmi"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "py-cpuinfo"
 version = "9.0.0"
@@ -3254,11 +2694,6 @@ files = [
     {file = "py_cpuinfo-9.0.0-py3-none-any.whl", hash = "sha256:859625bc251f64e21f077d099d4162689c762b5d6a4c3c97553d56241c9674d5"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "pyasn1"
 version = "0.5.0"
@@ -3270,11 +2705,6 @@ files = [
     {file = "pyasn1-0.5.0-py2.py3-none-any.whl", hash = "sha256:87a2121042a1ac9358cabcaf1d07680ff97ee6404333bacca15f76aa8ad01a57"},
     {file = "pyasn1-0.5.0.tar.gz", hash = "sha256:97b7290ca68e62a832558ec3976f15cbf911bf5d7c7039d8b861c2a0ece69fde"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "pydantic"
@@ -3330,11 +2760,6 @@ typing-extensions = ">=4.2.0"
 dotenv = ["python-dotenv (>=0.10.4)"]
 email = ["email-validator (>=1.0.3)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "pyee"
 version = "8.1.0"
@@ -3347,11 +2772,6 @@ files = [
     {file = "pyee-8.1.0.tar.gz", hash = "sha256:92dacc5bd2bdb8f95aa8dd2585d47ca1c4840e2adb95ccf90034d64f725bfd31"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "pyfiglet"
 version = "0.8.post1"
@@ -3363,11 +2783,6 @@ files = [
     {file = "pyfiglet-0.8.post1-py2.py3-none-any.whl", hash = "sha256:d555bcea17fbeaf70eaefa48bb119352487e629c9b56f30f383e2c62dd67a01c"},
     {file = "pyfiglet-0.8.post1.tar.gz", hash = "sha256:c6c2321755d09267b438ec7b936825a4910fec696292139e664ca8670e103639"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "pygments"
@@ -3384,11 +2799,6 @@ files = [
 [package.extras]
 plugins = ["importlib-metadata"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "pygtrie"
 version = "2.5.0"
@@ -3400,11 +2810,6 @@ files = [
     {file = "pygtrie-2.5.0-py3-none-any.whl", hash = "sha256:8795cda8105493d5ae159a5bef313ff13156c5d4d72feddefacaad59f8c8ce16"},
     {file = "pygtrie-2.5.0.tar.gz", hash = "sha256:203514ad826eb403dab1d2e2ddd034e0d1534bbe4dbe0213bb0593f66beba4e2"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "pyjwt"
@@ -3424,11 +2829,6 @@ dev = ["coverage[toml] (==5.0.4)", "cryptography (>=3.4.0)", "pre-commit", "pyte
 docs = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
 tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "pymdown-extensions"
 version = "9.11"
@@ -3444,11 +2844,6 @@ files = [
 [package.dependencies]
 markdown = ">=3.2"
 pyyaml = "*"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "pymongo"
@@ -3545,11 +2940,6 @@ ocsp = ["certifi", "pyopenssl (>=17.2.0)", "requests (<3.0.0)", "service-identit
 snappy = ["python-snappy"]
 zstd = ["zstandard"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "pyparsing"
 version = "3.0.9"
@@ -3565,11 +2955,6 @@ files = [
 [package.extras]
 diagrams = ["jinja2", "railroad-diagrams"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "pypika-tortoise"
 version = "0.1.6"
@@ -3582,11 +2967,6 @@ files = [
     {file = "pypika_tortoise-0.1.6-py3-none-any.whl", hash = "sha256:2d68bbb7e377673743cff42aa1059f3a80228d411fbcae591e4465e173109fd8"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "pypinyin"
 version = "0.47.1"
@@ -3598,11 +2978,6 @@ files = [
     {file = "pypinyin-0.47.1-py2.py3-none-any.whl", hash = "sha256:8b9a2de91958b61c649e823877de4005630cdca8f7b9537fe0d65740f42a07a5"},
     {file = "pypinyin-0.47.1.tar.gz", hash = "sha256:4244eec898294fd099c02d59faf8e89106d83d74e1c04a7af59094664d89636b"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "python-dateutil"
@@ -3619,11 +2994,6 @@ files = [
 [package.dependencies]
 six = ">=1.5"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "python-dotenv"
 version = "1.0.0"
@@ -3638,11 +3008,6 @@ files = [
 
 [package.extras]
 cli = ["click (>=5.0)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "python-engineio"
@@ -3659,11 +3024,6 @@ files = [
 [package.extras]
 asyncio-client = ["aiohttp (>=3.4)"]
 client = ["requests (>=2.21.0)", "websocket-client (>=0.54.0)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "python-jose"
@@ -3687,11 +3047,6 @@ cryptography = ["cryptography (>=3.4.0)"]
 pycrypto = ["pyasn1", "pycrypto (>=2.6.0,<2.7.0)"]
 pycryptodome = ["pyasn1", "pycryptodome (>=3.3.1,<4.0.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "python-markdown-math"
 version = "0.8"
@@ -3707,11 +3062,6 @@ files = [
 [package.dependencies]
 Markdown = ">=3.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "python-multipart"
 version = "0.0.5"
@@ -3725,11 +3075,6 @@ files = [
 
 [package.dependencies]
 six = ">=1.4.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "python-slugify"
@@ -3748,11 +3093,6 @@ text-unidecode = ">=1.3"
 
 [package.extras]
 unidecode = ["Unidecode (>=1.1.1)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "python-socketio"
@@ -3774,11 +3114,6 @@ python-engineio = ">=4.3.0"
 asyncio-client = ["aiohttp (>=3.4)"]
 client = ["requests (>=2.21.0)", "websocket-client (>=0.54.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "pytz"
 version = "2022.6"
@@ -3790,11 +3125,6 @@ files = [
     {file = "pytz-2022.6-py2.py3-none-any.whl", hash = "sha256:222439474e9c98fced559f1709d89e6c9cbf8d79c794ff3eb9f8800064291427"},
     {file = "pytz-2022.6.tar.gz", hash = "sha256:e89512406b793ca39f5971bc999cc538ce125c0e51c27941bef4568b460095e2"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "pyyaml"
@@ -3846,11 +3176,6 @@ files = [
     {file = "PyYAML-6.0.tar.gz", hash = "sha256:68fb519c14306fec9720a2a5b45bc9f0c8d1b9c72adf45c37baedfcd949c35a2"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "qrcode"
 version = "7.3.1"
@@ -3871,11 +3196,6 @@ dev = ["pytest", "tox"]
 maintainer = ["zest.releaser[recommended]"]
 pil = ["pillow"]
 test = ["pytest", "pytest-cov"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "regex"
@@ -3961,11 +3281,6 @@ files = [
     {file = "regex-2022.3.2.tar.gz", hash = "sha256:79e5af1ff258bc0fe0bdd6f69bc4ae33935a898e3cbefbbccf22e88a27fa053b"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "requests"
 version = "2.28.1"
@@ -3988,11 +3303,6 @@ urllib3 = ">=1.21.1,<1.27"
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "requests-oauthlib"
 version = "1.3.1"
@@ -4012,11 +3322,6 @@ requests = ">=2.0.0"
 [package.extras]
 rsa = ["oauthlib[signedtoken] (>=3.0.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "rfc3986"
 version = "1.5.0"
@@ -4034,11 +3339,6 @@ idna = {version = "*", optional = true, markers = "extra == \"idna2008\""}
 
 [package.extras]
 idna2008 = ["idna"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "rich"
@@ -4059,11 +3359,6 @@ pygments = ">=2.13.0,<3.0.0"
 [package.extras]
 jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "rply"
 version = "0.7.8"
@@ -4079,11 +3374,6 @@ files = [
 [package.dependencies]
 appdirs = "*"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "rsa"
 version = "4.9"
@@ -4098,11 +3388,6 @@ files = [
 
 [package.dependencies]
 pyasn1 = ">=0.1.3"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "rtoml"
@@ -4165,11 +3450,6 @@ files = [
     {file = "rtoml-0.9.0.tar.gz", hash = "sha256:113f2e133d152d9424269c475b4a7d0679987078b543e88fcb16c870dc2c460d"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "ruamel-yaml"
 version = "0.17.21"
@@ -4189,18 +3469,13 @@ files = [
 docs = ["ryd"]
 jinja2 = ["ruamel.yaml.jinja2 (>=0.2)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "ruamel-yaml-clib"
 version = "0.2.7"
 description = "C version of reader, parser and emitter for ruamel.yaml derived from libyaml"
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.5"
 files = [
     {file = "ruamel.yaml.clib-0.2.7-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:d5859983f26d8cd7bb5c287ef452e8aacc86501487634573d260968f753e1d71"},
     {file = "ruamel.yaml.clib-0.2.7-cp310-cp310-macosx_12_0_arm64.whl", hash = "sha256:debc87a9516b237d0466a711b18b6ebeb17ba9f391eb7f91c649c5c4ec5006c7"},
@@ -4209,7 +3484,8 @@ files = [
     {file = "ruamel.yaml.clib-0.2.7-cp310-cp310-win32.whl", hash = "sha256:763d65baa3b952479c4e972669f679fe490eee058d5aa85da483ebae2009d231"},
     {file = "ruamel.yaml.clib-0.2.7-cp310-cp310-win_amd64.whl", hash = "sha256:d000f258cf42fec2b1bbf2863c61d7b8918d31ffee905da62dede869254d3b8a"},
     {file = "ruamel.yaml.clib-0.2.7-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:045e0626baf1c52e5527bd5db361bc83180faaba2ff586e763d3d5982a876a9e"},
-    {file = "ruamel.yaml.clib-0.2.7-cp311-cp311-macosx_12_6_arm64.whl", hash = "sha256:721bc4ba4525f53f6a611ec0967bdcee61b31df5a56801281027a3a6d1c2daf5"},
+    {file = "ruamel.yaml.clib-0.2.7-cp311-cp311-macosx_13_0_arm64.whl", hash = "sha256:1a6391a7cabb7641c32517539ca42cf84b87b667bad38b78d4d42dd23e957c81"},
+    {file = "ruamel.yaml.clib-0.2.7-cp311-cp311-manylinux2014_aarch64.whl", hash = "sha256:9c7617df90c1365638916b98cdd9be833d31d337dbcd722485597b43c4a215bf"},
     {file = "ruamel.yaml.clib-0.2.7-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl", hash = "sha256:41d0f1fa4c6830176eef5b276af04c89320ea616655d01327d5ce65e50575c94"},
     {file = "ruamel.yaml.clib-0.2.7-cp311-cp311-win32.whl", hash = "sha256:f6d3d39611ac2e4f62c3128a9eed45f19a6608670c5a2f4f07f24e8de3441d38"},
     {file = "ruamel.yaml.clib-0.2.7-cp311-cp311-win_amd64.whl", hash = "sha256:da538167284de58a52109a9b89b8f6a53ff8437dd6dc26d33b57bf6699153122"},
@@ -4239,11 +3515,6 @@ files = [
     {file = "ruamel.yaml.clib-0.2.7-cp39-cp39-win_amd64.whl", hash = "sha256:184faeaec61dbaa3cace407cffc5819f7b977e75360e8d5ca19461cd851a5fc5"},
     {file = "ruamel.yaml.clib-0.2.7.tar.gz", hash = "sha256:1f08fd5a2bea9c4180db71678e850b995d2a5f4537be0e94557668cf0f5f9497"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "scikit-learn"
@@ -4288,11 +3559,6 @@ docs = ["Pillow (>=7.1.2)", "matplotlib (>=3.1.2)", "memory-profiler (>=0.57.0)"
 examples = ["matplotlib (>=3.1.2)", "pandas (>=1.0.5)", "scikit-image (>=0.16.2)", "seaborn (>=0.9.0)"]
 tests = ["black (>=22.3.0)", "flake8 (>=3.8.2)", "matplotlib (>=3.1.2)", "mypy (>=0.961)", "numpydoc (>=1.2.0)", "pandas (>=1.0.5)", "pyamg (>=4.0.0)", "pytest (>=5.0.1)", "pytest-cov (>=2.9.0)", "scikit-image (>=0.16.2)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "scipy"
 version = "1.9.3"
@@ -4332,11 +3598,6 @@ dev = ["flake8", "mypy", "pycodestyle", "typing_extensions"]
 doc = ["matplotlib (>2)", "numpydoc", "pydata-sphinx-theme (==0.9.0)", "sphinx (!=4.1.0)", "sphinx-panels (>=0.5.2)", "sphinx-tabs"]
 test = ["asv", "gmpy2", "mpmath", "pytest", "pytest-cov", "pytest-xdist", "scikit-umfpack", "threadpoolctl"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "setuptools"
 version = "67.8.0"
@@ -4354,11 +3615,6 @@ docs = ["furo", "jaraco.packaging (>=9)", "jaraco.tidelift (>=1.4)", "pygments-g
 testing = ["build[virtualenv]", "filelock (>=3.4.0)", "flake8-2020", "ini2toml[lite] (>=0.9)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "pip (>=19.1)", "pip-run (>=8.8)", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-mypy (>=0.9.1)", "pytest-perf", "pytest-ruff", "pytest-timeout", "pytest-xdist", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel"]
 testing-integration = ["build[virtualenv]", "filelock (>=3.4.0)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "pytest", "pytest-enabler", "pytest-xdist", "tomli", "virtualenv (>=13.0.0)", "wheel"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "sgmllib3k"
 version = "1.0.0"
@@ -4369,11 +3625,6 @@ python-versions = "*"
 files = [
     {file = "sgmllib3k-1.0.0.tar.gz", hash = "sha256:7868fb1c8bfa764c1ac563d3cf369c381d1325d36124933a726f29fcdaa812e9"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "shapely"
@@ -4430,11 +3681,6 @@ numpy = ">=1.14"
 docs = ["matplotlib", "numpydoc (>=1.1.0,<1.2.0)", "sphinx", "sphinx-book-theme", "sphinx-remove-toctrees"]
 test = ["pytest", "pytest-cov"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "six"
 version = "1.16.0"
@@ -4446,11 +3692,6 @@ files = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "smmap"
@@ -4464,11 +3705,6 @@ files = [
     {file = "smmap-5.0.0.tar.gz", hash = "sha256:c840e62059cd3be204b0c9c9f74be2c09d5648eddd4580d9314c3ecde0b30936"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "sniffio"
 version = "1.3.0"
@@ -4481,11 +3717,6 @@ files = [
     {file = "sniffio-1.3.0.tar.gz", hash = "sha256:e60305c5e5d314f5389259b7f22aaa33d8f7dee49763119234af3755c55b9101"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "soupsieve"
 version = "2.4.1"
@@ -4497,11 +3728,6 @@ files = [
     {file = "soupsieve-2.4.1-py3-none-any.whl", hash = "sha256:1c1bfee6819544a3447586c889157365a27e10d88cde3ad3da0cf0ddf646feb8"},
     {file = "soupsieve-2.4.1.tar.gz", hash = "sha256:89d12b2d5dfcd2c9e8c22326da9d9aa9cb3dfab0a83a024f05704076ee8d35ea"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "sqlalchemy"
@@ -4581,11 +3807,6 @@ postgresql-psycopg2cffi = ["psycopg2cffi"]
 pymysql = ["pymysql"]
 sqlcipher = ["sqlcipher3-binary"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "starlette"
 version = "0.25.0"
@@ -4604,11 +3825,6 @@ anyio = ">=3.4.0,<5"
 [package.extras]
 full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart", "pyyaml"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "strenum"
 version = "0.4.10"
@@ -4626,11 +3842,6 @@ docs = ["myst-parser[linkify]", "sphinx", "sphinx-rtd-theme"]
 release = ["twine"]
 test = ["pylint", "pytest", "pytest-black", "pytest-cov", "pytest-pylint"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "text-unidecode"
 version = "1.3"
@@ -4643,11 +3854,6 @@ files = [
     {file = "text_unidecode-1.3-py2.py3-none-any.whl", hash = "sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "threadpoolctl"
 version = "3.1.0"
@@ -4659,11 +3865,6 @@ files = [
     {file = "threadpoolctl-3.1.0-py3-none-any.whl", hash = "sha256:8b99adda265feb6773280df41eece7b2e6561b772d21ffd52e372f999024907b"},
     {file = "threadpoolctl-3.1.0.tar.gz", hash = "sha256:a335baacfaa4400ae1f0d8e3a58d6674d2f8828e3716bb2802c44955ad391380"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "tiktoken"
@@ -4711,11 +3912,6 @@ requests = ">=2.26.0"
 [package.extras]
 blobfile = ["blobfile (>=2)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "tinydb"
 version = "4.7.0"
@@ -4727,11 +3923,6 @@ files = [
     {file = "tinydb-4.7.0-py3-none-any.whl", hash = "sha256:e2cdf6e2dad49813e9b5fceb3c7943387309a8738125fbff0b58d248a033f7a9"},
     {file = "tinydb-4.7.0.tar.gz", hash = "sha256:357eb7383dee6915f17b00596ec6dd2a890f3117bf52be28a4c516aeee581100"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "toml"
@@ -4745,11 +3936,6 @@ files = [
     {file = "toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "tomli"
 version = "2.0.1"
@@ -4762,11 +3948,6 @@ files = [
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "tomlkit"
 version = "0.11.8"
@@ -4778,11 +3959,6 @@ files = [
     {file = "tomlkit-0.11.8-py3-none-any.whl", hash = "sha256:8c726c4c202bdb148667835f68d68780b9a003a9ec34167b6c673b38eff2a171"},
     {file = "tomlkit-0.11.8.tar.gz", hash = "sha256:9330fc7faa1db67b541b28e62018c17d20be733177d290a13b24c62d1614e0c3"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "tortoise-orm"
@@ -4810,11 +3986,6 @@ asyncodbc = ["asyncodbc (>=0.1.1,<0.2.0)"]
 asyncpg = ["asyncpg"]
 psycopg = ["psycopg[binary,pool]"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "tqdm"
 version = "4.64.1"
@@ -4835,11 +4006,6 @@ dev = ["py-make (>=0.1.0)", "twine", "wheel"]
 notebook = ["ipywidgets (>=6)"]
 slack = ["slack-sdk"]
 telegram = ["requests"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "tweepy"
@@ -4865,11 +4031,6 @@ docs = ["myst-parser (==0.15.2)", "readthedocs-sphinx-search (==0.1.1)", "sphinx
 socks = ["requests[socks] (>=2.27.0,<3)"]
 test = ["vcrpy (>=1.10.3)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "typing-extensions"
 version = "4.4.0"
@@ -4882,11 +4043,6 @@ files = [
     {file = "typing_extensions-4.4.0.tar.gz", hash = "sha256:1511434bb92bf8dd198c12b1cc812e800d4181cfcb867674e0f8279cc93087aa"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "tzdata"
 version = "2023.3"
@@ -4898,11 +4054,6 @@ files = [
     {file = "tzdata-2023.3-py2.py3-none-any.whl", hash = "sha256:7e65763eef3120314099b6939b5546db7adce1e7d6f2e179e3df563c70511eda"},
     {file = "tzdata-2023.3.tar.gz", hash = "sha256:11ef1e08e54acb0d4f95bdb1be05da659673de4acbd21bf9c69e94cc5e907a3a"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "tzlocal"
@@ -4921,11 +4072,6 @@ tzdata = {version = "*", markers = "platform_system == \"Windows\""}
 
 [package.extras]
 devenv = ["black", "check-manifest", "flake8", "pyroma", "pytest (>=4.3)", "pytest-cov", "pytest-mock (>=3.3)", "zest.releaser"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "ujson"
@@ -5002,11 +4148,6 @@ files = [
     {file = "ujson-5.5.0.tar.gz", hash = "sha256:b25077a971c7da47bd6846a912a747f6963776d90720c88603b1b55d81790780"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "urllib3"
 version = "1.26.12"
@@ -5023,11 +4164,6 @@ files = [
 brotli = ["brotli (>=1.0.9)", "brotlicffi (>=0.8.0)", "brotlipy (>=0.6.0)"]
 secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "ipaddress", "pyOpenSSL (>=0.14)", "urllib3-secure-extra"]
 socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "uvicorn"
@@ -5054,11 +4190,6 @@ websockets = {version = ">=10.4", optional = true, markers = "extra == \"standar
 
 [package.extras]
 standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)", "pyyaml (>=5.1)", "uvloop (>=0.14.0,!=0.15.0,!=0.15.1)", "watchfiles (>=0.13)", "websockets (>=10.4)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "uvloop"
@@ -5105,11 +4236,6 @@ dev = ["Cython (>=0.29.32,<0.30.0)", "Sphinx (>=4.1.2,<4.2.0)", "aiohttp", "flak
 docs = ["Sphinx (>=4.1.2,<4.2.0)", "sphinx-rtd-theme (>=0.5.2,<0.6.0)", "sphinxcontrib-asyncio (>=0.3.0,<0.4.0)"]
 test = ["Cython (>=0.29.32,<0.30.0)", "aiohttp", "flake8 (>=3.9.2,<3.10.0)", "mypy (>=0.800)", "psutil", "pyOpenSSL (>=22.0.0,<22.1.0)", "pycodestyle (>=2.7.0,<2.8.0)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "virtualenv"
 version = "20.17.1"
@@ -5131,11 +4257,6 @@ platformdirs = ">=2.4,<3"
 docs = ["proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-argparse (>=0.3.2)", "sphinx-rtd-theme (>=1)", "towncrier (>=22.8)"]
 testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7)", "packaging (>=21.3)", "pytest (>=7.0.1)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.2)", "pytest-mock (>=3.6.1)", "pytest-randomly (>=3.10.3)", "pytest-timeout (>=2.1)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "w3lib"
 version = "2.1.1"
@@ -5147,11 +4268,6 @@ files = [
     {file = "w3lib-2.1.1-py3-none-any.whl", hash = "sha256:7fd5bd7980a95d1a8185e867d05f68a591aa281a3ded4590d2641d7b09086ed4"},
     {file = "w3lib-2.1.1.tar.gz", hash = "sha256:0e1198f1b745195b6b3dd1a4cd66011fbf82f30a4d9dabaee1f9e5c86f020274"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "watchfiles"
@@ -5188,11 +4304,6 @@ files = [
 [package.dependencies]
 anyio = ">=3.0.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "wcwidth"
 version = "0.2.6"
@@ -5204,11 +4315,6 @@ files = [
     {file = "wcwidth-0.2.6-py2.py3-none-any.whl", hash = "sha256:795b138f6875577cd91bba52baf9e445cd5118fd32723b460e30a0af30ea230e"},
     {file = "wcwidth-0.2.6.tar.gz", hash = "sha256:a5220780a404dbe3353789870978e472cfe477761f06ee55077256e509b156d0"},
 ]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "websockets"
@@ -5290,11 +4396,6 @@ files = [
     {file = "websockets-11.0.3.tar.gz", hash = "sha256:88fc51d9a26b10fc331be344f1781224a375b78488fc343620184e95a4b27016"},
 ]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "win32-setctime"
 version = "1.1.0"
@@ -5309,11 +4410,6 @@ files = [
 
 [package.extras]
 dev = ["black (>=19.3b0)", "pytest (>=4.6.2)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "wordcloud"
@@ -5377,11 +4473,6 @@ files = [
 matplotlib = "*"
 numpy = ">=1.6.1"
 pillow = "*"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
 
 [[package]]
 name = "yarl"
@@ -5471,11 +4562,6 @@ files = [
 idna = ">=2.0"
 multidict = ">=4.0"
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [[package]]
 name = "zipp"
 version = "3.15.0"
@@ -5492,12 +4578,7 @@ files = [
 docs = ["furo", "jaraco.packaging (>=9)", "jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-lint"]
 testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more-itertools", "pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-flake8", "pytest-mypy (>=0.9.1)"]
 
-[package.source]
-type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
-
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "8a02dcd16f9d5c287f9fb8c67b3f22acbd7910dde97174715e4eeaf45a7836a3"
+content-hash = "fc61dbfc5c4aff4fa717534d4c1dc5bfd0c1e6be35c008a385ed74bed69e141f"

@@ -166,7 +166,9 @@ async def _(event: MessageEvent):
     else:
         nickname = event.sender.nickname
     # 从字典里获取结果
-    result = await get_chat_result(msg, nickname)
+    result1 = await get_chat_result1(msg, nickname)
+    result2 = await get_chat_result2(msg, nickname)
+    result = result1 or result2
     # 如果词库没有结果，则调用api获取智能回复
     if result == None:
         if api_num in [0, 1]:

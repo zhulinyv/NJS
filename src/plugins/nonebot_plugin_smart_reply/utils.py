@@ -110,7 +110,8 @@ attack_sendmessage = [
 # 载入词库(这个词库有点涩)
 AnimeThesaurus = json.load(open(Path(os.path.join(os.path.dirname(
     __file__), "resource/json")) / "data.json", "r", encoding="utf8"))
-
+LeafThesaurus = json.load(open(Path(os.path.join(os.path.dirname(
+    __file__), "resource/json")) / "leaf.json", "r", encoding="utf8"))
 
 
 # 获取resource/audio下面的全部文件
@@ -132,13 +133,18 @@ hello__reply = [
 
 
 # 从字典里返还消息, 抄(借鉴)的zhenxun-bot
-async def get_chat_result(text: str, nickname: str) -> str:
+async def get_chat_result1(text: str, nickname: str) -> str:
     if len(text) < 7:
         keys = AnimeThesaurus.keys()
         for key in keys:
             if text.find(key) != -1:
                 return random.choice(AnimeThesaurus[key]).replace("你", nickname)
-
+async def get_chat_result2(text: str, nickname: str) -> str:
+    if len(text) < 7:
+        keys = LeafThesaurus.keys()
+        for key in keys:
+            if text.find(key) != -1:
+                return random.choice(LeafThesaurus[key]).replace("name", nickname)
 
 
 # 从qinyunke_api拿到消息

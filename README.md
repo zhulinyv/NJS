@@ -167,19 +167,24 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 1、输入 `cd NJS` 回车, 来进入脑积水机器人目录。
 
-2、输入 `.\requirements.bat` 回车, 来安装依赖。依赖较多, 耐心等待。
-
-如果安装依赖过程中出现问题, 尝试使用 `poetry run pip install -r requirements.txt` 来安装。
-
-![image](https://user-images.githubusercontent.com/66541860/213731127-e48e3962-f7be-4f24-85cd-de14cd861508.png)
-
-备注: 部分 Linux 可能无法直接运行这个批处理脚本, 此时可以手动执行以下命令来安装依赖。
+2、依次输入以下指令:
 
 ```
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 pip install poetry
 poetry install
 ```
+
+第一行为全局换源(清华源)操作。
+
+第二行安装 poetry 。
+
+第三行用 poetry 创建环境并安装依赖。
+
+备注: 换源不是必须操作, 按需使用, 国内换国内源可加速安装过程。
+
+如果依赖安装过程中出现问题, 尝试使用这条命令安装 `poetry run pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple` 。
+
 
 ### 8️⃣ 配置 脑积水
 

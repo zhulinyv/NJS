@@ -124,19 +124,19 @@ async def _(switch_msg: Message = CommandArg()):
         await api_switch.finish("没有这个api哦~")
     finish_msg = f"切换成功, 当前智能回复api为{api_num}".replace('1', "小爱同学模式1").replace('2', "青云客"
         ).replace('3', "ChatGPT(使用Token)").replace('4', "ChatGPT(使用API)").replace('0', "小爱同学模式2")
-    await api_switch.finish(finish_msg)
+    await api_switch.finish(finish_msg, at_sender=True)
 
 @setu_switch.handle()
 async def _():
     global setu_flag
     setu_flag = not setu_flag
-    await setu_switch.send(message=f"切换成功, 当前戳一戳图片api为{'MirlKoi' if setu_flag else 'Pixiv'}")
+    await setu_switch.send(message=f"切换成功, 当前戳一戳图片api为{'MirlKoi' if setu_flag else 'Pixiv'}", at_sender=True)
 
 @api_check.handle()
 async def check():
     check_msg = f"当前图片 api 为 {setu_flag};\n当前聊天 api 为 {api_num}".replace('1', "小爱同学模式1").replace('2', "青云客").replace('3',
         "ChatGPT(使用Token)").replace('4', "ChatGPT(使用API)").replace('0', "小爱同学模式2").replace('True', "MirlKoi").replace('False', "Pixiv")
-    await api_check.send(check_msg)
+    await api_check.send(check_msg, at_sender=True)
 
 
 
@@ -159,7 +159,7 @@ async def _(event: MessageEvent):
         "你好",
         "在",
     ]:
-        await ai.finish(Message(random.choice(hello__reply)))
+        await ai.finish(Message(random.choice(hello__reply)), at_sender=True)
     # 获取用户nickname
     if isinstance(event, GroupMessageEvent):
         nickname = event.sender.card or event.sender.nickname
@@ -178,7 +178,7 @@ async def _(event: MessageEvent):
             message, voice = await xiaoice_reply(xiaoai_url)
             if api_num == 1:
                 logger.info("来自小爱同学的智能回复: " + message)
-                await ai.finish(message=message)
+                await ai.finish(message=message, at_sender=True)
             elif api_num == 0:
                 logger.info("尝试发送语音...")
                 response = requests.get(voice)
@@ -190,7 +190,7 @@ async def _(event: MessageEvent):
             qinyun_url = f"http://api.qingyunke.com/api.php?key=free&appid=0&msg={msg}"
             message = await qinyun_reply(qinyun_url)
             logger.info("来自青云客的智能回复: " + message)
-            await ai.finish(message=message)
+            await ai.finish(message=message, at_sender=True)
 
         else:
             # 冷却时间
@@ -241,7 +241,7 @@ async def _(event: MessageEvent):
                         res = await loop.run_in_executor(None, get_openai_reply, msg) # 开一个不会阻塞asyncio的线程调用get_openai_reply函数
                     except Exception as e:                                            # 如果出错
                         await ai.finish(str(e))                                       # 发送错误信息
-                    await ai.finish(MessageSegment.text(res),at_sender=True)          # 发送结果
+                    await ai.finish(MessageSegment.text(res), at_sender=True)          # 发送结果
             else:
                 await ai.finish(MessageSegment.text(f"{Bot_NICKNAME}冷却中... 剩余时间 {api_cd_time - cd:.0f} 秒"),at_sender=True)
     await ai.finish(Message(result), at_sender=True)
@@ -252,10 +252,10 @@ async def _(event: MessageEvent):
 @refresh.handle()
 async def refresh_conversation(event: MessageEvent) -> None:
     if not check_purview(event):
-        await refresh.finish("当前为公共会话模式, 仅支持群管理操作")
+        await refresh.finish("当前为公共会话模式, 仅支持群管理操作", at_sender=True)
     session[event]['conversation_id'].append(None)
     session[event]['parent_id'].append(chat_bot.id)
-    await refresh.send("当前会话已刷新")
+    await refresh.send("当前会话已刷新", at_sender=True)
 
 
 
@@ -288,11 +288,11 @@ async def _poke(bot: Bot,event: PokeNotifyEvent)-> bool:
                 
                 # res = requests.get('https://img.moehu.org/pic.php?return=json&id=img1&num=1').json()
                 # pic_url = res["pic"][0]
-                message="别戳了别戳了,这张图给你了,让我安静一会儿,60秒后我要撤回\n" + MessageSegment.image(file=pic_url)
+                message="别戳了别戳了, 这张图给你了, 让我安静一会儿, 60秒后我要撤回\n" + MessageSegment.image(file=pic_url)
             else:
                 pic = await get_setu()
-                message="别戳了别戳了,这张setu给你了,让我安静一会儿,60秒后我要撤回\n" + Message(pic[1]) + Message(pic[0])
-            setu_msg_id = await poke.send(message)
+                message="别戳了别戳了, 这张setu给你了, 让我安静一会儿, 60秒后我要撤回\n" + Message(pic[1]) + Message(pic[0])
+            setu_msg_id = await poke.send(message, at_sender=True)
             setu_msg_id = setu_msg_id['message_id']
             await asyncio.sleep(60)
             await bot.delete_msg(message_id=setu_msg_id)
@@ -303,10 +303,10 @@ async def _poke(bot: Bot,event: PokeNotifyEvent)-> bool:
             try:
                 await poke.send(MessageSegment.record(Path(aac_file_path)/random.choice(aac_file_list)))
             except:
-                await poke.send(message=f"{random.choice(poke_reply)}")
+                await poke.send(message=f"{random.choice(poke_reply)}", at_sender=True)
         # 20% 概率戳回去
         elif probability < 0.65:
             await poke.send(Message(f"[CQ:poke,qq={event.user_id}]"))
         # 35% 概率回复戳一戳文本
         else:
-            await poke.send(message=f"{random.choice(poke_reply)}")
+            await poke.send(message=f"{random.choice(poke_reply)}", at_sender=True)

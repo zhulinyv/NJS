@@ -8,7 +8,12 @@ readme = "README.md"
 
 [[tool.poetry.source]]
 name = "tsinghua"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+secondary = true
+
+[[tool.poetry.source]]
+name = 'aliyun'
+url = 'https://mirrors.aliyun.com/pypi/simple/'
 secondary = true
 
 [[tool.poetry.source]]

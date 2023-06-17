@@ -2,11 +2,15 @@ import asyncio
 from bs4 import BeautifulSoup
 from pathlib import Path
 import time
-        
-        
+
+from nonebot import require
+from nonebot.log import logger
 from nonebot_plugin_htmlrender import (
     html_to_pic,
 )
+require("nonebot_plugin_htmlrender")
+
+
 from .api import get_data
 
 
@@ -67,7 +71,7 @@ async def get_ship_msg(name:str):
     msg_img:bytes = await html_to_pic(msg_str)
     end_time = time.time()
     elapsed_time = end_time - start_time
-    print(f"耗时: {elapsed_time} 秒")
+    logger.success(f"绘图成功，耗时: {elapsed_time} 秒")
     return msg_img
 
 async def ship_html_select(soup:BeautifulSoup):

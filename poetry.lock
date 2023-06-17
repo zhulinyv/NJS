@@ -190,14 +190,14 @@ tz = ["python-dateutil"]
 
 [[package]]
 name = "amis-python"
-version = "1.0.6"
+version = "1.0.8.post2"
 description = "基于百度amis前端框架的python pydantic模型封装。"
 category = "main"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "amis-python-1.0.6.tar.gz", hash = "sha256:75c4c5961d1053f555cae5bd4b802b9a1293204aa6d07b9a7e93a1fd66bebf3e"},
-    {file = "amis_python-1.0.6-py3-none-any.whl", hash = "sha256:eea0b3982badc1c62ec0d25fb0d107a01ba8ddc69710fabd63febec305bd5e1d"},
+    {file = "amis_python-1.0.8.post2-py3-none-any.whl", hash = "sha256:92a9b5515ae901f57bb90281224663987b96bb16a81e56ce26fb390bb3bd550a"},
+    {file = "amis_python-1.0.8.post2.tar.gz", hash = "sha256:83c62fd68f7ac778d41b4b9312e0bc1d1f8418f8a6c1a993d23c0e74ba1af5fb"},
 ]
 
 [package.dependencies]
@@ -4581,4 +4581,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "3a8702ebbac8693f5485b245de0e7d6c350dbe0937310375f289faaaa7d90ac9"
+content-hash = "e9a129734a1b08b94aa25a0e8d6b8558bc58d29529be2d42b0de9eb55dbd18c6"

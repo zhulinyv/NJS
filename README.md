@@ -260,11 +260,11 @@ poetry install
 
 详细帮助查看: 
 
-2、《脑积水食用手册》: [https://zhulinyv.github.io/NJS](https://zhulinyv.github.io/NJS)
+2、脑积水有一个自己的帮助插件, 如果需要对帮助进行修改, 请参照 `.\NJS\data\njs_help_new\help.json` 文件进行修改。
 
-3、备用地址: [https://www.cnblogs.com/xytpz/p/NJS.html](https://www.cnblogs.com/xytpz/p/NJS.html)
+3、《脑积水食用手册》: [https://zhulinyv.github.io/NJS](https://zhulinyv.github.io/NJS)
 
-4、仓库文档: [https://github.com/zhulinyv/NJS/blob/Bot/NJS.md](https://github.com/zhulinyv/NJS/blob/Bot/NJS.md)
+4、备用地址: [https://www.cnblogs.com/xytpz/p/NJS.html](https://www.cnblogs.com/xytpz/p/NJS.html)
 
 5、默认 WebUI 地址: [http://127.0.0.1:13579/LittlePaimon/login](http://127.0.0.1:13579/LittlePaimon/login)
 

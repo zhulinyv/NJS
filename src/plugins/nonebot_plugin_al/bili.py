@@ -13,8 +13,6 @@ require("nonebot_plugin_htmlrender")
 
 from .api import get_data
 
-
-
 async def jinghao(tag):
     data = await get_data('https://wiki.biligame.com/blhx/井号碧蓝榜合集')
     soup = BeautifulSoup(data, 'html.parser')

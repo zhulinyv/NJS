@@ -4,15 +4,33 @@ from nonebot.rule import to_me
 from nonebot.params import CommandArg
 from nonebot.permission import SUPERUSER
 from nonebot.plugin.on import on_command
+from nonebot.plugin import PluginMetadata
 from nonebot.adapters.onebot.v11 import Message
 
 from .utils import *
-
 
 try:
     NICKNAME: str = (str(nonebot.get_driver().config.nickname)).replace('{\'', '').replace('\'}', '')
 except:
     NICKNAME: str = "脑积水"
+
+__plugin_meta__ = PluginMetadata(
+    name="群友召唤术",
+    description="让 BOT 帮你召唤群友!",
+    usage=("""
+设置召唤+艾特(或qq号)+昵称: 设置一个召唤群友
+删除召唤+昵称: 删除一个召唤群友
+召唤+昵称: 让机器人帮你叫群友
+召唤列表: 查看已设置的昵称
+戳+昵称+次数(数字): 让机器人戳群友
+"""
+    ),
+    extra={
+        "author": "zhulinyv <zhulinyv2005@outlook.com>",
+        "version": "2.5.3",
+    },
+)
+
 
 
 """获取指令"""

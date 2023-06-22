@@ -1,6 +1,7 @@
 """导入依赖"""
 from nonebot.adapters.onebot.v11 import Bot, GroupMessageEvent, ActionFailed, Message
 from nonebot.adapters.onebot.v11.permission import GROUP_OWNER, GROUP_ADMIN
+from nonebot.plugin import PluginMetadata
 from nonebot.permission import SUPERUSER
 from nonebot.params import CommandArg
 from nonebot import on_command
@@ -11,6 +12,26 @@ try:
     import ujson as json
 except:
     import json
+
+__plugin_meta__ = PluginMetadata(
+    name="PING",
+    description="PING/QRCODE/WHOIS",
+    usage=("""
+设置管理员 + @somebody: 设置一个管理员
+取消管理员 + @somebody: 取消一个管理员
+禁言/口球 + @somebody + 阿拉伯数字: 禁言某人，单位分钟，需要 BOT 为管理员
+解禁 + @somebody: 解除某人禁言，需要 BOT 为管理员
+移出 + @somebody: 移出某人，需要 BOT 为管理员
+移出并拉黑 + @somebody: 移出并拉黑，需要 BOT 为管理员
+"""
+    ),
+    extra={
+        "author": "zhulinyv <zhulinyv2005@outlook.com>",
+        "version": "0.3.1",
+    },
+)
+
+
 
 """导入变量"""
 config = nonebot.get_driver().config

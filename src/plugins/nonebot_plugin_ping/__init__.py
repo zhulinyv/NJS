@@ -1,4 +1,5 @@
 ﻿from nonebot.plugin.on import on_command
+from nonebot.plugin import PluginMetadata
 from nonebot.adapters.onebot.v11 import Message, MessageSegment
 from nonebot.params import CommandArg
 from httpx import AsyncClient
@@ -12,6 +13,21 @@ except:
     model: int = 1
 
 from .httpcat import httpcat_msgs
+
+__plugin_meta__ = PluginMetadata(
+    name="PING",
+    description="PING/QRCODE/WHOIS",
+    usage=("""
+ping + url: ping 一个网址
+qrcode + url: 给网址生成一个二维码
+whois + url: 查询一个网址的 whois 信息
+"""
+    ),
+    extra={
+        "author": "zhulinyv <zhulinyv2005@outlook.com>",
+        "version": "1.6.6",
+    },
+)
 
 
 

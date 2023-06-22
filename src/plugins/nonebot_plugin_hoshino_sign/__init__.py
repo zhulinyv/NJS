@@ -8,6 +8,7 @@ from io import BytesIO
 from typing import Union
 from nonebot import require
 require("nonebot_plugin_guild_patch")
+from nonebot.plugin import PluginMetadata
 from nonebot_plugin_guild_patch import GuildMessageEvent
 from nonebot.adapters.onebot.v11.exception import ActionFailed
 
@@ -35,6 +36,20 @@ try:
     NICKNAME: str = list(nonebot.get_driver().config.nickname)[0]
 except Exception:
     NICKNAME: str = "脑积水"
+
+__plugin_meta__ = PluginMetadata(
+    name="签到",
+    description="从 hoshino 搬来的 pcr 签到",
+    usage=("""
+签到/盖章/妈!: 签到(获得好感和 pcr 的印章)
+收集册(+QQ号/艾特): 查看自己或他人的收集进度
+"""
+    ),
+    extra={
+        "author": "zhulinyv <zhulinyv2005@outlook.com>",
+        "version": "2.0.9",
+    },
+)
 
 
 

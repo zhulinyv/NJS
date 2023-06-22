@@ -128,7 +128,7 @@ class BLHX_BASE:
         if len(div_list) != 0:
             for i in range(0, len(div_list)):
                 msg += Message(str(div_list[i].find('img')['alt']) + MessageSegment.image(file=str(div_list[i].find('img')['src'])) + "\n")
-                msg_list.append(msg)
+            msg_list.append(msg)
             forward_msg = render_forward_msg(msg_list,bot=bot)
             if isinstance(event,GroupMessageEvent):
                 await bot.call_api('send_group_forward_msg',group_id=event.group_id, messages=forward_msg)

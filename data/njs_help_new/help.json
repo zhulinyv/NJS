@@ -904,7 +904,7 @@
         {
             "插件名": "碧蓝航线攻略",
             "导包名": "nonebot_plugin_al",
-            "显示颜色": "绿色",
+            "显示颜色": "蓝色",
             "帮助文字": "",
             "帮助图片": "",
             "帮助文档": "./data/njs_help_new/nonebot_plugin_al/help.md",

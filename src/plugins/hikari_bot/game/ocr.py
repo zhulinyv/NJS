@@ -67,8 +67,8 @@ async def downlod_OcrResult():
                     ocr_filename_data = orjson.loads(f.read())
         return
     except:
-        logger.error("请检查token是否配置正确，如无问题请尝试重启，可能是网络波动或服务器原因")
-        logger.error(traceback.format_exc())
+        logger.warning("请检查token是否配置正确，如无问题请尝试重启，可能是网络波动或服务器原因")
+        # logger.error(traceback.format_exc())
         try:
             with open(ocr_data_path, "rb") as f:    
                 ocr_filename_data = orjson.loads(f.read())

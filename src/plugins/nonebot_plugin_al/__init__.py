@@ -103,7 +103,7 @@ async def _(matcher:Matcher,args:Message = CommandArg()):
         with open((Path(__file__).parent.joinpath("data/ship.json")),
           mode='r',encoding='utf-8')as f:
             ships = json.load(f)
-        word = word.replace("角色","")
+        word = word.replace("角色","").replace(" ", "")
         for key, value in ships.items():
             if any(word in sublist for sublist in value):
                 await matcher.finish(MessageSegment.image(await get_ship_msg(key)))
@@ -112,7 +112,7 @@ async def _(matcher:Matcher,args:Message = CommandArg()):
         with open((Path(__file__).parent.joinpath("data/eq.json")),
           mode='r',encoding='utf-8')as f:
             eq = json.load(f)
-        word = word.replace("装备","")
+        word = word.replace("装备","").replace(" ", "")
         for key, value in eq.items():
             if any(word in sublist for sublist in value):
                 await matcher.finish(MessageSegment.image(await get_ship_msg(key)))

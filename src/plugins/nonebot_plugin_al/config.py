@@ -10,7 +10,7 @@ from nonebot.adapters.onebot.v11.permission import (
     GROUP_OWNER,
 )
 
-CONFIG_PATH = Path().joinpath('data/al')
+CONFIG_PATH = Path().joinpath('data/al/config.yml')
 
 driver = get_driver()
 COMMAND_START = list[driver.config.command_start]

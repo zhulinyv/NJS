@@ -202,7 +202,7 @@ poetry install
 
 ⚠️ 下一步骤非常重要
 
-3、其它配置文件请参照 **env.else** 文件中的注释, 或根据[《脑积水使用手册》](https://zhulinyv.github.io/NJS/)中具体插件仓库详细配置项说明在 **env.prod** 文件中配置。
+3、其它配置文件请根据[《脑积水使用手册》(已过时)](https://zhulinyv.github.io/NJS/)中具体插件仓库详细配置项说明在 **env.prod** 文件中配置。
 
 注意: 配置项较多, 只有少部分是必须的, 可以按需配置。
 
@@ -264,9 +264,9 @@ poetry install
 
 2、脑积水有一个自己的帮助插件, 如果需要对帮助进行修改, 请参照 `.\NJS\data\njs_help_new\help.json` 文件进行修改。
 
-3、《脑积水食用手册》: [https://zhulinyv.github.io/NJS](https://zhulinyv.github.io/NJS)
+3、《脑积水食用手册》(已过时): [https://zhulinyv.github.io/NJS](https://zhulinyv.github.io/NJS)
 
-4、备用地址: [https://www.cnblogs.com/xytpz/p/NJS.html](https://www.cnblogs.com/xytpz/p/NJS.html)
+4、备用地址(已过时): [https://www.cnblogs.com/xytpz/p/NJS.html](https://www.cnblogs.com/xytpz/p/NJS.html)
 
 5、默认 WebUI 地址: [http://127.0.0.1:13579/LittlePaimon/login](http://127.0.0.1:13579/LittlePaimon/login)
 

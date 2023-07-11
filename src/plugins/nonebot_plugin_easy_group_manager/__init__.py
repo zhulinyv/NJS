@@ -14,8 +14,8 @@ except:
     import json
 
 __plugin_meta__ = PluginMetadata(
-    name="PING",
-    description="PING/QRCODE/WHOIS",
+    name="群管",
+    description="简易群管",
     usage=("""
 设置管理员 + @somebody: 设置一个管理员
 取消管理员 + @somebody: 取消一个管理员

@@ -1,20 +1,13 @@
-import os
-import time
+import json
 import random
-import nonebot
-from pathlib import Path
-from ast import literal_eval
-from nonebot.log import logger
-from .resource.setu_message import setu_sendcd
+import time
 
-try:
-    import ujson as json
-except:
-    logger.warning('ujson not find, import json instead')
-    import json
+from loguru import logger
 
+from .config import DATA_PATH, config
+from .setu_message import setu_sendcd
 
-'''{
+"""{
     'group_114':{
         'cd'       : 30,     # cd时长
         'r18'      : True,   # r18开关
@@ -29,125 +22,89 @@ except:
         'group_810'
     ],
     'proxy':'i.pixiv.re'  # 代理地址
-}'''
+}"""
 
 
 class PermissionManager:
     def __init__(self) -> None:
-        # 读取全局变量
-        try:
-            self.setu_perm_cfg_path = str(
-                Path(nonebot.get_driver().config.setu_perm_cfg_path, 'setu_perm_cfg.json'))
-        except:
-            self.setu_perm_cfg_path = 'data/setu4/setu_perm_cfg.json'
-        try:
-            self.setu_cd = int(nonebot.get_driver().config.setu_cd)
-        except:
-            self.setu_cd = 30
-        try:
-            self.setu_withdraw_time = int(nonebot.get_driver().config.setu_withdraw_time) if int(
-                nonebot.get_driver().config.setu_withdraw_time) < 100 else 100
-        except:
-            self.setu_withdraw_time = 100
-        try:
-            self.setu_max_num = int(nonebot.get_driver().config.setu_max_num)
-        except:
-            self.setu_max_num = 10
-        try:
-            self.setu_enable_private = bool(literal_eval(
-                nonebot.get_driver().config.setu_enable_private))
-        except:
-            self.setu_enable_private = False
-        try:
-            self.setu_disable_wlist = bool(literal_eval(
-                nonebot.get_driver().config.setu_disable_wlist))
-        except:
-            self.setu_disable_wlist = False
-        # 规范全局变量的取值范围
-        self.setu_cd = self.setu_cd if self.setu_cd > 0 else 0
-        self.setu_withdraw_time = self.setu_withdraw_time if self.setu_withdraw_time > 0 else 0
-        self.setu_withdraw_time = self.setu_withdraw_time if self.setu_withdraw_time < 100 else 100
-        self.setu_max_num = self.setu_max_num if self.setu_max_num > 1 else 1
-        self.setu_max_num = self.setu_max_num if self.setu_max_num < 25 else 25
-        # 读取perm_cfg
-        self.ReadCfg()
+        """初始化一些配置"""
+        self.setu_perm_cfg_filepath = DATA_PATH / "setu_perm_cfg.json"
+        self.setu_cd = config.setu_cd
+        self.setu_withdraw_time = config.setu_withdraw_time
+        self.setu_max_num = config.setu_max_num
+        self.setu_disable_wlist = config.setu_disable_wlist
+        self.setu_enable_private = config.setu_enable_private
+        self.read_cfg()
 
-    # --------------- 文件读写 开始 ---------------
-    # 读取cfg
-    def ReadCfg(self) -> dict:
+    def read_cfg(self) -> dict:
+        """读取配置文件"""
         try:
             # 尝试读取
-            with open(self.setu_perm_cfg_path, 'r', encoding='utf-8') as f:
-                self.cfg = json.loads(f.read())
-            return self.cfg
+            with open(self.setu_perm_cfg_filepath, "r", encoding="utf-8") as f:
+                self.cfg: dict = json.loads(f.read())
         except Exception as e:
             # 读取失败
-            logger.warning(f'setu_perm_cfg.json 读取失败, 尝试重建\n{e}')
-            self.cfg = {"proxy":"i.pixiv.re"}
-            self.WriteCfg()
-            return {}
+            logger.warning(f"setu_perm_cfg.json 读取失败, 尝试重建\n{repr(e)}")
+            self.cfg = {"proxy": "i.pixiv.re"}
+            self.write_cfg()
+        return self.cfg
 
-    # 写入cfg
-    def WriteCfg(self):
-        # 尝试创建路径
-        os.makedirs(self.setu_perm_cfg_path[:-18], mode=0o777, exist_ok=True)
-        # 写入数据
-        with open(self.setu_perm_cfg_path, 'w', encoding='utf-8') as f:
+    def write_cfg(self):
+        """写入配置文件"""
+        with open(self.setu_perm_cfg_filepath, "w", encoding="utf-8") as f:
             f.write(json.dumps(self.cfg))
+
     # --------------- 文件读写 开始 ---------------
 
     # --------------- 查询系统 开始 ---------------
-    # 查询上一次发送时间
-    def ReadLastSend(self, sessionId):
+    def read_last_send(self, session_id: str) -> float:
+        """查询最后一次发送时间"""
         try:
-            return self.cfg['last'][sessionId]
+            return self.cfg["last"][session_id]
         except KeyError:
             return 0
 
-    # 查询cd
-    def ReadCd(self, sessionId):
+    def read_cd(self, session_id: str) -> int:
+        """查询cd"""
         try:
-            return self.cfg[sessionId]['cd']
+            return self.cfg[session_id]["cd"]
         except KeyError:
             return self.setu_cd
 
-    # 查询撤回时间
-    def ReadWithdrawTime(self, sessionId):
+    def read_withdraw_time(self, session_id: str) -> int:
+        """查询撤回时间"""
         try:
-            return self.cfg[sessionId]['withdraw']
+            return self.cfg[session_id]["withdraw"]
         except KeyError:
             return self.setu_withdraw_time
 
-    # 查询最大张数
-    def ReadMaxNum(self, sessionId):
+    def read_max_num(self, session_id: str) -> int:
+        """查询最大张数"""
         try:
-            return self.cfg[sessionId]['maxnum']
+            return self.cfg[session_id]["maxnum"]
         except KeyError:
             return self.setu_max_num
 
-    # 查询r18
-    def ReadR18(self, sessionId):
+    def read_r18(self, session_id: str) -> bool:
+        """查询r18"""
         try:
-            return self.cfg[sessionId]['r18']
+            return self.cfg[session_id]["r18"]
         except KeyError:
             return False
 
-    # 查询黑名单
-    def ReadBanList(self, sessionId):
+    def read_ban_list(self, session_id: str) -> bool:
+        """查询黑名单"""
         try:
-            return sessionId in self.cfg['ban']
+            return session_id in self.cfg["ban"]
         except KeyError:
             return False
 
     # --------------- 查询系统 结束 ---------------
 
     # --------------- 逻辑判断 开始 ---------------
-    # 查询权限, 并返回修正过的参数
-    def CheckPermission(self, sessionId: str, r18flag: bool, num: int, userType: str = 'group'):
-        logger.debug(f'-==- {sessionId} -===-\
-            \ndisable_wlist  : {self.setu_disable_wlist}\
-            \nenable_private : {self.setu_enable_private}\
-            \nuserType       : {userType}')
+    def check_permission(
+        self, session_id: str, r18flag: bool, num: int, user_type: str = "group"
+    ):
         """查询权限, 并返回修正过的参数
 
         Args:
@@ -164,176 +121,184 @@ class PermissionManager:
             [bool, int, int]: [r18是否启用, 图片张数, 撤回时间]
         """
         # 优先采用黑名单检查
-        if self.ReadBanList(sessionId):
-            logger.warning(f'涩图功能对 {sessionId} 禁用！')
-            raise PermissionError(f'涩图功能对 {sessionId} 禁用！')
-        # 采用白名单检查
-        # 如果白名单被禁用则跳过
-        if not self.setu_disable_wlist:
-            # 如果没被禁用则开始检查
-            if userType == 'group' or (
-               (not self.setu_enable_private) and userType == 'private'
-               ):
-                # 如果会话本身未在名单中, 不启用功能
-                if not sessionId in self.cfg.keys():
-                    logger.warning(f'涩图功能在 {sessionId} 会话中未启用')
-                    raise PermissionError('涩图功能在此会话中未启用！')
+        if self.read_ban_list(session_id):
+            logger.warning(f"涩图功能对 {session_id} 禁用！")
+            raise PermissionError(f"涩图功能对 {session_id} 禁用！")
+        # 采用白名单检查, 如果白名单被禁用则跳过
+        if (
+            not self.setu_disable_wlist
+            and (
+                user_type == "group"
+                or ((not self.setu_enable_private) and user_type == "private")
+            )
+            and session_id not in self.cfg.keys()
+        ):
+            logger.warning(f"涩图功能在 {session_id} 会话中未启用")
+            raise PermissionError("涩图功能在此会话中未启用！")
 
         # 查询冷却时间
-        timeLeft = self.ReadCd(sessionId) + \
-            self.ReadLastSend(sessionId) - time.time()
-        if timeLeft > 0:
+        tile_left = (
+            self.read_cd(session_id) + self.read_last_send(session_id) - time.time()
+        )
+        if tile_left > 0:
             hours, minutes, seconds = 0, 0, 0
-            if timeLeft >= 60:
-                minutes, seconds = divmod(timeLeft, 60)
+            if tile_left >= 60:
+                minutes, seconds = divmod(tile_left, 60)
                 hours, minutes = divmod(minutes, 60)
             else:
-                seconds = timeLeft
-            cd_msg = f"{str(round(hours)) + '小时' if hours else ''}{str(round(minutes)) + '分钟' if minutes else ''}{str(round(seconds,3)) + '秒' if seconds else ''}"
-            logger.warning(f'setu的cd还有{cd_msg}')
-            raise PermissionError(
-                f"{random.choice(setu_sendcd)} 你的CD还有{cd_msg}！")
+                seconds = tile_left
+            cd_msg = f"{f'{str(round(hours))}小时' if hours else ''}{f'{str(round(minutes))}分钟' if minutes else ''}{f'{str(round(seconds, 3))}秒' if seconds else ''}"
+            logger.warning(f"setu的cd还有{cd_msg}")
+            raise PermissionError(f"{random.choice(setu_sendcd)} 你的CD还有{cd_msg}！")
 
         # 检查r18权限, 图片张数, 撤回时间
-        r18 = True if r18flag and self.ReadR18(sessionId) else False
-        num_ = num if num <= self.ReadMaxNum(
-            sessionId) else self.ReadMaxNum(sessionId)
-        return r18, num_, self.ReadWithdrawTime(sessionId)
+        r18 = bool(r18flag and self.read_r18(session_id))
+        num_ = (
+            num
+            if num <= self.read_max_num(session_id)
+            else self.read_max_num(session_id)
+        )
+        return r18, num_, self.read_withdraw_time(session_id)
+
     # --------------- 逻辑判断 结束 ---------------
 
     # --------------- 冷却更新 开始 ---------------
-    # 最后一次发送的记录
-    def UpdateLastSend(self, sessionId):
+    def update_last_send(self, session_id: str):
+        """更新最后一次发送时间"""
         try:
-            self.cfg['last'][sessionId] = time.time()
+            self.cfg["last"][session_id] = time.time()
         except KeyError:
-            self.cfg['last'] = {
-                sessionId: time.time()
-            }
+            self.cfg["last"] = {session_id: time.time()}
 
     # --------------- 冷却更新 结束 ---------------
 
     # --------------- 增删系统 开始 ---------------
-    def UpdateWhiteList(self, sessionId: str, add_mode: bool) -> str:
-        # 白名单部分
+    def update_white_list(self, session_id: str, add_mode: bool) -> str:
+        """更新白名单"""
         if add_mode:
-            if sessionId in self.cfg.keys():
-                return f'{sessionId}已在白名单'
-            self.cfg[sessionId] = {}
-            self.WriteCfg()
-            return f'成功添加{sessionId}至白名单'
+            if session_id in self.cfg.keys():
+                return f"{session_id}已在白名单"
+            self.cfg[session_id] = {}
+            self.write_cfg()
+            return f"成功添加{session_id}至白名单"
         # 移除出白名单
         else:
-            if sessionId in self.cfg.keys():
-                self.cfg.pop(sessionId)
-                self.WriteCfg()
-                return f'成功移除{sessionId}出白名单'
-            return f'{sessionId}不在白名单'
+            if session_id in self.cfg.keys():
+                self.cfg.pop(session_id)
+                self.write_cfg()
+                return f"成功移除{session_id}出白名单"
+            return f"{session_id}不在白名单"
 
-    # cd部分
-    def UpdateCd(self, sessionId: str, cdTime: int) -> str:
+    def update_cd(self, session_id: str, cd_time: int) -> str:
+        """更新cd时间"""
         # 检查是否已在白名单, 不在则结束
-        if not sessionId in self.cfg.keys():
-            return f'{sessionId}不在白名单, 请先添加至白名单后操作'
+        if session_id not in self.cfg.keys():
+            return f"{session_id}不在白名单, 请先添加至白名单后操作"
         # 检查数据是否超出范围，超出则设定至范围内
-        cdTime = cdTime if cdTime > 0 else 0
+        cd_time = max(cd_time, 0)
         # 读取原有数据
         try:
-            cdTime_old = self.cfg[sessionId]['cd']
-        except KeyError:
-            cdTime_old = '未设定'
+            cd_time_old = self.cfg[session_id]["cd"]
+        except Exception:
+            cd_time_old = "未设定"
         # 写入新数据
-        self.cfg[sessionId]['cd'] = cdTime
-        self.WriteCfg()
+        self.cfg[session_id]["cd"] = cd_time
+        self.write_cfg()
         # 返回信息
-        return f'成功更新冷却时间 {cdTime_old} -> {cdTime}'
+        return f"成功更新冷却时间 {cd_time_old} -> {cd_time}"
 
-    # 撤回时间部分
-    def UpdateWithdrawTime(self, sessionId: str, withdrawTime: int) -> str:
+    def update_withdraw_time(self, session_id: str, withdraw_time: int) -> str:
+        """更新撤回时间"""
         # 检查是否已在白名单, 不在则结束
-        if not sessionId in self.cfg.keys():
-            return f'{sessionId}不在白名单, 请先添加至白名单后操作'
+        if session_id not in self.cfg.keys():
+            return f"{session_id}不在白名单, 请先添加至白名单后操作"
         # 检查数据是否超出范围，超出则设定至范围内
-        withdrawTime = withdrawTime if withdrawTime > 0 else 0
-        withdrawTime = withdrawTime if withdrawTime < 100 else 100
+        withdraw_time = max(withdraw_time, 0)
+        withdraw_time = min(withdraw_time, 100)
         # 读取原有数据
         try:
-            withdrawTime_old = self.cfg[sessionId]['withdraw']
+            withdraw_time_old = self.cfg[session_id]["withdraw"]
         except KeyError:
-            withdrawTime_old = '未设定'
+            withdraw_time_old = "未设定"
         # 写入新数据
-        self.cfg[sessionId]['withdraw'] = withdrawTime
-        self.WriteCfg()
+        self.cfg[session_id]["withdraw"] = withdraw_time
+        self.write_cfg()
         # 返回信息
-        return f'成功更新撤回时间 {withdrawTime_old} -> {withdrawTime}'
+        return f"成功更新撤回时间 {withdraw_time_old} -> {withdraw_time}"
 
-    # 最大张数部分
-    def UpdateMaxNum(self, sessionId: str, maxNum: int) -> str:
+    def update_max_num(self, session_id: str, max_num: int) -> str:
+        """更新最大张数"""
         # 检查是否已在白名单, 不在则结束
-        if not sessionId in self.cfg.keys():
-            return f'{sessionId}不在白名单, 请先添加至白名单后操作'
+        if session_id not in self.cfg.keys():
+            return f"{session_id}不在白名单, 请先添加至白名单后操作"
         # 检查数据是否超出范围，超出则设定至范围内
-        maxNum = maxNum if maxNum > 1 else 1
-        maxNum = maxNum if maxNum < 25 else 25
+        max_num = max(max_num, 1)
+        max_num = min(max_num, 25)
         # 读取原有数据
         try:
-            maxNum_old = self.cfg[sessionId]['maxnum']
+            max_num_old = self.cfg[session_id]["maxnum"]
         except KeyError:
-            maxNum_old = '未设定'
+            max_num_old = "未设定"
         # 写入新数据
-        self.cfg[sessionId]['maxnum'] = maxNum
-        self.WriteCfg()
+        self.cfg[session_id]["maxnum"] = max_num
+        self.write_cfg()
         # 返回信息
-        return f'成功更新最大张数 {maxNum_old} -> {maxNum}'
+        return f"成功更新最大张数 {max_num_old} -> {max_num}"
 
-    # r18部分
-    def UpdateR18(self, sessionId: str, r18Mode: bool) -> str:
+    def update_r18(self, session_id: str, r18_mode: bool) -> str:
+        # sourcery skip: extract-duplicate-method
+        """更新r18权限"""
         # 检查是否已在白名单, 不在则结束
-        if not sessionId in self.cfg.keys():
-            return f'{sessionId}不在白名单, 请先添加至白名单后操作'
+        if session_id not in self.cfg.keys():
+            return f"{session_id}不在白名单, 请先添加至白名单后操作"
 
-        if r18Mode:
-            if self.ReadR18(sessionId):
-                return f'{sessionId}已开启r18'
-            self.cfg[sessionId]['r18'] = True
-            self.WriteCfg()
-            return f'成功开启{sessionId}的r18权限'
+        if r18_mode:
+            if self.read_r18(session_id):
+                return f"{session_id}已开启r18"
+            self.cfg[session_id]["r18"] = True
+            self.write_cfg()
+            return f"成功开启{session_id}的r18权限"
         else:
-            if self.ReadR18(sessionId):
-                self.cfg[sessionId]['r18'] = False
-                self.WriteCfg()
-                return f'成功关闭{sessionId}的r18权限'
-            return f'{sessionId}未开启r18'
+            if self.read_r18(session_id):
+                self.cfg[session_id]["r18"] = False
+                self.write_cfg()
+                return f"成功关闭{session_id}的r18权限"
+            return f"{session_id}未开启r18"
 
-    def UpdateBanList(self, sessionId: str, add_mode: bool) -> str:
-        # 加入黑名单
+    def update_ban_list(self, session_id: str, add_mode: bool) -> str:
+        """更新黑名单"""
         if add_mode:
             try:
-                if sessionId in self.cfg['ban']:
-                    return f'{sessionId}已在黑名单'
+                if session_id in self.cfg["ban"]:
+                    return f"{session_id}已在黑名单"
             except KeyError:
-                self.cfg['ban'] = []
-            self.cfg['ban'].append(sessionId)
-            self.WriteCfg()
-            return f'成功添加{sessionId}至黑名单'
+                self.cfg["ban"] = []
+            self.cfg["ban"].append(session_id)
+            self.write_cfg()
+            return f"成功添加{session_id}至黑名单"
         # 移出黑名单
         else:
             try:
-                self.cfg['ban'].remove(sessionId)
-                self.WriteCfg()
-                return f'成功移除{sessionId}出黑名单'
+                self.cfg["ban"].remove(session_id)
+                self.write_cfg()
+                return f"成功移除{session_id}出黑名单"
             except ValueError:
-                return f'{sessionId}不在黑名单'
-            
-    def UpdateProxy(self, proxy: str) -> None:
-        # 更新代理
-        self.cfg['proxy'] = proxy
-        self.WriteCfg()
-    
-    def ReadProxy(self) -> str:
-        # 读取代理
+                return f"{session_id}不在黑名单"
+
+    def update_proxy(self, proxy: str) -> None:
+        """更新代理"""
+        self.cfg["proxy"] = proxy
+        self.write_cfg()
+
+    def read_proxy(self) -> str:
+        """查询代理"""
         try:
-            return self.cfg['proxy']
+            return self.cfg["proxy"]
         except KeyError:
-            return 'i.pixiv.re'
+            return "i.pixiv.re"
+
     # --------------- 增删系统 结束 ---------------
+
+
+# 实例化权限管理
+pm = PermissionManager()

@@ -2,7 +2,7 @@
 name: 🐛 问题报告或求助
 about: 在使用中遇到问题，希望得到帮助
 title: '🐛'
-labels: question
+labels: 😕 question
 assignees: ''
 
 ---

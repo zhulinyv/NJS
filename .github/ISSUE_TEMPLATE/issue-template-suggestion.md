@@ -2,7 +2,7 @@
 name: ✨ 功能需求或建议
 about: 为项目提出一个新的想法或建议
 title: '✨'
-labels: enhancement
+labels: 🤩 enhancement
 assignees: ''
 
 ---

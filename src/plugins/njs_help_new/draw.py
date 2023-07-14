@@ -111,7 +111,9 @@ async def draw_help():
         for g in range(3):
             if num == 0:
                 num += 1
-            elif num == number:
+            elif num > number:
+                break
+            elif (num == number) and ((g == 1) or (g == 2)):
                 break
             else:
                 x = 360 * g + 60

@@ -31,7 +31,11 @@ async def draw_help():
 
     # 背景高度 (3 列为 600 像素高度)
     if list_number > 2:
-        height = row_number * 600
+        more = number % 20
+        if more != 0 and (list_number % 3) == 0:
+            height  = int(((row_number - 1) * 600  + (more * 26.5)) + 70)
+        else:
+            height = row_number * 600
     else:
         height = 600
 

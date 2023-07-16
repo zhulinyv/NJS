@@ -12,6 +12,7 @@ from nonebot.adapters.onebot.v11.permission import GROUP_OWNER, GROUP_ADMIN
 from nonebot.adapters.onebot.v11 import Message, MessageSegment, GroupMessageEvent
 
 from .utils import *
+from .nonebot_plugin_ncm_saying import *
 
 
 openstats = on_regex(r"^(开启文案|关闭文案)", permission=SUPERUSER | GROUP_ADMIN | GROUP_OWNER,

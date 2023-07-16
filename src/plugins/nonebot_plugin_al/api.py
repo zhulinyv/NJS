@@ -1247,10 +1247,10 @@ async def force_update_offline():
 
 async def get_recent_event():
     base_url='https://wiki.biligame.com'
-    url = "https://wiki.biligame.com/blhx/首页"
+    url = "https://wiki.biligame.com/blhx/新闻公告"
     response_text:str = await get_data(url,mode='text')
     soup = BeautifulSoup(response_text, "lxml")
-    div_list=soup.find(class_='wikitable eventCalendar noselect')
+    div_list=soup.find(class_='bili-list-order')
     if div_list.a['href'] is not None and str( div_list.a['href'])!='':
         return base_url+str(div_list.a['href'])
     else:

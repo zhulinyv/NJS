@@ -282,6 +282,7 @@ async def wb_search(
 
     if isinstance(event, GroupMessageEvent):
         forward_msg: List[Dict] = []
+        num = 0
         for entry in entrys:
             forward_msg.append(
                 to_json(
@@ -296,9 +297,16 @@ async def wb_search(
                         str(bot.self_id),
                     )
                 )
-        await bot.call_api(
-            "send_group_forward_msg", group_id=event.group_id, messages=forward_msg
-        )
+                num += 1
+                if len(forward_msg) == 200:
+                    await bot.call_api(
+                        "send_group_forward_msg", group_id=event.group_id, messages=forward_msg
+                    )
+                    forward_msg: List[Dict] = []
+                    num = 0
+            await bot.call_api(
+                        "send_group_forward_msg", group_id=event.group_id, messages=forward_msg
+                    )
     else:
         for entry in entrys:
             msg_temp = "问: " + Message(entry.key) + " 答:"

@@ -159,9 +159,9 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 ### 5️⃣ 安装 脑积水
 
-1、打开 powershell, 输入 `git clone --depth=1 https://ghproxy.com/https://github.com/zhulinyv/NJS` 来克隆本仓库。
+1、打开 powershell, 输入 `git clone -b Bot --depth=1 https://ghproxy.com/https://github.com/zhulinyv/NJS` 来克隆本仓库。
 
-上方链接是镜像源地址, 如有需要, 可将 `https://ghproxy.com/` 删除来直接通过 GitHub 克隆本仓库。
+上方链接是镜像源地址, 如有需要, 可将 `https://ghproxy.com/` 删除来直接通过 GitHub 克隆本仓库; `-b Bot` 参数为仅克隆 Bot 分支, 如有需要, 可将其删除以 clone 全部分支。
 
 2、仓库较大, 克隆过程较慢, 耐心等待, 大概会有 4GB 大小。
 

@@ -167,9 +167,11 @@ Ubuntu系统可以直接使用 `apt install ffmpeg` 来安装。
 
 ![image](https://user-images.githubusercontent.com/66541860/213651257-3f3bcb25-329f-4d8b-982a-591494e4513b.png)
 
-备注: 若出现克隆失败的情况, 多半是由于仓库太大造成的, 如果遇到可以尝试用 GitHub 源地址克隆或使用如下命令调整 http 的请求最大容量或直接下载 Zip 文件。
+备注: 若出现克隆失败的情况, 多半是由于仓库太大造成的, 如果遇到可以尝试用 GitHub 源地址克隆或直接下载 Zip 文件或使用如下命令调整 http 的请求最大容量。
 
 `git config --global http.postBuffer 数字`。(数字即为调整后的最大容量)
+
+如果实在是无法克隆或者下载, 这里有一份[度盘链接](https://pan.baidu.com/s/1Q85DJFi6b2uUCFM8Z-t-Rg?pwd=ytpz), 提取码: ytpz ,下载后可以使用 `git pull` 进行更新。
 
 3、关于额外的资源, 大部分插件会在启动时或启动后自动下载资源。如果出现由于网络问题或其它问题导致的下载失败, 可参照具体插件仓库说明手动下载。
 

@@ -32,7 +32,7 @@ class AIDRAW(AIDRAW_BASE):
         else:
             self.task_type = "txt2img"
         logger.info(f"任务类型:{self.task_type}")
-        resp_tuple = await sd_LoadBalance(task_type=self.task_type, state_dict=self.backend_info)
+        resp_tuple = await sd_LoadBalance()
         self.backend_name = resp_tuple[1][1]
         self.backend_site = resp_tuple[1][0]
         return resp_tuple
@@ -42,22 +42,17 @@ class AIDRAW(AIDRAW_BASE):
         获取post参数
         '''
         global site
+        if self.backend_index is not None and isinstance(self.backend_index, int):
+            self.backend_site = list(config.novelai_backend_url_dict.values())[self.backend_index]
         if self.backend_site:
             site = self.backend_site
         else:
             if config.novelai_load_balance:
-                if self.backend_index is not None and isinstance(self.backend_index, int):
-                    site = list(config.novelai_backend_url_dict.values())[self.backend_index]
-                    self.backend_site = site
-                else:
-                    await self.load_balance_init()
-                    site = self.backend_site or defult_site 
+                await self.load_balance_init()
+                site = self.backend_site or defult_site 
             else:
-                if self.backend_index is not None and isinstance(self.backend_index, int):
-                    site = defult_site or list(config.novelai_backend_url_dict.values())[self.backend_index]
-                    self.backend_site = site
-                else:
-                    site = defult_site or await config.get_value(self.group_id, "site") or config.novelai_site or "127.0.0.1:7860"
+                site = defult_site or await config.get_value(self.group_id, "site") or config.novelai_site or "127.0.0.1:7860"
+
         post_api = f"http://{site}/sdapi/v1/img2img" if self.img2img else f"http://{site}/sdapi/v1/txt2img"
         
         parameters = {
@@ -101,16 +96,13 @@ class AIDRAW(AIDRAW_BASE):
     async def post(self):
         global defult_site
         defult_site = None # 所有后端失效后, 尝试使用默认后端
-        with open("data/novelai/load_balance.json", "r", encoding="utf-8") as f:
-            content = f.read()
-            self.backend_info = json.loads(content)
         # 失效自动重试 
         for retry_times in range(config.novelai_retry):
             try:
                 self.start_time = time.time()
                 parameters_tuple = await self.post_parameters()
                 await self.post_(*parameters_tuple)
-            except:
+            except Exception:
                 self.start_time: float = time.time()
                 logger.info(f"第{retry_times + 1}次尝试")
                 logger.error(traceback.print_exc())
@@ -128,13 +120,13 @@ class AIDRAW(AIDRAW_BASE):
                         self.backend_name = (list(config.novelai_backend_url_dict.keys())[self.backend_index] 
                                              if self.backend_index 
                                              else self.backend_name)
-                    except:
+                    except Exception:
                         self.backend_name = ""
                 resp_list = await asyncio.gather(*[self.get_webui_config(self.backend_site), get_vram(self.backend_site)], return_exceptions=False)
                 resp_json = resp_list[0]
                 try:
                     self.model = resp_json["sd_model_checkpoint"]
-                except:
+                except Exception:
                     self.model = ""
                 self.vram = resp_list[1]
                 break

@@ -13,8 +13,8 @@ from nonebot.log import logger
 from PIL import Image
 from nonebot.adapters.onebot.v11 import MessageEvent, PrivateMessageEvent
 
-from ..config import config
-from ..utils import png2jpg
+from ..config import config, redis_client
+from ..utils import png2jpg, unload_and_reload
 from ..utils.data import shapemap
 from ..utils.load_balance import sd_LoadBalance
 history_list = []
@@ -84,14 +84,18 @@ class AIDRAW_BASE:
         self.time = time.strftime("%Y-%m-%d %H:%M:%S")
         self.user_id: str = "" if event is None else (str(event.get_user_id()))
         self.tags: str = tags
-        self.seed: list[int] = random.randint(0, 4294967295)
-        self.group_id: str =  "" if event is None else (f"{event.get_user_id()}_private" if isinstance(event, PrivateMessageEvent) else str(event.group_id))
+        self.seed: list[int] = seed or random.randint(0, 4294967295)
+        self.group_id = "" if event is None else (
+            f"{event.get_user_id()}_private" if isinstance(event, PrivateMessageEvent)
+            else str(event.group_id)
+        )
+
         if config.novelai_random_scale:
             self.scale: int = int(scale or self.weighted_choice(config.novelai_random_scale_list))
         else:
             self.scale = int(scale or config.novelai_scale)
         self.strength: float = strength or 0.7
-        self.steps: int = steps or 28
+        self.steps: int = steps or config.novelai_steps or 12
         self.noise: float = noise or 0.2
         self.ntags: str = ntags
         self.img2img: bool = False
@@ -114,15 +118,18 @@ class AIDRAW_BASE:
         self.novelai_hr_payload["hr_scale"] = self.hiresfix_scale
         self.hiresfix: bool = True if config.novelai_hr else False
         self.super_res_after_generate: bool = config.novelai_SuperRes_generate
-        self.control_net = {"control_net": False, 
+        self.control_net = {"control_net": False,
                            "controlnet_module": "",
-                           "controlnet_model": ""}
+                           "controlnet_model": ""
+                           }
         self.backend_info: dict = None
         self.task_type: str = None
         self.img_hash = None
+        self.extra_info = ""
+        self.audit_info = ""
         
         # 数值合法检查
-        if self.steps <= 0 or self.steps > (50 if config.novelai_paid else 28):
+        if self.steps <= 0 or self.steps > (36 if config.novelai_paid else 28):
             self.steps = 28
         if self.strength < 0 or self.strength > 1:
             self.strength = 0.7
@@ -206,7 +213,7 @@ class AIDRAW_BASE:
         width, height = image_.size
         self.width, self.height = self.shape_set(width, height, config.novelai_size_org)
         self.image = str(base64.b64encode(image), "utf-8")
-        self.steps = 28
+        self.steps = 20
         self.img2img = True
         self.control_net["control_net"] = True if control_net else False
         self.update_cost()
@@ -255,27 +262,9 @@ class AIDRAW_BASE:
                     logger.error(resp_dict)
                     if resp_dict["error"] == "OutOfMemoryError":
                         logger.info("检测到爆显存，执行自动模型释放并加载")
-                        async with aiohttp.ClientSession() as session:
-                            async with session.post(url=f"http://{self.backend_site}/sdapi/v1/unload-checkpoint") as resp:
-                                if resp.status not in [200, 201]:
-                                    logger.error(f"释放模型失败，可能是webui版本太旧，未支持此API，错误:{await resp.text()}")
-                        async with aiohttp.ClientSession() as session:
-                            async with session.post(url=f"http://{self.backend_site}/sdapi/v1/reload-checkpoint") as resp:
-                                if resp.status not in [200, 201]:
-                                    logger.error(f"重载模型失败，错误:{await resp.text()}")
-                                logger.info("重载模型成功")
+                        await unload_and_reload(backend_site=self.backend_site)
                 spend_time = time.time() - self.start_time
                 self.spend_time = f"{spend_time:.2f}秒"
-                tmp_history_list = self.backend_info[self.backend_site][self.task_type]["info"]["history"]
-                tmp_history_list.append({self.start_time: spend_time})
-                tc = self.backend_info[self.backend_site][self.task_type]["info"]["tasks_count"]
-                tc -= 1
-                self.backend_info[self.backend_site][self.task_type]["info"]["tasks_count"] = tc
-                cur_status = "idel" if tc == 0 else self.task_type
-                self.backend_info["status"] = cur_status
-                self.backend_info[self.backend_site][self.task_type]["info"]["history"] = tmp_history_list
-                with open("data/novelai/load_balance.json", "w") as f:
-                    f.write(json.dumps(self.backend_info))
                 img = await self.fromresp(resp)
                 logger.debug(f"获取到返回图片，正在处理")
                 # 将图片转化为jpg
@@ -319,7 +308,9 @@ class AIDRAW_BASE:
             "spend_time",
             "vram",
             "backend_name",
-            "img_hash"
+            "img_hash",
+            "tags",
+            "ntags"
         )
 
     def __getitem__(self, item):

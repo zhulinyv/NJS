@@ -197,8 +197,6 @@ uw 900x450 2:1横构图
 ```
 <table><tr><td bgcolor=pink>画3张使用UniPC采样器, 步数20步, 服从度7, 不希望出现nsfw(不适宜内容)的图, 使用1号后端进行工作</td></tr></table>
 
-以下是随机图片捏
-<img width="" src={url}/>
     '''.strip()
     img = await md_to_pic(md=markdown,
                           width=1000)

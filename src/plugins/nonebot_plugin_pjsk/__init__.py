@@ -25,7 +25,7 @@ __plugin_meta__ = PluginMetadata(
     },
 )
 
-pjsk = on_command("pjsk", aliases={"啤酒烧烤"}, priority=10)
+pjsk = on_command("pjsk", aliases={"啤酒烧烤"}, priority=10, block=True)
 
 
 @pjsk.handle()

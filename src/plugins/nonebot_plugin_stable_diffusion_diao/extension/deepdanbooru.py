@@ -6,6 +6,7 @@ from nonebot.log import logger
 from .translation import translate
 from .safe_method import send_forward_msg, risk_control
 from ..config import config
+from ..utils import pic_audit_standalone
 
 deepdanbooru = on_command(".gettag", aliases={"鉴赏", "查书", "分析"})
 
@@ -26,30 +27,15 @@ async def deepdanbooru_handle(event: MessageEvent, bot: Bot):
             async with session.get(url) as resp:
                 bytes = await resp.read()
         str_img = str(base64.b64encode(bytes), "utf-8")
-        message = ""
         start = "data:image/jpeg;base64,"
         str0 = start+str_img
+        
         if config.novelai_tagger_site:
-            site = config.novelai_tagger_site
-            payload = {"image": str0, "model": "wd14-vit-v2-git", "threshold": 0.35 }
-            async with aiohttp.ClientSession() as session:
-                async with session.post(url=f"http://{site}/tagger/v1/interrogate", json=payload) as resp:
-                    if resp.status not in [200, 201]:
-                        resp_text = await resp.text()
-                        logger.error(f"API失败，错误信息:{resp.status, resp_text}")
-                        await deepdanbooru.finish(f"识别失败，错误代码为{resp.status}")
-                    else:
-                        resp_dict = await resp.json()
-                        tags = resp_dict["caption"]
-                        replace_list =  ["general", "sensitive", "questionable", "explicit"]
-                        possibilities = {}
-                        for i in replace_list:
-                            possibilities[i]=tags[i]
-                            del tags[i]
-                        value = list(possibilities.values())
-                        value.sort(reverse=True)
-                        h_ = f"这张图涩度{value[0] * 100}%"
-                        tags = ", ".join(list(tags.keys()))
+            resp_tuple = await pic_audit_standalone(str0, True)
+            if resp_tuple is None:
+                await deepdanbooru.finish("识别失败")
+            h_, tags = resp_tuple
+            tags = ", ".join(tags)
 
         else:
             async with aiohttp.ClientSession() as session:

@@ -3,6 +3,7 @@ import re
 import random
 import json
 import os
+import ast
 
 from collections import deque
 import aiohttp
@@ -10,26 +11,26 @@ from aiohttp.client_exceptions import ClientConnectorError, ClientOSError
 from argparse import Namespace
 from asyncio import get_running_loop
 from nonebot import get_bot, on_shell_command
-import asyncio
 import aiofiles
 import traceback
 
-from nonebot.adapters.onebot.v11 import MessageEvent, MessageSegment, Bot, ActionFailed, PrivateMessageEvent
+from nonebot.adapters.onebot.v11 import MessageEvent, MessageSegment, Bot, ActionFailed, PrivateMessageEvent, GroupMessageEvent
 from nonebot.rule import ArgumentParser
 from nonebot.permission import SUPERUSER
 from nonebot.log import logger
 from nonebot.params import ShellCommandArgs
 
-from .config import config, nickname
+from .config import config, nickname, redis_client, backend_emb, backend_lora, get_
 from .utils.data import lowQuality, basetag, htags
 from .backend import AIDRAW
 from .extension.anlas import anlas_check, anlas_set
 from .extension.daylimit import count
 from .extension.explicit_api import check_safe_method
+from .extension.sd_extra_api_func import get_and_process_emb, get_and_process_lora
 from .utils.save import save_img
 from .utils.prepocess import prepocess_tags
 from .version import version
-from .utils import sendtosuperuser
+from .utils import sendtosuperuser, tags_to_list
 from .extension.safe_method import send_forward_msg
 from .extension.sd_extra_api_func import change_model
 cd = {}
@@ -37,7 +38,7 @@ gennerating = False
 wait_list = deque([])
 
 aidraw_parser = ArgumentParser()
-aidraw_parser.add_argument("tags", nargs="*", help="标签")
+aidraw_parser.add_argument("tags", nargs="*", help="标签", type=str)
 aidraw_parser.add_argument("-r", "--resolution", "-形状",
                            help="画布形状/分辨率", dest="man_shape")
 aidraw_parser.add_argument("-c", "--scale", "-服从",
@@ -72,6 +73,8 @@ aidraw_parser.add_argument("-hr",
                            type=float, help="高清修复倍率", dest="hiresfix_scale")
 aidraw_parser.add_argument("-m",
                            type=str, help="更换模型", dest="model")
+aidraw_parser.add_argument("-match_off","-match-off",
+                           action="store_true", help="关闭自动匹配", dest="match")
 
 
 async def get_message_at(data: str) -> int:
@@ -88,6 +91,14 @@ async def get_message_at(data: str) -> int:
         return None
 
 
+# def get_uni_str(all_tags_list: list) -> list:
+#     unique_strings = []
+#     for string in all_tags_list:
+#         if string not in unique_strings and string != "":
+#             unique_strings.append(string)
+#     return unique_strings
+
+
 aidraw = on_shell_command(
     ".aidraw",
     aliases=config.novelai_command_start,
@@ -98,6 +109,7 @@ aidraw = on_shell_command(
 
 @aidraw.handle()
 async def aidraw_get(bot: Bot, event: MessageEvent, args: Namespace = ShellCommandArgs()):
+    style_tag, style_ntag = "", ""
     user_id = str(event.user_id)
     if isinstance(event, PrivateMessageEvent):
         group_id = str(event.user_id)+"_private"
@@ -116,6 +128,13 @@ async def aidraw_get(bot: Bot, event: MessageEvent, args: Namespace = ShellComma
                 message = message + f"，今天你还能够生成{left}张"
         # 判断cd
         nowtime = time.time()
+        if isinstance(event, GroupMessageEvent):
+            deltatime_ = nowtime - cd.get(group_id, 0)
+            gcd = int(config.novelai_group_cd)
+            if deltatime_ < gcd:
+                await aidraw.finish(f"本群共享剩余CD为{gcd - int(deltatime_)}s")
+            else:
+                cd[group_id] = nowtime
         deltatime = nowtime - cd.get(user_id, 0)
         cd_ = int(await config.get_value(group_id, "cd"))
         if deltatime < cd_:
@@ -123,18 +142,129 @@ async def aidraw_get(bot: Bot, event: MessageEvent, args: Namespace = ShellComma
         else:
             cd[user_id] = nowtime
         # 初始化参数
-        try: # 检查翻译API是否失效
-            args.tags = await prepocess_tags(args.tags)
+        
+        if redis_client:
+            if not args.match or config.auto_match:
+                r = redis_client[1]
+                if r.exists("style"):
+                    info_style = None
+                    style_list: list[bytes] = r.lrange("style", 0, -1)
+                    for style in style_list:
+                        style = ast.literal_eval(style.decode("utf-8"))
+                        if style["name"] in args.tags:
+                            style_ = style["name"]
+                            info_style = f"自动找到的预设: {style_}\n"
+                            logger.info(info_style)
+                            style_tag = style["prompt"]
+                            style_ntag = style["negative_prompt"]
+                            break
+        org_str = []
+        convert_list = []
+        for tag in args.tags:
+            if "_" in tag:
+                org_str.append(tag)
+            else:
+                convert_list.append(tag)
+        args.tags = "".join(convert_list) + ", " + "".join(org_str)
+        fifo = AIDRAW(**vars(args), event=event)
+        fifo.extra_info += info_style if info_style else ""
+        await fifo.load_balance_init()
+        if args.model:
+            
+            index = fifo.backend_index if (
+                fifo.backend_index is not None and isinstance(fifo.backend_index, int)
+                ) else "0"
+            
+            await change_model(event, bot, args.model, index)
+        tags = fifo.tags
+        if isinstance(tags, str):
+            tags_list = tags_to_list(tags)
+        else:
+            tags_list = tags
+        org_tag_list = tags_list
+        new_tags_list = []
+        if args.match or not config.auto_match:
+            pass
+        elif redis_client:
+            r2 = redis_client[1]
+            if r2.exists("lora"):
+                check_ = r2.get("lora")
+                check_ = ast.literal_eval(check_.decode("utf-8"))
+                if fifo.backend_name in check_:
+                    all_lora_dict = r2.get("lora")
+                    cur_backend_lora_list = ast.literal_eval(all_lora_dict.decode("utf-8"))[fifo.backend_name]
+                    all_emb_dict = r2.get("emb")
+                    cur_backend_emb_list = ast.literal_eval(all_emb_dict.decode("utf-8"))[fifo.backend_name]
+                else:
+                    logger.info("此后端没有lora数据,尝试重新载入")
+                    cur_backend_lora_list, _ = await get_and_process_lora(fifo.backend_site, fifo.backend_name)
+                    cur_backend_emb_list, _ = await get_and_process_emb(fifo.backend_site, fifo.backend_name)
+                tag_index = -1
+                for tag in org_tag_list:
+                    tag_index += 1
+                    index = -1
+                    for lora in list(cur_backend_lora_list.values()):
+                        index += 1
+                        if re.search(tag, lora, re.IGNORECASE):
+                            info_ = f"自动找到的lora模型: {lora}"
+                            fifo.extra_info += f"{info_}\n"
+                            logger.info(info_)
+                            new_tags_list.append(f"<lora:{lora}:0.9>, ")
+                            tags_list.pop(org_tag_list.index(tag))
+                            break
+                tag_index = -1
+                for tag in org_tag_list:
+                    tag_index += 1
+                    index = -1
+                    for emb in list(cur_backend_emb_list.values()):
+                        index += 1
+                        if re.search(tag, emb, re.IGNORECASE):
+                            new_tags_list.append(emb)
+                            info_ = f"自动找到的嵌入式模型: {emb}, "
+                            fifo.extra_info += f"{info_}\n"
+                            logger.info(info_)
+                            tags_list.pop(org_tag_list.index(tag))
+                            break
+        # 检测是否有18+词条
+        try:  # 检查翻译API是否失效
+            tags_list: str = await prepocess_tags(tags_list)
         except Exception as e:
             logger.debug(str(e))
             await aidraw.finish("tag处理失败!可能是翻译API错误, 请稍后重试, 或者使用英文重试")
-        args.ntags = await prepocess_tags(args.ntags)
+        fifo.ntags = await prepocess_tags(fifo.ntags)
+        pattern = re.compile(f"{htags}", re.IGNORECASE)
+        h_words = ""
+        if isinstance(event, PrivateMessageEvent):
+            pass
+        else:
+            hway = await config.get_value(fifo.group_id, "h")
+            if hway is None:
+                hway = config.novelai_h
+            if hway == 0 and re.search(htags, tags_list, re.IGNORECASE):
+                await aidraw.finish(f"H是不行的!")
+            elif hway == 1:
+                re_list = pattern.findall(tags_list)
+                h_words = ""
+                if re_list:
+                    for i in re_list:
+                        h_words += f"{i},"
+                        tags_list = tags_list.replace(i, "")
+                    try:
+                        await bot.send(event=event, message=f"H是不行的!已经排除掉以下单词{h_words}", reply_message=True)
+                    except ActionFailed:
+                        logger.info("被风控了")
         emb_msg, lora_msg = "", ""
         if args.lora:
             lora_index, lora_weight = [args.lora], ["0.8"]
-            async with aiofiles.open("data/novelai/loras.json", "r", encoding="utf-8") as f:
-                content = await f.read()
-                lora_dict = json.loads(content)
+            if redis_client:
+                r2 = redis_client[1]
+                if r2.exists("lora"):
+                    lora_dict = r2.get("lora")
+                    lora_dict = ast.literal_eval(lora_dict.decode("utf-8"))[fifo.backend_name]
+            else:
+                async with aiofiles.open("data/novelai/loras.json", "r", encoding="utf-8") as f:
+                    content = await f.read()
+                    lora_dict = json.loads(content)
             if "_" in args.lora:
                 lora_ = args.lora.split(",")
                 lora_index, lora_weight = zip(*(i.split("_") for i in lora_))
@@ -146,9 +276,15 @@ async def aidraw_get(bot: Bot, event: MessageEvent, args: Namespace = ShellComma
             logger.info(f"使用的lora:{lora_msg}")
         if args.emb:
             emb_index, emb_weight = [args.emb], ["0.8"]
-            async with aiofiles.open("data/novelai/embs.json", "r", encoding="utf-8") as f:
-                content = await f.read()
-                emb_dict = json.loads(content)
+            if redis_client:
+                r2 = redis_client[1]
+                if r2.exists("emb"):
+                    emb_dict = r2.get("emb")
+                    emb_dict = ast.literal_eval(emb_dict.decode("utf-8"))[fifo.backend_name]
+            else:
+                async with aiofiles.open("data/novelai/embs.json", "r", encoding="utf-8") as f:
+                    content = await f.read()
+                    emb_dict = json.loads(content)
             if "_" in args.emb:
                 emb_ = args.emb.split(",")
                 emb_index, emb_weight = zip(*(i.split("_") for i in emb_))
@@ -158,46 +294,25 @@ async def aidraw_get(bot: Bot, event: MessageEvent, args: Namespace = ShellComma
             for i, w in zip(emb_index, emb_weight):
                 emb_msg += f"({emb_dict[i]:{w}})"
             logger.info(f"使用的emb:{emb_msg}")
-        args.tags += lora_msg + emb_msg
-        if args.no_trans: # 不希望翻译的tags
-            args.tags = args.tags + args.no_trans
-        fifo = AIDRAW(**vars(args), event=event)
-        if args.model:
-            
-            index = fifo.backend_index if (
-                fifo.backend_index is not None and isinstance(fifo.backend_index, int)
-                ) else "0"
-            
-            await change_model(event, bot, args.model, index)
-        # 检测是否有18+词条
-        pattern = re.compile(f"{htags}", re.IGNORECASE)
-        h_words = ""
-        if isinstance(event, PrivateMessageEvent):
-            pass
-        else:
-            hway = await config.get_value(fifo.group_id, "h")
-            if hway is None:
-                hway = config.novelai_h
-            if hway == 0 and re.search(htags, fifo.tags, re.IGNORECASE):
-                await aidraw.finish(f"H是不行的!")
-            elif hway == 1:
-                re_list = pattern.findall(fifo.tags)
-                h_words = ""
-                if re_list:
-                    for i in re_list:
-                        h_words += f"{i},"
-                        fifo.tags = fifo.tags.replace(i, "")
-                    try:
-                        await bot.send(event=event, message=f"H是不行的!已经排除掉以下单词{h_words}", reply_message=True)
-                    except ActionFailed:
-                        logger.info("被风控了")
-
+        tags_list += lora_msg + emb_msg
+        if args.no_trans:  # 不希望翻译的tags
+            tags_list = tags_list + args.no_trans
         if not args.override:
             global pre_tags
             pre_tags = basetag + await config.get_value(group_id, "tags")
             pre_ntags = lowQuality
-            fifo.tags = pre_tags + "," + fifo.tags
-            fifo.ntags = pre_ntags + fifo.ntags
+            fifo.tags = pre_tags + "," + tags_list + "," + ",".join(new_tags_list) + style_tag
+            fifo.ntags = pre_ntags + fifo.ntags + style_ntag
+        if redis_client:
+            tags_list_ = tags_to_list(tags_list)
+            r1 = redis_client[0]
+            pipe = r1.pipeline()
+            pipe.rpush("prompts", str(tags_list_))
+            pipe.rpush(fifo.user_id, str(dict(fifo)))
+            pipe.execute()
+        else:
+            logger.warning("没有连接到redis, prompt记录功能不完整")
+
         # 以图生图预处理
         img_url = ""
         reply = event.reply
@@ -239,12 +354,8 @@ async def aidraw_get(bot: Bot, event: MessageEvent, args: Namespace = ShellComma
 async def wait_fifo(fifo, event, anlascost=None, anlas=None, message="", bot=None):
     # 创建队列
     # 纯净模式额外信息
-    await fifo.load_balance_init()
+    message_data = None
     if await config.get_value(fifo.group_id, "pure"):
-        # hr_scale = config.novelai_hr_payload["hr_scale"]
-        extra_message_list = [f"后端:{fifo.backend_name}, 采样器:{fifo.sampler}, cfg:{fifo.scale}"]
-        user_input = fifo.tags.replace(pre_tags, "")
-        # 发送给用户当前的后端
         extra_message = f"后端:{fifo.backend_name}, 采样器:{fifo.sampler}, CFG Scale:{fifo.scale}"
     else:
         extra_message= ""
@@ -252,6 +363,7 @@ async def wait_fifo(fifo, event, anlascost=None, anlas=None, message="", bot=Non
         fifo.backend_name = list(config.novelai_backend_url_dict.keys())[fifo.backend_index]
         extra_message = f"已选择后端:{fifo.backend_name}"
     list_len = wait_len()
+    
     no_wait_list = [
     f"服务器正在全力绘图中，{nickname}也在努力哦！",
     f"请稍等片刻哦，{nickname}已经和服务器约定好了快快完成",
@@ -290,7 +402,7 @@ async def wait_fifo(fifo, event, anlascost=None, anlas=None, message="", bot=Non
         no_wait += f"\n本次生成消耗点数{anlascost},你的剩余点数为{anlas}"
     if config.novelai_limit:
         try:
-            await aidraw.send(has_wait if list_len > 0 else no_wait)
+            message_data =  await aidraw.send(has_wait if list_len > 0 else no_wait)
         except ActionFailed:
             logger.info("被风控了")
         finally:
@@ -298,12 +410,20 @@ async def wait_fifo(fifo, event, anlascost=None, anlas=None, message="", bot=Non
             await fifo_gennerate(event, bot=bot) 
     else:
         try:
-            await aidraw.send(no_wait)
-        except:
+            message_data = await aidraw.send(no_wait)
+        except ActionFailed:
             logger.info("被风控了")
         finally:
             await fifo_gennerate(event, fifo, bot)
-                                           
+    if message_data:
+        message_id = message_data["message_id"]
+        loop = get_running_loop()
+        loop.call_later(
+            random.randint(30, 60),
+            lambda: loop.create_task(
+                bot.delete_msg(message_id=message_id)),
+        )
+
 
 def wait_len():
     # 获取剩余队列长度
@@ -325,7 +445,6 @@ async def fifo_gennerate(event, fifo: AIDRAW = None, bot: Bot = None):
         if isinstance(event, PrivateMessageEvent):
             nickname = event.sender.nickname
         else:
-            print(fifo.group_id, fifo.user_id)
             resp = await bot.get_group_member_info(group_id=fifo.group_id, user_id=fifo.user_id)
             nickname = resp["card"] or resp["nickname"]
         # 开始生成
@@ -349,8 +468,10 @@ async def fifo_gennerate(event, fifo: AIDRAW = None, bot: Bot = None):
                         f"分辨率:{fifo.width}x{fifo.height}"
                         )
             try:
+                if len(fifo.extra_info) != 0:
+                    fifo.extra_info += "\n使用'-match_off'参数以关闭自动匹配功能\n"
                 message_data = await bot.send(event=event, 
-                                          message=pic_message+f"模型:{os.path.basename(fifo.model)}\n{res_msg}\n{fifo.img_hash}", 
+                                          message=pic_message+f"模型:{os.path.basename(fifo.model)}\n{fifo.img_hash}", 
                                           at_sender=True, 
                                           reply_message=True
             ) if (
@@ -375,7 +496,14 @@ async def fifo_gennerate(event, fifo: AIDRAW = None, bot: Bot = None):
                     lambda: loop.create_task(
                         bot.delete_msg(message_id=message_id)),
                 )
-
+            message_data = await bot.send(event=event, message=f"{fifo.extra_info}\n{res_msg}\n{fifo.audit_info}")
+            message_id = message_data["message_id"]
+            loop = get_running_loop()
+            loop.call_later(
+                random.randint(30, 60),
+                lambda: loop.create_task(
+                    bot.delete_msg(message_id=message_id)),
+            )
     if fifo:
         await generate(fifo)
 

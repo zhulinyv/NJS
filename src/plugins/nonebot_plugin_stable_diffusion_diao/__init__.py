@@ -2,7 +2,7 @@ from . import config, manage
 from .aidraw import AIDRAW
 from nonebot.plugin import PluginMetadata
 from .extension.deepdanbooru import deepdanbooru
-from .amusement import today_girl, chatgpt_tagger
+from .amusement import today_girl, chatgpt_tagger, vits
 from .extension import sd_extra_api_func, aidraw_help
 
 __plugin_meta__ = PluginMetadata(

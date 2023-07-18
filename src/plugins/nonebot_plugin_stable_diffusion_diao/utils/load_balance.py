@@ -1,20 +1,17 @@
-import aiohttp, asyncio, random
+import aiohttp
+import asyncio 
+import random
 from nonebot import logger
-from ..config import config
-import json
+from ..config import config, redis_client
 import time
-import aiofiles
+from tqdm import tqdm
+from datetime import datetime
+
+import ast
 import traceback
-
-
-async def calc_avage_time(state_dict_: list):
-    spend_time_list = []
-    for date_time in state_dict_["info"]["history"]:
-        spend_time_list.append(list(date_time.values())[0])
-    spend_time_list.pop(0)
-    spend_time_list.sort()
-    spend_time_list.pop() and spend_time_list.pop(0)
-    return int(sum(spend_time_list) / (len(spend_time_list)) - 3)
+import aiofiles
+import json
+import os
 
 
 async def get_progress(url):
@@ -44,66 +41,13 @@ async def get_vram(ava_url):
     return vram_usage
 
 
-async def chose_backend(state_dict, normal_backend, task_type):
-    backend_processtime: dict = {}
-    ava_url_dict: dict = {}
-    # n = -1
-    #         y = 0
-    #         normal_backend = list(status_dict.keys())
-    #         logger.info("没有空闲后端")
-    #         if len(normal_backend) == 0:
-    #             raise RuntimeError("没有可用后端")
-    #         else:
-    #             eta_list = list(status_dict.values())
-    #             for t, b in zip(eta_list, normal_backend):
-    #                 if int(t) < defult_eta:
-    #                     y += 1
-    #                     ava_url = b
-    #                     logger.info(f"已选择后端{reverse_dict[ava_url]}")
-    #                     break
-    #                 else:
-    #                     y +=0
-    #             if y == 0:
-    #                 reverse_sta_dict = {value: key for key, value in status_dict.items()}
-    #                 eta_list.sort()
-    #                 ava_url = reverse_sta_dict[eta_list[0]]
-    for i in normal_backend:
-        cur_state_dict = state_dict[i][task_type]
-        history_info_list: list = cur_state_dict["info"]
-        logger.debug(history_info_list)
-        if len(history_info_list["history"]) > 20: # 需要至少20次生成来确定此后端的平均工作时间
-            ava_time = (await calc_avage_time(cur_state_dict) if 
-                        history_info_list["history_avage_time"] is None 
-                        else i["history_avage_time"])
-        elif len(history_info_list["history"]) > 100:
-            # 重新计算平均时间, 并清空时间列表
-            pass
-        else: 
-            ava_time = cur_state_dict["info"]["eta_time"]
-        count = cur_state_dict["info"]["tasks_count"]
-        total_process_time = count * ava_time
-        backend_processtime.update({total_process_time: i})
-    # process_time_rev = {value: key for key, value in backend_process_time}
-    backend_process_time = list(backend_processtime.keys())
-    backend_process_time.sort()
-    logger.debug(backend_processtime[backend_process_time[0]])
-    logger.error(backend_processtime)
-    return backend_processtime[backend_process_time[0]]
-
-
-async def sd_LoadBalance(addtional_site=None, task_counts=None, task_type=None, state_dict=None):
+async def sd_LoadBalance():
     '''
     分别返回可用后端索引, 后端对应ip和名称(元组), 显存占用
     '''
+    current_date = datetime.now().date()
+    day: str = str(int(datetime.combine(current_date, datetime.min.time()).timestamp()))
     backend_url_dict = config.novelai_backend_url_dict
-    if state_dict is None:
-        with open("data/novelai/load_balance.json", "r", encoding="utf-8") as f:
-            content = f.read()
-            state_dict = json.loads(content)
-    else:
-        pass
-    if addtional_site:
-        backend_url_dict.update({"群专属后端": f"{addtional_site}"})
     reverse_dict = {value: key for key, value in backend_url_dict.items()}
     tasks = []
     is_avaiable = 0
@@ -111,20 +55,22 @@ async def sd_LoadBalance(addtional_site=None, task_counts=None, task_type=None, 
     ava_url = None
     n = -1
     e = -1
+    defult_eta = 20
     normal_backend = None
+    idle_backend = []
     for url in backend_url_dict.values():
         tasks.append(get_progress(url))
     # 获取api队列状态
     all_resp = await asyncio.gather(*tasks, return_exceptions=True)
     for resp_tuple in all_resp:
         e += 1 
-        if isinstance(resp_tuple, 
-                      (aiohttp.ContentTypeError, 
-                       asyncio.exceptions.TimeoutError, 
-                       aiohttp.ClientTimeout, 
+        if isinstance(resp_tuple,
+                      (aiohttp.ContentTypeError,
+                       asyncio.exceptions.TimeoutError,
+                       aiohttp.ClientTimeout,
                        Exception)
                        ):
-            logger.info(f"后端{list(config.novelai_backend_url_dict.keys())[e]}掉线")
+            print(f"后端{list(config.novelai_backend_url_dict.keys())[e]}掉线")
         else:
             try:
                 if resp_tuple[3] in [200, 201]:
@@ -134,39 +80,105 @@ async def sd_LoadBalance(addtional_site=None, task_counts=None, task_type=None, 
                 else:
                     raise RuntimeError
             except RuntimeError or TypeError:
-                logger.error(f"后端{list(config.novelai_backend_url_dict.keys())[e]}出错")
+                print(f"后端{list(config.novelai_backend_url_dict.keys())[e]}出错")
                 continue
             else:
                 # 更改判断逻辑
                 if resp_tuple[0]["progress"] in [0, 0.01, 0.0]:
-                        logger.info("后端空闲")
                         is_avaiable += 1
-                        ava_url = normal_backend[n]
+                        idle_backend.append(normal_backend[n])
                 else:
-                    # if state_dict[resp_tuple[2]]["status"] == "idle":
-                    #     logger.info("后端空闲")
-                    #     is_avaiable += 1
-                    #     ava_url = normal_backend[n]
-                    #     break
-                    logger.info("后端忙")
-    if normal_backend is None:
-        normal_backend_name = config.novelai_site or "127.0.0.1:7860"
-        normal_backend = [config.novelai_site, "127.0.0.1:7860"]
+                    pass
+            total = 100
+            progress = int(resp_tuple[0]["progress"]*100)
+            show_str = f"{list(backend_url_dict.keys())[e]}"
+            show_str = show_str.ljust(25, "-")
+            with tqdm(total=total,
+                      desc=show_str + "-->",
+                      bar_format="{l_bar}{bar}|"
+                      ) as pbar:
+                pbar.update(progress)
+                time.sleep(0.1)
+    if config.novelai_load_balance_mode == 1:
+        if is_avaiable == 0:
+            n = -1
+            y = 0
+            normal_backend = list(status_dict.keys())
+            logger.info("没有空闲后端")
+            if len(normal_backend) == 0:
+                raise RuntimeError("没有可用后端")
+            else:
+                eta_list = list(status_dict.values())
+                for t, b in zip(eta_list, normal_backend):
+                    if int(t) < defult_eta:
+                        y += 1
+                        ava_url = b
+                        logger.info(f"已选择后端{reverse_dict[ava_url]}")
+                        break
+                    else:
+                        y += 0
+                if y == 0:
+                    reverse_sta_dict = {value: key for key, value in status_dict.items()}
+                    eta_list.sort()
+                    ava_url = reverse_sta_dict[eta_list[0]]
+        if len(idle_backend) >= 1:
+            ava_url = random.choice(idle_backend)
+    elif config.novelai_load_balance_mode == 2:
+        list_tuple = []
+        weight_list = config.novelai_load_balance_weight
+        backend_url_list = list(config.novelai_backend_url_dict.values())
+        weight_list_len = len(weight_list)
+        backend_url_list_len = len(backend_url_list)
+        normal_backend_len = len(normal_backend)
+        if weight_list_len != backend_url_list_len:
+            logger.warning("权重列表长度不一致, 请重新配置!")
+            ava_url = random.choice(normal_backend)
+        else:
+            from ..backend import AIDRAW
+            if weight_list_len != normal_backend_len:
+                multi = weight_list_len / (weight_list_len - normal_backend_len)
+                for weight, backend_site in zip(weight_list, backend_url_list):
+                    if backend_site in normal_backend:
+                        list_tuple.append((backend_site, weight*multi))
+            else:
+                for backend, weight in zip(normal_backend, weight_list):
+                    list_tuple.append((backend, weight))
+            print(list_tuple)
+            fifo = AIDRAW()
+            ava_url = fifo.weighted_choice(list_tuple)
+    if redis_client:
+        try:
+            r = redis_client[2]
+            if r.exists(day):
+                backend_info = r.get(day)
+                backend_info = backend_info.decode("utf-8")
+                backend_info = ast.literal_eval(backend_info)
+                if backend_info.get("gpu"):
+                    backend_dict = backend_info.get("gpu")
+                    backend_dict[reverse_dict[ava_url]] = backend_dict[reverse_dict[ava_url]] + 1
+                    backend_info["gpu"] = backend_dict
+                else:
+                    backend_dict = {}
+                    backend_info["gpu"] = {}
+                    for i in list(config.novelai_backend_url_dict.keys()):
+                        backend_dict[i] = 1
+                        backend_info["gpu"] = backend_dict
+                r.set(day, str(backend_info))
+        except Exception:
+            logger.warning("redis出错惹!不过问题不大")
+            logger.info(traceback.print_exc())
     else:
-        normal_backend_name = [i for i in normal_backend]
-    logger.info(f"正常后端:{normal_backend_name}")
-    if is_avaiable == 0:
-        logger.debug("进入后端选择")
-        ava_url = await chose_backend(state_dict, normal_backend, task_type)
-
-    logger.info(f"已选择后端{ava_url}")
-    tc = int(state_dict[ava_url][task_type]["info"]["tasks_count"])
-    tc += 1
-    state_dict[ava_url]["status"] = task_type
-    state_dict[ava_url]["start_time"] = time.time()
-    state_dict[ava_url][task_type]["info"]["tasks_count"] = tc
-    with open("data/novelai/load_balance.json", "w", encoding="utf-8") as f:
-        f.write(json.dumps(state_dict))
+        filename = "data/novelai/day_limit_data.json"
+        if os.path.exists(filename):
+            async with aiofiles.open(filename, "r") as f:
+                json_ = await f.read()
+                json_ = json.loads(json_)
+            json_[day]["gpu"][reverse_dict[ava_url]] = json_[day]["gpu"][reverse_dict[ava_url]] + 1
+            async with aiofiles.open(filename, "w") as f:
+                await f.write(json.dumps(json_))
+        else:
+            pass
+    logger.info(f"已选择后端{reverse_dict[ava_url]}")
     ava_url_index = list(backend_url_dict.values()).index(ava_url)
     ava_url_tuple = (ava_url, reverse_dict[ava_url], all_resp, len(normal_backend))
-    return ava_url_index, ava_url_tuple, normal_backend, state_dict
+    return ava_url_index, ava_url_tuple, normal_backend

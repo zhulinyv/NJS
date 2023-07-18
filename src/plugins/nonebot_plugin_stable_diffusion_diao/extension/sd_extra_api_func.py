@@ -2,6 +2,7 @@ from typing import Tuple
 from PIL import Image
 from io import BytesIO
 from argparse import Namespace
+from PIL import ImageGrab
 import json, aiohttp, time, base64
 import base64
 import time
@@ -9,18 +10,22 @@ import io
 import re
 import asyncio
 import aiofiles
-import datetime
+from datetime import datetime
 import os
 import traceback
 import random
+import ast
 
-from ..config import config
+from ..config import config, redis_client, nickname
 from ..extension.translation import translate
-from ..extension.explicit_api import check_safe_method
+from ..extension.explicit_api import check_safe_method, check_safe
 from .translation import translate
 from ..backend import AIDRAW
+from ..utils import unload_and_reload, pic_audit_standalone
+from ..utils.save import save_img
 from ..utils.data import lowQuality, basetag
-from ..utils.load_balance import sd_LoadBalance
+from ..utils.load_balance import sd_LoadBalance, get_vram
+from ..utils.prepocess import prepocess_tags
 from .safe_method import send_forward_msg, risk_control
 from ..extension.daylimit import count
 
@@ -44,8 +49,11 @@ async def func_init(event):
     else:
         site = await config.get_value(event.group_id, "site") or config.novelai_site
     reverse_dict = {value: key for key, value in config.novelai_backend_url_dict.items()}
-    return site, reverse_dict
-    
+    return site, reverse_dict    
+
+reverse_dict = {value: key for key, value in config.novelai_backend_url_dict.items()}
+current_date = datetime.now().date()
+day: str = str(int(datetime.combine(current_date, datetime.min.time()).timestamp()))
 
 header = {
     "content-type": "application/json",
@@ -62,7 +70,7 @@ get_models = on_command(
 change_models = on_command("更换模型", priority=1, block=True)
 control_net = on_command("以图绘图", aliases={"以图生图"})
 control_net_list = on_command("controlnet", aliases={"控制网"})
-super_res = on_command("本地图片修复", aliases={"本地图片超分", "本地超分"})
+super_res = on_command("图片修复", aliases={"图片超分", "超分"})
 get_backend_status = on_command("后端", aliases={"查看后端"})
 get_emb = on_command("emb", aliases={"embs"})
 get_lora = on_command("lora", aliases={"loras"})
@@ -70,13 +78,23 @@ get_sampler = on_command("采样器", aliases={"获取采样器"})
 # translate_ = on_command("翻译")
 hr_fix = on_command("高清修复") # 欸，还没写呢，就是玩
 random_tags = on_command("随机tag")
-find_pic = on_command("找图片")
+find_pic = on_command("找图片", aliases={"图片"})
 word_frequency_count = on_command("词频统计", aliases={"tag统计"})
+run_screen_shot = on_command("运行截图", aliases={"状态"}, block=False, priority=2)
+audit = on_command("审核")
+genera_aging = on_command("再来一张")
+reload_ = on_command("卸载模型", aliases={"释放显存"})
+style_ = on_command("预设")
 
-more_func_parser = ArgumentParser()
+more_func_parser, style_parser = ArgumentParser(), ArgumentParser()
 more_func_parser.add_argument("-i", "--index", type=int, help="设置索引", dest="index")
 more_func_parser.add_argument("-v", "--value", type=str, help="设置值", dest="value")
 more_func_parser.add_argument("-s", "--search", type=str, help="搜索设置名", dest="search")
+style_parser.add_argument("tags", type=str, nargs="*", help="正面提示词")
+style_parser.add_argument("-f", "--find", type=str, help="寻找预设", dest="find_style_name")
+style_parser.add_argument("-n", "--name", type=str, help="预设名", dest="style_name")
+style_parser.add_argument("-u", type=str, help="负面提示词", dest="style_ntags")
+style_parser.add_argument("-d", type=str, help="删除指定预设", dest="delete")
 
 set_sd_config = on_shell_command(
     "config",
@@ -84,6 +102,71 @@ set_sd_config = on_shell_command(
     parser=more_func_parser,
     priority=5
 )
+
+style_ = on_shell_command(
+    "预设",
+    parser=style_parser,
+    priority=5
+)
+
+
+async def get_and_process_lora(site, site_, text_msg=None):
+    loras_list = [f"这是来自webui:{site_}的lora,\t\n注使用例<lora:xxx:0.8>\t\n或者可以使用 -lora 数字索引 , 例如 -lora 1\n"]
+    n = 0
+    lora_dict = {}
+    get_lora_site = "http://" + site + "/sdapi/v1/loras"
+    resp_json = await aiohttp_func("get", get_lora_site)
+    for item in resp_json[0]:
+        i = item["name"]
+        n += 1
+        lora_dict[n] = i
+        if text_msg:
+            pattern = re.compile(f".*{text_msg}.*", re.IGNORECASE)
+            if pattern.match(i):
+                loras_list.append(f"{n}.{i}\t\n")
+        else:
+            loras_list.append(f"{n}.{i}\t\n")
+    if redis_client:
+        r2 = redis_client[1]
+        if r2.exists("lora"):
+            lora_dict_org = r2.get("lora")
+            lora_dict_org = ast.literal_eval(lora_dict_org.decode("utf-8"))
+            lora_dict = lora_dict_org[site_]
+            lora_dict_org[site_] = lora_dict
+            r2.set("lora", json.dumps(lora_dict_org))
+    else:
+        async with aiofiles.open("data/novelai/loras.json", "w", encoding="utf-8") as f:
+            await f.write(json.dumps(lora_dict))
+    return lora_dict, loras_list
+
+
+async def get_and_process_emb(site, site_, text_msg=None):
+    embs_list = [f"这是来自webui:{site_}的embeddings,\t\n注:直接把emb加到tags里即可使用\t\n中文emb可以使用 -nt 来排除, 例如 -nt 雕雕\n"]
+    n = 0
+    emb_dict = {}
+    get_emb_site = "http://" + site + "/sdapi/v1/embeddings"
+    resp_json = await aiohttp_func("get", get_emb_site)
+    all_embs = list(resp_json[0]["loaded"].keys())
+    for i in all_embs:
+        n += 1
+        emb_dict[n] = i
+        if text_msg:
+            pattern = re.compile(f".*{text_msg}.*", re.IGNORECASE)
+            if pattern.match(i):
+                embs_list.append(f"{n}.{i}\t\n")
+        else:
+            embs_list.append(f"{n}.{i}\t\n")
+    if redis_client:
+        r2 = redis_client[1]
+        emb_dict_org = r2.get("emb")
+        emb_dict_org = ast.literal_eval(emb_dict_org.decode("utf-8"))
+        emb_dict = emb_dict_org[site_]
+        emb_dict_org[site_] = emb_dict
+        r2.set("emb", json.dumps(emb_dict_org))
+    else:
+        async with aiofiles.open("data/novelai/embs.json", "w", encoding="utf-8") as f:
+            await f.write(json.dumps(emb_dict))
+    return emb_dict, embs_list 
 
 
 async def download_img(url):
@@ -169,11 +252,11 @@ async def set_config(data, backend_site):
     return resp_[1], end
 
 
-async def extract_tags_from_file(file_path, get_full_content=True) -> str:
+def extract_tags_from_file(file_path, get_full_content=True) -> str:
     separators = ['，', '。', ","]
     separator_pattern = '|'.join(map(re.escape, separators))
-    async with aiofiles.open(file_path, 'r', encoding="utf-8") as file:
-        content = await file.read()
+    with open(file_path, 'r', encoding="utf-8") as file:
+        content = file.read()
         if get_full_content:
             return content
     lines = content.split('\n')  # 将内容按行分割成列表
@@ -187,11 +270,11 @@ async def extract_tags_from_file(file_path, get_full_content=True) -> str:
     return words
 
 
-async def get_tags_list(is_uni=True):
-    filenames = await get_all_filenames("data/novelai/output", ".txt")
+def get_tags_list(is_uni=True):
+    filenames = get_all_filenames("data/novelai/output", ".txt")
     all_tags_list = []
     for path in list(filenames.values()):
-        tags_list = await extract_tags_from_file(path, False)
+        tags_list = extract_tags_from_file(path, False)
         for tags in tags_list:
             all_tags_list.append(tags)
     if is_uni:
@@ -204,7 +287,7 @@ async def get_tags_list(is_uni=True):
         return all_tags_list
 
 
-async def get_all_filenames(directory, fileType=None) -> dict:
+def get_all_filenames(directory, fileType=None) -> dict:
     file_path_dict = {}
     for root, dirs, files in os.walk(directory):
         for file in files:
@@ -225,11 +308,11 @@ async def change_model(event: MessageEvent,
     await func_init(event)
     try:
         site_ = reverse_dict[backend_site]
-    except:
+    except KeyError:
         site_ = await config(event.group_id, "site") or config.novelai_site
     try:
         site_index = list(config.novelai_backend_url_dict.keys()).index(site_)
-    except:
+    except KeyError:
         site_index = ""
     async with aiofiles.open("data/novelai/models.json", "r", encoding="utf-8") as f:
         content = await f.read()
@@ -250,7 +333,6 @@ async def change_model(event: MessageEvent,
 
 
 async def aiohttp_func(way, url, payload=""):
-    
     if way == "post":
         async with aiohttp.ClientSession() as session:
             async with session.post(url=url, json=payload) as resp:
@@ -280,11 +362,11 @@ async def _(event: MessageEvent, bot: Bot, args: Namespace = ShellCommandArgs())
                 msg_list.append(f"{n}.设置项: {i},设置值: {v}" + "\n")
         else:
             msg_list.append(f"{n}.设置项: {i},设置值: {v}" + "\n")
-    if args.index == None and args.value == None:
+    if args.index is None and args.value == None:
         await risk_control(bot, event, msg_list, True)
-    elif args.index == None:
+    elif args.index is None:
         await set_sd_config.finish("你要设置啥啊!")
-    elif args.value == None:
+    elif args.value is None:
         await set_sd_config.finish("你的设置值捏?")
     else:
         payload = {
@@ -300,91 +382,36 @@ async def _(event: MessageEvent, bot: Bot, args: Namespace = ShellCommandArgs())
 
 @get_emb.handle()
 async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
-    index = None
-    text_msg = msg.extract_plain_text().strip()
+    text_msg = None
+    index = 0
+    msg = msg.extract_plain_text().strip()
     if msg:
-        list_len = len(list(config.novelai_backend_url_dict.values()))
-        try:
-            int(text_msg)
-        except:
-            pass
+        if "_" in msg:
+            index, text_msg = int(msg.split("_")[0]), msg.split("_")[1]
         else:
-            index = int(text_msg)
-            if 0 <= index < list_len:
-                pass
+            if msg.isdigit():
+                index = int(msg)
             else:
-                index = None
-    if index is not None and isinstance(index, int):
-        site = list(config.novelai_backend_url_dict.values())[index]
-        msg = None
-    else:
-         site, rev = await func_init(event)
-    try:
-        site_ = reverse_dict[site]
-    except:
-        site_ = await config.get_value(event.group_id, "site") or config.novelai_site
-    embs_list = [f"这是来自webui:{site_}的embeddings,\t\n注:直接把emb加到tags里即可使用\t\n中文emb可以使用 -nt 来排除, 例如 -nt 雕雕\n"]
-    n = 0
-    emb_dict = {}
-    get_emb_site = "http://" + site + "/sdapi/v1/embeddings"
-    resp_json = await aiohttp_func("get", get_emb_site)
-    all_embs = list(resp_json[0]["loaded"].keys())
-    pattern = re.compile(f".*{text_msg}.*", re.IGNORECASE)
-    for i in all_embs:
-        n += 1
-        emb_dict[n] = i
-        if msg:
-            if pattern.match(i):
-                embs_list.append(f"{n}.{i}\t\n")
-        else:
-            embs_list.append(f"{n}.{i}\t\n")
-    async with aiofiles.open("data/novelai/embs.json", "w", encoding="utf-8") as f:
-        await f.write(json.dumps(emb_dict))
+                text_msg = msg
+    site_, site = config.backend_name_list[index], config.backend_site_list[index]
+    emb_dict, embs_list = await get_and_process_emb(site, site_, text_msg)
     await risk_control(bot, event, embs_list, True)
-
 
 @get_lora.handle()
 async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
-    index = None
-    text_msg = msg.extract_plain_text().strip()
-    try:
-        site_ = reverse_dict[site]
-    except:
-        site_ = await config.get_value(event.group_id, "site") or config.novelai_site
+    text_msg = None
+    index = 0
+    msg = msg.extract_plain_text().strip()
     if msg:
-        list_len = len(list(config.novelai_backend_url_dict.values()))
-        try:
-            int(text_msg)
-        except:
-            pass
+        if "_" in msg:
+            index, text_msg = int(msg.split("_")[0]), msg.split("_")[1]
         else:
-            index = int(text_msg)
-            if 0 <= index < list_len:
-                pass
+            if msg.isdigit():
+                index = int(msg)
             else:
-                index = None
-    loras_list = [f"这是来自webui:{site_}的lora,\t\n注使用例<lora:xxx:0.8>\t\n或者可以使用 -lora 数字索引 , 例如 -lora 1\n"]
-    n = 0
-    lora_dict = {}
-    if index is not None and isinstance(index, int):
-        site = list(config.novelai_backend_url_dict.values())[index]
-        msg = None
-    else:
-         site, rev = await func_init(event)
-    get_lora_site = "http://" + site + "/sdapi/v1/loras"
-    resp_json = await aiohttp_func("get", get_lora_site)
-    pattern = re.compile(f".*{text_msg}.*", re.IGNORECASE)
-    for item in resp_json[0]:
-        i = item["name"]
-        n += 1
-        lora_dict[n] = i
-        if msg:
-            if pattern.match(i):
-                loras_list.append(f"{n}.{i}\t\n")
-        else:
-            loras_list.append(f"{n}.{i}\t\n")
-    async with aiofiles.open("data/novelai/loras.json", "w", encoding="utf-8") as f:
-        await f.write(json.dumps(lora_dict))
+                text_msg = msg
+    site_, site = config.backend_name_list[index], config.backend_site_list[index]
+    lora_dict, loras_list = await get_and_process_lora(site, site_, text_msg)
     await risk_control(bot, event, loras_list, True)
 
 
@@ -449,9 +476,11 @@ async def c_net(state: T_State, net: Message = CommandArg()):
     else:
         state["tag"] = net
 
+
 @control_net.got('tag', "请输入绘画的关键词")
 async def __():
     pass
+
 
 @control_net.got("net", "你的图图呢？")
 async def _(event: MessageEvent, bot: Bot, tag: str = ArgPlainText("tag"), msg: Message = Arg("net")):
@@ -512,7 +541,7 @@ async def get_sd_models(event: MessageEvent,
     else:
         backend_site_index = 0
     final_message = await sd(backend_site_index)
-    await risk_control(bot, event, final_message, False, True)
+    await risk_control(bot, event, final_message, True, False)
 
 
 @change_models.handle()
@@ -543,10 +572,10 @@ async def _(event: MessageEvent, bot: Bot):
 
 @get_backend_status.handle()
 async def _(event: MessageEvent, bot: Bot):
-    async with aiofiles.open("data/novelai/load_balance.json", "r", encoding="utf-8") as f:
-        content = await f.read()
-        backend_info: dict = json.loads(content)
-    backend_info_task_type = ["txt2img", "img2img", "controlnet"]
+    # async with aiofiles.open("data/novelai/load_balance.json", "r", encoding="utf-8") as f:
+    #     content = await f.read()
+    #     backend_info: dict = json.loads(content)
+    # backend_info_task_type = ["txt2img", "img2img", "controlnet"]
     n = -1
     backend_list = list(config.novelai_backend_url_dict.keys())
     backend_site = list(config.novelai_backend_url_dict.values())
@@ -558,9 +587,9 @@ async def _(event: MessageEvent, bot: Bot):
         task_list.append(fifo.get_webui_config(i))
     resp_config = await asyncio.gather(*task_list, return_exceptions=True)
     resp_tuple = all_tuple[1][2]
-    today = str(datetime.date.today())
+    current_date = datetime.now().date()
+    day: str = str(int(datetime.combine(current_date, datetime.min.time()).timestamp()))
     for i, m in zip(resp_tuple, resp_config):
-        work_history_list = []
         today_task = 0
         n += 1
         if isinstance(i, (aiohttp.ContentTypeError, 
@@ -585,17 +614,24 @@ async def _(event: MessageEvent, bot: Bot):
                 message.append(text_message)
             else:
                 message.append(f"{n+1}.后端{backend_list[n]}掉线😭\t\n")
-        for t in backend_info_task_type:
-            history_list: list[dict] = backend_info[backend_site[n]][t]["info"]["history"]
-            for task in history_list:
-                work_history_list.append(list(task.keys()))
-        today = str(datetime.date.today())
-        for ts in work_history_list:
-            if ts[0] == "null":
-                continue
-            if time.strftime("%Y-%m-%d", time.localtime(float(ts[0]))) == today:
-                today_task += 1
+                
+        today_task = 0
+        if redis_client:
+            r = redis_client[2]
+            if r.exists(day):
+                today = r.get(day)
+                today = ast.literal_eval(today.decode("utf-8"))
+                today_task = today["gpu"][backend_list[n]]
+        else:
+            filename = "data/novelai/day_limit_data.json"
+            if os.path.exists():
+                async with aiofiles.open(filename, "r") as f:
+                    json_ = await f.read()
+                    json_ = json.loads(json_)
+                today_task = json_[day]["gpu"][backend_list[n]]
         message.append(f"今日此后端已画{today_task}张图\t\n")
+        vram = await get_vram(backend_site[n])
+        message.append(f"{vram}\t\n")
 
     await risk_control(bot, event, message, True)
 
@@ -634,16 +670,24 @@ async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
     await risk_control(bot, event, model_list+module_list, True)
 
 
-# @translate_.handle()
-# async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
-#     txt_msg = msg.extract_plain_text()
-#     en = await translate(txt_msg, "en")
-#     await risk_control(bot=bot, event=event, message=[en])
+"""@translate_.handle()
+async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
+    txt_msg = msg.extract_plain_text()
+    en = await translate(txt_msg, "en")
+    await risk_control(bot=bot, event=event, message=[en])"""
 
 
 @random_tags.handle()
 async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
-    all_tags_list = await get_tags_list()
+    if redis_client:
+        r = redis_client[0]
+        all_tags_list_str = [] 
+        all_tags_list = r.lrange("prompt", 0, -1)
+        for byte_tag in all_tags_list:
+            all_tags_list_str.append(ast.literal_eval(byte_tag.decode("utf-8")))
+        all_tags_list = all_tags_list_str
+    else:
+        all_tags_list = await asyncio.get_event_loop().run_in_executor(None, get_tags_list)
     chose_tags_list = random.sample(all_tags_list, 12)
     chose_tags = ', '.join(chose_tags_list)
 
@@ -674,55 +718,210 @@ async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
 
 @find_pic.handle()
 async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
+    txt_content = ""
+
     hash_id = msg.extract_plain_text()
     directory_path = "data/novelai/output"  # 指定目录路径
-    filenames = await get_all_filenames(directory_path)
+    filenames = await asyncio.get_event_loop().run_in_executor(None, get_all_filenames, directory_path)
     txt_file_name, img_file_name = f"{hash_id}.txt", f"{hash_id}.jpg"
     if txt_file_name in list(filenames.keys()):
-        txt_content = await extract_tags_from_file(filenames[txt_file_name])
+        txt_content = await asyncio.get_event_loop().run_in_executor(None, extract_tags_from_file, filenames[txt_file_name])
         img_file_path = filenames[img_file_name]
         img_file_path = img_file_path if os.path.exists(img_file_path) else filenames[f"{hash_id}.png"]
+        
         async with aiofiles.open(img_file_path, "rb") as f:
             content = await f.read()
         msg_list = [f"这是你要找的{hash_id}的图\n", txt_content, MessageSegment.image(content)]
+    else:
+        await find_pic.finish("你要找的图不存在")
 
-        if config.novelai_extra_pic_audit:
-            fifo = AIDRAW(user_id=event.get_user_id,
-                          event=event 
-                        )
-            
-            await fifo.load_balance_init()
-            message_ = await check_safe_method(fifo, [content], [""], None, False)
-            if isinstance(message_[1], MessageSegment):
-                try:
-                    await send_forward_msg(bot, event, event.sender.nickname, str(event.user_id), msg_list)
-                except ActionFailed:
-                    await risk_control(bot, event, msg_list, True)
-            else:
-                await bot.send(event, message="哼！想看涩图，自己看私聊去！")
-        else:
+    if config.novelai_extra_pic_audit:
+        fifo = AIDRAW(user_id=event.get_user_id,
+                        event=event 
+                    )
+        await fifo.load_balance_init()
+        message_ = await check_safe_method(fifo, [content], [""], None, False)
+        if isinstance(message_[1], MessageSegment):
             try:
                 await send_forward_msg(bot, event, event.sender.nickname, str(event.user_id), msg_list)
             except ActionFailed:
                 await risk_control(bot, event, msg_list, True)
+        else:
+            await bot.send(event, message="哼！想看涩图，自己看私聊去！")
+    else:
+        try:
+            await send_forward_msg(bot, event, event.sender.nickname, str(event.user_id), msg_list)
+        except ActionFailed:
+            await risk_control(bot, event, msg_list, True)
 
 
 @word_frequency_count.handle()
 async def _(event: MessageEvent, bot: Bot, msg: Message = CommandArg()):
     msg_list = []
-
-    async def count_word_frequency(word_list):
+    if redis_client:
+        r = redis_client[0]
+        if r.exists("prompt"):
+            word_list_str = []
+            word_list = r.lrange("prompt", 0, -1)
+            for byte_word in word_list:
+                word_list_str.append(ast.literal_eval(byte_word.decode("utf-8")))
+            word_list = word_list_str
+        else:
+            await word_frequency_count.finish("画几张图图再来统计吧!")
+    else:
+        word_list = await asyncio.get_event_loop().run_in_executor(None, get_tags_list, False)
+        
+    def count_word_frequency(word_list):
         word_frequency = Counter(word_list)
         return word_frequency
 
-    async def sort_word_frequency(word_frequency):
+    def sort_word_frequency(word_frequency):
         sorted_frequency = sorted(word_frequency.items(), key=lambda x: x[1], reverse=True)
         return sorted_frequency
 
-    word_list = await get_tags_list(False)
-    word_frequency = await count_word_frequency(word_list)
-    sorted_frequency = await sort_word_frequency(word_frequency)
+    word_frequency = count_word_frequency(word_list)
+    sorted_frequency = sort_word_frequency(word_frequency)
     for word, frequency in sorted_frequency[0:240] if len(sorted_frequency) >= 240 else sorted_frequency:
         msg_list.append(f"prompt:{word},出现次数:{frequency}\t\n")
     await risk_control(bot, event, msg_list, True)
+
+
+@run_screen_shot.handle()
+async def _(event: MessageEvent, bot: Bot):
+    if config.run_screenshot:
+        time_ = str(time.time())
+        file_name = f"screenshot_{time_}.png"
+        screenshot = ImageGrab.grab()
+        screenshot.save(file_name)
+        with open(file_name, "rb") as f:
+            pic_content = f.read()
+            bytes_img = io.BytesIO(pic_content)
+        await bot.send(event=event, message=MessageSegment.image(bytes_img))
+        os.remove(file_name)
+    else:
+        await run_screen_shot.finish("未启动屏幕截图")
+
+
+@audit.handle()
+async def _(event: MessageEvent, bot: Bot):
+    url = ""
+    reply = event.reply
+    if reply:
+        for seg in reply.message['image']:
+            url = seg.data["url"]
+    for seg in event.message['image']:
+        url = seg.data["url"]
+    if url:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as resp:
+                bytes = await resp.read()
+        img_base64 = str(base64.b64encode(bytes), "utf-8")
+        message = await pic_audit_standalone(img_base64)
+        await bot.send(event, message, at_sender=True, reply_message=True)
+
+
+@genera_aging.handle()
+async def _(event: MessageEvent, bot: Bot):
+    # 读取redis数据
+    if redis_client:
+        r = redis_client[0]
+        if r.exists(str(event.user_id)):
+            fifo_info = r.lindex(str(event.user_id), -1)
+            fifo_info = fifo_info.decode("utf-8")
+            fifo_info = ast.literal_eval(fifo_info)
+            del fifo_info["seed"]
+            fifo = AIDRAW(**fifo_info)
+            try:
+                await fifo.post()
+            except Exception:
+                logger.error(traceback.print_exc())
+                await genera_aging.finish("出错惹, 快叫主人看控制台")
+            else:
+                img_msg = MessageSegment.image(fifo.result[0])
+                result = await check_safe_method(fifo, [fifo.result[0]], [""], None, True, "_agin")
+                if isinstance(result[1], MessageSegment):
+                    await bot.send(event=event,
+                                   message=f"{nickname}又给你画了一张哦!"+img_msg+f"\n{fifo.img_hash}",
+                                   at_sender=True,
+                                   reply_message=True
+                                   )
+                await save_img(fifo=fifo, img_bytes=fifo.result[0],extra=fifo.group_id+"_agin")
+        else:
+            await genera_aging.finish("你还没画过图, 这个功能用不了哦!")
+    else:
+        await genera_aging.finish("未连接redis, 此功能不可用")
+
+
+@reload_.handle()
+async def _(msg: Message = CommandArg()):
+    if not msg:
+        await reload_.finish("你要释放哪个后端的显存捏?")
+    text_msg = int(msg.extract_plain_text())
+    if not text_msg.isdigit():
+        await reload_.finish("笨蛋!后端编号是数字啦!!")
+    try:
+        await unload_and_reload(text_msg)
+    except Exception:
+        logger.error(traceback.print_exc())
+    else:
+        await reload_.finish(f"为后端{config.backend_name_list[text_msg]}重载成功啦!")
         
+
+@style_.handle()
+async def _(event: MessageEvent, bot: Bot, args: Namespace = ShellCommandArgs()):
+    message_list = []
+    style_dict = {}
+    if redis_client:
+        r = redis_client[1]
+        if r.exists("style"):
+            style_list = r.lrange("style", 0, -1)
+            style_list = [ast.literal_eval(style.decode("utf-8")) for style in style_list]
+            if r.exists("user_style"):
+                user_style_list = r.lrange("user_style", 0, -1)
+                user_style_list = [ast.literal_eval(style.decode("utf-8")) for style in user_style_list]
+                style_list += user_style_list
+    else:
+        await style.finish("需要redis以使用此功能")
+    if args.delete:
+        delete_name = args.delete[0] if isinstance(args.delete, list) else args.delete
+        find_style = False
+        style_index = -1
+        for style in user_style_list:
+            style_index += 1
+            if style["name"] == delete_name:
+                pipe = r.pipeline()
+                r.lset("user_style", style_index, '__DELETED__')
+                r.lrem("user_style", style_index, '__DELETED__')
+                pipe.execute()
+                find_style = True
+                await style_.finish(f"删除预设{delete_name}成功!")
+        if not find_style:
+            await style_.finish(f"没有找到预设{delete_name},是不是打错了!\n另外不支持删除从webui中导入的预设")
+    if args.find_style_name:
+        find_style = False
+        for style in style_list:
+            if args.find_style_name == style["name"]:
+                name, tags, ntags = style["name"], style["prompt"], style["negative_prompt"]
+                find_style = True
+                await risk_control(bot, event, [f"预设名称: {name}\n正面提示词: {tags}\n负面提示词: {ntags}\n"], True)
+                break
+        if not find_style:
+            await style_.finish(f"没有找到预设{args.find_style_name}")
+    if len(args.tags) != 0:
+        args.ntags = ""
+        if args.tags and args.style_name:
+            tags = await prepocess_tags(args.tags)
+            ntags = await prepocess_tags(args.ntags)
+            style_dict["name"] = args.style_name
+            style_dict["prompt"] = tags
+            style_dict["negative_prompt"] = ntags
+            r.rpush("user_style", str(style_dict))
+            await style_.finish(f"添加预设: {args.style_name}成功!")
+        else:
+            await style_.finish("参数不完整, 请检查后重试")
+    else:
+        for style in style_list:
+            name, tags, ntags = style["name"], style["prompt"], style["negative_prompt"]
+            message_list.append(f"预设名称: {name}\n正面提示词: {tags}\n负面提示词: {ntags}\n")
+        await risk_control(bot, event, message_list, True)
+    

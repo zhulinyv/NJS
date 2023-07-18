@@ -1,5 +1,12 @@
 from nonebot import require
-from nonebot.adapters.onebot.v11 import Bot, MessageEvent, Message, ActionFailed, MessageSegment, GroupMessageEvent, PrivateMessageEvent
+from nonebot.adapters.onebot.v11 import (Bot,
+                                         MessageEvent,
+                                         Message,
+                                         ActionFailed,
+                                         MessageSegment,
+                                         GroupMessageEvent,
+                                         PrivateMessageEvent
+                                         )
 require("nonebot_plugin_htmlrender")
 from nonebot_plugin_htmlrender import md_to_pic
 
@@ -11,7 +18,6 @@ async def send_forward_msg(
         uin: str,
         msgs: list,
 ) -> dict:
-    
     def to_json(msg: Message):
         return {"type": "node", "data": {"name": name, "uin": uin, "content": msg}}
 
@@ -47,12 +53,12 @@ async def risk_control(bot: Bot,
                        at_sender=True, 
                        reply_message=True
 ):
-
     '''
     为防止风控的函数, is_forward True为发送转发消息
     '''
     n = 240
     new_list = []
+    msg_list = None
     if len(message) > n and isinstance(message, list): # 列表太长，避免生成图片太大发不出去
         for i in range(0, len(message), n):
             new_list.append(message[i:i+n])
@@ -63,7 +69,7 @@ async def risk_control(bot: Bot,
             new_list.append(message)
     if md_temple:
         for img in new_list:
-            msg_list = "".join(img)
+            msg_list = "".join(str(img)) if isinstance(img, dict) else "".join(img)
             markdown = await markdown_temple(bot, msg_list)
             img = await md_to_pic(md=markdown, width=width)
             await bot.send(event=event, message=MessageSegment.image(img))
@@ -72,7 +78,7 @@ async def risk_control(bot: Bot,
             msg_list = ["".join(message[i:i+10]) for i in range(0, len(message), 10)]
             try:
                 await send_forward_msg(bot, event, event.sender.nickname, event.user_id, msg_list)
-            except:
+            except ActionFailed:
                 for img in new_list:
                     msg_list = "".join(img)
                     markdown = await markdown_temple(bot, msg_list)
@@ -80,12 +86,14 @@ async def risk_control(bot: Bot,
                     await bot.send(event=event, message=MessageSegment.image(img))
         else:
             try:
+                if not msg_list:
+                    msg_list = message
                 await bot.send(event=event, message=msg_list)
-            except:
+            except ActionFailed:
                     msg_list = ["".join(message[i:i+10]) for i in range(0, len(message), 10)]
                     try:
                         await send_forward_msg(bot, event, event.sender.nickname, event.user_id, msg_list)
-                    except:
+                    except ActionFailed:
                         msg_list = "".join(message)
                         markdown = await markdown_temple(bot, msg_list)
                         img = await md_to_pic(md=markdown, width=width)

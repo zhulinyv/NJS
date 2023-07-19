@@ -2149,25 +2149,25 @@ nonebot2 = ">=2.0.0-beta.1,<3.0.0"
 
 [[package]]
 name = "nonebot-plugin-htmlrender"
-version = "0.2.0.1"
+version = "0.2.1"
 description = "通过浏览器渲染图片"
 category = "main"
 optional = false
-python-versions = ">=3.8,<4.0"
+python-versions = "<4.0,>=3.8"
 files = [
-    {file = "nonebot-plugin-htmlrender-0.2.0.1.tar.gz", hash = "sha256:a6eb0b22dc66040c215cf60961bc1aec3d1670a4ba70a40b3c0590718a9525ba"},
-    {file = "nonebot_plugin_htmlrender-0.2.0.1-py3-none-any.whl", hash = "sha256:ba3d03688c1b680bc44e87aa60f5adcf5bab0421458a31ed7a3aa7cfd8fca42b"},
+    {file = "nonebot_plugin_htmlrender-0.2.1-py3-none-any.whl", hash = "sha256:caf26189fdfec1eb20c022a39da2758bf239285ccc3428756ea5446f91125df4"},
+    {file = "nonebot_plugin_htmlrender-0.2.1.tar.gz", hash = "sha256:da5d28366846eccc0037386a08834d234883a933a49f647ea56842fe1aa2e43f"},
 ]
 
 [package.dependencies]
-aiofiles = ">=0.8.0,<0.9.0"
-jinja2 = ">=3.0.3,<4.0.0"
-markdown = ">=3.3.6,<4.0.0"
-nonebot2 = ">=2.0.0-beta.1,<3.0.0"
-playwright = ">=1.17.2,<2.0.0"
-Pygments = ">=2.10.0,<3.0.0"
-pymdown-extensions = ">=9.1,<10.0"
-python-markdown-math = ">=0.8,<0.9"
+aiofiles = ">=0.8.0"
+jinja2 = ">=3.0.3"
+markdown = ">=3.3.6"
+nonebot2 = {version = ">=2.0.0", extras = ["fastapi"]}
+playwright = ">=1.17.2"
+Pygments = ">=2.10.0"
+pymdown-extensions = ">=9.1"
+python-markdown-math = ">=0.8"
 
 [[package]]
 name = "nonebot-plugin-imageutils"
@@ -4615,4 +4615,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "e10faa0de5927b2a7055a471b560ee1949fd10500698862bbf00787c96fcba8d"
+content-hash = "9ab36f90d24a8487cd0c528af12bfa4c6f36c9f7c0f8989a030a3c946d3f2986"

@@ -1,4 +1,5 @@
 import os
+import asyncio
 import ujson as json
 
 from nonebot.params import CommandArg
@@ -20,6 +21,12 @@ njs = on_command("njs", aliases={"NJS"}, priority=1, block=True)
 @njs.handle()
 async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
     number = msg.extract_plain_text().strip()
+    name_list = []
+    with open("./data/njs_help_new/help.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+    for plugin_info in data["插件列表"]:
+        name_list.append(plugin_info["插件名"])
+
     if number in ["帮助", "菜单", "列表", "help"]:
         await draw_help()
         help_img = MessageSegment.image(path / "help_new.png")
@@ -41,16 +48,20 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
             await bot.call_api('send_group_forward_msg', group_id=event.group_id, messages=msgs)
         else:
             await njs.send(head_msg, at_sender=True)
+            asyncio.sleep(1)
             await njs.send(help_img)
+            asyncio.sleep(1)
             await njs.send(foot_msg)
-    elif (number.isdigit()) and (int(number) > 0):
-        with open("./data/njs_help_new/help.json", "r", encoding="utf-8") as f:
-            data = json.load(f)
-
+    else:
         try:
-            target_plugin = data["插件列表"][int(number) - 1]
+            target_plugin = (data["插件列表"][int(number) - 1])
         except IndexError:
             await njs.finish("功能扩建中...", at_sender=True)
+        except ValueError:
+            try:
+                target_plugin = (data["插件列表"][name_list.index(f"{number}")])
+            except ValueError:
+                await njs.finish("功能扩建中...", at_sender=True)
 
         plugin_name = target_plugin["插件名"]
         import_name = target_plugin["导包名"]
@@ -78,5 +89,3 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
             msg += "\n" + bbcode_img
 
         await njs.finish(msg, at_sender=True)
-    else:
-        await njs.finish("功能扩建中...", at_sender=True)

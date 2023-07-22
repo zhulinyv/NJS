@@ -72,7 +72,7 @@ if record_waifu_file.exists() and os.path.getmtime(record_waifu_file) > Zero_tod
 else:
     record_waifu = {}
 
-waifu = on_command("娶群友", permission=GROUP, priority = 90, block = True)
+waifu = on_command("抽老婆", aliases="娶群友", permission=GROUP, priority = 90, block = True)
 
 no_waifu = [
     "你没有娶到群友，强者注定孤独，加油！",
@@ -224,7 +224,7 @@ async def FACTOR(bot: Bot, event: GroupMessageEvent) -> bool:
 global cd_bye
 cd_bye = {}
 
-bye = on_command("离婚", permission = FACTOR, priority = 90, block = True)
+bye = on_command("分手",aliases={"离婚"}, permission = FACTOR, priority = 90, block = True)
 
 @bye.handle()
 async def _(bot:Bot, event: GroupMessageEvent):

@@ -566,9 +566,14 @@ class Impart:
             await utils.update_ejaculation(round(temp, 3), lucky_user)
         except Exception:
             await utils.update_ejaculation(ejaculation, lucky_user)
-        await asyncio.sleep(2)  # 休眠2秒, 更有效果
+        # await asyncio.sleep(2)  # 休眠2秒, 更有效果
+        if ejaculation < 15:
+            repo_1 = f"行不行吖，小细狗🐕，才给{lucky_user_card}({lucky_user})注入{ejaculation}毫升,,ԾㅂԾ,,"
+        elif ejaculation > 85:
+            repo_1 = f"Hen...Hentai! 你怎么能对『{lucky_user_card}』🐍这么多({ejaculation}毫升)！！"
+        else:
+            repo_1 = f"好欸！『{req_user_card}』用时{random.randint(1, 600)}秒 \n给『{lucky_user_card}』注入了{ejaculation}毫升的脱氧核糖核酸, 当日总注入量为：{utils.get_today_ejaculation(lucky_user)}"
         # 准备调用api, 用来获取头像
-        repo_1 = f"好欸！{req_user_card}({uid})用时{random.randint(1, 20)}秒 \n给 {lucky_user_card}({lucky_user}) 注入了{ejaculation}毫升的脱氧核糖核酸, 当日总注入量为：{utils.get_today_ejaculation(lucky_user)}"
         await matcher.send(
             repo_1
             + MessageSegment.image(f"http://q1.qlogo.cn/g?b=qq&nk={lucky_user}&s=640")

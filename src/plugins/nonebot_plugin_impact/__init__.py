@@ -10,7 +10,7 @@ from .utils import utils
 
 on_command(
     "牛子pk",
-    aliases={"对决"},
+    aliases={"牛子对决"},
     rule=utils.rule,
     priority=20,
     block=False,
@@ -19,7 +19,7 @@ on_command(
 
 on_command(
     "小学pk",
-    aliases={"对决"},
+    aliases={"小学对决"},
     rule=utils.rule,
     priority=20,
     block=False,

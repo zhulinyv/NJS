@@ -1,5 +1,11 @@
 <div style="background-color:rgba(255, 0, 0, 0.5);">&nbsp</div>
 
+# 我是群Ai绘画{nickname}
+
+### 快速画图: 绘画 白发,红色眼睛
+
+<div style="background-color:rgba(255, 0, 0, 0.5);">&nbsp</div>
+
 ## 以下是功能捏 "#"井号是备注!请忽略它!😡
 
 ### 群管理功能  🥰
@@ -9,7 +15,7 @@
 <div style="background-color:rgba(12, 0, 0, 0.5);">&nbsp</div>
 
 ```text
-可自定义设置为:
+当前群的设置为
 novelai_cd:2 # 群聊画图cd, 单位为秒, 全局设置:{config.novelai_cd}, 当前群设置:{await config.get_value(event.group_id, "cd")}
 novelai_tags: # 本群自带的正面提示词
 novelai_on:True # 是否打开本群AI绘画功能

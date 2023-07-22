@@ -41,11 +41,13 @@
 
 ⚠️ 需要两个 QQ 号, 一个自己的, 一个机器人的。
 
-⚠️ 系统要求: Windows8 及以上, Linux(推荐:Ubuntu)~~, Mac(不会真的有人用 Mac 跑 Bot 叭)~~。
+⚠️ 系统要求: Windows8 及以上, Linux(推荐:Ubuntu)~~, Mac(不会真的有人用 Mac 跑 Bot 叭), Android 自己研究一下 (bushi)~~。
 
 |⚠️ 推荐配置要求: |CPU|RAM||⚠️ 最低配置要求: |CPU|RAM|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |推荐配置|2线程+|2GB+||该配置下部分功能可能无法正常使用|1线程|1GB|
+
+⚠️ 如果遇到任何部署、使用或二次开发上的问题或建议, 可以在 QQ频道: [我的中心花园-开发交流](https://pd.qq.com/s/8bkfowg3c) 找到我。
 
 ### 0️⃣ Star 本项目
 
@@ -295,7 +297,7 @@ poetry install
 
 6、更新: 艾特脑积水说更新即可在线更新, 更新成功后, 艾特脑积水说重启来应用新的内容。
 
-7、如有配置、部署或使用中的问题或建议, 请通过本仓库 [Issues](https://github.com/zhulinyv/NJS/issues) 或 [博客首页](https://zhulinyv.github.io/) 联系方式联系我。
+7、如有配置、部署或使用中的问题或建议, 请通过本仓库 [Issues](https://github.com/zhulinyv/NJS/issues)、QQ频道: [我的中心花园-开发交流](https://pd.qq.com/s/8bkfowg3c) 或 [博客首页](https://zhulinyv.github.io/) 联系方式联系我。
 
 #### 进阶使用
 

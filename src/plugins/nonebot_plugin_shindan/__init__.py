@@ -62,12 +62,12 @@ set_usage = """Usage:
 如：设置占卜 360578 text"""
 
 cmd_sd = on_command(
-    "占卜", aliases={"shindan", "shindanmaker"}, rule=to_me(), block=True, priority=13
+    "占卜", aliases={"shindan", "shindanmaker"}, rule=to_me(), block=True, priority=60
 )
-cmd_ls = on_command("占卜列表", aliases={"可用占卜"}, block=True, priority=13)
-cmd_add = on_command("添加占卜", permission=SUPERUSER, block=True, priority=13)
-cmd_del = on_command("删除占卜", permission=SUPERUSER, block=True, priority=13)
-cmd_set = on_command("设置占卜", permission=SUPERUSER, block=True, priority=13)
+cmd_ls = on_command("占卜列表", aliases={"可用占卜"}, block=True, priority=60)
+cmd_add = on_command("添加占卜", permission=SUPERUSER, block=True, priority=60)
+cmd_del = on_command("删除占卜", permission=SUPERUSER, block=True, priority=60)
+cmd_set = on_command("设置占卜", permission=SUPERUSER, block=True, priority=60)
 
 
 @cmd_sd.handle()

@@ -31,7 +31,7 @@ default_list = {
     "1120186": {"command": "我是什么虚拟歌姬", "title": "あなたを『有名なVOCALOIDキャラクター＋α』に例えると"},
     "1099346": {"command": "宝可梦人设", "title": "あなたがポケモンになった時の見た目や性能【ドット絵オリポケイラスト付き】"},
     "659188": {"command": "我的女子力", "title": "あなたの《女子力》検定"},
-    "516459": {"command": "抽老婆2", "title": "Your Anime Valentine "}
+    "516459": {"command": "动漫抽老婆", "title": "Your Anime Valentine "}
 }
 
 

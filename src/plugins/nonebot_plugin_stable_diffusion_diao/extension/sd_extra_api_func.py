@@ -80,7 +80,7 @@ hr_fix = on_command("高清修复") # 欸，还没写呢，就是玩
 random_tags = on_command("随机tag")
 find_pic = on_command("找图片", aliases={"图片"})
 word_frequency_count = on_command("词频统计", aliases={"tag统计"})
-run_screen_shot = on_command("运行截图", aliases={"状态"}, block=False, priority=2)
+run_screen_shot = on_command("画图运行截图", aliases={"画图状态"}, block=False, priority=2)
 audit = on_command("审核")
 genera_aging = on_command("再来一张")
 reload_ = on_command("卸载模型", aliases={"释放显存"})

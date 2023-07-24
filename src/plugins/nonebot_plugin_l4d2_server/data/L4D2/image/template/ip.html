@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="pc">
+<head>
+	<link rel="stylesheet" type="text/css" href="vue.css">
+    <title>Server Information</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body style="background-image: url('back2.jpg'); background-size: 1200px 1800px;">
+<div class="myinfo">
+<table>
+    {% for i in range(0, data|length, 3) %}
+        <tr>
+            {% for j in range(i, i + 3) %}
+                {% if j < data|length %}
+                    <td>
+                         <font color="red">{{ data[j].number }}</font><br>
+                        <font color="yellow">{{ data[j].name }}</font><br>
+                        <font color="gray">{{ data[j].ip }}</font><br>
+                        <font color="blue">{{ data[j].map_ }}</font><br>
+                        {% for Player in data[j].Players %}
+                            <font color="green">{{ Player }}</font><br>
+                        {% endfor %}
+                        <font color="yellow">{{ data[j].max_players }}{{data[j].ping}}</font>
+                    </td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+<h5><center>©爱丽数码</center></br>
+	<center>
+		github.com/Agnes4m/nonebot_plugin_l4d2_server
+	</center>
+</h5>
+</div>
+</html>

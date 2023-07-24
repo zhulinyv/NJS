@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+	<link rel="stylesheet" type="text/css" href="vue.css">
+</head>
+</br>
+<body style="background-image: url('back.png'); background-size: cover;">
+	<font color="yellow">
+	{% for item in data %}
+	<h1 ><center>求生药役anne电信服数据</center></h1>
+	<div class="scissors" style="border-top:1px dashed orange;">
+	</div><h3><center>
+		{% for msg_one in item.one_msg %}
+			{{ msg_one }}<br>
+		{% endfor %}</center></h3>
+	</font>
+	<div class="scissors" style="border-top:1px dashed orange;">
+	</div>
+	<div class="myinfo">
+		<table class="transparent-bg">
+			<tbody>
+				<tr>
+					<td rowspan="6">
+						<img src={{item.header}}  width="200" height="200" style="border-radius: 50%;">
+					</td>
+					<td>昵&emsp;&emsp;称 | {{item.name}}</td>
+					<td>Steam id | {{item.Steam_ID}}</td>
+			</tr>
+			<tr>
+				<td>游玩时间 | {{item.play_time}}</td>
+				<td>最后上线 | {{item.last_online}}</td>
+			</tr>
+			<tr>
+				<td>排&emsp;&emsp;行 | {{item.rank}}</td>
+				
+				<td>分&emsp;&emsp;数 | {{item.points}}</td>
+			</tr>
+			<tr>
+				<td>分数 / 分 | {{item.point_min}}</td>
+				<td>小僵尸数 | {{item.killed}}</td>
+			</tr>
+			<tr>
+				<td>爆&emsp;&emsp;头 | {{item.shut}}</td>
+				<td>爆&nbsp; 头&nbsp; 率 | {{item.out}}</td>
+			</tr>
+			<tr>
+				<td>游玩次数 | {{item.playtimes}}</td>
+				<td>救&nbsp; 援&nbsp; 关 | {{item.last_one}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<font color="yellow">
+{% endfor %}
+<h5><center>©爱丽数码</center></br>
+	<center>
+		github.com/Agnes4m/nonebot_plugin_l4d2_server
+	</center>
+</h5>
+</font>
+</body>

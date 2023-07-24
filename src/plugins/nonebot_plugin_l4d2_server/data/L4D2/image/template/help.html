@@ -1,0 +1,233 @@
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        zoom: 150%;
+      }
+      .image {
+        display: flex;
+        flex-direction: column;
+        overflow: scroll;
+        width: max-content;
+        padding: 20px;
+      }
+      .head {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #f5f6f7;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border: 2px solid;
+        border-radius: 50px;
+        border-color: #e5e7eb;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .plugins {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        row-gap: 20px;
+        column-gap: 20px;
+		margin-bottom: 20px;
+      }
+      .plugin {
+        display: flex;
+        padding: 5px;
+        border: 1px solid;
+        border-radius: 5px;
+        border-color: #e5e7eb;
+        box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
+        background-color: #f5f6f7;
+      }
+      .plugin_meta {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        width: 250px;
+        justify-content: space-between;
+      }
+      .plugin_name {
+        font-size: 20px;
+      }
+      .plugin_description {
+        font-size: 15px;
+        color: gray;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+      .plugin_meta_line1 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .plugin_meta_line3 {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .package_name_label{
+        background-image: url(./fingerprint.svg);
+        width: 13px;
+        height: 13px;
+        margin-right: 8px;
+      }
+      .package_name {
+        font-size: 13px;
+        color: gray;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 24px;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+      }
+      .switch input {
+        display: none;
+      }
+      .switch input:checked + .slider {
+        background-color: rgba(86, 40, 238, 0.5);
+      }
+      .switch input:checked + .slider:before {
+        -webkit-transform: translateX(16px);
+        -ms-transform: translateX(16px);
+        transform: translateX(16px);
+      }
+      .slider.round {
+        border-radius: 24px;
+      }
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      .checkbox {
+        visibility: hidden;
+      }
+      .slider.locked {
+        opacity: 0.5;
+      }
+      .switch input + span .lock {
+        width: 8px;
+        height: 7px;
+        background: #99a3ba;
+        position: absolute;
+        left: 8px;
+        bottom: 7px;
+        border-radius: 2px;
+        display: block;
+        z-index: 1;
+        transition: all 0.45s ease;
+      }
+      .switch input + span .lock:before {
+        content: "";
+        width: 2px;
+        height: 2px;
+        border-radius: 1px;
+        background: #fff;
+        position: absolute;
+        display: block;
+        left: 50%;
+        top: 50%;
+        margin: -1px 0 0 -1px;
+      }
+      .switch input + span .lock:after {
+        content: "";
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border: 1px solid #99a3ba;
+        border-bottom: 0;
+        width: 4px;
+        height: 4px;
+        left: 1px;
+        bottom: 6px;
+        position: absolute;
+        z-index: 1;
+        -webkit-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+        transition: all 0.45s ease;
+      }
+      .switch input:checked + span .lock {
+        background: #5628ee;
+        -webkit-transform: translateX(16px);
+        -ms-transform: translateX(16px);
+        transform: translateX(16px);
+      }
+      .lock {
+        visibility: hidden;
+      }
+      .lock.locked {
+        visibility: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image">
+      <div class="head">
+        <span><b>已加载服务器</b></span>
+        <span>发送 “<b>服务器昵称/序号</b>” 查看详情</span>
+      </div>
+      <div class="plugins">
+        {% for plugin in plugins %}
+        <div class="plugin">
+          <div class="plugin_meta">
+            <div class="plugin_meta_line1">
+              <div class="plugin_name">{{ plugin.number }}:{{ plugin.name }}</div>
+              <div class="plugin_status">
+                <label class="switch">
+                  <input class="checkbox" type="checkbox" {% if plugin.enabled %} checked {% endif %} />
+                  <span class="slider round {% if plugin.locked %} locked {% endif %}">
+                    <span class="lock {% if plugin.locked %} locked {% endif %}"></span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="plugin_meta_line2">
+				<font color="blue">{{ plugin.map_ }}</font><br>
+                {% for Player in plugin.Players %}
+                    <font color="green">{{ Player }}</font><br>
+                {% endfor %}
+            </div>
+            <div class="plugin_meta_line3">
+              <svg width="13px" height="13px">
+                <image xlink:href="{{ plugin.system }}" width="13px" height="13px"/>
+              </svg>
+              <div class="package_name">&nbsp{{ plugin.max_players }} </div>
+              <div class="package_name">&nbsp{{ plugin.tick }} </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+	  <div class="head">
+      <span><b>©爱丽数码</b></span>
+      <span>github.com/Agnes4m/nonebot_plugin_l4d2_server</span>
+      </div>
+    </div>
+</html>
+  </body>
+
+
+

@@ -293,6 +293,7 @@ poetry install
   <a><img src="https://github.com/zhulinyv/NJS/assets/66541860/bbf874ac-dd12-475e-8984-06e42e776563"></a>
   6、打开 <b>./NJS/accounts/你的脑积水的 QQ 号/config-template.yml</b> 文件在 account 下(如图所示选中部分)填写 <b>sign-server: 'http://127.0.0.1:24680'</b>
   <a><img src="https://github.com/zhulinyv/NJS/assets/66541860/b05f6672-b5a0-4e5b-817c-19ba1f6c0013"></a>
+  <hr>
   <b>II: 其它服务端: 看这里~!!</b>
   <a href="https://github.com/fuqiuluo/unidbg-fetch-qsign/wiki">unidbg-fetch-qsign wiki</a>
   <a href="https://github.com/fuqiuluo/unidbg-fetch-qsign/wiki/%E9%83%A8%E7%BD%B2%E5%9C%A8Linux"><b>→ Linux 直达 ←</b></a>
@@ -305,7 +306,7 @@ poetry install
   2、若服务器性能太低, 使用 qsign 服务器出现超时问题, 可以自行修改 go-cqhttp 源代码延长超时时间并进行编译。如果你不会 Go 语言或编译, 可以在本地部署 qsign 并成功登录后上传 device.json 和 session.token 文件复制到 .\NJS\accounts\uin(机器人的QQ号) 目录即可。
   <hr>
   unidbg-fetch-qsign wiki 截图。
-  <a><img src="https://github.com/zhulinyv/NJS/assets/66541860/bd9b1ed8-d252-4847-8aa2-7a3ab3b8760f"  width="850" height="1000"></a>
+  <a><img src="https://github.com/zhulinyv/NJS/assets/66541860/bd9b1ed8-d252-4847-8aa2-7a3ab3b8760f"></a>
   </p></pre>
 </details>
 

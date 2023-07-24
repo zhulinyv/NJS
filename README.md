@@ -355,3 +355,7 @@ poetry install
 ## 👥 鸣谢: 
 
 **感谢 [NoneBot](https://github.com/nonebot/nonebot2) 中的诸多贡献者。**
+
+**感谢 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) 中的诸多贡献者。**
+
+**感谢 [unidbg-fetch-qsign](https://github.com/fuqiuluo/unidbg-fetch-qsign) 中的诸多贡献者。**

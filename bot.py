@@ -28,6 +28,7 @@ nonebot.load_builtin_plugins("echo")
 nonebot.load_plugin("nonebot_plugin_apscheduler")
 nonebot.load_plugin("nonebot_plugin_htmlrender")
 nonebot.load_plugin("nonebot_plugin_imageutils")
+nonebot.load_plugin("nonebot_plugin_txt2img")
 nonebot.load_from_toml("pyproject.toml")
 nonebot.load_plugin("LittlePaimon")
 # Modify some config / config depends on loaded configs

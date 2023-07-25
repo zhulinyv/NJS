@@ -49,8 +49,8 @@ ban = on_command('禁言',aliases={"口球"}, permission=SUPERUSER|GROUP_OWNER|G
 unban = on_command('解禁', permission=SUPERUSER|GROUP_OWNER|GROUP_ADMIN, priority=10, block=True)
 kick = on_command('移出', permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
 kick_ban = on_command('移出并拉黑', permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
-shut = on_command('全员禁言', aliases={'开启全员禁言'}, priority=50, permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
-not_shut = on_command('解除全员禁言', aliases={'关闭全员禁言'}, priority=50, permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
+shut = on_command('全员禁言', aliases={'开启全员禁言'}, permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
+not_shut = on_command('解除全员禁言', aliases={'关闭全员禁言'}, permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
 
 
 

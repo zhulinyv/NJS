@@ -23,6 +23,8 @@ __plugin_meta__ = PluginMetadata(
 解禁 + @somebody: 解除某人禁言，需要 BOT 为管理员
 移出 + @somebody: 移出某人，需要 BOT 为管理员
 移出并拉黑 + @somebody: 移出并拉黑，需要 BOT 为管理员
+(开启)全员禁言: 开启全员禁言
+解除/关闭全员禁言: 关闭全员禁言
 """
     ),
     extra={
@@ -47,6 +49,8 @@ ban = on_command('禁言',aliases={"口球"}, permission=SUPERUSER|GROUP_OWNER|G
 unban = on_command('解禁', permission=SUPERUSER|GROUP_OWNER|GROUP_ADMIN, priority=10, block=True)
 kick = on_command('移出', permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
 kick_ban = on_command('移出并拉黑', permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
+shut = on_command('全员禁言', aliases={'开启全员禁言'}, priority=50, permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
+not_shut = on_command('解除全员禁言', aliases={'关闭全员禁言'}, priority=50, permission=SUPERUSER|GROUP_ADMIN|GROUP_OWNER, priority=10, block=True)
 
 
 
@@ -145,6 +149,22 @@ async def _(bot: Bot, event: GroupMessageEvent):
             await kick.send(f'已移出并拉黑群员{qid}')
         except ActionFailed:
             await kick_ban.send('权限不足捏', at_sender=True)
+
+@shut.handle()
+async def the_world(bot: Bot, event: GroupMessageEvent):
+    try:
+        await bot.set_group_whole_ban(group_id=event.group_id, enable=True)
+        await bot.send_msg(message="已开启全员禁言~", at_sender=True)
+    except:
+        await bot.send_msg(message="权限不足捏~", at_sender=True)
+
+@not_shut.handle()
+async def time_flow(bot: Bot, event: GroupMessageEvent):
+    try:
+        await bot.set_group_whole_ban(group_id=event.group_id, enable=False)
+        await bot.send_msg(message="已关闭全员禁言~", at_sender=True)
+    except:
+        await bot.send_msg(message="权限不足捏~", at_sender=True)
 
 
 

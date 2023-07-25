@@ -332,7 +332,7 @@ if record_yinpa_file.exists() and os.path.getmtime(record_yinpa_file) > Zero_tod
 else:
     record_yinpa = {}
 
-yinpa = on_command("透", permission=GROUP, priority = 10, block = True)
+yinpa = on_command("透", permission=GROUP, priority = 90, block = True)
 
 @yinpa.handle()
 async def _(bot:Bot, event: GroupMessageEvent):

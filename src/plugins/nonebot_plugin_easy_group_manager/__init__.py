@@ -154,17 +154,17 @@ async def _(bot: Bot, event: GroupMessageEvent):
 async def the_world(bot: Bot, event: GroupMessageEvent):
     try:
         await bot.set_group_whole_ban(group_id=event.group_id, enable=True)
-        await bot.send_msg(message="已开启全员禁言~", at_sender=True)
+        await shut.send("已开启全员禁言~", at_sender=True)
     except:
-        await bot.send_msg(message="权限不足捏~", at_sender=True)
+        await shut.send("权限不足捏~", at_sender=True)
 
 @not_shut.handle()
 async def time_flow(bot: Bot, event: GroupMessageEvent):
     try:
         await bot.set_group_whole_ban(group_id=event.group_id, enable=False)
-        await bot.send_msg(message="已关闭全员禁言~", at_sender=True)
+        await shut.send("已关闭全员禁言~", at_sender=True)
     except:
-        await bot.send_msg(message="权限不足捏~", at_sender=True)
+        await shut.send("权限不足捏~", at_sender=True)
 
 
 

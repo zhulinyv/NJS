@@ -1,18 +1,17 @@
 import re
 import httpx
-import nonebot
 import random
-from nonebot import on_command
+import nonebot
 from nonebot.matcher import Matcher
-from nonebot.params import CommandArg
 from nonebot.permission import SUPERUSER
+from nonebot import on_command, on_endswith
+from nonebot.adapters.onebot.v11 import MessageSegment, GroupMessageEvent
 from nonebot.adapters.onebot.v11.permission import GROUP_OWNER, GROUP_ADMIN
-from nonebot.adapters.onebot.v11 import MessageSegment, GroupMessageEvent, Message
 
 from .utils import *
 
 
-openstats = on_command("文案", permission=SUPERUSER | GROUP_ADMIN | GROUP_OWNER,
+openstats = on_endswith("文案", permission=SUPERUSER | GROUP_ADMIN | GROUP_OWNER,
                        priority=10, block=True)
 
 dog_matcher = on_command("舔狗日记", aliases={"舔狗嘤嘤嘤"},
@@ -149,8 +148,8 @@ async def love(event: GroupMessageEvent, matcher: Matcher):  # 定义异步函�
             at_sender=True, block=True)
 
 @openstats.handle()
-async def _(event: GroupMessageEvent, msg: Message = CommandArg()):
-    command = msg.extract_plain_text().strip()
+async def _(event: GroupMessageEvent):
+    command = event.message.extract_plain_text().replace("文案", "")
     gid = str(event.group_id)  # 群号
     if "开启" == command:
         if gid in groupdata:

@@ -3,6 +3,7 @@
 Revision ID: 02bb36c59899
 Revises: 
 Create Date: 2023-02-01 16:13:45.941344
+Edit Date: 2023年7月26日 19点20分
 
 """
 import sqlalchemy as sa
@@ -39,7 +40,9 @@ def set_default_value():
         ShindanRecord(
             shindan_id="162207", command="今天是什么少女", title="你的二次元少女化形象", mode="image"
         ),
-        ShindanRecord(shindan_id="917962", command="人设生成", title="人设生成器", mode="image"),
+        ShindanRecord(
+            shindan_id="917962", command="人设生成", title="人设生成器", mode="image"
+        ),
         ShindanRecord(
             shindan_id="790697", command="中二称号", title="奇妙的中二称号生成器", mode="image"
         ),
@@ -47,13 +50,10 @@ def set_default_value():
             shindan_id="587874", command="异世界转生", title="異世界轉生—∩開始的種族∩——", mode="image"
         ),
         ShindanRecord(
-            shindan_id="940824",
-            command="魔法人生",
-            title="魔法人生：我在霍格沃兹读书时发生的两三事",
-            mode="image",
+            shindan_id="940824", command="魔法人生", title="魔法人生：我在霍格沃兹读书时发生的两三事", mode="image",
         ),
         ShindanRecord(
-            shindan_id="1075116", command="抽老婆", title="あなたの二次元での嫁ヒロイン", mode="text"
+            shindan_id="1075116", command="二次元抽老婆", title="あなたの二次元での嫁ヒロイン", mode="text"
         ),
         ShindanRecord(
             shindan_id="400813", command="抽舰娘", title="【艦これ】あ なたの嫁になる艦娘は？", mode="image"
@@ -67,6 +67,48 @@ def set_default_value():
         ShindanRecord(
             shindan_id="360578", command="卖萌", title="顔文字作るよ(  ﾟдﾟ )", mode="text"
         ),
+        ShindanRecord(
+            shindan_id="828741", command="你会是什么样的魔法少女", title="你会是什么样的魔法少女呢？", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="1135563", command="前世生活", title="あなたの前世の人生！", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="1131405", command="二次元转生", title="もしあなたが二次元の高校生キャラだったら", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="1059228", command="马娘", title="如果你是一隻馬娘", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="394047", command="重口PLAY测试", title="重口PLAY测试（无R18G内容只到R18）", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="1031149", command="奇怪玩法", title="每日的梗之類的(全R18)", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="942789", command="暴富方法", title="我是如何一夜暴富走上人生巅峰的", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="1059194", command="角色卡生成", title="很酷的角色卡生成器", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="833754", command="最大的遗憾", title="你一生最大的遗憾", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="1045672", command="我的原神人设", title="【原神】穿越到提瓦特大陆中的你——☆", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="1120186", command="我是什么虚拟歌姬", title="あなたを『有名なVOCALOIDキャラクター＋α』に例えると", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="1099346", command="宝可梦人设", title="あなたがポケモンになった時の見た目や性能【ドット絵オリポケイラスト付き】", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="659188", command="我的女子力", title="あなたの《女子力》検定", mode="image"
+        ),
+        ShindanRecord(
+            shindan_id="516459", command="动漫抽老婆", title="Your Anime Valentine", mode="image"
+        )
     ]
     with Session(op.get_bind()) as session:
         for record in default_shindan_records:

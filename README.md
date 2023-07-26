@@ -359,3 +359,6 @@ poetry install
 **感谢 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) 中的诸多贡献者。**
 
 **感谢 [unidbg-fetch-qsign](https://github.com/fuqiuluo/unidbg-fetch-qsign) 中的诸多贡献者。**
+
+<hr>
+<img width="300px" src="https://count.getloli.com/get/@zhulinyv?theme=rule34"></img>

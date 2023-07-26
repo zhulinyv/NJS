@@ -26,27 +26,27 @@ def write_group_data() -> None:
 try:
     dog_cd = nonebot.get_driver().config.dog_cd       # 从配置文件中读取cd_time
 except:
-    dog_cd = 20      		# cd默认值
+    dog_cd = 1      		# cd默认值
 
 try:
     laugh_cd = nonebot.get_driver().config.laugh_cd       # 从配置文件中读取cd_time
 except:
-    laugh_cd = 20      		# cd默认值
+    laugh_cd = 1      		# cd默认值
 
 try:
     hitokoto_cd = nonebot.get_driver().config.hitokoto_cd       # 从配置文件中读取cd_time
 except:
-    hitokoto_cd = 20      		# cd默认值
+    hitokoto_cd = 1      		# cd默认值
 
 try:
     wenan_cd = nonebot.get_driver().config.wenan_cd       # 从配置文件中读取cd_time
 except:
-    wenan_cd = 20      		# cd默认值
+    wenan_cd = 1      		# cd默认值
 
 try:
     love_cd = nonebot.get_driver().config.love_cd
 except:
-    love_cd = 20
+    love_cd = 1
 '''
 try:
     music_cd = nonebot.get_driver().config.music_cd       # 从配置文件中读取cd_time

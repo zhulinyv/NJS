@@ -1,13 +1,18 @@
 import httpx
 from nonebot import logger, on_command
-from nonebot.adapters import Message
 from nonebot.matcher import Matcher
 from nonebot.params import CommandArg
+from nonebot.adapters.onebot.v11 import Message, GroupMessageEvent
+
+from ..nonebot_plugin_dog.utils import *
+
 
 hitokoto_matcher = on_command("一言", aliases={"一句"}, priority=60, block=True)
 
 @hitokoto_matcher.handle()
-async def hitokoto(matcher: Matcher, args: Message = CommandArg()):
+async def hitokoto(event: GroupMessageEvent, matcher: Matcher, args: Message = CommandArg()):
+    if not (await check_group_allow(str(event.group_id))):
+        await hitokoto_matcher.finish(notAllow, at_sender=True)
     if args:
         return
     async with httpx.AsyncClient() as client:

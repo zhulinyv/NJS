@@ -22,7 +22,7 @@ njs = on_command("njs", aliases={"NJS"}, priority=1, block=True)
 async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
     number = msg.extract_plain_text().strip()
     name_list = []
-    with open("./data/njs_help_new/help.json", "r", encoding="utf-8") as f:
+    with open("./data/njs_help/help.json", "r", encoding="utf-8") as f:
         data = json.load(f)
     for plugin_info in data["插件列表"]:
         name_list.append(plugin_info["插件名"])

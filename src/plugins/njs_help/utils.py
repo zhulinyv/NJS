@@ -19,9 +19,9 @@ except Exception:
     NICKNAME: str = "脑积水"
 
 
-if not os.path.exists("./data/njs_help_new/"):
+if not os.path.exists("./data/njs_help/"):
     # 不存在就创建文件
-    os.makedirs("./data/njs_help_new/")
+    os.makedirs("./data/njs_help/")
     help_data = {
         "帮助说明":{
             "插件名": "插件的名字, 可以随便起",
@@ -45,7 +45,7 @@ if not os.path.exists("./data/njs_help_new/"):
             }
         ]
     }
-    with open("./data/njs_help_new/help.json", "w", encoding="utf-8") as f:
+    with open("./data/njs_help/help.json", "w", encoding="utf-8") as f:
         json.dump(help_data, f, indent=4, ensure_ascii=False)
 
 

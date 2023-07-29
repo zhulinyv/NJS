@@ -25,7 +25,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_setu4/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_setu4/help.md",
             "BBcode": ""
         },
         {
@@ -34,7 +34,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_russian_ban/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_russian_ban/help.md",
             "BBcode": ""
         },
         {
@@ -61,7 +61,7 @@
             "显示颜色": "红色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_aidraw/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_aidraw/help.md",
             "BBcode": ""
         },
         {
@@ -79,7 +79,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_groupmate_waifu/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_groupmate_waifu/help.md",
             "BBcode": ""
         },
         {
@@ -97,7 +97,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_bottle/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_bottle/help.md",
             "BBcode": ""
         },
         {
@@ -132,7 +132,7 @@
             "导包名": "nonebot_plugin_shindan",
             "显示颜色": "绿色",
             "帮助文字": "发送 “占卜指令 名字” 即可，如：人设生成 小Q\n发送 “/占卜列表” 可以查看上述列表；\n超级用户 可以发送 “/添加占卜 id 指令”、“/删除占卜 id” 增删占卜列表，可以发送 “/设置占卜 id image/text”设置输出形式",
-            "帮助图片": "./data/njs_help_new/nonebot_plugin_shindan/help.jpg",
+            "帮助图片": "./data/njs_help/nonebot_plugin_shindan/help.jpg",
             "帮助文档": "",
             "BBcode": ""
         },
@@ -177,7 +177,7 @@
             "导包名": "LittlePaimon",
             "显示颜色": "绿色",
             "帮助文字": "",
-            "帮助图片": "./data/njs_help_new/LittlePaimon/help.png",
+            "帮助图片": "./data/njs_help/LittlePaimon/help.png",
             "帮助文档": "",
             "BBcode": ""
         },
@@ -204,7 +204,7 @@
             "导包名": "homo_mathematician",
             "显示颜色": "绿色",
             "帮助文字": "命令头: {lag, 找规律}  / {homonumber, 臭数字}  eg: 找规律 1 2 3 4 5 6 7 114514 1919810  / homonumber 2749903559",
-            "帮助图片": "./data/njs_help_new/homo_mathematician/help.jpg",
+            "帮助图片": "./data/njs_help/homo_mathematician/help.jpg",
             "帮助文档": "",
             "BBcode": ""
         },
@@ -223,7 +223,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_arktools/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_arktools/help.md",
             "BBcode": ""
         },
         {
@@ -232,7 +232,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_bawiki/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_bawiki/help.md",
             "BBcode": ""
         },
         {
@@ -322,7 +322,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_manga_translator/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_manga_translator/help.md",
             "BBcode": ""
         },
         {
@@ -412,7 +412,7 @@
             "显示颜色": "蓝色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_gamedraw/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_gamedraw/help.md",
             "BBcode": ""
         },
         {
@@ -421,7 +421,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_word_bank2/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_word_bank2/help.md",
             "BBcode": ""
         },
         {
@@ -439,7 +439,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_giyf/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_giyf/help.md",
             "BBcode": ""
         },
         {
@@ -448,7 +448,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_blacklist/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_blacklist/help.md",
             "BBcode": ""
         },
         {
@@ -457,7 +457,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_manager/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_manager/help.md",
             "BBcode": ""
         },
         {
@@ -466,7 +466,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_oddtext/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_oddtext/help.md",
             "BBcode": ""
         },
         {
@@ -511,7 +511,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_bfchat/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_bfchat/help.md",
             "BBcode": ""
         },
         {
@@ -519,7 +519,7 @@
             "导包名": "hikari_bot",
             "显示颜色": "绿色",
             "帮助文字": "",
-            "帮助图片": "./data/njs_help_new/hikari_bot/help.jpg",
+            "帮助图片": "./data/njs_help/hikari_bot/help.jpg",
             "帮助文档": "",
             "BBcode": ""
         },
@@ -547,7 +547,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_l4d2_server/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_l4d2_server/help.md",
             "BBcode": ""
         },
         {
@@ -583,7 +583,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_note/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_note/help.md",
             "BBcode": ""
         },
         {
@@ -592,7 +592,7 @@
             "显示颜色": "蓝色",
             "帮助文字": "开始对话:\nchat1 + 任意内容",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_chatgpt_plus/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_chatgpt_plus/help.md",
             "BBcode": ""
         },
         {
@@ -601,7 +601,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_alias/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_alias/help.md",
             "BBcode": ""
         },
         {
@@ -610,7 +610,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_summon/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_summon/help.md",
             "BBcode": ""
         },
         {
@@ -619,7 +619,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_abstain_diary/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_abstain_diary/help.md",
             "BBcode": ""
         },
         {
@@ -628,7 +628,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_apex_api_query/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_apex_api_query/help.md",
             "BBcode": ""
         },
         {
@@ -637,7 +637,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_gpt3/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_gpt3/help.md",
             "BBcode": ""
         },
         {
@@ -646,7 +646,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_antirecall/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_antirecall/help.md",
             "BBcode": ""
         },
         {
@@ -673,7 +673,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_ping/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_ping/help.md",
             "BBcode": ""
         },
         {
@@ -681,7 +681,7 @@
             "导包名": "nonebot_plugin_memes",
             "显示颜色": "绿色",
             "帮助文字": "触发方式：“关键词 + 图片/文字”\n发送 “表情详情 + 关键词” 查看表情参数和预览\n目前支持的表情列表：",
-            "帮助图片": "./data/njs_help_new/nonebot_plugin_memes/help.jpg",
+            "帮助图片": "./data/njs_help/nonebot_plugin_memes/help.jpg",
             "帮助文档": "",
             "BBcode": ""
         },
@@ -700,7 +700,7 @@
             "显示颜色": "蓝色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_stable_diffusion_diao/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_stable_diffusion_diao/help.md",
             "BBcode": ""
         },
         {
@@ -772,7 +772,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_leetcode2/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_leetcode2/help.md",
             "BBcode": ""
         },
         {
@@ -790,7 +790,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_wantwords/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_wantwords/help.md",
             "BBcode": ""
         },
         {
@@ -799,7 +799,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_easy_group_manager/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_easy_group_manager/help.md",
             "BBcode": ""
         },
         {
@@ -862,7 +862,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_matcher_block/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_matcher_block/help.md",
             "BBcode": ""
         },
         {
@@ -880,7 +880,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_twitter/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_twitter/help.md",
             "BBcode": ""
         },
         {
@@ -889,7 +889,7 @@
             "显示颜色": "蓝色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "./data/njs_help_new/nonebot_plugin_al/help.md",
+            "帮助文档": "./data/njs_help/nonebot_plugin_al/help.md",
             "BBcode": ""
         },
         {

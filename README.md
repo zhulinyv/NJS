@@ -318,7 +318,7 @@ poetry install
 
 **详细帮助查看:**
 
-2、脑积水有一个自己的帮助插件, 如果需要对帮助进行修改, 请参照 `.\NJS\data\njs_help_new\help.json` 文件进行修改。
+2、脑积水有一个自己的帮助插件, 如果需要对帮助进行修改, 请参照 `.\NJS\data\njs_help\help.json` 文件进行修改。
 
 3、《脑积水食用手册》(已过时): [https://zhulinyv.github.io/NJS](https://zhulinyv.github.io/NJS)
 

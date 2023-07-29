@@ -10,7 +10,7 @@ async def draw_help():
     path = Path(__file__).parent
 
     # 读取数据
-    with open("./data/njs_help_new/help.json", "r", encoding="utf-8") as f:
+    with open("./data/njs_help/help.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
     # 总插件数

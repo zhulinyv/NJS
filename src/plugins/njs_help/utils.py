@@ -58,6 +58,7 @@ head_msg = """以下仅为功能名称, 并非指令！
 
 foot_msg = """文档地址: 《脑积水使用手册》
 优先: zhulinyv.github.io/NJS
+仓库: github.com/zhulinyv/NJS/wiki
 备用: cnblogs.com/xytpz/p/NJS.html"""
 
 

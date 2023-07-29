@@ -7,7 +7,7 @@ from ..config import config, nickname
 require("nonebot_plugin_htmlrender")
 from nonebot_plugin_htmlrender import md_to_pic
 
-aidraw_help = on_command("绘画帮助", aliases={"帮助", "help"}, priority=1, block=True)
+aidraw_help = on_command("绘画帮助", aliases={"画图帮助", "draw help"}, priority=1, block=True)
 
 
 async def get_url():

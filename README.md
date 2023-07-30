@@ -316,21 +316,23 @@ poetry install
 
 好多好多好多功能, ~~我自己都还没完全用过~~, 所以你可能需要一段时间来适应。
 
-**详细帮助查看:**
+这是脑积水自己的帮助插件, 如果需要对帮助进行修改, 请参照 `.\NJS\data\njs_help\help.json` 文件进行修改。
 
-2、脑积水有一个自己的帮助插件, 如果需要对帮助进行修改, 请参照 `.\NJS\data\njs_help\help.json` 文件进行修改。
+2、《脑积水食用手册》: [https://zhulinyv.github.io/NJS](https://zhulinyv.github.io/NJS)
 
-3、《脑积水食用手册》(已过时): [https://zhulinyv.github.io/NJS](https://zhulinyv.github.io/NJS)
+3、仓库wiki: [https://github.com/zhulinyv/NJS/wiki](https://github.com/zhulinyv/NJS/wiki)
 
-4、备用地址(已过时): [https://www.cnblogs.com/xytpz/p/NJS.html](https://www.cnblogs.com/xytpz/p/NJS.html)
+4、备用地址: [https://www.cnblogs.com/xytpz/p/NJS.html](https://www.cnblogs.com/xytpz/p/NJS.html)
 
-5、默认 WebUI 地址: [http://127.0.0.1:13579/LittlePaimon/login](http://127.0.0.1:13579/LittlePaimon/login)
+<hr>
+
+i、默认 WebUI 地址: [http://127.0.0.1:13579/LittlePaimon/login](http://127.0.0.1:13579/LittlePaimon/login)
 
 说明: 可以通过 WebUI 对脑积水进行较为方便的图形化管理。基于 [小派蒙](https://github.com/CMHopeSunshine/LittlePaimon) WebUI 样式修改。
 
-6、更新: 艾特脑积水说更新即可在线更新, 更新成功后, 艾特脑积水说重启来应用新的内容。
+ii、更新: 艾特脑积水说更新即可在线更新, 更新成功后, 艾特脑积水说重启来应用新的内容。
 
-7、如有配置、部署或使用中的问题或建议, 请通过本仓库 [Issues](https://github.com/zhulinyv/NJS/issues)、QQ频道: [我的中心花园-开发交流](https://pd.qq.com/s/8bkfowg3c) 或 [博客首页](https://zhulinyv.github.io/) 联系方式联系我。
+iii、如有配置、部署或使用中的问题或建议, 请通过本仓库 [Issues](https://github.com/zhulinyv/NJS/issues)、QQ频道: [我的中心花园-开发交流](https://pd.qq.com/s/8bkfowg3c) 或 [博客首页](https://zhulinyv.github.io/) 联系方式联系我。
 
 #### 进阶使用
 

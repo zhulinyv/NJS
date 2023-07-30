@@ -529,7 +529,7 @@
             "显示颜色": "绿色",
             "帮助文字": "",
             "帮助图片": "",
-            "帮助文档": "",
+            "帮助文档": "./data/njs_help/nonebot_plugin_wordcloud/help.md",
             "BBcode": ""
         },
         {

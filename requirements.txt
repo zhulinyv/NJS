@@ -7,7 +7,7 @@ anyio==3.6.2
 apscheduler==3.9.1.post1
 arrow==1.2.3
 asyncio==3.4.3
-attrs==22.1.0
+attrs==22.2.0
 bbcode==1.1.0
 bs4==0.0.1
 cachetools==5.2.0

@@ -304,9 +304,6 @@ async def wb_search(
                     )
                     forward_msg: List[Dict] = []
                     num = 0
-            await bot.call_api(
-                        "send_group_forward_msg", group_id=event.group_id, messages=forward_msg
-                    )
     else:
         for entry in entrys:
             msg_temp = "问: " + Message(entry.key) + " 答:"

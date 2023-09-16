@@ -33,7 +33,7 @@ except:
 try:
     api_num: int = nonebot.get_driver().config.api_num               # 这个值为1时, 使用的是小爱同学模式1
 except:
-    api_num: int = 1
+    api_num: int = 2
 try:
     api_cd_time: int = nonebot.get_driver().config.api_cd_time       # api 冷却时间
 except:

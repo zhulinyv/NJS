@@ -5,17 +5,13 @@ from pathlib import Path
 from PIL import Image, ImageFont, ImageDraw
 
 
-async def draw_help():
+async def draw_help(data):
     # 当前路径
     path = Path(__file__).parent
 
-    # 读取数据
-    with open("./data/njs_help/help.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
-
     # 总插件数
     number = 0
-    for i in data["插件列表"]:
+    for i in data:
         number += 1
     
     # 总列数 (20 个插件为 1 列)
@@ -123,8 +119,8 @@ async def draw_help():
                 x = 360 * g + 60
                 y = 600 * i + 30
                 for k in range(20):
-                    text = data["插件列表"][num - 1]["插件名"]
-                    color = data["插件列表"][num - 1]["显示颜色"]
+                    text = data[num - 1]["插件名"]
+                    color = data[num - 1]["显示颜色"]
                     if color == "绿色":
                         draw.text(xy=(x, y), text=f"{num}. {text}", fill=(0, 176, 80), font=plugin_font)
                     elif color == "蓝色":
@@ -140,4 +136,4 @@ async def draw_help():
                         break
 
     # 保存图片
-    background.save(path / "help_new.png")
+    background.save(path / "help.png")

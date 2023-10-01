@@ -12,6 +12,9 @@
     <a href="https://pd.qq.com/s/8bkfowg3c"><img src="https://img.shields.io/badge/QQ频道交流-我的中心花园-blue?style=flat-square" alt="QQ guild"></a>
 </p>
 
+## 🚑 缓更
+
+本人高三啦，目前没有太多时间继续更新维护，不过其中大部分功能是没有问题的，而且各插件独立，方便替换。
 
 ## 💬 前言
 

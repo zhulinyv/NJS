@@ -5,7 +5,7 @@ import string
 from collections import defaultdict
 from time import time
 
-# from littlepaimon_utils import aiorequests
+from littlepaimon_utils import aiorequests
 from nonebot import logger
 
 from .db_util import get_cookie_cache, update_cookie_cache, delete_cookie_cache

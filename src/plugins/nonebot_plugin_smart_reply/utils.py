@@ -2,24 +2,12 @@
 import re
 import base64
 import random
-import openai
 import nonebot
+import ujson as json
 from re import findall
 from pathlib import Path
 from loguru import logger
 from httpx import AsyncClient
-from collections import defaultdict
-from typing import Any, Dict, Literal,Optional,Tuple,Union
-from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent
-
-try:
-    import ujson as json
-except:
-    import json
-
-from .data import setting
-from .config import config
-
 
 
 try:
@@ -35,21 +23,9 @@ try:
 except:
     api_num: int = 2
 try:
-    api_cd_time: int = nonebot.get_driver().config.api_cd_time       # api 冷却时间
-except:
-    api_cd_time: int = 120
-try:
     ban_cd_time: int = nonebot.get_driver().config.ban_cd_time       # ban 冷却时间
 except:
     ban_cd_time: int = 21600
-try:
-    api_key: str = nonebot.get_driver().config.openai_api_key        # Openai api key
-except:
-    api_key: str = "寄"
-try:
-    max_tokens: int = nonebot.get_driver().config.openai_max_tokens  # 返回的最大文本
-except:
-    max_tokens: int = 2000
 try:
     Bot_NICKNAME: str = nonebot.get_driver().config.bot_nickname     # bot的nickname,可以换成你自己的
 except:
@@ -169,145 +145,6 @@ async def xiaoice_reply(url):
         else:
             return "寄"
 
-
-
-""" ChatGPT 部分"""
-openai_cd_dir = {} # 空字典, 用来存放冷却时间
-
-# 判断传入的字符串中是否有url存在(我他娘的就不信这样还能输出广告?)
-def have_url(s: str) -> bool:
-    index = s.find('.')     # 找到.的下标
-    if index == -1:         # 如果没有.则返回False
-        return False
-    flag1 = (u'\u0041' <= s[index-1] <= u'\u005a') or (u'\u0061' <= s[index-1] <= u'\u007a')        # 判断.前面的字符是否为字母
-    flag2 = (u'\u0041' <= s[index+1] <= u'\u005a') or (u'\u0061' <= s[index+1] <= u'\u007a')        # 判断.后面的字符是否为字母
-    if flag1 and flag2:     # 如果.前后都是字母则返回True
-        return True
-    else:               # 如果.前后不是字母则返回False
-        return False
-
-def get_openai_reply(prompt:str)->str:
-    openai.api_key = api_key
-    response = openai.Completion.create(
-        model="text-davinci-003",
-        prompt=prompt,
-        temperature=0.5,
-        max_tokens=max_tokens,
-        top_p=1.0,
-        frequency_penalty=0.0,
-        presence_penalty=0.0
-    )
-    res = response.choices[0].text
-    # 移除所有开头的\n
-    while res.startswith("\n"):
-        res = res[1:]
-    return res
-
-class Session(dict):
-    __file_path: Path = config.chatgpt_data / "sessions.json"
-
-    @property
-    def file_path(self) -> Path:
-        return self.__class__.__file_path
-
-    def __init__(self, scope: Literal["private", "public"]) -> None:
-        super().__init__()
-        self.is_private = scope == "private"
-        if self.__file_path.is_file():
-            self.update(json.loads(self.__file_path.read_text("utf-8")))
-
-    def __getitem__(self, event: MessageEvent) -> Dict[str, Any]:
-        return super().__getitem__(self.id(event))
-
-    def __setitem__(
-        self,
-        event: MessageEvent,
-        value: Union[Tuple[Optional[str], Optional[str]], Dict[str, Any]],
-    ) -> None:
-        if isinstance(value, tuple):
-            conversation_id, parent_id = value
-        else:
-            conversation_id = value["conversation_id"]
-            parent_id = value["parent_id"]
-        if self.__getitem__(event):
-            if isinstance(value, tuple):
-                self.__getitem__(event)["conversation_id"].append(conversation_id)
-                self.__getitem__(event)["parent_id"].append(parent_id)
-                if self.count(event) > config.chatgpt_max_rollback:
-                    self[event]["conversation_id"] = self[event]["conversation_id"][-config.chatgpt_max_rollback:]
-                    self[event]["parent_id"] = self[event]["parent_id"][-config.chatgpt_max_rollback:]
-        else:
-            super().__setitem__(
-                self.id(event),
-                {
-                    # "conversation_id": deque(
-                    #     [conversation_id], maxlen=config.chatgpt_max_rollback
-                    # ),
-                    # "parent_id": deque([parent_id], maxlen=config.chatgpt_max_rollback),
-                    "conversation_id": [conversation_id],
-                    "parent_id": [parent_id],
-                },
-            )
-
-    def __delitem__(self, event: MessageEvent) -> None:
-        return super().__delitem__(self.id(event))
-
-    def __missing__(self, _) -> Dict[str, Any]:
-        return {}
-
-    def id(self, event: MessageEvent) -> str:
-        if self.is_private:
-            return event.get_session_id()
-        return str(
-            event.group_id if isinstance(event, GroupMessageEvent) else event.user_id
-        )
-
-    def save(self, name: str, event: MessageEvent) -> None:
-        sid = self.id(event)
-        if setting.session.get(sid) is None:
-            setting.session[sid] = {}
-        setting.session[sid][name] = {
-            "conversation_id": self[event]["conversation_id"][-1],
-            "parent_id": self[event]["parent_id"][-1],
-        }
-        setting.save()
-        self.save_sessions()
-
-    def save_sessions(self) -> None:
-        self.file_path.write_text(json.dumps(self), encoding="utf-8")
-
-    def find(self, event: MessageEvent) -> Dict[str, Any]:
-        sid = self.id(event)
-        return setting.session[sid]
-
-    def count(self, event: MessageEvent):
-        return len(self[event]["conversation_id"])
-
-    def pop(self, event: MessageEvent):
-        conversation_id = self[event]["conversation_id"].pop()
-        parent_id = self[event]["parent_id"].pop()
-        return conversation_id, parent_id
-
-lockers = defaultdict(bool)
-
-def check_purview(event: MessageEvent) -> bool:
-    return not (
-        isinstance(event, GroupMessageEvent)
-        and config.chatgpt_scope == "public"
-        and event.sender.role == "member"
-    )
-
-def convert_seconds(seconds):
-    hours = seconds // 3600
-    minutes = (seconds % 3600) // 60
-    seconds = seconds % 60
-    
-    if hours > 0:
-        return f"{hours}小时{minutes}分钟{seconds}秒"
-    elif minutes > 0:
-        return f"{minutes}分钟{seconds}秒"
-    else:
-        return f"{seconds}秒"
 
 
 # 获取涩图(P站)

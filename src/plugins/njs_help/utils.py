@@ -6,11 +6,10 @@ import ujson as json
 from PIL import Image
 from pathlib import Path
 from nonebot import require
+from pil_utils import text2image
 
 require("nonebot_plugin_htmlrender")
 from nonebot_plugin_htmlrender import md_to_pic
-require("nonebot_plugin_imageutils")
-from nonebot_plugin_imageutils import text2image
 
 
 try:
@@ -30,7 +29,7 @@ if not os.path.exists("./data/njs_help/"):
             "帮助文字": "直接填写, 换行等请使用转义字符 \n 等, 转义字符参考: https://zhuanlan.zhihu.com/p/598923346",
             "帮助图片": "填写相对于 bot.py 的*相对路径*, 开头可省略 ./ , 例如: ./data/.../*.png --> data/.../*.png , 不可以填绝对路径",
             "帮助文档": "填写相对于 bot.py 的*相对路径*, 支持大部分 Markdown 语法, 其它要求请见: https://github.com/kexue-z/nonebot-plugin-htmlrender/blob/master/docs/example.md",
-            "BBcode": "格式请见: https://github.com/noneplugin/nonebot-plugin-imageutils#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B",
+            "BBcode": "格式请见: https://github.com/MeetWq/pil-utils#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B",
             "extra:": "包含多个插件时使用, 格式同上",
             "其它说明": "不需要的插件帮助请直接删除, 额外添加的插件帮助请按照上述内容或仿照其它插件帮助填写, 各种格式的文档没必要都写, 不需要的直接留空即可, 但请不要删除" 
         },

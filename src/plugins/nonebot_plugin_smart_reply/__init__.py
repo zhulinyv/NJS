@@ -21,21 +21,6 @@ from nonebot.adapters.onebot.v11 import (
 )
 # 从 utils 中导入一堆东西
 from .utils import *
-#-------------------ChatGPT-------------------------#
-from .chatgpt import Chatbot
-from .config import config
-from .data import setting
-chat_bot = Chatbot(
-    token=setting.token or config.chatgpt_session_token,
-    model=config.chatgpt_model,
-    account=config.chatgpt_account,
-    password=config.chatgpt_password,
-    api=config.chatgpt_api,
-    proxies=config.chatgpt_proxies,
-    presets=setting.presets,
-    timeout=config.chatgpt_timeout,
-)
-session = Session(config.chatgpt_scope)
 
 logger.info(logo) # 在日志中输出打印logo
 
@@ -192,70 +177,7 @@ async def _(event: MessageEvent):
             logger.info("来自青云客的智能回复: " + message)
             await ai.finish(message=message, at_sender=True)
 
-        else:
-            # 冷却时间
-            qid = event.get_user_id() 
-            try:
-                cd = event.time - openai_cd_dir[qid]
-            except KeyError:
-                cd = api_cd_time + 1
-            if (cd>api_cd_time or event.get_user_id() in nonebot.get_driver().config.superusers):  # 超过cd时间或者是超级用户
-                openai_cd_dir.update({qid: event.time}) # 记录cd
-                if api_num == 3:
-                    played_name = config.chatgpt_default_preset
-                    if not chat_bot.presets.get(played_name):
-                        played_name = ""
-                    cvst = session[event]
-                    try:
-                        if config.chatgpt_notice:
-                            msg = "收到请求，等待响应..."
-                            if not has_title:
-                                msg += f"\n首次请求，人格设定: {played_name if played_name else '无'}"
-                            await ai.send(msg)
-                        msg = await chat_bot(**cvst, played_name=played_name).get_chat_response(msg)
-                        if (msg == "token失效，请重新设置token" and chat_bot.session_token != config.chatgpt_session_token):
-                            chat_bot.session_token = config.chatgpt_session_token
-                            msg = await chat_bot(**cvst, played_name=played_name).get_chat_response(msg)
-                        elif (msg == "会话不存在"):
-                            if config.chatgpt_auto_refresh:
-                                has_title = False
-                                cvst['conversation_id'].append(None)
-                                cvst['parent_id'].append(chat_bot.id)
-                                await ai.send("会话不存在，已自动刷新对话，等待响应...")
-                                msg = await chat_bot(**cvst, played_name=played_name).get_chat_response(msg)
-                            else:
-                                msg += ",请刷新会话"
-                    except Exception as e:
-                        lockers[event.user_id] = False
-                        error = f"{type(e).__name__}: {e}"
-                        logger.opt(exception=e).error(f"ChatGPT request failed: {error}")
-                        await ai.finish(f"请求 ChatGPT 服务器时出现问题，请稍后再试\n错误信息: {error}")
-                    lockers[event.user_id] = False
-                    await ai.finish(msg, at_sender=True)
-
-                elif api_num == 4:
-                    if api_key == "寄":                             
-                        await ai.finish("请先配置openai_api_key")
-                    loop = asyncio.get_event_loop() # 获取事件循环
-                    try:
-                        res = await loop.run_in_executor(None, get_openai_reply, msg) # 开一个不会阻塞asyncio的线程调用get_openai_reply函数
-                    except Exception as e:                                            # 如果出错
-                        await ai.finish(str(e))                                       # 发送错误信息
-                    await ai.finish(MessageSegment.text(res), at_sender=True)          # 发送结果
-            else:
-                await ai.finish(MessageSegment.text(f"{Bot_NICKNAME}冷却中... 剩余时间 {api_cd_time - cd:.0f} 秒"),at_sender=True)
     await ai.finish(Message(result), at_sender=True)
-
-
-
-"""------------------------------ChatGPT刷新会话------------------------------"""
-@refresh.handle()
-async def refresh_conversation(event: MessageEvent) -> None:
-    if not check_purview(event):
-        await refresh.finish("当前为公共会话模式, 仅支持群管理操作", at_sender=True)
-    session[event]['conversation_id'].append(None)
-    session[event]['parent_id'].append(chat_bot.id)
-    await refresh.send("当前会话已刷新", at_sender=True)
 
 
 

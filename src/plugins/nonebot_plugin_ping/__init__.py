@@ -1,11 +1,12 @@
-﻿from nonebot.plugin.on import on_command
-from nonebot.plugin import PluginMetadata
-from nonebot.adapters.onebot.v11 import Message, MessageSegment
-from nonebot.params import CommandArg
-from httpx import AsyncClient
-import nonebot
+﻿import nonebot
 import asyncio
 import platform
+from httpx import AsyncClient
+from ping3 import ping as ping3ping
+from nonebot.params import CommandArg
+from nonebot.plugin.on import on_command
+from nonebot.plugin import PluginMetadata
+from nonebot.adapters.onebot.v11 import Message, MessageSegment
 
 try:
     model: int = nonebot.get_driver().config.ping
@@ -25,7 +26,7 @@ whois + url: 查询一个网址的 whois 信息
     ),
     extra={
         "author": "zhulinyv <zhulinyv2005@outlook.com>",
-        "version": "1.6.6",
+        "version": "1.7.0",
     },
 )
 
@@ -42,6 +43,8 @@ async def _(msg: Message = CommandArg()):
         message = await api_ping(api)
     elif model == 2:
         message = await cmd_ping(url)
+    elif model == 3:
+        message = await lib_ping(url)
     else:
         message = "PING 配置项填写有误, 联系 SUPPERUSER 检查!"
 
@@ -50,17 +53,6 @@ async def _(msg: Message = CommandArg()):
 
 async def api_ping(api):
     async with AsyncClient() as client:
-        # res = (await client.get(api)).json()
-        # try:
-        #     url = (res["host"])
-        #     ip = (res["ip"])
-        #     max = (res["ping_time_max"])
-        #     min = (res["ping_time_min"])
-        #     place = (res["location"])
-        #     res = f"域名: {url}\nIP: {ip}\n最大延迟: {max}\n最小延迟: {min}\n服务器归属地: {place}"
-        #     return res
-        # except Exception:
-        #     return "寄"
         try:
             res = (await client.get(api, timeout=10)).text
             return res
@@ -68,25 +60,36 @@ async def api_ping(api):
             return "寄"
 
 async def cmd_ping(url):
-    # 获取系统信息, Windows 请求默认 4 次, Linux 请求默认不会停止.
-    sys = platform.system()
-    # 由于不同系统参数不同, 这里做一下判断.
-    if sys == "Windows":
-        url = f"ping {url} -n 4"
-    elif sys == "Linux":
-        # Ubuntu 系统是 -c , 其它发行版未测试.
-        url = f"ping {url} -c 4"
+    if ' ' in url:
+        return "请确保链接不附带任何参数!"
     else:
-        # 其它系统未测试.
-        url = f"ping {url}"
-    
-    p = await asyncio.subprocess.create_subprocess_shell(url, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
-    stdout, stderr = await p.communicate()
-    try:
-        result = (stdout or stderr).decode('gb2312')
-    except Exception:
-        result = str(stdout or stderr)
-    result = result.strip()
+        # 获取系统信息, Windows 请求默认 4 次, Linux 请求默认不会停止.
+        sys = platform.system()
+        # 由于不同系统参数不同, 这里做一下判断.
+        if sys == "Windows":
+            url = f"ping {url} -n 4"
+        elif sys == "Linux":
+            # Ubuntu 系统是 -c , 其它发行版未测试.
+            url = f"ping {url} -c 4"
+        else:
+            # 其它系统未测试.
+            url = f"ping {url}"
+        p = await asyncio.subprocess.create_subprocess_shell(url, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
+        stdout, stderr = await p.communicate()
+        try:
+            result = (stdout or stderr).decode('gb2312')
+        except Exception:
+            result = str(stdout or stderr)
+        result = result.strip()
+        return result
+
+async def lib_ping(url):
+    result = ""
+    for i in range(4):
+        second = ping3ping(url)
+        msecond = int(second * 1000)
+        res = f"ping '{url}' ... {msecond}ms\n"
+        result += res
     return result
 
 

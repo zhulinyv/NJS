@@ -83,7 +83,7 @@ on_command(
 )
 
 on_regex(
-    r"^(日群友|透群友|日群主|透群主|日管理|透管理)",
+    r"^(日群友|透|日群主|透群主|日管理|透管理)",
     flags=I,
     priority=15,
     block=True,

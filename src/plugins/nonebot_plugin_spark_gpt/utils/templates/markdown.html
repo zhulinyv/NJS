@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <style type="text/css">
+        {{  css  }}
+    </style>
+    <style>
+        @font-face {
+            font-family: "Custom Font";
+            src: url("{{font_path}}");
+        }
+
+        .markdown-body {
+            font-family: "Custom Font";
+            box-sizing: border-box !important;
+            margin: 0 auto !important;
+            padding: 8px !important;
+            border:solid;
+            border-radius: 8px !important;
+        }
+        .markdown-body table {
+            font-family: "Custom Font";
+            display:inline-table !important;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body {
+                font-family: "Custom Font";
+                padding: 8px !important;
+            }
+        }
+
+        .markdown-body::after {
+            font-family: "Custom Font";
+            content: "SparkGPT V2 0.2";
+            font-size: 10px !important;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+<article class="markdown-body">
+    {{ md }}
+</article>
+</body>
+{{ extra }}

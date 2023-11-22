@@ -2117,6 +2117,58 @@
     },
     "SideIconName": "UI_AvatarIcon_Side_Freminet"
   },
+  "10000086": {
+    "SkillOrder": [
+      10861,
+      10862,
+      10865
+    ],
+    "Skills": {
+      "10861": "Skill_A_Catalyst_MD",
+      "10862": "Skill_S_Wriothesley_01",
+      "10865": "Skill_E_Wriothesley_01"
+    },
+    "SideIconName": "UI_AvatarIcon_Side_Wriothesley"
+  },
+  "10000087": {
+    "SkillOrder": [
+      10871,
+      10872,
+      10875
+    ],
+    "Skills": {
+      "10871": "Skill_A_Catalyst_MD",
+      "10872": "Skill_S_Neuvillette_01",
+      "10875": "Skill_E_Neuvillette_01"
+    },
+    "SideIconName": "UI_AvatarIcon_Side_Neuvillette"
+  },
+  "10000088": {
+    "SkillOrder": [
+      10881,
+      10882,
+      10885
+    ],
+    "Skills": {
+      "10881": "Skill_A_Catalyst_MD",
+      "10882": "Skill_S_Charlotte_01",
+      "10885": "Skill_E_Charlotte_01"
+    },
+    "SideIconName": "UI_AvatarIcon_Side_Charlotte"
+  },
+  "10000089": {
+    "SkillOrder": [
+      10891,
+      10892,
+      10895
+    ],
+    "Skills": {
+      "10891": "Skill_A_01",
+      "10892": "Skill_S_Furina_01",
+      "10895": "Skill_E_Furina_01"
+    },
+    "SideIconName": "UI_AvatarIcon_Side_Furina"
+  },
   "10000005-501": {
     "Element": "None",
     "Consts": [

@@ -2,7 +2,7 @@
 from pathlib import Path
 from typing import Union
 
-from littlepaimon_utils.files import load_json_from_url
+# from littlepaimon_utils.files import load_json_from_url
 from nonebot import get_driver
 from nonebot import on_regex, on_command, logger
 from nonebot.adapters.onebot.v11 import MessageEvent, GroupMessageEvent, PrivateMessageEvent
@@ -33,37 +33,37 @@ if config.paimon_mongodb_url:
     try:
         from .Learning_repeate import main
     except ImportError:
-        logger.warning('脑积水机器学习聊天启用失败，可能是mongodb连接失败或缺少相关库（jieba_fast、pymongo、pypinyin）')
+        logger.warning('本插件仅用作派蒙随机语音, 将在未来简化本插件')
 else:
-    logger.warning('脑积水机器学习启用失败，未配置mongodb连接url，如无需该功能，可忽略')
+    logger.warning('本插件仅用作派蒙随机语音, 将在未来简化本插件')
 
 driver = get_driver()
 
 voice_url = 'https://static.cherishmoon.fun/LittlePaimon/voice/'
 chat_lmt = FreqLimiter2(60)
 
-update_voice = on_command('更新脑积水语音', priority=2)
+# update_voice = on_command('更新脑积水语音', priority=2)
 
 
 def check_group(event: Union[GroupMessageEvent, PrivateMessageEvent]) -> bool:
     return True if isinstance(event, PrivateMessageEvent) else event.group_id in config.paimon_chat_group
 
 
-@update_voice.handle()
-async def update_paimon_voice(event: MessageEvent):
-    try:
-        old_len = len([m for m in matchers[10] if m.plugin_name == 'Paimon_Chat'])
-        path = Path() / 'data' / 'LittlePaimon' / 'voice' / 'voice_list.json'
-        voice_list = await load_json_from_url('https://static.cherishmoon.fun/LittlePaimon/voice/voice_list.json', path, True)
-        matchers[10] = [m for m in matchers[10] if m.plugin_name != 'Paimon_Chat']
-        for key, value in voice_list.items():
-            create_matcher(key, value['pattern'], value['cooldown'], value['pro'], value['files'])
-        new_len = len(voice_list) - old_len
-        await update_voice.send(f'脑积水语音更新成功，本次获取到{len(voice_list)}种语音， 新增{new_len}种语音')
-    except FinishedException:
-        raise
-    except Exception as e:
-        await update_voice.send(f'脑积水语音更新失败：{e}')
+# @update_voice.handle()
+# async def update_paimon_voice(event: MessageEvent):
+#     try:
+#         old_len = len([m for m in matchers[10] if m.plugin_name == 'Paimon_Chat'])
+#         path = Path() / 'data' / 'LittlePaimon' / 'voice' / 'voice_list.json'
+#         voice_list = await load_json_from_url('https://static.cherishmoon.fun/LittlePaimon/voice/voice_list.json', path, True)
+#         matchers[10] = [m for m in matchers[10] if m.plugin_name != 'Paimon_Chat']
+#         for key, value in voice_list.items():
+#             create_matcher(key, value['pattern'], value['cooldown'], value['pro'], value['files'])
+#         new_len = len(voice_list) - old_len
+#         await update_voice.send(f'脑积水语音更新成功，本次获取到{len(voice_list)}种语音， 新增{new_len}种语音')
+#     except FinishedException:
+#         raise
+#     except Exception as e:
+#         await update_voice.send(f'脑积水语音更新失败：{e}')
 
 
 def create_matcher(chat_word: str, pattern: str, cooldown: int, pro: float, responses):
@@ -97,9 +97,9 @@ def create_matcher(chat_word: str, pattern: str, cooldown: int, pro: float, resp
             logger.error('脑积水发送语音失败', e)
 
 
-@driver.on_startup
-async def load_voice():
-    path = Path() / 'data' / 'LittlePaimon' / 'voice' / 'voice_list.json'
-    voice_list = await load_json_from_url('https://static.cherishmoon.fun/LittlePaimon/voice/voice_list.json', path)
-    for k, v in voice_list.items():
-        create_matcher(k, v['pattern'], v['cooldown'], v['pro'], v['files'])
+# @driver.on_startup
+# async def load_voice():
+#     path = Path() / 'data' / 'LittlePaimon' / 'voice' / 'voice_list.json'
+#     voice_list = await load_json_from_url('https://static.cherishmoon.fun/LittlePaimon/voice/voice_list.json', path)
+#     for k, v in voice_list.items():
+#         create_matcher(k, v['pattern'], v['cooldown'], v['pro'], v['files'])

@@ -132,6 +132,7 @@ ujson = "5.5.0"
 urllib3 = "1.26.12"
 win32-setctime = "1.1.0"
 wordcloud = "1.8.2.2"
+ping3 = "^4.0.4"
 
 [tool.nonebot]
 plugins = ["nonebot_plugin_gocqhttp", "nonebot_plugin_guild_patch"]

@@ -6,7 +6,7 @@ from typing import List, Dict, Tuple, Optional
 
 import httpx
 from nonebot import logger
-from nonebot_plugin_imageutils import text2image
+from pil_utils import text2image
 
 from ..core.database.plugin_sqlite import MAACopilotSubsModel
 from ..exceptions import MAAFailedResponseException, MAANoResultException

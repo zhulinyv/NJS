@@ -5,7 +5,7 @@ import string
 from collections import defaultdict
 from time import time
 
-from littlepaimon_utils import aiorequests
+# from littlepaimon_utils import aiorequests
 from nonebot import logger
 
 from .db_util import get_cookie_cache, update_cookie_cache, delete_cookie_cache
@@ -190,23 +190,23 @@ def get_sign_headers(cookie):
     return headers
 
 
-# 检查cookie是否有效，通过查看个人主页来判断
-async def check_cookie(cookie):
-    url = 'https://bbs-api.mihoyo.com/user/wapi/getUserFullInfo?gids=2'
-    headers = {
-        'DS':                get_ds(),
-        'Origin':            'https://webstatic.mihoyo.com',
-        'Cookie':            cookie,
-        'x-rpc-app_version': "2.11.1",
-        'x-rpc-client_type': '5',
-        'Referer':           'https://webstatic.mihoyo.com/'
-    }
-    res = await aiorequests.get(url=url, headers=headers)
-    res = res.json()
-    if res['retcode'] != 0:
-        return False
-    else:
-        return True
+# # 检查cookie是否有效，通过查看个人主页来判断
+# async def check_cookie(cookie):
+#     url = 'https://bbs-api.mihoyo.com/user/wapi/getUserFullInfo?gids=2'
+#     headers = {
+#         'DS':                get_ds(),
+#         'Origin':            'https://webstatic.mihoyo.com',
+#         'Cookie':            cookie,
+#         'x-rpc-app_version': "2.11.1",
+#         'x-rpc-client_type': '5',
+#         'Referer':           'https://webstatic.mihoyo.com/'
+#     }
+#     res = await aiorequests.get(url=url, headers=headers)
+#     res = res.json()
+#     if res['retcode'] != 0:
+#         return False
+#     else:
+#         return True
 
 
 

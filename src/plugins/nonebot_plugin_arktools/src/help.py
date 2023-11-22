@@ -12,7 +12,7 @@ from .utils import __plugin_meta__ as UTILS_META
 from nonebot import on_command
 from nonebot.adapters.onebot.v11 import MessageSegment
 from io import BytesIO
-from nonebot_plugin_imageutils import text2image
+from pil_utils import text2image
 
 
 HELP_DATAS = [

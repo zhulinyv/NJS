@@ -21,7 +21,6 @@ HIDDEN_PLUGINS = [
     'nonebot_plugin_apscheduler',
     'nonebot_plugin_gocqhttp',
     'nonebot_plugin_htmlrender',
-    'nonebot_plugin_imageutils',
     'NoticeAndRequest'
 ]
 

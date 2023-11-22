@@ -3,7 +3,6 @@
 
 import nonebot
 from nonebot.adapters.onebot.v11 import Adapter as ONEBOT_V11Adapter
-import matcher_patch
 
 # Custom your logger
 # 

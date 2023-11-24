@@ -346,7 +346,7 @@ class ImageFactory(object):
             if not w and not h and ratio:
                 w = int(self.img.size[0] * ratio)
                 h = int(self.img.size[1] * ratio)
-        self.change_making_img(self.img.resize((w, h), Image.ANTIALIAS))
+        self.change_making_img(self.img.resize((w, h), Image.LANCZOS))
 
     def filter(self, filter_: str, aud: int = None):
         """

@@ -176,7 +176,7 @@ class BaseHandle(Generic[TC]):
                         int(label_w * label.width / label.height),
                         label_w,
                     ),
-                    Image.ANTIALIAS,
+                    Image.LANCZOS,
                 )
                 card_img.paste(label, alpha=True)
 

@@ -31,7 +31,7 @@ async def img_to_vtf(pic_byte: bytes, tag) -> BytesIO:
             ratio = 1024 / h
             new_height = 1024
             new_width = int(w * ratio)
-        pic = pic.resize((new_width, new_height), Image.ANTIALIAS)
+        pic = pic.resize((new_width, new_height), Image.LANCZOS)
         background = Image.new("RGBA", (1024, 1024), (255, 255, 255, 0))
         background.paste(pic, ((1024 - new_width) // 2, (1024 - new_height) // 2))
         pic = background

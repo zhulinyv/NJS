@@ -170,7 +170,7 @@ class MangaTranslator:
         with BytesIO(image_data) as input:
             image=Image.open(input)
             image=image.convert("RGB")
-            image=image.resize((int(image.width*0.5),int(image.height*0.5)),Image.ANTIALIAS)
+            image=image.resize((int(image.width*0.5),int(image.height*0.5)),Image.LANCZOS)
             image.save(input,format="JPEG",quality=80)
             return input.getvalue()
         

@@ -99,7 +99,7 @@ class OnmyojiHandle(BaseHandle[OnmyojiChar]):
         img_path = str(self.img_path / f"{cn2py(card.name)}_mark_btn.png")
         img = BuildImage(0, 0, background=img_path)
         img = Image.open(img_path).convert("RGBA")
-        label = self.star_label(card.star).resize((60, 33), Image.ANTIALIAS)
+        label = self.star_label(card.star).resize((60, 33), Image.LANCZOS)
         bg.paste(img, (0, 0), alpha=True)
         bg.paste(label, (0, 135), alpha=True)
         font = load_font("msyh.ttf", 16)

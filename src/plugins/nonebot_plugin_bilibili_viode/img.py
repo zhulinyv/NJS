@@ -188,7 +188,7 @@ def _render_image(draw, data, config: ImageItem):
     else:
         data = data.convert('RGBA')
     # 将图像缩放到指定大小
-    data = data.resize((_width, _height), Image.ANTIALIAS)
+    data = data.resize((_width, _height), Image.LANCZOS)
     # 将图像粘贴到画布上
     draw.paste(data, (config.x, config.y), data)
     return draw

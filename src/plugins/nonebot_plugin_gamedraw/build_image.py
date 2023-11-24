@@ -51,14 +51,14 @@ class BuildImage:
                         self.w = int(divisor * w)
                         self.h = int(divisor * h)
                         self.markImg = self.markImg.resize(
-                            (self.w, self.h), Image.ANTIALIAS
+                            (self.w, self.h), Image.LANCZOS
                         )
                     else:
                         self.w = w
                         self.h = h
                 else:
                     self.markImg = Image.open(background).resize(
-                        (self.w, self.h), Image.ANTIALIAS
+                        (self.w, self.h), Image.LANCZOS
                     )
             except UnidentifiedImageError as e:
                 logger.warning(f"无法识别图片 已删除图片，下次更新重新下载... e：{e}")

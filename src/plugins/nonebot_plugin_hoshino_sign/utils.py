@@ -45,7 +45,7 @@ def get_pic(pic_path, grey):
         sign_image = image_cache[pic_path]
     else:
         sign_image = Image.open(os.path.join(__BASE, 'stamp', pic_path))
-    sign_image = sign_image.resize((80, 80), Image.ANTIALIAS)
+    sign_image = sign_image.resize((80, 80), Image.LANCZOS)
     if grey:
         sign_image = sign_image.convert('L')
     return sign_image

@@ -122,7 +122,7 @@ returns：
     一个PIL.Image对象，表示转换完成的图片
 '''
 def Resize(img, size:tuple):
-    img = img.resize(size, Image.ANTIALIAS)
+    img = img.resize(size, Image.LANCZOS)
     return img
 
 '''

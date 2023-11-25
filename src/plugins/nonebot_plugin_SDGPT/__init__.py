@@ -22,27 +22,27 @@ async def postprocessor():
 
 
 L_webuiapi = asyncio.Lock()
-chat = on_command(config['Command']['chat'][1:], priority=1, block=True)
-bing = on_command(config['Command']['bing'][1:], priority=1, block=True)
-switchAI = on_command(config['Command']['switchAI'][1:], priority=1, block=True)
-switch = on_command(config['Command']['switch'][1:], priority=1, block=True)
-switchPreset = on_command(config['Command']['switchPreset'][1:], priority=1, block=True)
-tag = on_command(config['Command']['tag'][1:], priority=1, block=True)
-SD_webui = on_command(config['Command']['SD_webui'][1:], priority=1, block=True)
-MSG = on_message(rule=to_me(), priority=2, block=True)
-poe = on_command(config['Command']['poe'][1:], priority=1, block=True)
-model = on_command(config['Command']['model'][1:], priority=1, block=True)
+chat = on_command(config['Command']['chat'][1:], priority=2, block=True)
+bing = on_command(config['Command']['bing'][1:], priority=2, block=True)
+switchAI = on_command(config['Command']['switchAI'][1:], priority=2, block=True)
+switch = on_command(config['Command']['switch'][1:], priority=2, block=True)
+switchPreset = on_command(config['Command']['switchPreset'][1:], priority=2, block=True)
+tag = on_command(config['Command']['tag'][1:], priority=2, block=True)
+SD_webui = on_command(config['Command']['SD_webui'][1:], priority=2, block=True)
+# MSG = on_message(rule=to_me(), priority=2, block=True)
+poe = on_command(config['Command']['poe'][1:], priority=2, block=True)
+model = on_command(config['Command']['model'][1:], priority=2, block=True)
 
 
-@MSG.handle()
-async def _(foo: Bot, event: GuildMessageEvent | GroupMessageEvent | PrivateMessageEvent):
-    if not rules('msg', config, event): return
-    message = str(event.message)
-    BOT = asBot(['chatgpt-api', 'chatgpt', 'bing'], BotUse, cfg)
-    if len(message) == 0: return
-    if BOT:
-        info(BOT, '对话: ' + message)
-        await Chat(event, foo, BOT, message)
+# @MSG.handle()
+# async def _(foo: Bot, event: GuildMessageEvent | GroupMessageEvent | PrivateMessageEvent):
+#     if not rules('msg', config, event): return
+#     message = str(event.message)
+#     BOT = asBot(['chatgpt-api', 'chatgpt', 'bing'], BotUse, cfg)
+#     if len(message) == 0: return
+#     if BOT:
+#         info(BOT, '对话: ' + message)
+#         await Chat(event, foo, BOT, message)
 
 
 @chat.handle()

@@ -905,10 +905,19 @@
             "BBcode": ""
         },
         {
-            "插件名": "多模型 AI 对话",
-            "导包名": "nonebot_plugin_spark_gpt",
+            "插件名": "ChatGPT",
+            "导包名": "nonebot_plugin_chatgpt_plus",
             "显示颜色": "绿色",
-            "帮助文字": "https://canxin121.github.io/p/sparkgpt/#%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B",
+            "帮助文字": "./data/njs_help/nonebot_plugin_chatgpt_plus/help.md",
+            "帮助图片": "",
+            "帮助文档": "",
+            "BBcode": ""
+        },
+        {
+            "插件名": "BingGPT",
+            "导包名": "bing_chat",
+            "显示颜色": "绿色",
+            "帮助文字": "bing",
             "帮助图片": "",
             "帮助文档": "",
             "BBcode": ""

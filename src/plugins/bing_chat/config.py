@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Sequence
+from typing import Sequence, Literal
 
 from nonebot import get_driver
 from pydantic import BaseSettings
@@ -10,7 +10,7 @@ class Config(BaseSettings):
     smart_reply_path: Path = Path("data/smart_reply")
     ai_reply_private: bool = True
     newbing_cd_time: int = 600
-    newbing_style: str = "balanced"
+    newbing_style: Literal["creative", "balanced", "precise"] = "balanced"
     bing_or_openai_proxy: str = ""
     superusers: Sequence[str] = []
 

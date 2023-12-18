@@ -1,9 +1,10 @@
-from typing import Any, Dict, Optional
+from typing import Dict, Optional
 
 from nonebot.log import logger
 from nonebot.adapters import Event
 from nonebot.typing import T_State
 from nonebot.adapters.kaiheila import Bot
+from nonebot.adapters.kaiheila.api.model import MessageCreateReturn
 from nonebot.adapters.kaiheila.exception import ActionFailed
 from nonebot.adapters.kaiheila.event import (
     ChannelMessageEvent,
@@ -38,8 +39,8 @@ def get_origin_message(event: Event) -> Optional[Dict[str, str]]:
 
 
 @register_get_message_func("Kaiheila")
-def get_message(result: Dict[str, Any]) -> Optional[Dict[str, str]]:
-    if msg_id := result.get("msg_id"):
+def get_message(result: MessageCreateReturn) -> Optional[Dict[str, str]]:
+    if msg_id := result.msg_id:
         return {"message_id": msg_id}
 
 

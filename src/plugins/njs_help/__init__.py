@@ -50,9 +50,9 @@ async def _(bot: Bot, event: Event, msg: Message = CommandArg()):
             await bot.call_api('send_group_forward_msg', group_id=event.group_id, messages=msgs)
         else:
             await njs.send(head_msg, at_sender=True)
-            asyncio.sleep(1)
+            await asyncio.sleep(1)
             await njs.send(help_img)
-            asyncio.sleep(1)
+            await asyncio.sleep(1)
             await njs.send(foot_msg)
     else:
         global get_plugin, draw_plugin_help

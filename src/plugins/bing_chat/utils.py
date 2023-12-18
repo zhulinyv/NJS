@@ -1,16 +1,26 @@
-from typing import Any, Dict
+import re
+import random
 
-from EdgeGPT.EdgeGPT import Chatbot, ConversationStyle
+import ujson as json
+
+from io import BytesIO
+from pathlib import Path
+from loguru import logger
+from typing import Any, Dict, List, Tuple
+from PIL import Image, ImageDraw, ImageFont
+from EdgeGPT import Chatbot, ConversationStyle
+
+from nonebot.matcher import Matcher
+from nonebot.params import CommandArg
 from nonebot.adapters.onebot.v11 import (
     Message,
     MessageEvent,
     MessageSegment,
     PrivateMessageEvent,
 )
-from nonebot.matcher import Matcher
-from nonebot.params import CommandArg
 
-from .utils import utils
+from .config import config
+
 
 
 class NewBing:
@@ -115,6 +125,139 @@ class NewBing:
                     reply_message=True,
                 )
 
-
 # 实例化一个NewBing对象
 newbing = NewBing()
+
+
+
+class Utils:
+    def __init__(self) -> None:
+        """初始化"""
+        self.reply_private: bool = config.ai_reply_private
+        self.nonsense: Tuple = (
+            "你好啊",
+            "你好",
+            "在吗",
+            "在不在",
+            "您好",
+            "您好啊",
+            "你好",
+            "在",
+        )
+        # ==================================== bing工具属性 ====================================================
+        # 会话字典，用于存储会话   {"user_id": {"chatbot": bot, "last_time": time, "model": "balanced", isRunning: bool}}
+        self.bing_chat_dict: Dict = {}
+        bing_cookies_files: List[Path] = [
+            file
+            for file in config.smart_reply_path.rglob("*.json")
+            if file.stem.startswith("cookie")
+        ]
+        try:
+            self.bing_cookies: List = [
+                json.load(open(file, "r", encoding="utf-8"))
+                for file in bing_cookies_files
+            ]
+            logger.success(f"bing_cookies读取, 初始化成功, 共{len(self.bing_cookies)}个cookies")
+        except Exception as e:
+            logger.error(f"读取bing cookies失败 error信息: {repr(e)}")
+            self.bing_cookies: List = []
+
+    async def newbing_new_chat(self, event: MessageEvent, matcher: Matcher) -> None:
+        """重置会话"""
+        current_time: int = event.time
+        user_id: str = str(event.user_id)
+        if user_id in self.bing_chat_dict:
+            last_time: int = self.bing_chat_dict[user_id]["last_time"]
+            if (current_time - last_time < config.newbing_cd_time) and (
+                event.get_user_id() not in config.superusers
+            ):  # 如果当前时间减去上一次时间小于CD时间, 直接返回 # type: ignore
+                await matcher.finish(
+                    MessageSegment.reply(event.message_id)
+                    + MessageSegment.text(
+                        f"非报错情况下每个会话需要{config.newbing_cd_time}秒才能新建哦, 当前还需要{config.newbing_cd_time - (current_time - last_time)}秒"
+                    )
+                )
+        bot: Chatbot = await Chatbot.create(
+            cookies=random.choice(self.bing_cookies), proxy=self.proxy
+        )  # 随机选择一个cookies创建一个Chatbot
+        self.bing_chat_dict[user_id] = {
+            "chatbot": bot,
+            "last_time": current_time,
+            "model": config.newbing_style,
+            "sessions_number": 0,
+            "isRunning": False,
+        }
+
+    @staticmethod
+    async def bing_string_handle(input_string: str) -> str:
+        """处理一下bing返回的字符串"""
+        return re.sub(r'\[\^(\d+)\^]',  r'[\1]', input_string)
+
+    # ================================================================================================
+
+    @staticmethod
+    async def text_to_img(text: str) -> bytes:
+        """将文字转换为图片"""
+        return await txt_to_img.txt_to_img(text)
+
+# 创建一个工具实例
+utils = Utils()
+
+
+
+class TxtToImg:
+    def __init__(self) -> None:
+        self.LINE_CHAR_COUNT = 30 * 2
+        self.CHAR_SIZE = 30
+        self.TABLE_WIDTH = 4
+
+    async def line_break(self, line: str) -> str:
+        """将一行文本按照指定宽度进行换行"""
+        ret: str = ""
+        width = 0
+        for c in line:
+            if len(c.encode("utf8")) == 3:  # 中文
+                if self.LINE_CHAR_COUNT == width + 1:  # 剩余位置不够一个汉字
+                    width = 2
+                    ret += "\n" + c
+                else:  # 中文宽度加2，注意换行边界
+                    width += 2
+                    ret += c
+            elif c == "\n":
+                width = 0
+                ret += c
+            elif c == "\t":
+                space_c: int = (
+                    self.TABLE_WIDTH - width % self.TABLE_WIDTH
+                )  # 已有长度对TABLE_WIDTH取余
+                ret += " " * space_c
+                width += space_c
+            else:
+                width += 1
+                ret += c
+            if width >= self.LINE_CHAR_COUNT:
+                ret += "\n"
+                width = 0
+        return ret if ret.endswith("\n") else ret + "\n"
+
+    async def txt_to_img(
+        self, text: str, font_size=30, font_path="simsun.ttc"
+    ) -> bytes:
+        """将文本转换为图片"""
+        text = await self.line_break(text)
+        d_font = ImageFont.truetype(font_path, font_size)
+        lines: int = text.count("\n")
+        image: Image.Image = Image.new(
+            "L",
+            (self.LINE_CHAR_COUNT * font_size // 2 + 50, font_size * lines + 50),
+            "white",
+        )
+        draw_table = ImageDraw.Draw(im=image)
+        draw_table.text(xy=(25, 25), text=text, fill="#000000", font=d_font, spacing=4)
+        new_img: Image.Image = image.convert("RGB")
+        img_byte = BytesIO()
+        new_img.save(img_byte, format="PNG")
+        return img_byte.getvalue()
+
+# 创建一个实例
+txt_to_img = TxtToImg()

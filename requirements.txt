@@ -171,6 +171,7 @@ python-socks[asyncio]==2.4.4 ; python_version >= "3.10" and python_version < "4.
 pytz==2022.6 ; python_version >= "3.10" and python_version < "4.0"
 pyunpack==0.3 ; python_version >= "3.10" and python_version < "4.0"
 pyyaml==6.0.1 ; python_version >= "3.10" and python_version < "4.0"
+pyzbar==0.1.9 ; python_version >= "3.10" and python_version < "4.0"
 qrcode==7.3.1 ; python_version >= "3.10" and python_version < "4.0"
 quickjs==1.19.4 ; python_version >= "3.10" and python_version < "4.0"
 rarfile==4.0 ; python_version >= "3.10" and python_version < "4.0"

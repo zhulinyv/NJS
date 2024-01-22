@@ -1,0 +1,2 @@
+class QRDecodeError(Exception):
+    pass

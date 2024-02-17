@@ -233,6 +233,14 @@ poetry install
 
 ⚠️ 由于 TX 风控, 以下登录方法**可能**无法正常使用, 请留意 [go-cqhttp 仓库 Issue](https://github.com/Mrs4s/go-cqhttp/issues) 和 [go-cqhttp 插件仓库 Issue](https://github.com/mnixry/nonebot-plugin-gocqhttp/issues) 。
 
+⚠️ **推荐的项目:**
+```
+LagrangeDev/Lagrange.Core
+2891954521/LiteLoaderQQNT-OneBotApi-JS
+linyuchen/LiteLoaderQQNT-OneBotApi
+whitechi73/OpenShamrock
+```
+
 1、在 NJS 目录中, 输入 `poetry run nb run` 或 `poetry run python bot.py` 来运行脑积水。首次启动较慢, 耐心等待。
 
 如果出现类似下图所示报错, 是因为 hikari_bot 插件的 API_TOKEN 和 nonebot_plugin_bing_chat 的 cookies 未配置造成的, 可以直接**忽略**或根据步骤 7 的第 3 步中的说明获取。但这并**不影响**其它插件的使用, 如果不需要这个插件, 可以去 `NJS\src\plugins\hikari_bot` 和 `NJS\src\plugins\nonebot_plugin_bing_chat` 目录中将 **_\_init__.py** 文件重命名为 **init__.py**。
